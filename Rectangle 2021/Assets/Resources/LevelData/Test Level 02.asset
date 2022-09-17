@@ -1,0 +1,238 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12edce95dc841f42a47c095b28edf34, type: 3}
+  m_Name: Test Level 02
+  m_EditorClassIdentifier: 
+  areaData:
+  - tiles:
+    - rect:
+        serializedVersion: 2
+        x: 445.49997
+        y: 164.5
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 0
+      areaIndex: 0
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 0
+    - rect:
+        serializedVersion: 2
+        x: 566.49994
+        y: 164.5
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 1
+      areaIndex: 0
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 0
+    - rect:
+        serializedVersion: 2
+        x: 687.49994
+        y: 164.5
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 2
+      areaIndex: 0
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 0
+    - rect:
+        serializedVersion: 2
+        x: 566.49994
+        y: 285.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 7
+      areaIndex: 0
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 0
+  - tiles:
+    - rect:
+        serializedVersion: 2
+        x: 445.49997
+        y: 285.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 6
+      areaIndex: 1
+      playerMode: 1
+      color: {r: 0.439, g: 0.427, b: 0.937, a: 1}
+      text: 1
+    - rect:
+        serializedVersion: 2
+        x: 445.49997
+        y: 406.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 12
+      areaIndex: 1
+      playerMode: 1
+      color: {r: 0.439, g: 0.427, b: 0.937, a: 1}
+      text: 1
+    - rect:
+        serializedVersion: 2
+        x: 566.49994
+        y: 406.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 13
+      areaIndex: 1
+      playerMode: 1
+      color: {r: 0.439, g: 0.427, b: 0.937, a: 1}
+      text: 1
+  - tiles:
+    - rect:
+        serializedVersion: 2
+        x: 687.49994
+        y: 285.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 8
+      areaIndex: 2
+      playerMode: 2
+      color: {r: 0.314, g: 0.745, b: 0.302, a: 1}
+      text: 2
+    - rect:
+        serializedVersion: 2
+        x: 687.49994
+        y: 406.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 14
+      areaIndex: 2
+      playerMode: 2
+      color: {r: 0.314, g: 0.745, b: 0.302, a: 1}
+      text: 2
+    - rect:
+        serializedVersion: 2
+        x: 808.49994
+        y: 406.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 15
+      areaIndex: 2
+      playerMode: 2
+      color: {r: 0.314, g: 0.745, b: 0.302, a: 1}
+      text: 2
+    - rect:
+        serializedVersion: 2
+        x: 808.49994
+        y: 285.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 9
+      areaIndex: 2
+      playerMode: 2
+      color: {r: 0.314, g: 0.745, b: 0.302, a: 1}
+      text: 2
+  - tiles:
+    - rect:
+        serializedVersion: 2
+        x: 808.49994
+        y: 164.5
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 3
+      areaIndex: 3
+      playerMode: 4
+      color: {r: 0.945, g: 0.306, b: 0.306, a: 1}
+      text: 3
+    - rect:
+        serializedVersion: 2
+        x: 929.4999
+        y: 164.5
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 4
+      areaIndex: 3
+      playerMode: 4
+      color: {r: 0.945, g: 0.306, b: 0.306, a: 1}
+      text: 3
+    - rect:
+        serializedVersion: 2
+        x: 929.4999
+        y: 285.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 10
+      areaIndex: 3
+      playerMode: 4
+      color: {r: 0.945, g: 0.306, b: 0.306, a: 1}
+      text: 3
+  - tiles:
+    - rect:
+        serializedVersion: 2
+        x: 929.4999
+        y: 406.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 16
+      areaIndex: 4
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 4
+    - rect:
+        serializedVersion: 2
+        x: 1050.4999
+        y: 406.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 17
+      areaIndex: 4
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 4
+    - rect:
+        serializedVersion: 2
+        x: 1050.4999
+        y: 285.49997
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 11
+      areaIndex: 4
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 4
+    - rect:
+        serializedVersion: 2
+        x: 1050.4999
+        y: 164.5
+        width: 114.94998
+        height: 114.94998
+      active: 1
+      tileIndex: 5
+      areaIndex: 4
+      playerMode: 3
+      color: {r: 0.972, g: 0.702, b: 0.227, a: 1}
+      text: 4
+  grid: {x: 6, y: 3}
+  hasDeletedTiles: 0

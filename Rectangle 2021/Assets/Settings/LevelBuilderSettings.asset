@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c42378e7f8c9941bde580ed3271819, type: 3}
+  m_Name: LevelBuilderSettings
+  m_EditorClassIdentifier: 
+  tileSize: 8
+  rightTopCorner: {fileID: 11400000, guid: 9420e27bd8356b64fbabd89574c068b2, type: 2}
+  leftTopCorner: {fileID: 11400000, guid: b0c203f33a6dee140a061f42a0fa6be9, type: 2}
+  rightBottomCorner: {fileID: 11400000, guid: 6aaf1e18f85f8654e9609fb98ff04163, type: 2}
+  leftBottomCorner: {fileID: 11400000, guid: ee50680c504e1e14bbb35247524e4e2c, type: 2}
+  topBorder: {fileID: 11400000, guid: af4bbab88d603ca45a20bb2943f0cd57, type: 2}
+  leftBorder: {fileID: 11400000, guid: 264f655575993ac4f8a0d49350df463b, type: 2}
+  bottomBorder: {fileID: 11400000, guid: 1b871ad9d0ab927428cfdd166a48012e, type: 2}
+  rightBorder: {fileID: 11400000, guid: eccde0990761c8c48a6598a1d55e00c0, type: 2}
