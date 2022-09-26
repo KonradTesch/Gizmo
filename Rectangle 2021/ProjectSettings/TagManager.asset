@@ -8,15 +8,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
+  - Player
+  - Grid
   - 
   - 
-  - Ground
-  - Ramp
-  - ModeCollider
-  - GridCollider
+  - 
+  - 
   - 
   - 
   - 
@@ -38,18 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: TileMap_Grid
-    uniqueID: 3808747013
-    locked: 0
-  - name: HG_Collider
-    uniqueID: 4249461935
-    locked: 0
-  - name: TileMap_Level
-    uniqueID: 1198972147
+  - name: Background
+    uniqueID: 2218652233
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Level
+    uniqueID: 3595311789
+    locked: 0
   - name: Player
-    uniqueID: 2790732729
+    uniqueID: 681935141
+    locked: 0
+  - name: UI
+    uniqueID: 2011800873
     locked: 0

@@ -20,7 +20,7 @@ namespace Rectangle.Level
         {
             modeGroup = GetComponentInParent<ModeGroup>();
 
-            gridLayer = LayerMask.GetMask("GridCollider");
+            gridLayer = LayerMask.GetMask("Grid");
         }
         void Update()
         {

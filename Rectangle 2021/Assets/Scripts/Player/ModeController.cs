@@ -83,13 +83,17 @@ namespace Rectangle.Player
         public void ChangeMode(PlayerModes mode)
         {
             Debug.Log($"ModeController: -> ChangeMode(mode = {mode})");
+
+            Vector3 currentPosition = activePlayer.transform.position;
+            Vector2 currentVelocity = activePlayer.GetComponent<Rigidbody2D>().velocity;
             activePlayer.gameObject.SetActive(false);
-            Vector3 lastPosition = activePlayer.transform.position;
 
             activePlayer = modes[mode];
 
-            activePlayer.gameObject.transform.SetPositionAndRotation(lastPosition, Quaternion.identity);
-            modes[mode].gameObject.SetActive(true);
+            activePlayer.gameObject.transform.SetPositionAndRotation(currentPosition, Quaternion.identity);
+            activePlayer.gameObject.SetActive(true);
+            activePlayer.GetComponent<Rigidbody2D>().velocity = currentVelocity;
+
 
             virtualCam.Follow = activePlayer.transform;
             virtualCam.LookAt = activePlayer.transform;
@@ -121,7 +125,6 @@ namespace Rectangle.Player
                     modes.Add(mode.playerMode, mode.player);
                 }
             }
-
             Debug.Log("ModeController: <- InitModes()");
 
         }

@@ -65,7 +65,7 @@ namespace Rectangle.Player
 
         protected Rigidbody2D rigidBody;
         protected Collider2D col;
- 
+
         protected float horizontalMove;
 
         private void Awake()
@@ -97,7 +97,7 @@ namespace Rectangle.Player
         protected virtual void Move()
         {
 
-            if(grounded || airControl && !onRamp)
+            if (grounded || airControl && !onRamp)
             {
                 Vector2 targetVelocity = new Vector2(horizontalMove * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
                 rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
@@ -124,6 +124,5 @@ namespace Rectangle.Player
             grounded = Physics2D.Raycast(new Vector2(col.bounds.center.x, col.bounds.min.y), Vector3.down, 0.2f, groundLayer);
             onRamp = Physics2D.Raycast(new Vector2(col.bounds.center.x, col.bounds.min.y), Vector3.down, 0.3f, rampLayer);
         }
-
     }
 }

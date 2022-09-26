@@ -23,7 +23,7 @@ namespace Rectangle.Player
 
                 canDoubleJump = true;
             }
-            else if( canDoubleJump)
+            else if (canDoubleJump)
             {
                 //Resets the velocity on the y axis
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
