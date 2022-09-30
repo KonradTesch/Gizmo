@@ -31,7 +31,7 @@ namespace Rectangle.Player
             }
             else
             {
-                rigidBody.gravityScale = 2;
+                rigidBody.gravityScale = 1.5f;
             }
 
             base.Move();

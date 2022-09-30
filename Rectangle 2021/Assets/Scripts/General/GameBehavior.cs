@@ -16,6 +16,8 @@ namespace Rectangle.General
     /// </summary>
     public class GameBehavior : MonoBehaviour
     {
+        public static GameBehavior instance;
+
         [Header("Player")]
 
         /// <summary>
@@ -55,10 +57,16 @@ namespace Rectangle.General
         [Header("Level")]
 
         /// <summary>
-        /// The list of shapes for the player moe.
+        /// The script, tht builds the tilemap level.
         /// </summary>
-        [Tooltip("The list of shapes for the player moe.")]
-        [SerializeField] private BackgroundMode[] modeShapes;
+        [Tooltip("The script, tht builds the tilemap level.")]
+        public LevelBuilder levelBuilder;
+
+        /// <summary>
+        /// The list of level tiles for the player mode.
+        /// </summary>
+        [Tooltip("The list of level tiles for the player mode.")]
+        [SerializeField] private LevelTile[] levelTiles;
 
         /// <summary>
         /// The list of background colliders on the level grid.
@@ -71,33 +79,22 @@ namespace Rectangle.General
 
         void Awake()
         {
+            if(instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+                return;
+            }
+
             startPlayText = startLevelButton.gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
             startLevelButton.enabled = false;
             debugUI.GetComponent<DebugUI>().enabled = false;
-            foreach (BackgroundMode bg in modeShapes)
-            {
-                bg.enabled = false;
-            }
-        }
 
-        void Update()
-        {
-            if (CheckGridCollider())
-            {
-                startPlayText.color = Color.black;
-                startLevelButton.enabled = true;
-                canStart = true;
-
-            }
-            else
-            {
-                startPlayText.color = new Color(0, 0, 0, 0.3f);
-                canStart = false;
-                startLevelButton.enabled = false;
-
-            }
-
+            CheckGridCollider();
         }
 
         /// <summary>
@@ -108,16 +105,13 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> StartPlayMode()");
             if (canStart)
             {
+                levelBuilder.BuildLevel(levelTiles);
+
                 debugUI.GetComponent<DebugUI>().enabled = true;
                 TimerUI.timer = true;
                 player.gameObject.SetActive(true);
                 buttonUI.SetActive(false);
                 levelCam.Priority = 2;
-                foreach (BackgroundMode bg in modeShapes)
-                {
-                    bg.gameObject.GetComponent<ModeShape>().enabled = false;
-                    bg.enabled = true;
-                }
             }
             Debug.Log("GameBehavior: <- StartPlayMode()");
         }
@@ -126,36 +120,29 @@ namespace Rectangle.General
         /// Checks if every gackground grid collider is covered with a mode shape.
         /// </summary>
         /// <returns></returns>
-        bool CheckGridCollider()
+        public void CheckGridCollider()
         {
-            foreach (GameObject obj in gridColliders)
-            {
-                if (!obj.GetComponent<IsGridUsed>().isUsed)
-                    return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Sets all mode shapes to there correct positions.
-        /// </summary>
-        public void ShapesToCorrectPosition()
-        {
-            foreach (BackgroundMode bg in modeShapes)
-            {
-                Vector2 pos = bg.gameObject.GetComponentInParent<ModeGroup>().correctPosition;
-                bg.gameObject.transform.parent.position = pos;
-                bg.gameObject.transform.parent.localScale = Vector3.one;
-                bg.gameObject.GetComponent<ModeShape>().enabled = false;
-
-
-            }
+            int counter = 0;
 
             foreach (GameObject obj in gridColliders)
             {
-                obj.GetComponent<IsGridUsed>().isUsed = true;
+                if (obj.GetComponent<IsGridUsed>().isUsed)
+                    counter++;
             }
 
+            if(counter == levelTiles.Length)
+            {
+                startPlayText.color = Color.black;
+                startLevelButton.enabled = true;
+                canStart = true;
+            }
+            else
+            {
+                startPlayText.color = new Color(0, 0, 0, 0.3f);
+                canStart = false;
+                startLevelButton.enabled = false;
+            }
         }
+
     }
 }

@@ -100,11 +100,11 @@ namespace Rectangle.Player
 
             if(mode == PlayerModes.Little)
             {
-                virtualCam.m_Lens.OrthographicSize = 2.5f;
+                virtualCam.m_Lens.OrthographicSize = 1f;
             }
             else
             {
-                virtualCam.m_Lens.OrthographicSize = 5f;
+                virtualCam.m_Lens.OrthographicSize = 2f;
             }
             Debug.Log("ModeController: <- ChangeMode()");
 

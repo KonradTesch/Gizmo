@@ -79,6 +79,12 @@ namespace Rectangle.Player
             if (grounded || airControl  || onWallEnd)
             {
                 Vector2 targetVelocity = new Vector2(horizontalMove * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
+
+                if(targetVelocity.y < maxFallingSpped)
+                {
+                    targetVelocity.y = maxFallingSpped;
+                }
+
                 rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
             }
 

@@ -30,6 +30,12 @@ namespace Rectangle.Player
         [SerializeField] protected float jumpForce = 45;
 
         /// <summary>
+        /// The maximum speed when falling.
+        /// </summary>
+        [Tooltip("The maximum speed when falling.")]
+        [SerializeField] protected float maxFallingSpped = -11;
+
+        /// <summary>
         /// Whether it is possible to control the player in the air.
         /// </summary>
         [Tooltip("Whether it is possible to control the player in the air.")]
@@ -100,6 +106,13 @@ namespace Rectangle.Player
             if (grounded || airControl && !onRamp)
             {
                 Vector2 targetVelocity = new Vector2(horizontalMove * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
+
+                if(targetVelocity.y < maxFallingSpped)
+                {
+                    targetVelocity.y = maxFallingSpped;
+                    Debug.Log("reduce falling speed");
+                }
+
                 rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
             }
         }

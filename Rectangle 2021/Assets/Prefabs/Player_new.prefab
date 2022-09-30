@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3683547977390433020
 Transform:
   m_ObjectHideFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3683547977390433008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -15, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3683547977414959946}
@@ -60,7 +60,7 @@ MonoBehaviour:
   virtualCam: {fileID: 0}
   backgroundLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1032
   activePlayer: {fileID: 0}
 --- !u!1 &3683547977414959945
 GameObject:
@@ -90,7 +90,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3683547977414959945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,9 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a26155def3867341bac523d7b313f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 10
   movementSmoothing: 0.05
-  jumpForce: 45
+  jumpForce: 22
+  maxFallingSpped: -10
   airControl: 1
   groundLayer:
     serializedVersion: 2
@@ -159,8 +160,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1504234567
-  m_SortingLayer: 1
+  m_SortingLayerID: 681935141
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 343e6d5bb0da1e34fac94315862d1cfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -214,7 +215,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: fb0317a8076b52c4abd3e47d1b9c8e9f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -267,9 +268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303fa3b601d370f46bb0f5b09d64d48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 10
   movementSmoothing: 0.05
-  jumpForce: 45
+  jumpForce: 22
+  maxFallingSpped: -10
   airControl: 1
   groundLayer:
     serializedVersion: 2
@@ -317,8 +319,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1504234567
-  m_SortingLayer: 1
+  m_SortingLayerID: 681935141
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 343e6d5bb0da1e34fac94315862d1cfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -372,7 +374,7 @@ Rigidbody2D:
   m_Mass: 1.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: fb0317a8076b52c4abd3e47d1b9c8e9f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -425,9 +427,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a697935a34b143a4690350c19889ab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 10
   movementSmoothing: 0.05
-  jumpForce: 45
+  jumpForce: 22
+  maxFallingSpped: -10
   airControl: 1
   groundLayer:
     serializedVersion: 2
@@ -437,7 +440,7 @@ MonoBehaviour:
     m_Bits: 512
   grounded: 0
   onRamp: 0
-  climbSpeed: 5
+  climbSpeed: 3
   onWall: 0
 --- !u!212 &3683547979103905856
 SpriteRenderer:
@@ -477,8 +480,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1504234567
-  m_SortingLayer: 1
+  m_SortingLayerID: 681935141
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0e90a2246298ce04f8ccd382befe3453, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -506,7 +509,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: fb0317a8076b52c4abd3e47d1b9c8e9f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -592,9 +595,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01657fbc7c1aea8439512620d5a81c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 10
   movementSmoothing: 0.05
-  jumpForce: 45
+  jumpForce: 22
+  maxFallingSpped: -10
   airControl: 1
   groundLayer:
     serializedVersion: 2
@@ -643,8 +647,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1504234567
-  m_SortingLayer: 1
+  m_SortingLayerID: 681935141
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: af8cc29589980e1468fdaa0cb02dfb1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -688,7 +692,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: fb0317a8076b52c4abd3e47d1b9c8e9f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1

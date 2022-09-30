@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Rectangle.Level
 {
-    public class ModeGroup : MonoBehaviour
+    public class TileGroup : MonoBehaviour
     {
         /// <summary>
         /// The correct position on the level grid for this shape.

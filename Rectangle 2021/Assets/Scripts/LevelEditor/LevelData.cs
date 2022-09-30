@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Rectangle.LevelBuilder
+namespace Rectangle.LevelEditor
 {
     public class LevelData : ScriptableObject
     {

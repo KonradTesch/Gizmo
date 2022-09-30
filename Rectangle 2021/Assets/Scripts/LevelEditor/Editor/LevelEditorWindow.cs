@@ -3,9 +3,9 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rectangle.LevelBuilder
+namespace Rectangle.LevelEditor
 {
-    public class LevelBuilderEditor : EditorWindow
+    public class LevelEditorWindow : EditorWindow
     {
         private Rect menuBar;
         private Rect mainPanel;
@@ -40,10 +40,10 @@ namespace Rectangle.LevelBuilder
 
         private List<List<Tile>> areas;
 
-        [MenuItem("Rectangle/Level Builder")]
+        [MenuItem("Rectangle/Level Editor")]
         public static void OpenWindow()
         {
-            GetWindow<LevelBuilderEditor>("Rectangle Level Builder");
+            GetWindow<LevelEditorWindow>("Rectangle Level Editor");
         }
 
         private void OnEnable()

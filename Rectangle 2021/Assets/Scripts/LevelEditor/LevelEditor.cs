@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Rectangle.Level;
 
-namespace Rectangle.LevelBuilder
+namespace Rectangle.LevelEditor
 {
-    public class LevelBuilder : MonoBehaviour
+    public class LevelEditor : MonoBehaviour
     {
         [SerializeField] private LevelData levelData;
-        [SerializeField] private LevelBuilderSettings builderSettings;
+        [SerializeField] private LevelEditorSettings builderSettings;
         [SerializeField] private Grid tileMapGrid;
 
 

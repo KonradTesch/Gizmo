@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Rectangle.LevelBuilder
+namespace Rectangle.LevelEditor
 {
     [CreateAssetMenu(fileName = "LevelBuilderSettings", menuName = "Rectangle/Level Builder Settings")]
-    public class LevelBuilderSettings : ScriptableObject
+    public class LevelEditorSettings : ScriptableObject
     {
         public int tileSize = 8;
 

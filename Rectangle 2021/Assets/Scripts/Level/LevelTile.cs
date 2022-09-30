@@ -1,24 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rectangle.TileBuilder;
+using Rectangle.Player;
 
 namespace Rectangle.Level
 {
-    public class ModeShape : MonoBehaviour
+    public class LevelTile : MonoBehaviour
     {
+        public LevelTileBuilder.TileTypes tileType;
+        public ModeController.PlayerModes playerMode;
+        public Vector2Int tileSize = new Vector2Int(32, 32);
 
         private LayerMask gridLayer;
 
         private bool isPicked;
 
-        private Vector2 mouseOffset;
+        private Vector2 mouseOffset = Vector2.zero;
         private Vector3 latestPosition;
 
-        private ModeGroup modeGroup;
+        private TileGroup tileGroup;
 
         private void Start()
         {
-            modeGroup = GetComponentInParent<ModeGroup>();
+            tileGroup = GetComponentInParent<TileGroup>();
 
             gridLayer = LayerMask.GetMask("Grid");
         }
@@ -34,20 +39,21 @@ namespace Rectangle.Level
 
                 if (newPos != latestPosition)
                 {
-                    foreach (IsGridUsed grid in modeGroup.gridColliders)
+                    foreach (IsGridUsed grid in tileGroup.gridColliders)
                     {
                         grid.isUsed = true;
                     }
+                    General.GameBehavior.instance.CheckGridCollider();
                 }
                 else
                 {
-                    foreach (IsGridUsed grid in modeGroup.latestGrid)
+                    foreach (IsGridUsed grid in tileGroup.latestGrid)
                     {
                         grid.isUsed = true;
                     }
-                    modeGroup.gridColliders = new List<IsGridUsed>(modeGroup.latestGrid);
+                    tileGroup.gridColliders = new List<IsGridUsed>(tileGroup.latestGrid);
 
-                    if (modeGroup.latestGrid.Count == 0)
+                    if (tileGroup.latestGrid.Count == 0)
                         transform.parent.transform.localScale = new Vector3(0.4f, 0.4f, 1);
 
                 }
@@ -71,12 +77,12 @@ namespace Rectangle.Level
             latestPosition = transform.position - transform.localPosition;
             isPicked = true;
 
-            foreach (IsGridUsed grid in modeGroup.gridColliders)
+            foreach (IsGridUsed grid in tileGroup.gridColliders)
             {
                 grid.isUsed = false;
             }
-            modeGroup.latestGrid = new List<IsGridUsed>(modeGroup.gridColliders);
-            modeGroup.gridColliders.Clear();
+            tileGroup.latestGrid = new List<IsGridUsed>(tileGroup.gridColliders);
+            tileGroup.gridColliders.Clear();
         }
 
         /// <summary>
@@ -95,7 +101,7 @@ namespace Rectangle.Level
                     return latestPosition;
 
                 IsGridUsed grid = positionCollider.gameObject.GetComponent<IsGridUsed>();
-                modeGroup.gridColliders.Add(grid);
+                tileGroup.gridColliders.Add(grid);
                 if (grid.isUsed)
                 {
                     return latestPosition;
@@ -112,13 +118,15 @@ namespace Rectangle.Level
         {
             if (Input.GetMouseButtonDown(1))
             {
-                modeGroup.gameObject.transform.position = modeGroup.originPosition;
-                modeGroup.gameObject.transform.localScale = new Vector3(0.4f, 0.4f, 1);
-                foreach (IsGridUsed grid in modeGroup.gridColliders)
+                tileGroup.gameObject.transform.position = tileGroup.originPosition;
+                tileGroup.gameObject.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+                foreach (IsGridUsed grid in tileGroup.gridColliders)
                 {
                     grid.isUsed = false;
                 }
-                modeGroup.gridColliders.Clear();
+                tileGroup.gridColliders.Clear();
+
+                General.GameBehavior.instance.CheckGridCollider();
             }
         }
     }
