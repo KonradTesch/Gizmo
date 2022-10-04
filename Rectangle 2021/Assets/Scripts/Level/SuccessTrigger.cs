@@ -11,13 +11,13 @@ namespace Rectangle.Level
         /// Canvas Object of the success canvas.
         /// </summary>
         [Tooltip("The canvas Object of the success canvas.")]
-        [SerializeField] private GameObject successCanvas;
+        public GameObject successCanvas;
 
         /// <summary>
         /// TimerUI script of the UI timer.
         /// </summary>
         [Tooltip("The TimerUI script of the UI timer.")]
-        [SerializeField] private TimerUI timerUI;
+        public TimerUI timerUI;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

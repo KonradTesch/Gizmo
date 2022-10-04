@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Rectangle.TileBuilder;
 
 namespace Rectangle.LevelEditor
 {
-    [CreateAssetMenu(fileName = "LevelBuilderSettings", menuName = "Rectangle/Level Builder Settings")]
+    [CreateAssetMenu(fileName = "LevelEditorSettings", menuName = "Rectangle/Level Editor Settings")]
     public class LevelEditorSettings : ScriptableObject
     {
+        [Header("Tiles")]
         public int tileSize = 8;
+        public LevelTileData gridTiles;
+        public TileBase borderTile;
 
-        public TileBase rightTopCorner;
-        public TileBase leftTopCorner;
-        public TileBase rightBottomCorner;
-        public TileBase leftBottomCorner;
+        [Header("Level Backgrounds")]
 
-        public TileBase topBorder;
-        public TileBase leftBorder;
-        public TileBase bottomBorder;
-        public TileBase rightBorder;
+        public Sprite backgroundImage;
+        public Color rectangleColor;
+        public Color spikeyColor;
+        public Color bubbleColor;
+        public Color littleColor;
 
     }
 }

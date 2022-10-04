@@ -83,7 +83,7 @@ namespace Rectangle.TileBuilder
                 return;
             }
 
-            LevelTileData tile = (LevelTileData)ScriptableObject.CreateInstance(typeof(LevelTileData));
+            LevelTileData tile = (LevelTileData)CreateInstance(typeof(LevelTileData));
 
             tile.groundTileChanges = new();
             tile.nookTileChanges = new();

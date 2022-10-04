@@ -94,7 +94,8 @@ namespace Rectangle.General
             startLevelButton.enabled = false;
             debugUI.GetComponent<DebugUI>().enabled = false;
 
-            CheckGridCollider();
+            startPlayText.color = new Color(0, 0, 0, 0.3f);
+            canStart = false;
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> StartPlayMode()");
             if (canStart)
             {
-                levelBuilder.BuildLevel(levelTiles);
+                levelBuilder.BuildLevel();
 
                 debugUI.GetComponent<DebugUI>().enabled = true;
                 TimerUI.timer = true;
@@ -122,15 +123,7 @@ namespace Rectangle.General
         /// <returns></returns>
         public void CheckGridCollider()
         {
-            int counter = 0;
-
-            foreach (GameObject obj in gridColliders)
-            {
-                if (obj.GetComponent<IsGridUsed>().isUsed)
-                    counter++;
-            }
-
-            if(counter == levelTiles.Length)
+            if(levelBuilder.CheckLevel())
             {
                 startPlayText.color = Color.black;
                 startLevelButton.enabled = true;
