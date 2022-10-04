@@ -2,10 +2,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Rectangle.TileBuilder
+namespace Rectangle.TileCreater
 {
-    [CustomEditor(typeof(LevelTileBuilder))]
-    public class TileBuilderInspector : Editor
+    [CustomEditor(typeof(TileCreater))]
+    public class TileCreatorInspector : Editor
     {
         private LevelTileData tileData;
 
@@ -14,7 +14,7 @@ namespace Rectangle.TileBuilder
         {
             DrawDefaultInspector();
 
-            LevelTileBuilder builder = (LevelTileBuilder)target;
+            TileCreater builder = (TileCreater)target;
 
             if (GUILayout.Button("Save Tile"))
             {
@@ -55,7 +55,7 @@ namespace Rectangle.TileBuilder
             }
         }
 
-        private void SaveTile(LevelTileBuilder builder)
+        private void SaveTile(TileCreater builder)
         {
             if (!AssetDatabase.IsValidFolder("Assets/LevelTiles"))
             {
@@ -72,7 +72,7 @@ namespace Rectangle.TileBuilder
                 Debug.LogWarning("There is already a file with the given name.");
                 return;
             }
-            if (builder.tileType == LevelTileBuilder.TileTypes.undefined)
+            if (builder.tileType == TileCreater.TileTypes.undefined)
             {
                 Debug.LogWarning("Please select a Tile Type for the tile in the Inspector.");
                 return;
@@ -143,7 +143,7 @@ namespace Rectangle.TileBuilder
             Debug.Log($"New TileData saved at 'Assets/LevelTiles/{builder.tileName}.asset'.");
         }
 
-        private void CreateTile(LevelTileBuilder builder, LevelTileData tile)
+        private void CreateTile(TileCreater builder, LevelTileData tile)
         {
             builder.groundTilemap.ClearAllTiles();
             builder.nooksTilemap.ClearAllTiles();

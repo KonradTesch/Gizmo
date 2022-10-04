@@ -110,7 +110,6 @@ namespace Rectangle.Player
                 if(targetVelocity.y < maxFallingSpped)
                 {
                     targetVelocity.y = maxFallingSpped;
-                    Debug.Log("reduce falling speed");
                 }
 
                 rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);

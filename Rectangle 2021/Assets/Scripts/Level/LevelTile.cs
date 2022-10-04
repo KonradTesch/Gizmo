@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Rectangle.TileBuilder;
+using Rectangle.TileCreater;
 using Rectangle.Player;
 
 namespace Rectangle.Level
 {
     public class LevelTile : MonoBehaviour
     {
-        public LevelTileBuilder.TileTypes tileType;
+        public TileCreater.TileCreater.TileTypes tileType;
         public ModeController.PlayerModes playerMode;
         public Vector2Int tileSize = new Vector2Int(32, 32);
 

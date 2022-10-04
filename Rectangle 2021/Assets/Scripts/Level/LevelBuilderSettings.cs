@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using Rectangle.TileCreater;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Rectangle.TileBuilder;
 
-namespace Rectangle.LevelEditor
+namespace Rectangle.Level
 {
-    [CreateAssetMenu(fileName = "LevelEditorSettings", menuName = "Rectangle/Level Editor Settings")]
-    public class LevelEditorSettings : ScriptableObject
+    [CreateAssetMenu(fileName = "LevelBuilderSettings", menuName = "Rectangle/Level Builder Settings")]
+    public class LevelBuilderSettings : ScriptableObject
     {
         [Header("Tiles")]
         public int tileSize = 8;

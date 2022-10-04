@@ -60,7 +60,7 @@ namespace Rectangle.General
         /// The script, tht builds the tilemap level.
         /// </summary>
         [Tooltip("The script, tht builds the tilemap level.")]
-        public LevelBuilder levelBuilder;
+        public TileBuilder levelBuilder;
 
         /// <summary>
         /// The list of level tiles for the player mode.

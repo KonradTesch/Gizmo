@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Rectangle.TileBuilder
+namespace Rectangle.TileCreater
 {
-    public class LevelTileBuilder : MonoBehaviour
+    public class TileCreater : MonoBehaviour
     {
         [Header("TileMaps")]
         public Tilemap groundTilemap;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Rectangle.TileBuilder
+namespace Rectangle.TileCreater
 {
     public class LevelTileData : ScriptableObject
     {
@@ -12,7 +12,7 @@ namespace Rectangle.TileBuilder
         public List<ChangeData> rampTileChanges;
 
         public Vector2Int tileSize;
-        public LevelTileBuilder.TileTypes tileType;
+        public TileCreater.TileTypes tileType;
         public Player.ModeController.PlayerModes playerMode;
     }
 

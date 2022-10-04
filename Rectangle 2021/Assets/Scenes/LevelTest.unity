@@ -26544,6 +26544,7 @@ GameObject:
   - component: {fileID: 2001858574}
   - component: {fileID: 2001858576}
   - component: {fileID: 2001858577}
+  - component: {fileID: 2001858578}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26647,6 +26648,22 @@ MonoBehaviour:
   startDirection: 2
   destinationPosition: {fileID: 977755571}
   destinationDirection: 2
+--- !u!114 &2001858578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001858573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fdfccb3cb60a3429a05dc87cc916c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelLayout: {fileID: 0}
+  builderSettings: {fileID: 0}
+  gridTilemap: {fileID: 0}
+  borderTilemap: {fileID: 0}
 --- !u!1 &2025691334
 GameObject:
   m_ObjectHideFlags: 0

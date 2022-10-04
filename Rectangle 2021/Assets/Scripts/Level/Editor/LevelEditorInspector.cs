@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Tilemaps;
-using Rectangle.TileBuilder;
+using Rectangle.TileCreater;
 using Rectangle.Level;
 
 namespace Rectangle.LevelEditor
 {
-    [CustomEditor(typeof(LevelEditor))]
-    public class LevelEditorInspector : Editor
+    [CustomEditor(typeof(LevelBuilder))]
+    public class LevelBuilderInspector : Editor
     {
-        LevelEditor builder;
+        LevelBuilder builder;
 
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
-            builder = (LevelEditor)target;
+            builder = (LevelBuilder)target;
 
             if(GUILayout.Button("Build Level"))
             {
@@ -266,10 +266,10 @@ namespace Rectangle.LevelEditor
             return direction;
         }
 
-        private List<LevelTileBuilder.TileTypes> CalculateLevelPath(LevelGrid gridData, Vector2Int startDirection, Vector2Int endDirection)
+        private List<TileCreater.TileCreater.TileTypes> CalculateLevelPath(LevelGrid gridData, Vector2Int startDirection, Vector2Int endDirection)
         {
             List<Vector2Int> pathPositions = new();
-            List<LevelTileBuilder.TileTypes> pathTiles = new();
+            List<TileCreater.TileCreater.TileTypes> pathTiles = new();
 
             endDirection = -endDirection;
 
@@ -349,23 +349,23 @@ namespace Rectangle.LevelEditor
             return freeDirections;
         }
 
-        private LevelTileBuilder.TileTypes GetTileType(Vector2Int input, Vector2Int output)
+        private TileCreater.TileCreater.TileTypes GetTileType(Vector2Int input, Vector2Int output)
         {
-            LevelTileBuilder.TileTypes tileType = LevelTileBuilder.TileTypes.undefined;
+            TileCreater.TileCreater.TileTypes tileType = TileCreater.TileCreater.TileTypes.undefined;
 
             if(input == Vector2Int.up)
             {
                 if (output == Vector2Int.right)
                 {
-                    return LevelTileBuilder.TileTypes.UpAndRight;
+                    return TileCreater.TileCreater.TileTypes.UpAndRight;
                 }
                 else if (output == Vector2Int.down)
                 {
-                    return LevelTileBuilder.TileTypes.DownAndRight;
+                    return TileCreater.TileCreater.TileTypes.DownAndRight;
                 }
                 else if (output == Vector2Int.left)
                 {
-                    return LevelTileBuilder.TileTypes.LeftAndRight;
+                    return TileCreater.TileCreater.TileTypes.LeftAndRight;
                 }
 
             }
@@ -373,45 +373,45 @@ namespace Rectangle.LevelEditor
             {
                 if (output == Vector2Int.up)
                 {
-                    return LevelTileBuilder.TileTypes.UpAndRight;
+                    return TileCreater.TileCreater.TileTypes.UpAndRight;
                 }
                 else if (output == Vector2Int.down)
                 {
-                    return LevelTileBuilder.TileTypes.DownAndRight;
+                    return TileCreater.TileCreater.TileTypes.DownAndRight;
                 }
                 else if (output == Vector2Int.left)
                 {
-                    return LevelTileBuilder.TileTypes.LeftAndRight;
+                    return TileCreater.TileCreater.TileTypes.LeftAndRight;
                 }
             }
             else if (input == Vector2Int.down)
             {
                 if (output == Vector2Int.up)
                 {
-                    return LevelTileBuilder.TileTypes.UpAndDown;
+                    return TileCreater.TileCreater.TileTypes.UpAndDown;
                 }
                 else if (output == Vector2Int.right)
                 {
-                    return LevelTileBuilder.TileTypes.UpAndRight;
+                    return TileCreater.TileCreater.TileTypes.UpAndRight;
                 }
                 else if (output == Vector2Int.left)
                 {
-                    return LevelTileBuilder.TileTypes.LeftAndDown;
+                    return TileCreater.TileCreater.TileTypes.LeftAndDown;
                 }
             }
             else if (input == Vector2Int.left)
             {
                 if (output == Vector2Int.up)
                 {
-                    return LevelTileBuilder.TileTypes.LeftAndUp;
+                    return TileCreater.TileCreater.TileTypes.LeftAndUp;
                 }
                 else if (output == Vector2Int.right)
                 {
-                    return LevelTileBuilder.TileTypes.LeftAndRight;
+                    return TileCreater.TileCreater.TileTypes.LeftAndRight;
                 }
                 else if (output == Vector2Int.down)
                 {
-                    return LevelTileBuilder.TileTypes.LeftAndDown;
+                    return TileCreater.TileCreater.TileTypes.LeftAndDown;
                 }
             }
 
