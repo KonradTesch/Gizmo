@@ -54,6 +54,8 @@ namespace Rectangle.General
         [Tooltip("The button to start the level.")]
         [SerializeField] private Button startLevelButton;
 
+        public GameObject sucessPanel;
+
         [Header("Camera")]
 
         /// <summary>

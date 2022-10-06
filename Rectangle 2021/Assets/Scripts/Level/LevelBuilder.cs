@@ -131,7 +131,7 @@ namespace Rectangle.Level
             endCollider.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
             endCollider.AddComponent<BackgroundMode>().playerMode = Player.ModeController.PlayerModes.Rectangle;
             SuccessTrigger success = endCollider.AddComponent<SuccessTrigger>();
-            success.successCanvas = GameObject.Find("Success_Canvas");
+            success.successPanel = General.GameBehavior.instance.sucessPanel;
             success.timerUI = FindObjectOfType<UI.TimerUI>();
 
 
