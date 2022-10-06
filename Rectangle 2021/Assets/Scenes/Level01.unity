@@ -13869,7 +13869,6 @@ MonoBehaviour:
   correctPosition: {x: 17, y: 2}
   gridColliders: []
   latestGrid: []
-  originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &29893399
 GameObject:
   m_ObjectHideFlags: 0
@@ -14370,6 +14369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &214827924
 GameObject:
   m_ObjectHideFlags: 0
@@ -14490,7 +14493,6 @@ MonoBehaviour:
   correctPosition: {x: 13, y: -10}
   gridColliders: []
   latestGrid: []
-  originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &230646798
 GameObject:
   m_ObjectHideFlags: 0
@@ -14630,6 +14632,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &267759601
 GameObject:
   m_ObjectHideFlags: 0
@@ -14769,6 +14775,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &277051587
 GameObject:
   m_ObjectHideFlags: 0
@@ -26271,6 +26281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &484973287
 GameObject:
   m_ObjectHideFlags: 0
@@ -26674,7 +26688,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3683547977390433008, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
       propertyPath: m_Name
-      value: Player_new
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3683547977390433008, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
       propertyPath: m_IsActive
@@ -26813,7 +26827,6 @@ MonoBehaviour:
   correctPosition: {x: 29, y: 2}
   gridColliders: []
   latestGrid: []
-  originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &791629064
 GameObject:
   m_ObjectHideFlags: 0
@@ -26953,6 +26966,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &819456995
 GameObject:
   m_ObjectHideFlags: 0
@@ -27337,6 +27354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &961119470
 GameObject:
   m_ObjectHideFlags: 0
@@ -27548,6 +27569,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &995065325
 GameObject:
   m_ObjectHideFlags: 0
@@ -27668,7 +27693,6 @@ MonoBehaviour:
   correctPosition: {x: 25, y: -10}
   gridColliders: []
   latestGrid: []
-  originPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1061847952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27918,7 +27942,6 @@ MonoBehaviour:
   correctPosition: {x: 1, y: -10}
   gridColliders: []
   latestGrid: []
-  originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1166321511
 GameObject:
   m_ObjectHideFlags: 0
@@ -28058,6 +28081,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!224 &1166576360 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4564017792315991069, guid: 1e0f99ca244f11542bd9fb2183db01d0, type: 3}
@@ -28463,6 +28490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &1358079956
 GameObject:
   m_ObjectHideFlags: 0
@@ -28475,6 +28506,7 @@ GameObject:
   - component: {fileID: 1358079958}
   - component: {fileID: 1358079957}
   - component: {fileID: 1358079960}
+  - component: {fileID: 1358079961}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -28584,6 +28616,39 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1358079961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358079956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1406165982
 GameObject:
   m_ObjectHideFlags: 0
@@ -28863,8 +28928,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 0
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 2004186862}
+  m_Follow: {fileID: 2004186862}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 2.5
@@ -28890,7 +28955,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443957625}
-  m_LocalRotation: {x: -1.776357e-15, y: -0.000000024928111, z: -4.4281227e-23, w: 1}
+  m_LocalRotation: {x: -0, y: 1e-45, z: -0, w: 1}
   m_LocalPosition: {x: -11.5, y: 3, z: -10.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -37948,6 +38013,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &1792412750
 GameObject:
   m_ObjectHideFlags: 0
@@ -38136,6 +38205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &1800216046
 GameObject:
   m_ObjectHideFlags: 0
@@ -38631,7 +38704,6 @@ MonoBehaviour:
   correctPosition: {x: 5, y: 2}
   gridColliders: []
   latestGrid: []
-  originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1887249569
 GameObject:
   m_ObjectHideFlags: 0
@@ -38803,6 +38875,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &1943228152
 GameObject:
   m_ObjectHideFlags: 0
@@ -40124,6 +40200,8 @@ GameObject:
   - component: {fileID: 2001858575}
   - component: {fileID: 2001858574}
   - component: {fileID: 2001858576}
+  - component: {fileID: 2001858578}
+  - component: {fileID: 2001858577}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40144,38 +40222,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 94041364}
+  tilePanel: {fileID: 0}
   debugUI: {fileID: 604020119}
   buttonUI: {fileID: 1628222964}
   startLevelButton: {fileID: 277051589}
   levelCam: {fileID: 1443957626}
-  modeShapes:
-  - {fileID: 1775249695}
-  - {fileID: 1321259855}
-  - {fileID: 159107311}
-  - {fileID: 413910339}
-  - {fileID: 1797197716}
-  - {fileID: 1913755792}
-  - {fileID: 867757849}
-  - {fileID: 230646800}
-  - {fileID: 267759604}
-  - {fileID: 791629066}
-  - {fileID: 2134918619}
-  - {fileID: 1166321513}
-  - {fileID: 967752223}
-  gridColliders:
-  - {fileID: 1471789923}
-  - {fileID: 1176020210}
-  - {fileID: 2025691334}
-  - {fileID: 372369408}
-  - {fileID: 1406165982}
-  - {fileID: 819456995}
-  - {fileID: 559046723}
-  - {fileID: 1553119565}
-  - {fileID: 1974837104}
-  - {fileID: 820059527}
-  - {fileID: 503751407}
-  - {fileID: 961119470}
-  - {fileID: 995065325}
 --- !u!4 &2001858575
 Transform:
   m_ObjectHideFlags: 0
@@ -40203,6 +40254,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2fd254c55aa8c488025ec6ba3dbc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2001858577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001858573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45b32ecbf0bf484381ad7ff3e59021c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelTiles: []
+  backgroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundTilemap: {fileID: 0}
+  rampTilemap: {fileID: 0}
+--- !u!114 &2001858578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001858573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fdfccb3cb60a3429a05dc87cc916c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelLayouts: []
+  builderSettings: {fileID: 0}
+  gridTilemap: {fileID: 0}
+  borderTilemap: {fileID: 0}
+  startText: {fileID: 0}
+  endText: {fileID: 0}
+  tilePanel: {fileID: 0}
+  placedTiles: []
+--- !u!4 &2004186862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3683547977390433020, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+  m_PrefabInstance: {fileID: 640753825}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2025691334
 GameObject:
   m_ObjectHideFlags: 0
@@ -42071,6 +42165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1a1ff8c681146ae234be10c9983e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
+  tileSize: {x: 32, y: 32}
+  builderSettings: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1001 &4564017793431121653
 PrefabInstance:
   m_ObjectHideFlags: 0

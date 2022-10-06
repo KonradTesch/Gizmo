@@ -1,133 +1,106 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Rectangle.TileCreater;
-using Rectangle.Player;
+using Rectangle.TileCreation;
+using Rectangle.UI;
 
 namespace Rectangle.Level
 {
     public class LevelTile : MonoBehaviour
     {
-        public TileCreater.TileCreater.TileTypes tileType;
-        public ModeController.PlayerModes playerMode;
+        public TileCreator.TileTypes tileType;
         public Vector2Int tileSize = new Vector2Int(32, 32);
+        [SerializeField] private LevelBuilderSettings builderSettings;
+
+        [HideInInspector] public TileButton button;
 
         private LayerMask gridLayer;
 
-        private bool isPicked;
+        private SpriteRenderer rend;
 
-        private Vector2 mouseOffset = Vector2.zero;
-        private Vector3 latestPosition;
-
-        private TileGroup tileGroup;
+        private IsGridUsed gridCollider;
+        private IsGridUsed lastGrid;
 
         private void Start()
         {
-            tileGroup = GetComponentInParent<TileGroup>();
-
             gridLayer = LayerMask.GetMask("Grid");
+            rend = GetComponent<SpriteRenderer>();
         }
-        void Update()
+
+        private void OnMouseDrag()
         {
-            if (Input.GetMouseButtonUp(0) && isPicked)
+            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y , 0);
+        }
+
+        private void OnMouseUp()
+        {
+            Collider2D positionCollider;
+
+            positionCollider = Physics2D.OverlapPoint(transform.position, gridLayer);
+
+            if (positionCollider != null ? !positionCollider.GetComponent<IsGridUsed>().isUsed : false)
             {
-                isPicked = false;
+                gridCollider = positionCollider.GetComponent<IsGridUsed>();
 
-                Vector3 newPos = NewShapePosition();
-
-                transform.parent.position = newPos;
-
-                if (newPos != latestPosition)
+                rend.color = builderSettings.GetModeColor(positionCollider.GetComponent<BackgroundMode>().playerMode);
+            }
+            else
+            {
+                if (lastGrid != null)
                 {
-                    foreach (IsGridUsed grid in tileGroup.gridColliders)
-                    {
-                        grid.isUsed = true;
-                    }
-                    General.GameBehavior.instance.CheckGridCollider();
+                    gridCollider = lastGrid;
                 }
                 else
                 {
-                    foreach (IsGridUsed grid in tileGroup.latestGrid)
-                    {
-                        grid.isUsed = true;
-                    }
-                    tileGroup.gridColliders = new List<IsGridUsed>(tileGroup.latestGrid);
-
-                    if (tileGroup.latestGrid.Count == 0)
-                        transform.parent.transform.localScale = new Vector3(0.4f, 0.4f, 1);
-
+                    Return();
+                    return;
                 }
             }
 
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (isPicked == true)
-            {
-                transform.parent.position = mousePos + mouseOffset - (Vector2)transform.localPosition;
-            }
-            mouseOffset = (Vector2)transform.position - mousePos;
+            transform.position = gridCollider.transform.position;
+            gridCollider.isUsed = true;
 
+            General.GameBehavior.instance.CheckGridCollider();
         }
 
         void OnMouseDown()
         {
-            if (transform.parent.transform.localScale != Vector3.one)
+            if(transform.localPosition == Vector3.zero)
             {
-                transform.parent.transform.localScale = Vector3.one;
-            }
-            latestPosition = transform.position - transform.localPosition;
-            isPicked = true;
-
-            foreach (IsGridUsed grid in tileGroup.gridColliders)
-            {
-                grid.isUsed = false;
-            }
-            tileGroup.latestGrid = new List<IsGridUsed>(tileGroup.gridColliders);
-            tileGroup.gridColliders.Clear();
-        }
-
-        /// <summary>
-        /// Returnst the new position whan this mode shape is dropped.
-        /// </summary>
-        /// <returns></returns>
-        public Vector3 NewShapePosition()
-        {
-            Collider2D positionCollider;
-
-            foreach (Transform child in transform.parent.transform)
-            {
-                positionCollider = Physics2D.OverlapPoint(child.transform.position, gridLayer);
-
-                if (positionCollider == null)
-                    return latestPosition;
-
-                IsGridUsed grid = positionCollider.gameObject.GetComponent<IsGridUsed>();
-                tileGroup.gridColliders.Add(grid);
-                if (grid.isUsed)
-                {
-                    return latestPosition;
-                }
-
+                button.GetTile();
             }
 
-            positionCollider = Physics2D.OverlapPoint(transform.position, gridLayer);
+            if(gridCollider != null)
+            {
+                gridCollider.isUsed = false;
 
-            return positionCollider.gameObject.transform.position - transform.localPosition;
+                lastGrid = gridCollider;
+
+                gridCollider = null;
+            }
+
+            transform.localScale = Vector3.one * 2;
         }
 
         private void OnMouseOver()
         {
             if (Input.GetMouseButtonDown(1))
             {
-                tileGroup.gameObject.transform.position = tileGroup.originPosition;
-                tileGroup.gameObject.transform.localScale = new Vector3(0.4f, 0.4f, 1);
-                foreach (IsGridUsed grid in tileGroup.gridColliders)
-                {
-                    grid.isUsed = false;
-                }
-                tileGroup.gridColliders.Clear();
+                Return();
+
+                if(gridCollider != null)
+                    gridCollider.isUsed = false;
 
                 General.GameBehavior.instance.CheckGridCollider();
             }
+        }
+
+        private void Return()
+        {
+            rend.color = Color.white;
+            transform.localPosition = Vector3.zero;
+            transform.localScale = Vector2.one;
+            button.ReturnTile();
         }
     }
 }

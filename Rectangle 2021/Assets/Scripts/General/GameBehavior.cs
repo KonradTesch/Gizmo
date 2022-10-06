@@ -11,6 +11,8 @@ using Rectangle.Level;
 
 namespace Rectangle.General
 {
+    [RequireComponent(typeof(LevelBuilder))]
+    [RequireComponent(typeof(TileBuilder))]
     /// <summary>
     /// Controls the general game mechanics.
     /// </summary>
@@ -24,9 +26,15 @@ namespace Rectangle.General
         /// The player mode controller.
         /// </summary>
         [Tooltip("The player mode controller.")]
-        [SerializeField] private ModeController player;
+        public ModeController player;
 
         [Header("UI")]
+
+        /// <summary>
+        /// The UI panel with the tiles.
+        /// </summary>
+        [Tooltip("The UI panel with the tiles.")]
+        [SerializeField] private UI.TilePanel tilePanel;
 
         /// <summary>
         /// The UI canvas for gebugging.
@@ -54,25 +62,9 @@ namespace Rectangle.General
         [Tooltip("The virtual Ccamera that follows the player.")]
         [SerializeField] private CinemachineVirtualCamera levelCam;
 
-        [Header("Level")]
 
-        /// <summary>
-        /// The script, tht builds the tilemap level.
-        /// </summary>
-        [Tooltip("The script, tht builds the tilemap level.")]
-        public TileBuilder levelBuilder;
-
-        /// <summary>
-        /// The list of level tiles for the player mode.
-        /// </summary>
-        [Tooltip("The list of level tiles for the player mode.")]
-        [SerializeField] private LevelTile[] levelTiles;
-
-        /// <summary>
-        /// The list of background colliders on the level grid.
-        /// </summary>
-        [Tooltip("The list of background colliders on the level grid.")]
-        [SerializeField] private GameObject[] gridColliders;
+        private TileBuilder tileBuilder;
+        private LevelBuilder levelBuilder;
 
         private TextMeshProUGUI startPlayText;
         private bool canStart;
@@ -88,6 +80,11 @@ namespace Rectangle.General
                 Destroy(this);
                 return;
             }
+
+            tileBuilder = GetComponent<TileBuilder>();
+            levelBuilder = GetComponent<LevelBuilder>();
+
+            levelBuilder.BuildLevel();
 
             startPlayText = startLevelButton.gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
@@ -106,12 +103,13 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> StartPlayMode()");
             if (canStart)
             {
-                levelBuilder.BuildLevel();
+                tileBuilder.BuildLevel(levelBuilder.placedTiles);
 
                 debugUI.GetComponent<DebugUI>().enabled = true;
-                TimerUI.timer = true;
+                //TimerUI.timer = true;
                 player.gameObject.SetActive(true);
                 buttonUI.SetActive(false);
+                tilePanel.gameObject.SetActive(false);
                 levelCam.Priority = 2;
             }
             Debug.Log("GameBehavior: <- StartPlayMode()");
@@ -123,7 +121,8 @@ namespace Rectangle.General
         /// <returns></returns>
         public void CheckGridCollider()
         {
-            if(levelBuilder.CheckLevel())
+            
+            if(levelBuilder.CheckLevelPath())
             {
                 startPlayText.color = Color.black;
                 startLevelButton.enabled = true;
@@ -135,6 +134,7 @@ namespace Rectangle.General
                 canStart = false;
                 startLevelButton.enabled = false;
             }
+            
         }
 
     }

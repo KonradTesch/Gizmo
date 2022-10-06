@@ -22,14 +22,6 @@ namespace Rectangle.Level
         /// </summary>
         [HideInInspector] public List<IsGridUsed> latestGrid;
 
-        /// <summary>
-        /// Original position at the start.
-        /// </summary>
-        [HideInInspector] public Vector3 originPosition;
 
-        private void Start()
-        {
-            originPosition = transform.position;
-        }
     }
 }

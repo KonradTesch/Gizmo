@@ -17,7 +17,7 @@ namespace Rectangle.Player
         [Tooltip("The list of the differnt modes (must have all 4 modes).")]
         [SerializeField] private PlayerMode[] playerModes = new PlayerMode[]
         {
-            new PlayerMode(PlayerModes.Rectanle, null),
+            new PlayerMode(PlayerModes.Rectangle, null),
             new PlayerMode(PlayerModes.Bubble, null),
             new PlayerMode(PlayerModes.Spikey, null),
             new PlayerMode(PlayerModes.Little, null)
@@ -47,13 +47,14 @@ namespace Rectangle.Player
         /// <summary>
         /// The enum with all player modes.
         /// </summary>
-        public enum PlayerModes { None, Rectanle, Bubble, Spikey, Little}
+        public enum PlayerModes { None, Rectangle, Bubble, Spikey, Little}
 
         void Awake()
         {
             Debug.Log("ModeController: -> Awake()");
             InitModes();
-            activePlayer = modes[PlayerModes.Rectanle];
+            activePlayer = modes[PlayerModes.Rectangle];
+            ChangeMode(PlayerModes.Rectangle);
             Debug.Log("ModeController: <- Awake()   activePlayer = " + activePlayer.name);
 
         }

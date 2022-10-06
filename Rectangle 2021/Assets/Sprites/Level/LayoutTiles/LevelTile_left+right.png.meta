@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c17e6a4945ca3c14e93c5f915d616454
+guid: 2bdeddf9f62ac5c4b801ed49cbc2d6fd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 64
-  spriteBorder: {x: 140, y: 140, z: 140, w: 140}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -138,216 +138,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: LevelTile_left+right_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 341.3333
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9d17403de6cf1542bf1ffa181cc8be9
-      internalID: -1888008282
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_1
-      rect:
-        serializedVersion: 2
-        x: 170
-        y: 341.3333
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21f4c0d720b2aa343bef51cb090b4988
-      internalID: 493411375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_2
-      rect:
-        serializedVersion: 2
-        x: 340
-        y: 341.3333
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd8946162fdf47046a4db6d11c8c863d
-      internalID: -1622856030
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 171.33333
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 92fd139924354ad419a02e22fb1ec2f0
-      internalID: -524176883
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_4
-      rect:
-        serializedVersion: 2
-        x: 170
-        y: 171.33333
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aec3a4164df8b494da97d2ef044c1838
-      internalID: 1798073911
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_5
-      rect:
-        serializedVersion: 2
-        x: 340
-        y: 171.33333
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e35e8c6b5e79ac4a803a5c381631d7d
-      internalID: 1632189504
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1.3333282
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf88352a8cd807443bc14196110c6b57
-      internalID: 1377627722
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_7
-      rect:
-        serializedVersion: 2
-        x: 170
-        y: 1.3333282
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 708f0c27a365d584f89a5bee45d4575e
-      internalID: -1518001746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LevelTile_left+right_8
-      rect:
-        serializedVersion: 2
-        x: 340
-        y: 1.3333282
-        width: 170.66667
-        height: 170.66667
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d64a54ea4b11914591797139487b140
-      internalID: 1303419154
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      LevelTile_left+right_6: 1377627722
-      LevelTile_left+right_1: 493411375
-      LevelTile_left+right_0: -1888008282
-      LevelTile_left+right_8: 1303419154
-      LevelTile_left+right_7: -1518001746
-      LevelTile_left+right_3: -524176883
-      LevelTile_left+right_4: 1798073911
-      LevelTile_left+right_2: -1622856030
-      LevelTile_left+right_5: 1632189504
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

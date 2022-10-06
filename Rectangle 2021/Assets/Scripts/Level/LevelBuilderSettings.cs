@@ -1,4 +1,4 @@
-using Rectangle.TileCreater;
+using Rectangle.TileCreation;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,11 +14,55 @@ namespace Rectangle.Level
 
         [Header("Level Backgrounds")]
 
+        public LayerMask gridLayer;
+        public LayerMask backgroundLayer;
         public Sprite backgroundImage;
         public Color rectangleColor;
         public Color spikeyColor;
         public Color bubbleColor;
         public Color littleColor;
 
+        [Header("LevelTiles")]
+
+        public TileType[] tileTypes; 
+
+        public Sprite GetTileTypeSprite(TileCreator.TileTypes tileType)
+        {
+            foreach(TileType type in tileTypes)
+            {
+                if(type.tileType == tileType)
+                {
+                    return type.tileSprite;
+                }
+            }
+
+            Debug.LogWarning("The LevelBuildSettings haven't a tileype sprite for type " + tileType);
+            return null;
+        }
+
+        public Color GetModeColor(Player.ModeController.PlayerModes mode)
+        {
+            switch(mode)
+            {
+                case Player.ModeController.PlayerModes.Rectangle:
+                    return rectangleColor;
+                case Player.ModeController.PlayerModes.Bubble:
+                    return bubbleColor;
+                case Player.ModeController.PlayerModes.Spikey:
+                    return spikeyColor;
+                case Player.ModeController.PlayerModes.Little:
+                    return littleColor;
+            }
+
+            return Color.white;
+        }
+
+    }
+
+    [System.Serializable]
+    public class TileType
+    {
+        public TileCreation.TileCreator.TileTypes tileType;
+        public Sprite tileSprite;
     }
 }
