@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Rectangle.Level;
+using Rectangle.General;
 
 namespace Rectangle.Player
 {
@@ -24,12 +25,6 @@ namespace Rectangle.Player
         };
 
         /// <summary>
-        /// The virtual camera that follows the player.
-        /// </summary>
-        [Tooltip("The virtual camera that follows the player.")]
-        [SerializeField] private CinemachineVirtualCamera virtualCam;
-
-        /// <summary>
         /// The layer for the background colliders.
         /// </summary>
         [Tooltip("The layer for the background colliders.")]
@@ -43,6 +38,7 @@ namespace Rectangle.Player
 
         private BackgroundMode activeBackground;
         private Dictionary<PlayerModes, PlayerBase> modes;
+        private CameraController camController;
 
         /// <summary>
         /// The enum with all player modes.
@@ -52,6 +48,7 @@ namespace Rectangle.Player
         void Awake()
         {
             Debug.Log("ModeController: -> Awake()");
+            camController = Camera.main.GetComponent<CameraController>();
             InitModes();
             activePlayer = modes[PlayerModes.Rectangle];
             ChangeMode(PlayerModes.Rectangle);
@@ -61,17 +58,18 @@ namespace Rectangle.Player
 
         void Update()
         {
-            PlayerModes lastMode = PlayerModes.None;
+            BackgroundMode lastBackground = null;
             if (activeBackground != null)
             {
-                lastMode = activeBackground.playerMode;
+                lastBackground = activeBackground;
             }
 
             activeBackground = Physics2D.OverlapPoint(activePlayer.transform.position, backgroundLayer).GetComponent<BackgroundMode>();
 
-            if(lastMode != activeBackground.playerMode)
+            if(lastBackground != activeBackground)
             {
                 ChangeMode(activeBackground.playerMode);
+                camController.CameraTransition(activeBackground.transform.position);
             }
         }
 
@@ -95,18 +93,6 @@ namespace Rectangle.Player
             activePlayer.gameObject.SetActive(true);
             activePlayer.GetComponent<Rigidbody2D>().velocity = currentVelocity;
 
-
-            virtualCam.Follow = activePlayer.transform;
-            virtualCam.LookAt = activePlayer.transform;
-
-            if(mode == PlayerModes.Little)
-            {
-                virtualCam.m_Lens.OrthographicSize = 1f;
-            }
-            else
-            {
-                virtualCam.m_Lens.OrthographicSize = 2f;
-            }
             Debug.Log("ModeController: <- ChangeMode()");
 
         }

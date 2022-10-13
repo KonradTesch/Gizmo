@@ -3566,7 +3566,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 14, y: 31, z: 0}
+  - position: {x: 14, y: 30, z: 0}
     tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
       e00: -1
@@ -3661,7 +3661,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 15, y: 31, z: 0}
+  - position: {x: 15, y: 30, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
       e00: -1
@@ -3756,7 +3756,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 16, y: 31, z: 0}
+  - position: {x: 16, y: 30, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
       e00: 1
@@ -3851,7 +3851,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 17, y: 31, z: 0}
+  - position: {x: 17, y: 30, z: 0}
     tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
       e00: 1

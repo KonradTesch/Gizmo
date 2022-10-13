@@ -56,18 +56,10 @@ namespace Rectangle.General
 
         public GameObject sucessPanel;
 
-        [Header("Camera")]
-
-        /// <summary>
-        /// The virtual Ccamera that follows the player.
-        /// </summary>
-        [Tooltip("The virtual Ccamera that follows the player.")]
-        [SerializeField] private CinemachineVirtualCamera levelCam;
-
-
         private TileBuilder tileBuilder;
         private LevelBuilder levelBuilder;
 
+        private CameraController camController;
         private TextMeshProUGUI startPlayText;
         private bool canStart;
 
@@ -85,6 +77,7 @@ namespace Rectangle.General
 
             tileBuilder = GetComponent<TileBuilder>();
             levelBuilder = GetComponent<LevelBuilder>();
+            camController = Camera.main.GetComponent<CameraController>();
 
             levelBuilder.BuildLevel();
 
@@ -112,7 +105,8 @@ namespace Rectangle.General
                 player.gameObject.SetActive(true);
                 buttonUI.SetActive(false);
                 tilePanel.gameObject.SetActive(false);
-                levelCam.Priority = 2;
+
+                camController.SetLevelCamera();
             }
             Debug.Log("GameBehavior: <- StartPlayMode()");
         }
