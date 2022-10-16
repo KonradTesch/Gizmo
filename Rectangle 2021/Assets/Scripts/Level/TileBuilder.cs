@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Rectangle.TileCreation;
+using Rectangle.Player;
 
 namespace Rectangle.Level
 {
@@ -20,7 +21,43 @@ namespace Rectangle.Level
         private Dictionary<TileCreator.TileTypes, List<LevelTileData>> modeTiles;
 
         public enum Direction { None, Up, Right, Down, Left}
-        void Start()
+
+        public void BuildLevel(List<LevelTile> placedTiles)
+        {
+            foreach (LevelTile tile in placedTiles)
+            {
+                Vector2 originPosition = ((Vector2)tile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(tile.tileSize.x / 2, tile.tileSize.y / 2);
+
+
+                List<LevelTileData> possibleTiles = new();
+
+                for (int i = 0; i < modeTiles[tile.tileType].Count; i++)
+                {
+                    if (modeTiles[tile.tileType][i].playerMode == tile.playerMode)
+                    {
+                        possibleTiles.Add(modeTiles[tile.tileType][i]);
+                    }
+                }
+
+                int randomIndex = Random.Range(0, possibleTiles.Count);
+
+                BuildTile(Vector2Int.RoundToInt(originPosition), possibleTiles[randomIndex]);
+            }
+        }
+
+        public PlayerController.PlayerModes GetPlayerMode(TileCreator.TileTypes tileType)
+        {
+            if(modeTiles == null)
+            {
+                InitModeTiles();
+            }
+
+            int randomIndex = Random.Range(0, modeTiles[tileType].Count);
+
+            return modeTiles[tileType][randomIndex].playerMode;
+        }
+
+        private void InitModeTiles()
         {
             modeTiles = new()
             {
@@ -34,9 +71,9 @@ namespace Rectangle.Level
 
             };
 
-            foreach(LevelTileData tile in levelTiles)
+            foreach (LevelTileData tile in levelTiles)
             {
-                switch(tile.tileType)
+                switch (tile.tileType)
                 {
                     case TileCreator.TileTypes.AllSides:
                         modeTiles[TileCreator.TileTypes.AllSides].Add(tile);
@@ -60,18 +97,6 @@ namespace Rectangle.Level
                         modeTiles[TileCreator.TileTypes.UpAndDown].Add(tile);
                         break;
                 }
-            }
-        }
-
-        public void BuildLevel(List<LevelTile> placedTiles)
-        {
-            foreach (LevelTile tile in placedTiles)
-            {
-                Vector2 originPosition = ((Vector2)tile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(tile.tileSize.x / 2, tile.tileSize.y / 2);
-
-                int randomIndex = Random.Range(0, modeTiles[tile.tileType].Count);
-
-                BuildTile(Vector2Int.RoundToInt(originPosition), modeTiles[tile.tileType][randomIndex]);
             }
         }
 

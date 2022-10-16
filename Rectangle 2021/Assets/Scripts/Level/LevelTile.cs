@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rectangle.TileCreation;
+using Rectangle.Player;
 using Rectangle.UI;
 
 namespace Rectangle.Level
@@ -9,14 +10,15 @@ namespace Rectangle.Level
     public class LevelTile : MonoBehaviour
     {
         public TileCreator.TileTypes tileType;
+        public PlayerController.PlayerModes playerMode;
         public Vector2Int tileSize = new Vector2Int(32, 32);
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [HideInInspector] public TileButton button;
 
-        private LayerMask gridLayer;
-
         private SpriteRenderer rend;
+
+        private LayerMask gridLayer;
 
         private IsGridUsed gridCollider;
         private IsGridUsed lastGrid;
@@ -34,6 +36,8 @@ namespace Rectangle.Level
 
         private void OnMouseUp()
         {
+            rend.sortingOrder = 0;
+
             Collider2D positionCollider;
 
             positionCollider = Physics2D.OverlapPoint(transform.position, gridLayer);
@@ -41,8 +45,8 @@ namespace Rectangle.Level
             if (positionCollider != null ? !positionCollider.GetComponent<IsGridUsed>().isUsed : false)
             {
                 gridCollider = positionCollider.GetComponent<IsGridUsed>();
-
-                rend.color = builderSettings.GetModeColor(positionCollider.GetComponent<BackgroundMode>().playerMode);
+                gridCollider.GetComponent<SpriteRenderer>().color = rend.color;
+                gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
             }
             else
             {
@@ -65,7 +69,9 @@ namespace Rectangle.Level
 
         void OnMouseDown()
         {
-            if(transform.localPosition == Vector3.zero)
+            rend.sortingOrder = 1;
+
+            if (transform.localPosition == Vector3.zero)
             {
                 button.GetTile();
             }
@@ -73,6 +79,9 @@ namespace Rectangle.Level
             if(gridCollider != null)
             {
                 gridCollider.isUsed = false;
+                gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
+                gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
+
 
                 lastGrid = gridCollider;
 
@@ -89,7 +98,11 @@ namespace Rectangle.Level
                 Return();
 
                 if(gridCollider != null)
+                {
+                    gridCollider.GetComponent<SpriteRenderer>().color = rend.color;
+                    gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
                     gridCollider.isUsed = false;
+                }
 
                 General.GameBehavior.instance.CheckGridCollider();
             }
@@ -97,7 +110,8 @@ namespace Rectangle.Level
 
         private void Return()
         {
-            rend.color = Color.white;
+            rend.sortingOrder = 0;
+
             transform.localPosition = Vector3.zero;
             transform.localScale = Vector2.one;
             button.ReturnTile();

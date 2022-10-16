@@ -11,8 +11,11 @@ namespace Rectangle.UI
     {
         [SerializeField] private GameObject tileButtonReference;
 
+        private TileBuilder tileBuilder;
+
         public void InitTileButtons(List<TileCreator.TileTypes> tileTypes, LevelBuilderSettings builderSettings)
         {
+            tileBuilder = General.GameBehavior.instance.GetComponent<TileBuilder>();
 
             Dictionary<TileCreator.TileTypes, int> levelTiles = new();
 
@@ -40,8 +43,13 @@ namespace Rectangle.UI
                 newButton.tileCount = tileType.Value;
                 newButton.tileType = tileType.Key;
                 newButton.tileSprite = builderSettings.GetTileTypeSprite(tileType.Key);
+                newButton.playerMode = tileBuilder.GetPlayerMode(tileType.Key);
+                newButton.tileColor = builderSettings.GetModeColor(newButton.playerMode);
 
-                newButton.GetComponent<SpriteRenderer>().sprite = builderSettings.GetTileTypeSprite(tileType.Key);
+                SpriteRenderer tileRend = newButton.GetComponent<SpriteRenderer>();
+
+                tileRend.sprite = builderSettings.GetTileTypeSprite(tileType.Key);
+                tileRend.color = Color.grey;
 
                 newButton.gameObject.SetActive(true);
 

@@ -21091,8 +21091,10 @@ MonoBehaviour:
   tileCountText: {fileID: 772686419}
   tilePrefab: {fileID: 852341010236262845, guid: c62f07b76baa0734cb79cce40d213818, type: 3}
   tileSprite: {fileID: 0}
+  tileColor: {r: 0, g: 0, b: 0, a: 0}
   tileCount: 0
   tileType: 0
+  playerMode: 0
 --- !u!212 &1762109799
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21621,6 +21623,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d94353f59d212b644b21a79722325707, type: 2}
   - {fileID: 11400000, guid: 34139f812d84cff4297c82352f15a2f2, type: 2}
   - {fileID: 11400000, guid: d4638d8d5f09c1c4faa35e3870b55be7, type: 2}
+  - {fileID: 11400000, guid: dcecac6c4c5cb6146b9a91f254771923, type: 2}
+  - {fileID: 11400000, guid: 5b644d960b8da5e41a865112caed6cc3, type: 2}
   backgroundLayer:
     serializedVersion: 2
     m_Bits: 8

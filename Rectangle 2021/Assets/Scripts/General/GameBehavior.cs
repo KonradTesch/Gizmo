@@ -34,7 +34,7 @@ namespace Rectangle.General
         /// The UI panel with the tiles.
         /// </summary>
         [Tooltip("The UI panel with the tiles.")]
-        [SerializeField] private UI.TilePanel tilePanel;
+        [SerializeField] private TilePanel tilePanel;
 
         /// <summary>
         /// The UI canvas for gebugging.

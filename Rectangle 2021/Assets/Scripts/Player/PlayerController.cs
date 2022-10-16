@@ -86,7 +86,6 @@ namespace Rectangle.Player
 
             if (lastBackground != activeBackground)
             {
-                Debug.Log("CHANGE MODE | Cam:" + camController + " to position: " + activeBackground.transform.position);
                 ChangeMode(activeBackground.playerMode);
                 camController.CameraTransition(activeBackground.transform.position);
             }

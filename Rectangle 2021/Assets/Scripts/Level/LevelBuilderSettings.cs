@@ -62,7 +62,7 @@ namespace Rectangle.Level
     [System.Serializable]
     public class TileType
     {
-        public TileCreation.TileCreator.TileTypes tileType;
+        public TileCreator.TileTypes tileType;
         public Sprite tileSprite;
     }
 }

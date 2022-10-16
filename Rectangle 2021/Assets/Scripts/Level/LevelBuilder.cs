@@ -75,7 +75,13 @@ namespace Rectangle.Level
                         SpriteRenderer backgroundRend = newGridCol.AddComponent<SpriteRenderer>();
                         backgroundRend.sortingLayerName = "Background";
                         backgroundRend.sprite = builderSettings.backgroundImage;
+                        backgroundRend.sortingOrder = -1;
 
+                        backgroundRend.color = Color.grey;
+
+                        newGridCol.AddComponent<BackgroundMode>();
+
+                        /*
                         int randomModeIndex = Random.Range(1, 2);
                         newGridCol.AddComponent<BackgroundMode>().playerMode = (Player.PlayerController.PlayerModes)randomModeIndex;
 
@@ -94,6 +100,8 @@ namespace Rectangle.Level
                                 backgroundRend.color = builderSettings.littleColor;
                                 break;
                         }
+                        */
+
                     }
                     else
                     {
