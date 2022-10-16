@@ -13,7 +13,7 @@ namespace Rectangle.TileCreation
 
         public Vector2Int tileSize;
         public TileCreator.TileTypes tileType;
-        public Player.ModeController.PlayerModes playerMode;
+        public Player.PlayerController.PlayerModes playerMode;
     }
 
     [System.Serializable]

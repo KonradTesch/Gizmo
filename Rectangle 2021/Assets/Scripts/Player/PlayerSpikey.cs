@@ -27,11 +27,6 @@ namespace Rectangle.Player
         {
             PositionCheck();
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
-
             if (Input.GetKey(KeyCode.W))
             {
                 climb = true;
@@ -40,12 +35,6 @@ namespace Rectangle.Player
             {
                 climb = false;
             }
-            horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
-            Move();
-        }
-
-        protected override void FixedUpdate()
-        {
         }
 
         /// <summary>
@@ -73,12 +62,12 @@ namespace Rectangle.Player
         /// <summary>
         /// Moves of the spikey player.
         /// </summary>
-        protected override void Move()
+        public override void Move(Vector2 horizontalMove)
         {
 
             if (grounded || airControl  || onWallEnd)
             {
-                Vector2 targetVelocity = new Vector2(horizontalMove * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
+                Vector2 targetVelocity = new Vector2(horizontalMove.x * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
 
                 if(targetVelocity.y < maxFallingSpped)
                 {

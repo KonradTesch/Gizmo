@@ -2445,25 +2445,6 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 9, y: 28, z: 0}
-    tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
-    transform:
-      e00: -1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
   - position: {x: 9, y: 31, z: 0}
     tile: {fileID: 11400000, guid: 6877d2a183d758f489621d5dd20de567, type: 2}
     transform:
@@ -2655,7 +2636,7 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 10, y: 28, z: 0}
-    tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
+    tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
       e00: -1
       e01: 0
@@ -2866,7 +2847,7 @@ MonoBehaviour:
   - position: {x: 11, y: 28, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
-      e00: 1
+      e00: -1
       e01: 0
       e02: 0
       e03: 0
@@ -3072,7 +3053,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 12, y: 25, z: 0}
+  - position: {x: 12, y: 24, z: 0}
     tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
       e00: -1
@@ -3092,7 +3073,7 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 12, y: 28, z: 0}
-    tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
+    tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
       e00: 1
       e01: 0
@@ -3262,10 +3243,29 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 13, y: 25, z: 0}
+  - position: {x: 13, y: 24, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
       e00: -1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 13, y: 28, z: 0}
+    tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
+    transform:
+      e00: 1
       e01: 0
       e02: 0
       e03: 0
@@ -3395,45 +3395,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 14, y: 6, z: 0}
-    tile: {fileID: 11400000, guid: 0485160505f6866489343f583869c0b5, type: 2}
-    transform:
-      e00: -1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - position: {x: 14, y: 7, z: 0}
-    tile: {fileID: 11400000, guid: 5ce52796b9eaef048a4efccd41edbdb5, type: 2}
-    transform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: -1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - position: {x: 14, y: 25, z: 0}
+  - position: {x: 14, y: 24, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
       e00: 1
@@ -3566,44 +3528,6 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 15, y: 5, z: 0}
-    tile: {fileID: 11400000, guid: 0485160505f6866489343f583869c0b5, type: 2}
-    transform:
-      e00: -1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - position: {x: 15, y: 6, z: 0}
-    tile: {fileID: 11400000, guid: 5ce52796b9eaef048a4efccd41edbdb5, type: 2}
-    transform:
-      e00: 0
-      e01: -1
-      e02: 0
-      e03: 0
-      e10: 1
-      e11: 0
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
   - position: {x: 15, y: 13, z: 0}
     tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
@@ -3623,7 +3547,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 15, y: 25, z: 0}
+  - position: {x: 15, y: 24, z: 0}
     tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
       e00: 1
@@ -3756,25 +3680,6 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 16, y: 5, z: 0}
-    tile: {fileID: 11400000, guid: 5ce52796b9eaef048a4efccd41edbdb5, type: 2}
-    transform:
-      e00: 0
-      e01: -1
-      e02: 0
-      e03: 0
-      e10: 1
-      e11: 0
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
   - position: {x: 16, y: 13, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
@@ -3794,7 +3699,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 16, y: 21, z: 0}
+  - position: {x: 16, y: 20, z: 0}
     tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
       e00: -1
@@ -3946,7 +3851,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 17, y: 21, z: 0}
+  - position: {x: 17, y: 20, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
       e00: -1
@@ -4098,7 +4003,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 18, y: 21, z: 0}
+  - position: {x: 18, y: 20, z: 0}
     tile: {fileID: 11400000, guid: 4796e51bdac2f92429b0cc06157fc25a, type: 2}
     transform:
       e00: 1
@@ -4231,7 +4136,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 19, y: 21, z: 0}
+  - position: {x: 19, y: 20, z: 0}
     tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
     transform:
       e00: 1
@@ -6170,7 +6075,102 @@ MonoBehaviour:
       e32: 0
       e33: 1
   nookTileChanges: []
-  rampTileChanges: []
+  rampTileChanges:
+  - position: {x: 14, y: 6, z: 0}
+    tile: {fileID: 11400000, guid: 0485160505f6866489343f583869c0b5, type: 2}
+    transform:
+      e00: 0
+      e01: 1
+      e02: 0
+      e03: 0
+      e10: -1
+      e11: 0
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 14, y: 7, z: 0}
+    tile: {fileID: 11400000, guid: 5ce52796b9eaef048a4efccd41edbdb5, type: 2}
+    transform:
+      e00: 0
+      e01: -1
+      e02: 0
+      e03: 0
+      e10: 1
+      e11: 0
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 15, y: 5, z: 0}
+    tile: {fileID: 11400000, guid: 0485160505f6866489343f583869c0b5, type: 2}
+    transform:
+      e00: 0
+      e01: 1
+      e02: 0
+      e03: 0
+      e10: -1
+      e11: 0
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 15, y: 6, z: 0}
+    tile: {fileID: 11400000, guid: 5ce52796b9eaef048a4efccd41edbdb5, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: -1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 16, y: 5, z: 0}
+    tile: {fileID: 11400000, guid: 5ce52796b9eaef048a4efccd41edbdb5, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: -1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   tileSize: {x: 32, y: 32}
   tileType: 4
   playerMode: 1

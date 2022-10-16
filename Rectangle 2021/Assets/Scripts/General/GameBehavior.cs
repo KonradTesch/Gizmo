@@ -26,7 +26,7 @@ namespace Rectangle.General
         /// The player mode controller.
         /// </summary>
         [Tooltip("The player mode controller.")]
-        public ModeController player;
+        public PlayerController player;
 
         [Header("UI")]
 

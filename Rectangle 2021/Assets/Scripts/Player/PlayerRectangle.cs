@@ -14,7 +14,7 @@ namespace Rectangle.Player
         /// <summary>
         /// Let the rectangle player jump.
         /// </summary>
-        protected override void Jump()
+        public override void Jump()
         {
             if (grounded)
             {

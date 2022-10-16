@@ -21,7 +21,7 @@ namespace Rectangle.Player
         /// <summary>
         /// Moves the bubble player.
         /// </summary>
-        protected override void Move()
+        public override void Move(Vector2 horizontalMove)
         {
             falling = CheckFalling();
 
@@ -34,7 +34,7 @@ namespace Rectangle.Player
                 rigidBody.gravityScale = 1.5f;
             }
 
-            base.Move();
+            base.Move(horizontalMove);
         }
 
         /// <summary>

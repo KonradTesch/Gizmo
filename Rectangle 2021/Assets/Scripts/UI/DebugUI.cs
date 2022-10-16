@@ -8,7 +8,7 @@ namespace Rectangle.UI
 {
     public class DebugUI : MonoBehaviour
     {
-        public ModeController modeController;
+        public PlayerController modeController;
 
         [Space]
 

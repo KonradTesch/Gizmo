@@ -40,17 +40,17 @@ namespace Rectangle.Level
             return null;
         }
 
-        public Color GetModeColor(Player.ModeController.PlayerModes mode)
+        public Color GetModeColor(Player.PlayerController.PlayerModes mode)
         {
             switch(mode)
             {
-                case Player.ModeController.PlayerModes.Rectangle:
+                case Player.PlayerController.PlayerModes.Rectangle:
                     return rectangleColor;
-                case Player.ModeController.PlayerModes.Bubble:
+                case Player.PlayerController.PlayerModes.Bubble:
                     return bubbleColor;
-                case Player.ModeController.PlayerModes.Spikey:
+                case Player.PlayerController.PlayerModes.Spikey:
                     return spikeyColor;
-                case Player.ModeController.PlayerModes.Little:
+                case Player.PlayerController.PlayerModes.Little:
                     return littleColor;
             }
 

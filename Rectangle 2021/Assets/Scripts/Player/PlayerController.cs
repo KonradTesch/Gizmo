@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using UnityEngine.InputSystem;
 using Rectangle.Level;
 using Rectangle.General;
 
 namespace Rectangle.Player
 {
     /// <summary>
-    /// Controls the changing between modes of the player.
+    /// Controls the movement and changing between modes of the player.
     /// </summary>
-    public class ModeController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         /// <summary>
         /// The list of the differnt modes (must have all 4 modes).
@@ -40,6 +40,9 @@ namespace Rectangle.Player
         private Dictionary<PlayerModes, PlayerBase> modes;
         private CameraController camController;
 
+        private PlayerInput playerInput;
+        private PlayerInputActions inputActions;
+
         /// <summary>
         /// The enum with all player modes.
         /// </summary>
@@ -48,15 +51,30 @@ namespace Rectangle.Player
         void Awake()
         {
             Debug.Log("ModeController: -> Awake()");
+
+            inputActions = new PlayerInputActions();
+            inputActions.Player.Enable();
+
             camController = Camera.main.GetComponent<CameraController>();
             InitModes();
             activePlayer = modes[PlayerModes.Rectangle];
-            ChangeMode(PlayerModes.Rectangle);
+            CheckBackground();
             Debug.Log("ModeController: <- Awake()   activePlayer = " + activePlayer.name);
 
         }
 
         void Update()
+        {
+            CheckBackground();
+        }
+
+        private void FixedUpdate()
+        {
+            Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
+            activePlayer.Move(movement);
+        }
+
+        private void CheckBackground()
         {
             BackgroundMode lastBackground = null;
             if (activeBackground != null)
@@ -66,8 +84,9 @@ namespace Rectangle.Player
 
             activeBackground = Physics2D.OverlapPoint(activePlayer.transform.position, backgroundLayer).GetComponent<BackgroundMode>();
 
-            if(lastBackground != activeBackground)
+            if (lastBackground != activeBackground)
             {
+                Debug.Log("CHANGE MODE | Cam:" + camController + " to position: " + activeBackground.transform.position);
                 ChangeMode(activeBackground.playerMode);
                 camController.CameraTransition(activeBackground.transform.position);
             }
@@ -97,6 +116,19 @@ namespace Rectangle.Player
 
         }
 
+        public void Jump(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+            {
+                activePlayer.Jump();
+            }
+        }
+
+        public void Move(InputAction.CallbackContext context)
+        {
+            activePlayer.Move(context.ReadValue<Vector2>());
+        }
+
         /// <summary>
         /// Initiates the modes dictiornary.
         /// </summary>
@@ -124,14 +156,14 @@ namespace Rectangle.Player
         /// The mode of the player.
         /// </summary>
         [Tooltip("The mode of the player.")]
-        public ModeController.PlayerModes playerMode;
+        public PlayerController.PlayerModes playerMode;
         /// <summary>
         /// The movement script of the player.
         /// </summary>
         [Tooltip("The fitting movement script of the player.")]
         public PlayerBase player;
 
-        public PlayerMode(ModeController.PlayerModes mode, PlayerBase playerMove)
+        public PlayerMode(PlayerController.PlayerModes mode, PlayerBase playerMove)
         {
             playerMode = mode;
             player = playerMove;

@@ -11639,13 +11639,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3683547977390433008, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: m_Name
-      value: Player_new
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: 58e03a22-a839-491a-baf1-4aafb664709b
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: Player/Move[/Keyboard/a,/Keyboard/d]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 94041364}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Rectangle.Player.PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265299147388319907, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3683547977390433008, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Name
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3683547977390433020, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
       propertyPath: m_RootOrder
@@ -11691,9 +11731,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3683547977390433021, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: virtualCam
-      value: 
+    - target: {fileID: 3683547977414959958, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: moveSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683547978436954697, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: moveSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683547979103905857, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: moveSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683547979325627247, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: moveSpeed
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
@@ -11709,7 +11761,7 @@ GameObject:
   - component: {fileID: 750495369}
   - component: {fileID: 750495368}
   m_Layer: 0
-  m_Name: LevelTiles
+  m_Name: LevelTilePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

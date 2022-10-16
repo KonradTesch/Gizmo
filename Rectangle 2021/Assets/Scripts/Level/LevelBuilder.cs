@@ -77,7 +77,7 @@ namespace Rectangle.Level
                         backgroundRend.sprite = builderSettings.backgroundImage;
 
                         int randomModeIndex = Random.Range(1, 2);
-                        newGridCol.AddComponent<BackgroundMode>().playerMode = (Player.ModeController.PlayerModes)randomModeIndex;
+                        newGridCol.AddComponent<BackgroundMode>().playerMode = (Player.PlayerController.PlayerModes)randomModeIndex;
 
                         switch (randomModeIndex)
                         {
@@ -116,7 +116,7 @@ namespace Rectangle.Level
             startCollider.transform.position = startPos;
             startCollider.AddComponent<BoxCollider2D>().isTrigger = true;
             startCollider.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
-            startCollider.AddComponent<BackgroundMode>().playerMode = Player.ModeController.PlayerModes.Rectangle;
+            startCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
 
             endDirection = GetEndDirection();
             Vector2 endPos = DrawStartOrEnd(gridData.end, endDirection);
@@ -129,7 +129,7 @@ namespace Rectangle.Level
             endCollider.transform.position = endPos;
             endCollider.AddComponent<BoxCollider2D>().isTrigger = true;
             endCollider.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
-            endCollider.AddComponent<BackgroundMode>().playerMode = Player.ModeController.PlayerModes.Rectangle;
+            endCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
             SuccessTrigger success = endCollider.AddComponent<SuccessTrigger>();
             success.successPanel = General.GameBehavior.instance.sucessPanel;
             success.timerUI = FindObjectOfType<UI.TimerUI>();

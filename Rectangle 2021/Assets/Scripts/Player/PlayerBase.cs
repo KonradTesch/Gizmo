@@ -72,7 +72,7 @@ namespace Rectangle.Player
         protected Rigidbody2D rigidBody;
         protected Collider2D col;
 
-        protected float horizontalMove;
+        //protected float horizontalMove;
 
         private void Awake()
         {
@@ -81,31 +81,22 @@ namespace Rectangle.Player
 
         }
 
-        private void Update()
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
-        }
-
         protected virtual void FixedUpdate()
         {
             PositionCheck();
 
-            horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
-            Move();
+            //horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
+            //Move();
         }
 
         /// <summary>
         /// Moves the player
         /// </summary>
-        protected virtual void Move()
+        public virtual void Move(Vector2 horizontalMove)
         {
-
             if (grounded || airControl && !onRamp)
             {
-                Vector2 targetVelocity = new Vector2(horizontalMove * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
+                Vector2 targetVelocity = new Vector2(horizontalMove.x * moveSpeed * Time.fixedDeltaTime, rigidBody.velocity.y);
 
                 if(targetVelocity.y < maxFallingSpped)
                 {
@@ -119,7 +110,7 @@ namespace Rectangle.Player
         /// <summary>
         /// Let the player jump.
         /// </summary>
-        protected virtual void Jump()
+        public virtual void Jump()
         {
             if (grounded)
             {

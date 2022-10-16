@@ -110,7 +110,7 @@ namespace Rectangle.TileCreation
                 Debug.LogWarning("Please select a Tile Type for the tile in the Inspector.");
                 return;
             }
-            if (builder.playerMode == Player.ModeController.PlayerModes.None)
+            if (builder.playerMode == Player.PlayerController.PlayerModes.None)
             {
                 Debug.LogWarning("Please select a Player Mode for the tile in the Inspector.");
                 return;

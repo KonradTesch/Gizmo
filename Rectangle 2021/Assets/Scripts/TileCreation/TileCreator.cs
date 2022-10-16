@@ -18,7 +18,7 @@ namespace Rectangle.TileCreation
         [Space()]
         public string tileName;
         public TileTypes tileType;
-        public Player.ModeController.PlayerModes playerMode;
+        public Player.PlayerController.PlayerModes playerMode;
 
         [Header("Asset Folder")]
         public string saveFolderPath;
