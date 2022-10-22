@@ -40,6 +40,8 @@ namespace Rectangle.TileCreation
 
                 if (GUILayout.Button("Override"))
                 {
+                    AssetDatabase.DeleteAsset($"{builder.saveFolderPath}/{builder.playerMode}/{builder.tileName}.asset");
+
                     SaveTile(builder);
                     fileExists = false;
                 }
@@ -173,6 +175,8 @@ namespace Rectangle.TileCreation
         {
             builder.groundTilemap.ClearAllTiles();
             builder.rampTilemap.ClearAllTiles();
+            builder.tileSize = tile.tileSize;
+            builder.tileName = tile.name;
 
             foreach(ChangeData change in tile.groundTileChanges)
             {

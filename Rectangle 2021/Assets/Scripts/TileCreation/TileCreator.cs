@@ -13,6 +13,9 @@ namespace Rectangle.TileCreation
         public Tilemap rampTilemap;
         public Vector2Int tileSize = new Vector2Int(32, 32);
 
+        [Header("Asset Folder")]
+        public string saveFolderPath;
+
         [Header("Tile Settings")]
         public LevelBuilderSettings builderSettings;
         [Space()]
@@ -20,8 +23,6 @@ namespace Rectangle.TileCreation
         public TileTypes tileType;
         public Player.PlayerController.PlayerModes playerMode;
 
-        [Header("Asset Folder")]
-        public string saveFolderPath;
 
         public enum TileTypes { undefined, AllSides, LeftAndRight, LeftAndDown, LeftAndUp, UpAndRight, DownAndRight, UpAndDown};
 
