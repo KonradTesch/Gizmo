@@ -18,8 +18,10 @@ namespace Rectangle.TileCreation
 
         [Header("Tile Settings")]
         public LevelBuilderSettings builderSettings;
+        public Transform collectableParent;
         [Space()]
         public string tileName;
+        public bool hasCollactables;
         public TileTypes tileType;
         public Player.PlayerController.PlayerModes playerMode;
 

@@ -103,9 +103,29 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a2329502-677a-4d77-a2ce-7f17bdbf30a4
     m_ActionName: Rectangle/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58e03a22-a839-491a-baf1-4aafb664709b
+    m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3683547977390433021}
+        m_TargetAssemblyTypeName: Rectangle.Player.PlayerController, Assembly-CSharp
+        m_MethodName: BuildingMode
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5b7c5a3a-0953-48da-b350-7140c764c755
+    m_ActionName: Player/ChangeGameMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightTrigger,/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Rectangle
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &3683547977414959945
@@ -155,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a26155def3867341bac523d7b313f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 100
   movementSmoothing: 0.05
   jumpForce: 22
   maxFallingSpped: -10
@@ -314,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303fa3b601d370f46bb0f5b09d64d48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 100
   movementSmoothing: 0.05
   jumpForce: 22
   maxFallingSpped: -10
@@ -473,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a697935a34b143a4690350c19889ab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 100
   movementSmoothing: 0.05
   jumpForce: 22
   maxFallingSpped: -10
@@ -641,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01657fbc7c1aea8439512620d5a81c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 100
   movementSmoothing: 0.05
   jumpForce: 22
   maxFallingSpped: -10

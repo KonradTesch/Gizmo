@@ -10,7 +10,9 @@ namespace Rectangle.Level
     public class TileBuilder : MonoBehaviour
     {
         [SerializeField] private LevelTileData[] levelTiles;
-        [SerializeField] private LayerMask backgroundLayer;
+        [SerializeField] private LevelTileData[] anchorTiles;
+        [SerializeField] private LayerMask gridLayer;
+        [SerializeField] private GameObject collectableTilePrefab;
 
         [Header("Tilemaps")]
 
@@ -22,12 +24,12 @@ namespace Rectangle.Level
 
         public enum Direction { None, Up, Right, Down, Left}
 
-        public void BuildLevel(List<LevelTile> placedTiles)
+        public void BuildLevel(List<LevelTile> placedTiles, List<LevelTile> anchorLevelTiles)
         {
             foreach (LevelTile tile in placedTiles)
             {
+                Debug.Log("build tile " + tile.name);
                 Vector2 originPosition = ((Vector2)tile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(tile.tileSize.x / 2, tile.tileSize.y / 2);
-
 
                 List<LevelTileData> possibleTiles = new();
 
@@ -42,10 +44,34 @@ namespace Rectangle.Level
                 int randomIndex = Random.Range(0, possibleTiles.Count);
 
                 BuildTile(Vector2Int.RoundToInt(originPosition), possibleTiles[randomIndex]);
+
+            }
+
+            foreach(LevelTile anchorTile in anchorLevelTiles)
+            {
+                Vector2 originPosition = ((Vector2)anchorTile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(anchorTile.tileSize.x / 2, anchorTile.tileSize.y / 2);
+
+                LevelTileData randomTile = anchorTiles[Random.Range(0, anchorTiles.Length)];
+
+                Physics2D.OverlapPoint(anchorTile.transform.position, gridLayer).GetComponent<BackgroundMode>().playerMode = randomTile.playerMode;
+
+                anchorTile.gameObject.SetActive(false);
+
+                BuildTile(Vector2Int.RoundToInt(originPosition), randomTile);
+
+                if (anchorTile.collectableTiles != null)
+                {
+                    SpriteRenderer rend = anchorTile.GetComponent<SpriteRenderer>();
+
+                    Vector2 origin = rend.bounds.min;
+
+                    PlaceCollectableTiles(anchorTile.collectableTiles, randomTile.collectablePositions, origin);
+                    anchorTile.collectableTiles = null;
+                }
             }
         }
 
-        public PlayerController.PlayerModes GetPlayerMode(TileCreator.TileTypes tileType)
+        public PlayerController.PlayerModes GetRandomPlayerMode(TileCreator.TileTypes tileType)
         {
             if(modeTiles == null)
             {
@@ -55,6 +81,37 @@ namespace Rectangle.Level
             int randomIndex = Random.Range(0, modeTiles[tileType].Count);
 
             return modeTiles[tileType][randomIndex].playerMode;
+        }
+
+        private void PlaceCollectableTiles( List<TileCreator.TileTypes> collectableTiles, Vector2[] positions, Vector2 tilePosition)
+        {
+            Debug.Log("Place " + collectableTiles.Count + "Collectables.");
+            Dictionary<TileCreator.TileTypes, int> collectables = new();
+            foreach (TileCreator.TileTypes tileType in collectableTiles)
+            {
+                if (collectables.ContainsKey(tileType))
+                {
+                    collectables[tileType]++;
+                }
+                else
+                {
+                    collectables.Add(tileType, 1);
+                }
+            }
+
+
+            int i = 0;
+            foreach (KeyValuePair<TileCreator.TileTypes, int> collectable in collectables)
+            {
+                CollectableTile newCollectable = Instantiate(collectableTilePrefab).GetComponent<CollectableTile>();
+                newCollectable.transform.position = tilePosition + positions[i];
+                newCollectable.tileType = collectable.Key;
+                newCollectable.count = collectable.Value;
+
+                newCollectable.GetComponent<SpriteRenderer>().sprite = General.GameBehavior.instance.builderSettings.GetTileTypeSprite(collectable.Key);
+
+                i++;
+            }
         }
 
         private void InitModeTiles()
@@ -126,5 +183,15 @@ namespace Rectangle.Level
             }
             rampTilemap.RefreshAllTiles();
         }
+    }
+
+    [System.Serializable]
+    public class TileGroupData
+    {
+        public TileCreator.TileTypes tileType;
+        public PlayerController.PlayerModes playerMode;
+        public int tileCount;
+        public Sprite tileSprite;
+        public Color tileColor;
     }
 }

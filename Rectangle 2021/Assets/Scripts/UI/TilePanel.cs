@@ -11,49 +11,40 @@ namespace Rectangle.UI
     {
         [SerializeField] private GameObject tileButtonReference;
 
-        private TileBuilder tileBuilder;
-
-        public void InitTileButtons(List<TileCreator.TileTypes> tileTypes, LevelBuilderSettings builderSettings)
+        public void InitTileButtons(List<TileGroupData> tileGroups)
         {
-            tileBuilder = General.GameBehavior.instance.GetComponent<TileBuilder>();
-
-            Dictionary<TileCreator.TileTypes, int> levelTiles = new();
-
-            foreach(TileCreator.TileTypes type in tileTypes)
+            foreach(Transform child in transform)
             {
-                if(levelTiles.ContainsKey(type))
-                {
-                    levelTiles[type]++;
-                }
-                else
-                {
-                    levelTiles.Add(type, 1);
-                }
+                if(child.gameObject != tileButtonReference)
+                    Destroy(child.gameObject);
             }
 
             int i = 1;
             float panelHeight = GetComponent<SpriteRenderer>().size.y;
 
-            foreach (KeyValuePair<TileCreator.TileTypes, int> tileType in levelTiles)
+            foreach (TileGroupData tileGroup in tileGroups)
             {
-                TileButton newButton = Instantiate(tileButtonReference, transform).GetComponent<TileButton>();
+                if(tileGroup.tileCount > 0)
+                {
+                    TileButton newButton = Instantiate(tileButtonReference, transform).GetComponent<TileButton>();
 
-                newButton.transform.localPosition = new Vector3(0, i * (panelHeight / (levelTiles.Count + 1)) - panelHeight / 2, 0);
+                    newButton.transform.localPosition = new Vector3(0, i * (panelHeight / (tileGroups.Count + 1)) - panelHeight / 2, 0);
 
-                newButton.tileCount = tileType.Value;
-                newButton.tileType = tileType.Key;
-                newButton.tileSprite = builderSettings.GetTileTypeSprite(tileType.Key);
-                newButton.playerMode = tileBuilder.GetPlayerMode(tileType.Key);
-                newButton.tileColor = builderSettings.GetModeColor(newButton.playerMode);
+                    newButton.tileCount = tileGroup.tileCount;
+                    newButton.tileType = tileGroup.tileType;
+                    newButton.tileSprite = tileGroup.tileSprite;
+                    newButton.playerMode = tileGroup.playerMode;
+                    newButton.tileColor = tileGroup.tileColor;
 
-                SpriteRenderer tileRend = newButton.GetComponent<SpriteRenderer>();
+                    SpriteRenderer tileRend = newButton.GetComponent<SpriteRenderer>();
 
-                tileRend.sprite = builderSettings.GetTileTypeSprite(tileType.Key);
-                tileRend.color = Color.grey;
+                    tileRend.sprite = tileGroup.tileSprite;
+                    tileRend.color = Color.grey;
 
-                newButton.gameObject.SetActive(true);
+                    newButton.gameObject.SetActive(true);
 
-                i++;
+                    i++;
+                }
             }
 
         }

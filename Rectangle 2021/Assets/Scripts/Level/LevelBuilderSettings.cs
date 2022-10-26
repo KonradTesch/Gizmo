@@ -24,6 +24,7 @@ namespace Rectangle.Level
 
         [Header("LevelTiles")]
 
+        public Sprite anchorTileSprite;
         public TileType[] tileTypes; 
 
         public Sprite GetTileTypeSprite(TileCreator.TileTypes tileType)

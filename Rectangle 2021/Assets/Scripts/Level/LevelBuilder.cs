@@ -20,18 +20,13 @@ namespace Rectangle.Level
         [SerializeField] private GameObject startText;
         [SerializeField] private GameObject endText;
 
-        /// <summary>
-        /// The UI panel with the tiles.
-        /// </summary>
-        [Tooltip("The UI panel with the tiles.")]
-        [SerializeField] private UI.TilePanel tilePanel;
-
         [HideInInspector] public List<LevelTile> placedTiles;
+        [HideInInspector] public List<LevelTile> anchorTiles;
 
         private LevelGrid gridData;
         private Vector2Int startDirection;
         private Vector2Int endDirection;
-
+        private List<Vector2Int> blockedPositions;
 
         public void BuildLevel()
         {
@@ -71,7 +66,7 @@ namespace Rectangle.Level
                         }
 
                         GameObject newGridCol = Instantiate(gridCollider, new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale, Quaternion.identity, gridColliders.transform);
-                        newGridCol.gameObject.layer = LayerMask.NameToLayer("Grid");
+                        newGridCol.layer = LayerMask.NameToLayer("Grid");
                         SpriteRenderer backgroundRend = newGridCol.AddComponent<SpriteRenderer>();
                         backgroundRend.sortingLayerName = "Background";
                         backgroundRend.sprite = builderSettings.backgroundImage;
@@ -81,26 +76,20 @@ namespace Rectangle.Level
 
                         newGridCol.AddComponent<BackgroundMode>();
 
-                        /*
-                        int randomModeIndex = Random.Range(1, 2);
-                        newGridCol.AddComponent<BackgroundMode>().playerMode = (Player.PlayerController.PlayerModes)randomModeIndex;
-
-                        switch (randomModeIndex)
+                        if (gridData.anchorTiles.Contains(new Vector2Int(x, y)))
                         {
-                            case 1:
-                                backgroundRend.color = builderSettings.rectangleColor;
-                                break;
-                            case 2:
-                                backgroundRend.color = builderSettings.bubbleColor;
-                                break;
-                            case 3:
-                                backgroundRend.color = builderSettings.spikeyColor;
-                                break;
-                            case 4:
-                                backgroundRend.color = builderSettings.littleColor;
-                                break;
+                            LevelTile anchorTile = new GameObject("Anchor_Tile").AddComponent<LevelTile>();
+                            anchorTile.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
+                            anchorTile.gameObject.layer = LayerMask.NameToLayer("Background");
+
+                            anchorTile.tileType = TileCreator.TileTypes.AllSides;
+
+                            SpriteRenderer tileRend = anchorTile.gameObject.AddComponent<SpriteRenderer>();
+                            tileRend.sortingLayerName = "Level";
+                            tileRend.sprite = builderSettings.anchorTileSprite;
+
+                            anchorTiles.Add(anchorTile);
                         }
-                        */
 
                     }
                     else
@@ -146,40 +135,88 @@ namespace Rectangle.Level
             gridTilemap.RefreshAllTiles();
             borderTilemap.RefreshAllTiles();
 
-            List<TileCreator.TileTypes> tileTypes =  CalculateLevelPath();
+            List<TileCreator.TileTypes> tileTypes = new();
 
-            tilePanel.InitTileButtons(tileTypes, builderSettings);
+            for(int i = 0; i < anchorTiles.Count; i++)
+            {
+                tileTypes.AddRange(CalculatePathToAnchor(gridData.anchorTiles[i]));
+                anchorTiles[i].collectableTiles = new(CalculatePathToEnd(gridData.anchorTiles[i]));
+            }
+
+            General.GameBehavior.instance.InitLevelTiles(tileTypes);
 
             DestroyImmediate(gridCollider);
 
+
         }
 
-        public bool CheckLevelPath()
+        public bool CheckLevelPath(Vector2Int startPosition)
         {
-            Vector2Int currentDirection = startDirection;
-            Vector2Int currentPosition = gridData.start;
+            placedTiles.Clear();
+
+            Vector2Int currentDirection = Vector2Int.zero;
+            Vector2Int currentPosition = startPosition;
+
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.up), builderSettings.backgroundLayer) != null)
+            {
+                if(Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.up), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.up) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.up;
+                }
+            }
+            else if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.right), builderSettings.backgroundLayer) != null)
+            {
+                if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.right), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.right) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.right;
+                }
+            }
+            else if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.down), builderSettings.backgroundLayer) != null)
+            {
+                if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.down), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.down) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.down;
+                }
+            }
+            else if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.left), builderSettings.backgroundLayer) != null)
+            {
+                if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.left), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.left) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.left;
+                }
+            }
+
+            if(currentDirection == Vector2Int.zero)
+            {
+                return false;
+            }
+
 
             do
             {
                 currentPosition += currentDirection;
 
-                if(Physics2D.OverlapPoint(((Vector2)currentPosition + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x, builderSettings.backgroundLayer) == null)
+                if (Physics2D.OverlapPoint(((Vector2)currentPosition + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x, builderSettings.backgroundLayer) == null)
                 {
                     return false;
                 }
                 else
                 {
-                    LevelTile tile = Physics2D.OverlapPoint(((Vector2)currentPosition + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x, builderSettings.backgroundLayer).GetComponent<LevelTile>();
+                    LevelTile tile = Physics2D.OverlapPoint(CoordinateToWorldPosition(currentPosition), builderSettings.backgroundLayer).GetComponent<LevelTile>();
 
-                    placedTiles.Add(tile);
+                    if(!placedTiles.Contains(tile))
+                    {
+                        placedTiles.Add(tile);
+                    }
 
                     currentDirection = GetNextDirection(tile.tileType, currentDirection);
                     if(currentDirection == Vector2Int.zero)
                     {
                         return false;
                     }
+
                 }
-            } while (!(currentPosition + currentDirection == gridData.end));
+            } while (!(currentPosition + currentDirection == gridData.end) && !(gridData.anchorTiles.Contains(currentPosition + currentDirection)));
 
             return true;
         }
@@ -188,6 +225,7 @@ namespace Rectangle.Level
             LevelGrid gridData = new();
 
             gridData.grid = new Dictionary<Vector2Int, bool>();
+            gridData.anchorTiles = new();
 
             Texture2D levelLayout = levelLayouts[Random.Range(0, levelLayouts.Length)];
 
@@ -223,6 +261,11 @@ namespace Rectangle.Level
                     else if (levelLayout.GetPixel(x, y) == Color.blue)
                     {
                         gridData.end = new Vector2Int(x, y) - Vector2Int.one;
+                    }
+                    else if(levelLayout.GetPixel(x, y) == Color.cyan)
+                    {
+                        gridData.anchorTiles.Add(new Vector2Int(x, y) - Vector2Int.one);
+                        gridData.grid[new Vector2Int(x, y) - Vector2Int.one] = true;
                     }
                 }
             }
@@ -327,28 +370,36 @@ namespace Rectangle.Level
             return direction;
         }
 
-        private List<TileCreator.TileTypes> CalculateLevelPath()
+        private List<TileCreator.TileTypes> CalculatePathToAnchor(Vector2Int anchorPosition)
         {
+            blockedPositions = new();
             List<Vector2Int> pathPositions = new();
             List<TileCreator.TileTypes> pathTiles = new();
 
-            endDirection = -endDirection;
 
             Vector2Int currentDirection = startDirection;
             Vector2Int currentPosition = gridData.start + startDirection;
             pathPositions.Add(currentPosition);
+            blockedPositions.Add(currentPosition);
             do
             {
-
-                List<Vector2Int> freeDirections = GetFreeDirections(currentPosition, pathPositions);
-                if (freeDirections.Count == 0)
+                List<Vector2Int> freeDirections = GetFreeDirections(currentPosition, gridData.start.x, anchorPosition.x);
+                if (freeDirections.Count == 0 || gridData.anchorTiles.Contains(currentPosition))
                 {
+                    blockedPositions.Add(currentPosition);
+
                     pathTiles.RemoveAt(pathTiles.Count - 1);
                     pathPositions.Remove(currentPosition);
                     currentPosition = pathPositions[pathPositions.Count - 1];
 
-                    currentDirection = currentPosition - pathPositions[pathPositions.Count - 2];
-
+                    if (pathPositions.Count - 2 < 0)
+                    {
+                        currentDirection = currentPosition - gridData.start;
+                    }
+                    else
+                    {
+                        currentDirection = currentPosition - pathPositions[pathPositions.Count - 2];
+                    }
 
                     continue;
                 }
@@ -357,52 +408,123 @@ namespace Rectangle.Level
                 currentDirection = freeDirections[Random.Range(0, freeDirections.Count)];
                 currentPosition += currentDirection;
 
+                blockedPositions.Add(currentPosition);
                 pathPositions.Add(currentPosition);
                 pathTiles.Add(GetTileType(lastDirection, currentDirection));
 
-            } while (!(currentPosition + endDirection == gridData.end));
-
-            pathTiles.Add(GetTileType(currentDirection, endDirection));
+            } while (currentPosition != anchorPosition);
 
             return pathTiles;
         }
 
-        private List<Vector2Int> GetFreeDirections(Vector2Int currentPos, List<Vector2Int> currentPath)
+        private List<TileCreator.TileTypes> CalculatePathToEnd(Vector2Int start)
+        {
+            blockedPositions = new();
+            List<Vector2Int> pathPositions = new();
+            List<TileCreator.TileTypes> pathTiles = new();
+
+            gridData.grid[start] = false;
+
+            List<Vector2Int> freeDirections = GetFreeDirections(start, start.x, gridData.end.x);
+
+            int randomIndex = Random.Range(0, freeDirections.Count);
+
+            Vector2Int currentDirection = freeDirections[randomIndex];
+
+            Vector2Int currentPosition = start + currentDirection;
+            pathPositions.Add(start);
+            pathPositions.Add(currentPosition);
+            blockedPositions.Add(currentPosition);
+            do
+            {
+                freeDirections = GetFreeDirections(currentPosition, start.x, gridData.end.x);
+                if (freeDirections.Count == 0 || gridData.anchorTiles.Contains(currentPosition))
+                {
+
+                    pathTiles.RemoveAt(pathTiles.Count - 1);
+                    pathPositions.Remove(currentPosition);
+                    currentPosition = pathPositions[pathPositions.Count - 1];
+
+                    if (pathPositions.Count - 2 < 0)
+                    {
+                        currentDirection = currentPosition - gridData.start;
+                    }
+                    else
+                    {
+                        currentDirection = currentPosition - pathPositions[pathPositions.Count - 2];
+                    }
+
+                    continue;
+                }
+                Vector2Int lastDirection = currentDirection;
+
+                currentDirection = freeDirections[Random.Range(0, freeDirections.Count)];
+                currentPosition += currentDirection;
+
+                blockedPositions.Add(currentPosition);
+                pathPositions.Add(currentPosition);
+                pathTiles.Add(GetTileType(lastDirection, currentDirection));
+
+            } while (currentPosition - endDirection != gridData.end);
+
+            pathTiles.Add(GetTileType(currentDirection, -endDirection));
+            return pathTiles;
+        }
+        private List<Vector2Int> GetFreeDirections(Vector2Int currentPos, int startX, int endX)
         {
             List<Vector2Int> freeDirections = new();
 
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.up))
+            int minX;
+            int maxX;
+
+            if(startX > endX)
             {
-                if (gridData.grid[currentPos + Vector2Int.up] && !currentPath.Contains(currentPos + Vector2Int.up))
+                minX = endX;
+                maxX = startX;
+            }
+            else
+            {
+                minX = startX;
+                maxX = endX;
+            }
+
+            Vector2Int checkPosition;
+
+            checkPosition = currentPos + Vector2Int.up;
+
+            if (gridData.grid.ContainsKey(checkPosition))
+            {
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.up);
                 }
             }
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.right))
+
+            checkPosition = currentPos + Vector2Int.right;
+            if (gridData.grid.ContainsKey(checkPosition) && currentPos.x + 1 <= maxX)
             {
-                if (gridData.grid[currentPos + Vector2Int.right] && !currentPath.Contains(currentPos + Vector2Int.right))
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.right);
                 }
             }
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.down))
+
+            checkPosition = currentPos + Vector2Int.down;
+            if (gridData.grid.ContainsKey(checkPosition))
             {
-                if (gridData.grid[currentPos + Vector2Int.down] && !currentPath.Contains(currentPos + Vector2Int.down))
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.down);
                 }
             }
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.left))
+
+            checkPosition = currentPos + Vector2Int.left;
+            if (gridData.grid.ContainsKey(checkPosition) && currentPos.x - 1 >= minX)
             {
-                if (gridData.grid[currentPos + Vector2Int.left] && !currentPath.Contains(currentPos + Vector2Int.left))
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.left);
                 }
-            }
-
-            if (freeDirections.Count == 0)
-            {
-                gridData.grid[currentPos] = false;
             }
 
             return freeDirections;
@@ -575,11 +697,22 @@ namespace Rectangle.Level
 
             return Vector2Int.zero;
         }
+
+        private Vector2 CoordinateToWorldPosition(Vector2Int coordinate)
+        {
+            return ((Vector2)coordinate + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x;
+        }
+
+        public Vector2Int PositionToCoordinate(Vector2 position)
+        {
+            return Vector2Int.FloorToInt(position / builderSettings.tileSize / gridTilemap.transform.lossyScale.x);
+        }
     }
 
     public class LevelGrid
     {
         public Dictionary<Vector2Int, bool> grid;
+        public List<Vector2Int> anchorTiles;
         public int height;
         public int width;
         public Vector2Int start;

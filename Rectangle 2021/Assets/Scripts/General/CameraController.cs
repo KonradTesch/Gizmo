@@ -13,10 +13,10 @@ namespace Rectangle.General
         [SerializeField] private Vector3 camOffset;
 
         /// <summary>
-        /// The Camera Size (Zoom) at the start of the level.
+        /// The Camera Size (Zoom) during the building view.
         /// </summary>
-        [Tooltip("The Camera Size (Zoom) at the start of the level.")]
-        [SerializeField] private float startCamSize;
+        [Tooltip("The Camera Size (Zoom) during the building view.")]
+        [SerializeField] private float buildingCamSize;
 
         /// <summary>
         /// The Camera Size (Zoom) during the jump 'n' run level.
@@ -32,10 +32,17 @@ namespace Rectangle.General
         [Tooltip("The time in seconds of the transition betwenn two camera positions.")]
         [SerializeField] private float transitionTime = 1;
 
+        private Vector3 LevelBuildingPosition;
+
         private float timer = 0;
         private bool transition;
         private Vector3 startPosition;
         private Vector3 newPosition;
+
+        private void Start()
+        {
+            LevelBuildingPosition = transform.position;
+        }
 
         void Update()
         {
@@ -71,9 +78,21 @@ namespace Rectangle.General
             }
         }
 
+        /// <summary>
+        /// Let the camera zoom in the level.
+        /// </summary>
         public void SetLevelCamera()
         {
             GetComponent<Camera>().orthographicSize = levelCamSize;
+        }
+
+        /// <summary>
+        /// Let the camera zoom out to the building view.
+        /// </summary>
+        public void SetBuildingCamera()
+        {
+            GetComponent<Camera>().orthographicSize = buildingCamSize;
+            transform.position = LevelBuildingPosition;
         }
     }
 

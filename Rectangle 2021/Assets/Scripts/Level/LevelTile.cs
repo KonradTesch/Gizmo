@@ -15,6 +15,9 @@ namespace Rectangle.Level
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [HideInInspector] public TileButton button;
+        [HideInInspector] public bool locked = false;
+
+        public List<TileCreator.TileTypes> collectableTiles;
 
         private SpriteRenderer rend;
 
@@ -36,7 +39,7 @@ namespace Rectangle.Level
 
         private void OnMouseUp()
         {
-            rend.sortingOrder = 0;
+            rend.sortingOrder = 1;
 
             Collider2D positionCollider;
 
@@ -69,7 +72,7 @@ namespace Rectangle.Level
 
         void OnMouseDown()
         {
-            rend.sortingOrder = 1;
+            rend.sortingOrder = 2;
 
             if (transform.localPosition == Vector3.zero)
             {
@@ -81,7 +84,6 @@ namespace Rectangle.Level
                 gridCollider.isUsed = false;
                 gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
-
 
                 lastGrid = gridCollider;
 
@@ -97,10 +99,11 @@ namespace Rectangle.Level
             {
                 Return();
 
+                lastGrid = null;
                 if(gridCollider != null)
                 {
-                    gridCollider.GetComponent<SpriteRenderer>().color = rend.color;
-                    gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
+                    gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
+                    gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
                     gridCollider.isUsed = false;
                 }
 
@@ -110,7 +113,7 @@ namespace Rectangle.Level
 
         private void Return()
         {
-            rend.sortingOrder = 0;
+            rend.sortingOrder = 1;
 
             transform.localPosition = Vector3.zero;
             transform.localScale = Vector2.one;

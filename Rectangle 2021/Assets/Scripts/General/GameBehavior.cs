@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Rectangle.Player;
 using Rectangle.UI;
 using Rectangle.Level;
+using Rectangle.TileCreation;
 
 namespace Rectangle.General
 {
@@ -52,16 +53,37 @@ namespace Rectangle.General
         /// The button to start the level.
         /// </summary>
         [Tooltip("The button to start the level.")]
-        [SerializeField] private Button startLevelButton;
+        [SerializeField] private Button buildLevelButton;
 
+        /// <summary>
+        /// The button to cancel the building mode.
+        /// </summary>
+        [Tooltip("The button to cancel the building mode.")]
+        [SerializeField] private Button cancelBuildingButton;
+
+        /// <summary>
+        /// The success panel object.
+        /// </summary>
+        [Tooltip("The success panel object.")]
         public GameObject sucessPanel;
+
+        [Header("Builder Settings")]
+
+        /// <summary>
+        /// The settings file for level building.
+        /// </summary>
+        [Tooltip("The settings file for level building.")]
+        public LevelBuilderSettings builderSettings;
+
+        public List<TileGroupData> tileInventory;
 
         private TileBuilder tileBuilder;
         private LevelBuilder levelBuilder;
 
         private CameraController camController;
-        private TextMeshProUGUI startPlayText;
         private bool canStart;
+
+        private bool buildingMode = true;
 
         void Awake()
         {
@@ -75,18 +97,19 @@ namespace Rectangle.General
                 return;
             }
 
+            player.playerActive = false;
+
             tileBuilder = GetComponent<TileBuilder>();
             levelBuilder = GetComponent<LevelBuilder>();
             camController = Camera.main.GetComponent<CameraController>();
 
             levelBuilder.BuildLevel();
+            tilePanel.InitTileButtons(tileInventory);
 
-            startPlayText = startLevelButton.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-
-            startLevelButton.enabled = false;
+            cancelBuildingButton.interactable = false;
+            buildLevelButton.interactable = false;
             debugUI.GetComponent<DebugUI>().enabled = false;
 
-            startPlayText.color = new Color(0, 0, 0, 0.3f);
             canStart = false;
         }
 
@@ -98,40 +121,133 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> StartPlayMode()");
             if (canStart)
             {
-                tileBuilder.BuildLevel(levelBuilder.placedTiles);
+                foreach (LevelTile tile in levelBuilder.placedTiles)
+                {
+                    TileInventoryChange(tile.tileType, -1);
+                }
+
+                tileBuilder.BuildLevel(levelBuilder.placedTiles, levelBuilder.anchorTiles);
 
                 debugUI.GetComponent<DebugUI>().enabled = true;
                 //TimerUI.timer = true;
                 player.gameObject.SetActive(true);
                 buttonUI.SetActive(false);
                 tilePanel.gameObject.SetActive(false);
-
+                camController.CameraTransition(Physics2D.OverlapPoint(player.activePlayer.transform.position, builderSettings.gridLayer).GetComponent<BackgroundMode>().transform.position);
                 camController.SetLevelCamera();
+                buildingMode = false;
+                player.playerActive = true;
             }
             Debug.Log("GameBehavior: <- StartPlayMode()");
         }
 
         /// <summary>
-        /// Checks if every gackground grid collider is covered with a mode shape.
+        /// Changes between the building and jump 'n' run mode.
         /// </summary>
-        /// <returns></returns>
+        public void BuildingMode()
+        {
+            Debug.Log("GameBehavior: -> ChangeGameMode()");
+            if (!buildingMode)
+            {
+                buttonUI.SetActive(true);
+                cancelBuildingButton.interactable = true;
+                buildLevelButton.interactable = false;
+                camController.SetBuildingCamera();
+                tilePanel.InitTileButtons(tileInventory);
+                tilePanel.gameObject.SetActive(true);
+                buildingMode = true;
+
+            }
+            Debug.Log("GameBehavior: <- ChangeGameMode()");
+
+        }
+
+        public void CanncelGameMode()
+        {
+            if(buildingMode)
+            {
+
+                buttonUI.SetActive(false);
+                camController.CameraTransition(Physics2D.OverlapPoint(player.activePlayer.transform.position, builderSettings.gridLayer).GetComponent<BackgroundMode>().transform.position);
+                camController.SetLevelCamera();
+                tilePanel.gameObject.SetActive(false);
+                buildingMode = false;
+                player.playerActive = true;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the tiles are placed correctly.
+        /// </summary>
         public void CheckGridCollider()
         {
-            
-            if(levelBuilder.CheckLevelPath())
+            if (levelBuilder.CheckLevelPath(levelBuilder.PositionToCoordinate(player.activePlayer.transform.position)))
             {
-                startPlayText.color = Color.black;
-                startLevelButton.enabled = true;
+                buildLevelButton.interactable = true;
                 canStart = true;
             }
             else
             {
-                startPlayText.color = new Color(0, 0, 0, 0.3f);
                 canStart = false;
-                startLevelButton.enabled = false;
+                buildLevelButton.interactable = false;
             }
-            
         }
 
+        public void InitLevelTiles(List<TileCreator.TileTypes> tileTypes)
+        {
+            Dictionary<TileCreator.TileTypes, int> levelTiles = new();
+
+            foreach (TileCreator.TileTypes type in tileTypes)
+            {
+                if (levelTiles.ContainsKey(type))
+                {
+                    levelTiles[type]++;
+                }
+                else
+                {
+                    levelTiles.Add(type, 1);
+                }
+            }
+
+            foreach (KeyValuePair<TileCreator.TileTypes, int> tileType in levelTiles)
+            {
+                TileGroupData tileGroup = new()
+                {
+                    tileType = tileType.Key,
+                    playerMode = tileBuilder.GetRandomPlayerMode(tileType.Key),
+                    tileCount = tileType.Value,
+                    tileSprite = builderSettings.GetTileTypeSprite(tileType.Key),
+                };
+
+                tileGroup.tileColor = builderSettings.GetModeColor(tileGroup.playerMode);
+
+                tileInventory.Add(tileGroup);
+            }
+        }
+
+        public void TileInventoryChange(TileCreator.TileTypes tileType, int count)
+        {
+            foreach(TileGroupData tileGroup in tileInventory)
+            {
+                if(tileGroup.tileType == tileType)
+                {
+                    tileGroup.tileCount += count;
+                    return;
+                }
+            }
+
+            if(count > 0)
+            {
+                TileGroupData newTileGroup = new()
+                {
+                    tileType = tileType,
+                    playerMode = tileBuilder.GetRandomPlayerMode(tileType),
+                    tileCount = count,
+                    tileSprite = builderSettings.GetTileTypeSprite(tileType),
+                };
+                newTileGroup.tileColor = builderSettings.GetModeColor(newTileGroup.playerMode);
+                tileInventory.Add(newTileGroup);
+            }
+        }
     }
 }

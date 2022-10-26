@@ -11,6 +11,8 @@ namespace Rectangle.TileCreation
         public List<ChangeData> nookTileChanges;
         public List<ChangeData> rampTileChanges;
 
+        public Vector2[] collectablePositions;
+
         public Vector2Int tileSize;
         public TileCreator.TileTypes tileType;
         public Player.PlayerController.PlayerModes playerMode;

@@ -117,6 +117,11 @@ namespace Rectangle.TileCreation
                 Debug.LogWarning("Please select a Player Mode for the tile in the Inspector.");
                 return;
             }
+            if(builder.hasCollactables && builder.collectableParent.childCount < 6)
+            {
+                Debug.LogWarning("The tile must have at least six collectable spots.");
+                return;
+            }
 
             LevelTileData tile = (LevelTileData)CreateInstance(typeof(LevelTileData));
 
@@ -152,6 +157,17 @@ namespace Rectangle.TileCreation
 
                         tile.rampTileChanges.Add(change);
                     }
+                }
+            }
+
+            if(builder.hasCollactables)
+            {
+                tile.collectablePositions = new Vector2[builder.collectableParent.childCount];
+                int i = 0;
+                foreach(Transform spot in builder.collectableParent)
+                {
+                    tile.collectablePositions[i] = spot.localPosition;
+                    i++;
                 }
             }
 

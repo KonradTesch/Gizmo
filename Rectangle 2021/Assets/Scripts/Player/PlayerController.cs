@@ -36,11 +36,11 @@ namespace Rectangle.Player
         /// </summary>
         [HideInInspector] public PlayerBase activePlayer;
 
+        [HideInInspector]public bool playerActive = true;
+
         private BackgroundMode activeBackground;
         private Dictionary<PlayerModes, PlayerBase> modes;
         private CameraController camController;
-
-        private PlayerInput playerInput;
         private PlayerInputActions inputActions;
 
         /// <summary>
@@ -58,7 +58,6 @@ namespace Rectangle.Player
             camController = Camera.main.GetComponent<CameraController>();
             InitModes();
             activePlayer = modes[PlayerModes.Rectangle];
-            CheckBackground();
             Debug.Log("ModeController: <- Awake()   activePlayer = " + activePlayer.name);
 
         }
@@ -70,8 +69,11 @@ namespace Rectangle.Player
 
         private void FixedUpdate()
         {
-            Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
-            activePlayer.Move(movement);
+            if(playerActive)
+            {
+                Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
+                activePlayer.Move(movement);
+            }
         }
 
         private void CheckBackground()
@@ -87,7 +89,10 @@ namespace Rectangle.Player
             if (lastBackground != activeBackground)
             {
                 ChangeMode(activeBackground.playerMode);
-                camController.CameraTransition(activeBackground.transform.position);
+                if(playerActive)
+                {
+                    camController.CameraTransition(activeBackground.transform.position);
+                }
             }
         }
 
@@ -117,15 +122,19 @@ namespace Rectangle.Player
 
         public void Jump(InputAction.CallbackContext context)
         {
-            if(context.performed)
+            if(context.performed && playerActive)
             {
                 activePlayer.Jump();
             }
         }
 
-        public void Move(InputAction.CallbackContext context)
+        public void BuildingMode(InputAction.CallbackContext context)
         {
-            activePlayer.Move(context.ReadValue<Vector2>());
+            if(context.performed && playerActive)
+            {
+                playerActive = false;
+                GameBehavior.instance.BuildingMode();
+            }
         }
 
         /// <summary>

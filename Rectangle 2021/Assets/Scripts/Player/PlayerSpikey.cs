@@ -67,7 +67,7 @@ namespace Rectangle.Player
 
             if (grounded || airControl  || onWallEnd)
             {
-                Vector2 targetVelocity = new Vector2(horizontalMove.x * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
+                Vector2 targetVelocity = new Vector2(horizontalMove.x * moveSpeed * Time.fixedDeltaTime, rigidBody.velocity.y);
 
                 if(targetVelocity.y < maxFallingSpped)
                 {

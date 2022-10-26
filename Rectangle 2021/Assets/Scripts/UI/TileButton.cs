@@ -42,7 +42,6 @@ namespace Rectangle.UI
 
         public void GetTile()
         {
-
             tileCount--;
 
             tileCountText.text = tileCount.ToString();
@@ -50,6 +49,7 @@ namespace Rectangle.UI
 
         public void ReturnTile()
         {
+
             tileCount++;
 
             tileCountText.text = tileCount.ToString();
