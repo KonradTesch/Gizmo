@@ -55,8 +55,7 @@ namespace Rectangle.Player
         /// </summary>
         public override void Move(Vector2 horizontalMove)
         {
-
-            climb = horizontalMove.y > 0.1f;
+            climb = horizontalMove.y > 0.1f && onWall;
 
             Vector2 targetVelocity = Vector2.zero;
 
@@ -96,7 +95,7 @@ namespace Rectangle.Player
         {
             base.Jump();
 
-            if (climb && Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.05f, groundLayer))
+                     if (climb && Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.05f, groundLayer))
             {
                 rigidBody.AddForce(new Vector2(-jumpForce * 10, jumpForce * 5), ForceMode2D.Force);
             }

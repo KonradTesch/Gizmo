@@ -80,12 +80,14 @@ namespace Rectangle.Player
 
         protected Collider2D platformCollider;
 
+        protected Animator animator;
+
 
         private void Awake()
         {
             rigidBody = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
-
+            animator = GetComponent<Animator>();
         }
 
         protected virtual void FixedUpdate()
@@ -137,7 +139,8 @@ namespace Rectangle.Player
             RaycastHit2D[] hits = new RaycastHit2D[3];
             ContactFilter2D filter = new ContactFilter2D
             {
-                layerMask = groundLayer
+                layerMask = groundLayer,
+                useLayerMask = true
             };
 
             if (Physics2D.Raycast(new Vector2(col.bounds.center.x, col.bounds.min.y), Vector3.down, filter, hits , 0.2f) > 0)

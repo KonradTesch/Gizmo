@@ -10767,8 +10767,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  platformTileChanges: []
-  rampTileChanges:
+  platformTileChanges:
   - position: {x: 12, y: 0, z: 0}
     tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
     transform:
@@ -10921,6 +10920,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+  rampTileChanges: []
   collectablePositions:
   - {x: 4, y: 3}
   - {x: 4, y: 5}

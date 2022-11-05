@@ -18,6 +18,8 @@ namespace Rectangle.Player
         private bool falling;
         private float lastYPosition;
 
+
+
         /// <summary>
         /// Moves the bubble player.
         /// </summary>
@@ -28,10 +30,12 @@ namespace Rectangle.Player
             if (!falling || onRamp || horizontalMove.y < - 0.2f)
             {
                 rigidBody.gravityScale = 1.5f;
+                animator.SetBool("float", false);
             }
             else
             {
                 rigidBody.gravityScale = lowGravityScale;
+                animator.SetBool("float", true);
             }
 
             base.Move(horizontalMove);
