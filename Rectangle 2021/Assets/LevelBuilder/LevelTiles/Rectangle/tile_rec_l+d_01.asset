@@ -8886,7 +8886,159 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  nookTileChanges: []
+  platformTileChanges:
+  - position: {x: 12, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 13, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 14, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 15, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 16, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 17, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 18, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 19, y: 0, z: 0}
+    tile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   rampTileChanges:
   - position: {x: 1, y: 3, z: 0}
     tile: {fileID: 11400000, guid: 0485160505f6866489343f583869c0b5, type: 2}
@@ -9040,6 +9192,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+  collectablePositions: []
   tileSize: {x: 32, y: 32}
   tileType: 3
   playerMode: 1

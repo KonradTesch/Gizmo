@@ -39,8 +39,8 @@ namespace Rectangle.UI
             {
                 db_OnWall.color = new Color(0.5f, 0.5f, 0.5f, 0.3f);
             }
-            db_Grounded.color = TextColor(activePlayer.grounded);
-            db_OnRamp.color = TextColor(activePlayer.onRamp);
+            //db_Grounded.color = TextColor(activePlayer.grounded);
+            //db_OnRamp.color = TextColor(activePlayer.onRamp);
             //db_Rectangle.color = TextColor(activePlayer.playerMode.name == "Rectangle");
             //db_Sphere.color = TextColor(activePlayer.playerMode.name == "Sphere");
             //db_Spikey.color = TextColor(activePlayer.playerMode.name == "Spikey");

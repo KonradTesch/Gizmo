@@ -127,6 +127,7 @@ namespace Rectangle.TileCreation
 
             tile.groundTileChanges = new();
             tile.rampTileChanges = new();
+            tile.platformTileChanges = new();
 
             for (int x = 0; x < builder.tileSize.x; x++)
             {
@@ -157,6 +158,19 @@ namespace Rectangle.TileCreation
 
                         tile.rampTileChanges.Add(change);
                     }
+
+                    if (builder.platformTilemap.HasTile(pos))
+                    {
+                        ChangeData change = new()
+                        {
+                            position = pos,
+                            tile = builder.platformTilemap.GetTile(pos),
+                            transform = builder.platformTilemap.GetTransformMatrix(pos)
+                        };
+
+                        tile.platformTileChanges.Add(change);
+                    }
+
                 }
             }
 
@@ -191,6 +205,7 @@ namespace Rectangle.TileCreation
         {
             builder.groundTilemap.ClearAllTiles();
             builder.rampTilemap.ClearAllTiles();
+            builder.platformTilemap.ClearAllTiles();
             builder.tileSize = tile.tileSize;
             builder.tileName = tile.name;
 
@@ -219,6 +234,20 @@ namespace Rectangle.TileCreation
                 builder.rampTilemap.SetTile(tileChane, true);
             }
             builder.rampTilemap.RefreshAllTiles();
+
+            foreach (ChangeData change in tile.platformTileChanges)
+            {
+                TileChangeData tileChane = new()
+                {
+                    position = change.position,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+
+                builder.platformTilemap.SetTile(tileChane, true);
+            }
+            builder.platformTilemap.RefreshAllTiles();
+
         }
 
         private void StartTest(TileCreator builder)

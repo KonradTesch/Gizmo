@@ -25,13 +25,13 @@ namespace Rectangle.Player
         {
             falling = CheckFalling();
 
-            if(falling & !onRamp)
+            if (!falling || onRamp || horizontalMove.y < - 0.2f)
             {
-                rigidBody.gravityScale = lowGravityScale;
+                rigidBody.gravityScale = 1.5f;
             }
             else
             {
-                rigidBody.gravityScale = 1.5f;
+                rigidBody.gravityScale = lowGravityScale;
             }
 
             base.Move(horizontalMove);

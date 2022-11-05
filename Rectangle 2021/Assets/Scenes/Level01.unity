@@ -11778,10 +11778,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3683547977390433008, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3683547977390433020, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -11859,6 +11855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileButtonReference: {fileID: 1762109797}
+  usedGridFields: []
 --- !u!212 &750495369
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12099,6 +12096,163 @@ RectTransform:
   m_AnchoredPosition: {x: 2.7, y: -2.7}
   m_SizeDelta: {x: 2.5, y: 2.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &822767793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822767794}
+  - component: {fileID: 822767798}
+  - component: {fileID: 822767797}
+  - component: {fileID: 822767796}
+  - component: {fileID: 822767795}
+  m_Layer: 8
+  m_Name: Tilemap_Level_Platform
+  m_TagString: OneWayPlatform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822767794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822767793}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1792412752}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!251 &822767795
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822767793}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!19719996 &822767796
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822767793}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
+--- !u!483693784 &822767797
+TilemapRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822767793}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -699655507
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_ChunkSize: {x: 32, y: 32, z: 32}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_MaxChunkCount: 16
+  m_MaxFrameAge: 16
+  m_SortOrder: 0
+  m_Mode: 0
+  m_DetectChunkCullingBounds: 0
+  m_MaskInteraction: 0
+--- !u!1839735485 &822767798
+Tilemap:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822767793}
+  m_Enabled: 1
+  m_Tiles: {}
+  m_AnimatedTiles: {}
+  m_TileAssetArray: []
+  m_TileSpriteArray: []
+  m_TileMatrixArray: []
+  m_TileColorArray: []
+  m_TileObjectToInstantiateArray: []
+  m_AnimationFrameRate: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0, y: 0, z: 1}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileOrientation: 0
+  m_TileOrientationMatrix:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
 --- !u!224 &1165894370 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5470789994929037747, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
@@ -21309,6 +21463,7 @@ MonoBehaviour:
   tileCount: 0
   tileType: 0
   playerMode: 0
+  usedGridFields: []
 --- !u!212 &1762109799
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21422,6 +21577,7 @@ Transform:
   - {fileID: 298339187}
   - {fileID: 1679745061}
   - {fileID: 1067168}
+  - {fileID: 822767794}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21584,6 +21740,18 @@ PrefabInstance:
     - target: {fileID: 1960735805150798123, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -464.27496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258332563114604863, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2001858576}
+    - target: {fileID: 3258332563114604863, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadSceneAtIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258332563114604863, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Rectangle.General.SceneLoader, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3737530687451202277, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
       propertyPath: m_AnchorMax.y
@@ -21796,6 +21964,7 @@ MonoBehaviour:
   sucessPanel: {fileID: 1528619786}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   tileInventory: []
+  levelBuilder: {fileID: 0}
 --- !u!4 &2001858575
 Transform:
   m_ObjectHideFlags: 0
@@ -21844,14 +22013,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4638d8d5f09c1c4faa35e3870b55be7, type: 2}
   - {fileID: 11400000, guid: dcecac6c4c5cb6146b9a91f254771923, type: 2}
   - {fileID: 11400000, guid: 5b644d960b8da5e41a865112caed6cc3, type: 2}
+  - {fileID: 11400000, guid: 35b65d64ac713b140a04930f8feda881, type: 2}
+  - {fileID: 11400000, guid: 4f2eb6b85b0b2254d92469c398aa6b7e, type: 2}
   anchorTiles:
   - {fileID: 11400000, guid: 8b4fea390b9aba048a430be9c0ed7ec3, type: 2}
+  - {fileID: 11400000, guid: dc32ee77b2bbca449ac9b40eccf5e5ef, type: 2}
+  - {fileID: 11400000, guid: 815e029391356d246b7b587895b145bf, type: 2}
   gridLayer:
     serializedVersion: 2
     m_Bits: 128
   collectableTilePrefab: {fileID: 8622568014851585060, guid: 3f25c73a77d08e94f951a5323722ad9c, type: 3}
   groundTilemap: {fileID: 1679745063}
   rampTilemap: {fileID: 1067170}
+  platformTilemap: {fileID: 822767798}
 --- !u!114 &2001858579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21871,6 +22045,7 @@ MonoBehaviour:
   borderTilemap: {fileID: 298339190}
   startText: {fileID: 1567240318}
   endText: {fileID: 1422954950}
+  anchorTextPrefab: {fileID: 1410625091615380301, guid: 0638f6083567cd94aba8421951fbc75c, type: 3}
   placedTiles: []
   anchorTiles: []
 --- !u!1001 &4564017793431121653

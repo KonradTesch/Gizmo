@@ -8,7 +8,7 @@ namespace Rectangle.TileCreation
     public class LevelTileData : ScriptableObject
     {
         public List<ChangeData> groundTileChanges;
-        public List<ChangeData> nookTileChanges;
+        public List<ChangeData> platformTileChanges;
         public List<ChangeData> rampTileChanges;
 
         public Vector2[] collectablePositions;

@@ -19,9 +19,10 @@ namespace Rectangle.Level
         [Header("LevelText")]
         [SerializeField] private GameObject startText;
         [SerializeField] private GameObject endText;
+        [SerializeField] private GameObject anchorTextPrefab;
 
         [HideInInspector] public List<LevelTile> placedTiles;
-        [HideInInspector] public List<LevelTile> anchorTiles;
+        [HideInInspector] public List<LevelTile> anchorTiles = new();
 
         private LevelGrid gridData;
         private Vector2Int startDirection;
@@ -42,7 +43,9 @@ namespace Rectangle.Level
             col.size = Vector2.one * builderSettings.tileSize * gridTilemap.transform.lossyScale;
             col.isTrigger = true;
 
-            gridCollider.AddComponent<IsGridUsed>();
+            gridCollider.AddComponent<GridField>();
+
+            anchorTiles.Clear();
 
             gridTilemap.ClearAllTiles();
             borderTilemap.ClearAllTiles();
@@ -141,6 +144,15 @@ namespace Rectangle.Level
             {
                 tileTypes.AddRange(CalculatePathToAnchor(gridData.anchorTiles[i]));
                 anchorTiles[i].collectableTiles = new(CalculatePathToEnd(gridData.anchorTiles[i]));
+
+                List<Player.PlayerController.PlayerModes> tileModes = new();
+
+                for(int n = 0; n < anchorTiles[i].collectableTiles.Count; n++)
+                {
+                    tileModes.Add(General.GameBehavior.instance.CheckTileInventoryModes(anchorTiles[i].collectableTiles[n]));
+                }
+
+                Instantiate(anchorTextPrefab, anchorTiles[i].transform.position, Quaternion.identity).GetComponent<UI.AnchorText>().SetTileNumbers(tileModes);
             }
 
             General.GameBehavior.instance.InitLevelTiles(tileTypes);
@@ -164,21 +176,21 @@ namespace Rectangle.Level
                     currentDirection = Vector2Int.up;
                 }
             }
-            else if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.right), builderSettings.backgroundLayer) != null)
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.right), builderSettings.backgroundLayer) != null)
             {
                 if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.right), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.right) != Vector2Int.zero)
                 {
                     currentDirection = Vector2Int.right;
                 }
             }
-            else if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.down), builderSettings.backgroundLayer) != null)
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.down), builderSettings.backgroundLayer) != null)
             {
                 if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.down), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.down) != Vector2Int.zero)
                 {
                     currentDirection = Vector2Int.down;
                 }
             }
-            else if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.left), builderSettings.backgroundLayer) != null)
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.left), builderSettings.backgroundLayer) != null)
             {
                 if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.left), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.left) != Vector2Int.zero)
                 {
@@ -600,7 +612,7 @@ namespace Rectangle.Level
             return tileType;
         }
 
-        private void DrawBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, TileBase tile)
+        public void DrawBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, TileBase tile)
         {
             Vector2 diff = pos2 - pos1;
 
@@ -698,12 +710,12 @@ namespace Rectangle.Level
             return Vector2Int.zero;
         }
 
-        private Vector2 CoordinateToWorldPosition(Vector2Int coordinate)
+        public Vector2 CoordinateToWorldPosition(Vector2Int coordinate)
         {
             return ((Vector2)coordinate + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x;
         }
 
-        public Vector2Int PositionToCoordinate(Vector2 position)
+        public Vector2Int WorldPositionToCoordinate(Vector2 position)
         {
             return Vector2Int.FloorToInt(position / builderSettings.tileSize / gridTilemap.transform.lossyScale.x);
         }

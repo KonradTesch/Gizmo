@@ -7,7 +7,7 @@ namespace Rectangle.Level
     /// <summary>
     /// T#Storest wheter this tile is alredy used by a shape.
     /// </summary>
-    public class IsGridUsed : MonoBehaviour
+    public class GridField : MonoBehaviour
     {
         /// <summary>
         /// Whether this tile is alredy used by a shape.

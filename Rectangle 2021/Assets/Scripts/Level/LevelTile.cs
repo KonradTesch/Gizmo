@@ -23,8 +23,8 @@ namespace Rectangle.Level
 
         private LayerMask gridLayer;
 
-        private IsGridUsed gridCollider;
-        private IsGridUsed lastGrid;
+        [HideInInspector]public GridField gridCollider;
+        private GridField lastGrid;
 
         private void Start()
         {
@@ -45,11 +45,13 @@ namespace Rectangle.Level
 
             positionCollider = Physics2D.OverlapPoint(transform.position, gridLayer);
 
-            if (positionCollider != null ? !positionCollider.GetComponent<IsGridUsed>().isUsed : false)
+            if (positionCollider != null ? !positionCollider.GetComponent<GridField>().isUsed : false)
             {
-                gridCollider = positionCollider.GetComponent<IsGridUsed>();
+                gridCollider = positionCollider.GetComponent<GridField>();
                 gridCollider.GetComponent<SpriteRenderer>().color = rend.color;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
+
+                button.PlaceTile(gridCollider);
             }
             else
             {
@@ -81,6 +83,8 @@ namespace Rectangle.Level
 
             if(gridCollider != null)
             {
+                button.ResetTile(gridCollider);
+
                 gridCollider.isUsed = false;
                 gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
@@ -102,9 +106,12 @@ namespace Rectangle.Level
                 lastGrid = null;
                 if(gridCollider != null)
                 {
+                    button.ResetTile(gridCollider);
+
                     gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                     gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
                     gridCollider.isUsed = false;
+                    gridCollider = null;
                 }
 
                 General.GameBehavior.instance.CheckGridCollider();
@@ -118,6 +125,7 @@ namespace Rectangle.Level
             transform.localPosition = Vector3.zero;
             transform.localScale = Vector2.one;
             button.ReturnTile();
+
         }
     }
 }

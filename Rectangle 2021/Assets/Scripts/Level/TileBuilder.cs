@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Rectangle.TileCreation;
 using Rectangle.Player;
+using Rectangle.General;
+using Rectangle.UI;
 
 namespace Rectangle.Level
 {
@@ -18,6 +20,7 @@ namespace Rectangle.Level
 
         [SerializeField] private Tilemap groundTilemap;
         [SerializeField] private Tilemap rampTilemap;
+        [SerializeField] private Tilemap platformTilemap;
 
 
         private Dictionary<TileCreator.TileTypes, List<LevelTileData>> modeTiles;
@@ -28,7 +31,7 @@ namespace Rectangle.Level
         {
             foreach (LevelTile tile in placedTiles)
             {
-                Debug.Log("build tile " + tile.name);
+                Debug.Log("Build Tile " + tile.name);
                 Vector2 originPosition = ((Vector2)tile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(tile.tileSize.x / 2, tile.tileSize.y / 2);
 
                 List<LevelTileData> possibleTiles = new();
@@ -53,10 +56,14 @@ namespace Rectangle.Level
 
                 LevelTileData randomTile = anchorTiles[Random.Range(0, anchorTiles.Length)];
 
-                Physics2D.OverlapPoint(anchorTile.transform.position, gridLayer).GetComponent<BackgroundMode>().playerMode = randomTile.playerMode;
+                BackgroundMode background =  Physics2D.OverlapPoint(anchorTile.transform.position, gridLayer).GetComponent<BackgroundMode>();
+
+                background.playerMode = randomTile.playerMode;
+                background.GetComponent<SpriteRenderer>().color = GameBehavior.instance.builderSettings.GetModeColor(randomTile.playerMode);
 
                 anchorTile.gameObject.SetActive(false);
 
+                CloseAnkerTile(anchorTile);
                 BuildTile(Vector2Int.RoundToInt(originPosition), randomTile);
 
                 if (anchorTile.collectableTiles != null)
@@ -99,7 +106,6 @@ namespace Rectangle.Level
                 }
             }
 
-
             int i = 0;
             foreach (KeyValuePair<TileCreator.TileTypes, int> collectable in collectables)
             {
@@ -107,11 +113,15 @@ namespace Rectangle.Level
                 newCollectable.transform.position = tilePosition + positions[i];
                 newCollectable.tileType = collectable.Key;
                 newCollectable.count = collectable.Value;
+                newCollectable.playerMode = GameBehavior.instance.CheckTileInventoryModes(collectable.Key);
+                newCollectable.GetComponent<SpriteRenderer>().color = GameBehavior.instance.builderSettings.GetModeColor(newCollectable.playerMode);
 
                 newCollectable.GetComponent<SpriteRenderer>().sprite = General.GameBehavior.instance.builderSettings.GetTileTypeSprite(collectable.Key);
 
+
                 i++;
             }
+
         }
 
         private void InitModeTiles()
@@ -182,6 +192,90 @@ namespace Rectangle.Level
                 rampTilemap.SetTile(tileChange, true);
             }
             rampTilemap.RefreshAllTiles();
+
+            foreach (ChangeData change in tile.platformTileChanges)
+            {
+                TileChangeData tileChange = new()
+                {
+                    position = change.position + (Vector3Int)originPosition,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+                platformTilemap.SetTile(tileChange, true);
+            }
+            platformTilemap.RefreshAllTiles();
+
+        }
+
+        private void CloseAnkerTile(LevelTile anchorTile)
+        {
+            LevelBuilder levelBuilder = GameBehavior.instance.levelBuilder;
+            LevelBuilderSettings builderSettings = GameBehavior.instance.builderSettings;
+
+            Vector2Int anchorCoordinate = levelBuilder.WorldPositionToCoordinate(anchorTile.transform.position);
+
+            int tileHeight = (int)(builderSettings.tileSize / groundTilemap.transform.localScale.y);
+            int tileWidth = (int)(builderSettings.tileSize / groundTilemap.transform.localScale.x);
+
+            Vector2Int tileOrigin = anchorCoordinate * new Vector2Int(tileWidth, tileHeight);
+
+            if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.up), builderSettings.backgroundLayer) == null)
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth/2 - tileWidth/8, tileHeight - 1);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, tileHeight - 1);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+            }
+            else
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - tileWidth / 8, tileHeight - 1);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, tileHeight - 1);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+            }
+            if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.right), builderSettings.backgroundLayer) == null)
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - tileHeight / 8);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + tileHeight / 8);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+            }
+            else
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - tileHeight / 8);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + tileHeight / 8);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+            }
+            if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.down), builderSettings.backgroundLayer) == null)
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - tileWidth / 8, 0);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, 0);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+            }
+            else
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - tileWidth / 8, 0);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, 0);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+            }
+            if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.left), builderSettings.backgroundLayer) == null)
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - tileHeight / 8);
+                Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + tileHeight / 8);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+            }
+            else
+            {
+                Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - tileHeight / 8);
+                Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + tileHeight / 8);
+
+                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+            }
+
         }
     }
 

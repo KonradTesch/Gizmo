@@ -11,6 +11,7 @@ namespace Rectangle.TileCreation
         [Header("TileMaps")]
         public Tilemap groundTilemap;
         public Tilemap rampTilemap;
+        public Tilemap platformTilemap;
         public Vector2Int tileSize = new Vector2Int(32, 32);
 
         [Header("Asset Folder")]

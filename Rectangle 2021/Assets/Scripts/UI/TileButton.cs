@@ -19,6 +19,8 @@ namespace Rectangle.UI
         [HideInInspector] public TileCreator.TileTypes tileType;
         [HideInInspector] public PlayerController.PlayerModes playerMode;
 
+        [HideInInspector]public List<GridField> usedGridFields = new();
+
 
 
         private void OnEnable()
@@ -56,5 +58,17 @@ namespace Rectangle.UI
 
             General.GameBehavior.instance.CheckGridCollider();
         }
+
+        public void PlaceTile(GridField gridField)
+        {
+            transform.parent.GetComponent<TilePanel>().usedGridFields.Add(gridField);
+        }
+
+        public void ResetTile(GridField gridField)
+        {
+            transform.parent.GetComponent<TilePanel>().usedGridFields.Remove(gridField);
+        }
+
+
     }
 }

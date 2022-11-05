@@ -78,7 +78,7 @@ namespace Rectangle.General
         public List<TileGroupData> tileInventory;
 
         private TileBuilder tileBuilder;
-        private LevelBuilder levelBuilder;
+        [HideInInspector] public LevelBuilder levelBuilder;
 
         private CameraController camController;
         private bool canStart;
@@ -137,6 +137,8 @@ namespace Rectangle.General
                 camController.SetLevelCamera();
                 buildingMode = false;
                 player.playerActive = true;
+
+                tilePanel.ResetUsedGrids(levelBuilder.placedTiles);
             }
             Debug.Log("GameBehavior: <- StartPlayMode()");
         }
@@ -166,13 +168,14 @@ namespace Rectangle.General
         {
             if(buildingMode)
             {
-
                 buttonUI.SetActive(false);
                 camController.CameraTransition(Physics2D.OverlapPoint(player.activePlayer.transform.position, builderSettings.gridLayer).GetComponent<BackgroundMode>().transform.position);
                 camController.SetLevelCamera();
                 tilePanel.gameObject.SetActive(false);
                 buildingMode = false;
                 player.playerActive = true;
+
+                tilePanel.ResetUsedGrids(null);
             }
         }
 
@@ -181,7 +184,7 @@ namespace Rectangle.General
         /// </summary>
         public void CheckGridCollider()
         {
-            if (levelBuilder.CheckLevelPath(levelBuilder.PositionToCoordinate(player.activePlayer.transform.position)))
+            if (levelBuilder.CheckLevelPath(levelBuilder.WorldPositionToCoordinate(player.activePlayer.transform.position)))
             {
                 buildLevelButton.interactable = true;
                 canStart = true;
@@ -211,6 +214,21 @@ namespace Rectangle.General
 
             foreach (KeyValuePair<TileCreator.TileTypes, int> tileType in levelTiles)
             {
+                bool alreadyAdded = false;
+                for(int i = 0; i < tileInventory.Count; i++)
+                {
+                    if (tileInventory[i].tileType == tileType.Key)
+                    {
+                        tileInventory[i].tileCount = tileType.Value;
+                        alreadyAdded = true;
+                    }
+                }
+
+                if(alreadyAdded)
+                {
+                    continue;
+                }
+
                 TileGroupData tileGroup = new()
                 {
                     tileType = tileType.Key,
@@ -236,18 +254,32 @@ namespace Rectangle.General
                 }
             }
 
-            if(count > 0)
+        }
+
+        public PlayerController.PlayerModes CheckTileInventoryModes(TileCreator.TileTypes tileType)
+        {
+            foreach (TileGroupData tileGroup in tileInventory)
             {
-                TileGroupData newTileGroup = new()
+                if (tileGroup.tileType == tileType)
                 {
-                    tileType = tileType,
-                    playerMode = tileBuilder.GetRandomPlayerMode(tileType),
-                    tileCount = count,
-                    tileSprite = builderSettings.GetTileTypeSprite(tileType),
-                };
-                newTileGroup.tileColor = builderSettings.GetModeColor(newTileGroup.playerMode);
-                tileInventory.Add(newTileGroup);
+                    return tileGroup.playerMode;
+                }
             }
+
+            TileGroupData newTileGroup = new()
+            {
+                tileType = tileType,
+                playerMode = tileBuilder.GetRandomPlayerMode(tileType),
+                tileCount = 0,
+                tileSprite = builderSettings.GetTileTypeSprite(tileType),
+            };
+            newTileGroup.tileColor = builderSettings.GetModeColor(newTileGroup.playerMode);
+            tileInventory.Add(newTileGroup);
+
+            return newTileGroup.playerMode;
+
+
+
         }
     }
 }

@@ -37,6 +37,7 @@ namespace Rectangle.Player
         [HideInInspector] public PlayerBase activePlayer;
 
         [HideInInspector]public bool playerActive = true;
+        [HideInInspector] public bool anchor = false;
 
         private BackgroundMode activeBackground;
         private Dictionary<PlayerModes, PlayerBase> modes;
@@ -130,7 +131,7 @@ namespace Rectangle.Player
 
         public void BuildingMode(InputAction.CallbackContext context)
         {
-            if(context.performed && playerActive)
+            if(context.performed && playerActive && anchor)
             {
                 playerActive = false;
                 GameBehavior.instance.BuildingMode();

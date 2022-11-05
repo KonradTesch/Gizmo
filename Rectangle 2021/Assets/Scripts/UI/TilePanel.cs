@@ -11,6 +11,7 @@ namespace Rectangle.UI
     {
         [SerializeField] private GameObject tileButtonReference;
 
+        [SerializeField] public List<GridField> usedGridFields;
         public void InitTileButtons(List<TileGroupData> tileGroups)
         {
             foreach(Transform child in transform)
@@ -48,6 +49,27 @@ namespace Rectangle.UI
             }
 
         }
+
+        public void ResetUsedGrids(List<LevelTile> placedTiles)
+        {
+            if(placedTiles != null)
+            {
+                foreach(LevelTile tile in placedTiles)
+                {
+                    usedGridFields.Remove(tile.gridCollider);
+                }
+            }
+
+            foreach (GridField gridCollider in usedGridFields)
+            {
+                gridCollider.isUsed = false;
+                gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
+                gridCollider.GetComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.None;
+            }
+
+            usedGridFields.Clear();
+        }
+
 
 
     }

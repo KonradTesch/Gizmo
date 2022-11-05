@@ -20,8 +20,6 @@ namespace Rectangle.Player
             {
                 grounded = false;
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
-
-                canDoubleJump = true;
             }
             else if (canDoubleJump)
             {
@@ -31,6 +29,15 @@ namespace Rectangle.Player
                 //Add the jump force
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
                 canDoubleJump = false;
+            }
+        }
+
+        protected override void PositionCheck()
+        {
+            base.PositionCheck();
+            if(grounded)
+            {
+                canDoubleJump = true;
             }
         }
     }
