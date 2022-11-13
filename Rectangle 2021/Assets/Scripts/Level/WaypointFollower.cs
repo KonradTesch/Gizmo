@@ -6,8 +6,8 @@ namespace Rectangle.Level
 {
     public class WaypointFollower : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private Vector2[] waypoints = new Vector2[] { Vector2.zero };
+        public float moveSpeed;
+        public Vector2[] waypoints = new Vector2[] { Vector2.zero };
 
         private float timer;
         private int waypointIndex = 0;

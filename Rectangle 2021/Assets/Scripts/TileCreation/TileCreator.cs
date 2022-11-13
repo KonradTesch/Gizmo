@@ -9,6 +9,7 @@ namespace Rectangle.TileCreation
     public class TileCreator : MonoBehaviour
     {
         [Header("TileMaps")]
+        public Tilemap backgroundTilemap;
         public Tilemap groundTilemap;
         public Tilemap rampTilemap;
         public Tilemap platformTilemap;
@@ -26,10 +27,8 @@ namespace Rectangle.TileCreation
         public TileTypes tileType;
         public Player.PlayerController.PlayerModes playerMode;
 
-
         public enum TileTypes { undefined, AllSides, LeftAndRight, LeftAndDown, LeftAndUp, UpAndRight, DownAndRight, UpAndDown};
 
-
-
+        public List<Tilemap> movingPlatforms;
     }
 }
