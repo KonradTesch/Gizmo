@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Rectangle
+namespace Rectangle.Audio
 {
     public class PlayAudioOnEvent : MonoBehaviour
     {
