@@ -387,7 +387,8 @@ namespace Rectangle.TileCreation
 
             foreach(Tilemap platformTilemap in builder.movingPlatforms)
             {
-                DestroyImmediate(platformTilemap.gameObject);
+                if(platformTilemap != null)
+                    DestroyImmediate(platformTilemap.gameObject);
             }
             builder.movingPlatforms.Clear();
 

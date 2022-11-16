@@ -7065,5 +7065,5 @@ MonoBehaviour:
   - {x: 5.243, y: 3.486}
   - {x: 5.243, y: 4.475}
   tileSize: {x: 32, y: 32}
-  tileType: 1
+  tileType: 2
   playerMode: 1
