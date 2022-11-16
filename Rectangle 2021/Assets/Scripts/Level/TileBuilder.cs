@@ -15,12 +15,14 @@ namespace Rectangle.Level
         [SerializeField] private LevelTileData[] anchorTiles;
         [SerializeField] private LayerMask gridLayer;
         [SerializeField] private GameObject collectableTilePrefab;
+        [SerializeField] private GameObject movingPlatformPrefab;
 
         [Header("Tilemaps")]
 
+        [SerializeField] private Tilemap backgroundTilemap;
         [SerializeField] private Tilemap groundTilemap;
         [SerializeField] private Tilemap rampTilemap;
-        [SerializeField] private Tilemap platformTilemap;
+        [SerializeField] private Tilemap onewayPlatformTilemap;
 
 
         private Dictionary<TileCreator.TileTypes, List<LevelTileData>> modeTiles;
@@ -169,7 +171,19 @@ namespace Rectangle.Level
 
         private void BuildTile(Vector2Int originPosition, LevelTileData tile)
         {
-            foreach(ChangeData change in tile.groundTileChanges)
+            foreach (ChangeData change in tile.backgroundTileChanges)
+            {
+                TileChangeData tileChange = new()
+                {
+                    position = change.position + (Vector3Int)originPosition,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+                backgroundTilemap.SetTile(tileChange, true);
+            }
+            backgroundTilemap.RefreshAllTiles();
+
+            foreach (ChangeData change in tile.groundTileChanges)
             {
                 TileChangeData tileChange = new()
                 {
@@ -201,9 +215,32 @@ namespace Rectangle.Level
                     tile = change.tile,
                     transform = change.transform
                 };
-                platformTilemap.SetTile(tileChange, true);
+                onewayPlatformTilemap.SetTile(tileChange, true);
             }
-            platformTilemap.RefreshAllTiles();
+            onewayPlatformTilemap.RefreshAllTiles();
+
+            foreach(MovingPlatformData platform in tile.movingPlatforms)
+            {
+                Tilemap platformTilemap = Instantiate(movingPlatformPrefab, groundTilemap.transform.parent).GetComponent<Tilemap>();
+                platformTilemap.transform.localScale = groundTilemap.transform.localScale;
+
+                WaypointFollower platformFollower = platformTilemap.GetComponent<WaypointFollower>();
+                platformFollower.moveSpeed = platform.moveSpeed;
+                platformFollower.waypoints = platform.waypoints;
+
+                foreach (ChangeData change in platform.platformTileChanges)
+                {
+                    TileChangeData tileChange = new()
+                    {
+                        position = change.position + (Vector3Int)originPosition,
+                        tile = change.tile,
+                        transform = change.transform
+                    };
+                    platformTilemap.SetTile(tileChange, true);
+                }
+
+                platformTilemap.RefreshAllTiles();
+            }
 
         }
 
