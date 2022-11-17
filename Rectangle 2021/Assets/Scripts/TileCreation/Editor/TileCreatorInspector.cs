@@ -45,7 +45,10 @@ namespace Rectangle.TileCreation
 
                     if(GUILayout.Button("Delete"))
                     {
-                        DestroyImmediate(builder.movingPlatforms[i].gameObject);
+                        if (builder.movingPlatforms[i] != null)
+                        {
+                            DestroyImmediate(builder.movingPlatforms[i].gameObject);
+                        }
                         builder.movingPlatforms.Remove(builder.movingPlatforms[i]);
                         rename = true;
                         break;
@@ -72,7 +75,10 @@ namespace Rectangle.TileCreation
             {
                 foreach(Tilemap platform in builder.movingPlatforms)
                 {
-                    DestroyImmediate(platform.gameObject);
+                    if(platform != null)
+                    {
+                        DestroyImmediate(platform.gameObject);
+                    }
                 }
                 builder.movingPlatforms.Clear();
             }

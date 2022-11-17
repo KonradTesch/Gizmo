@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c42378e7f8c9941bde580ed3271819, type: 3}
   m_Name: LevelBuilderSettings
   m_EditorClassIdentifier: 
-  tileSize: 16
-  gridTiles: {fileID: 11400000, guid: 6e584c4787543ea4e89b9fd7986586c6, type: 2}
+  tileSize: {x: 32, y: 18}
+  gridTiles: {fileID: 11400000, guid: cc5eb9e85f09778489507c1695470d46, type: 2}
   borderTile: {fileID: 11400000, guid: 6877d2a183d758f489621d5dd20de567, type: 2}
   gridLayer:
     serializedVersion: 2

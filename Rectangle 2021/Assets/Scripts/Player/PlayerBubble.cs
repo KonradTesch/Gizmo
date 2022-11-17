@@ -13,7 +13,7 @@ namespace Rectangle.Player
         /// The gravity scale when the player floats.
         /// </summary>
         [Tooltip("The gravity scale when the player floats.")]
-        [SerializeField] private float lowGravityScale = 0.4f;
+        [SerializeField] private float lowGravityScale = 0.2f;
 
         private bool falling;
         private float lastYPosition;
@@ -29,7 +29,7 @@ namespace Rectangle.Player
 
             if (!falling || onRamp || horizontalMove.y < - 0.2f)
             {
-                rigidBody.gravityScale = 1.5f;
+                rigidBody.gravityScale = 5f;
                 animator.SetBool("float", false);
             }
             else

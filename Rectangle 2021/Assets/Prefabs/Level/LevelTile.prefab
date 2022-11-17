@@ -103,6 +103,9 @@ MonoBehaviour:
   tileSize: {x: 32, y: 32}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   button: {fileID: 0}
+  locked: 0
+  collectableTiles: 
+  gridCollider: {fileID: 0}
 --- !u!61 &-2580002084943614951
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127,5 +130,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 32, y: 18}
   m_EdgeRadius: 0

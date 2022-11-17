@@ -21,8 +21,6 @@ namespace Rectangle.UI
 
         [HideInInspector]public List<GridField> usedGridFields = new();
 
-
-
         private void OnEnable()
         {
             tileCountText.text = tileCount.ToString();

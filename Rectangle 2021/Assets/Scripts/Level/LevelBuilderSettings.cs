@@ -8,7 +8,7 @@ namespace Rectangle.Level
     public class LevelBuilderSettings : ScriptableObject
     {
         [Header("Tiles")]
-        public int tileSize = 8;
+        public Vector2Int tileSize;
         public LevelTileData gridTiles;
         public TileBase borderTile;
 

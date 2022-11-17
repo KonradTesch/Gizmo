@@ -251,8 +251,8 @@ namespace Rectangle.Level
 
             Vector2Int anchorCoordinate = levelBuilder.WorldPositionToCoordinate(anchorTile.transform.position);
 
-            int tileHeight = (int)(builderSettings.tileSize / groundTilemap.transform.localScale.y);
-            int tileWidth = (int)(builderSettings.tileSize / groundTilemap.transform.localScale.x);
+            int tileHeight = (int)(builderSettings.tileSize.y / groundTilemap.transform.localScale.y);
+            int tileWidth = (int)(builderSettings.tileSize.x / groundTilemap.transform.localScale.x);
 
             Vector2Int tileOrigin = anchorCoordinate * new Vector2Int(tileWidth, tileHeight);
 
