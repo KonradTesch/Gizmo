@@ -29,6 +29,6 @@ namespace Rectangle.TileCreation
 
         public enum TileTypes { undefined, AllSides, LeftAndRight, LeftAndDown, LeftAndUp, UpAndRight, DownAndRight, UpAndDown};
 
-        public List<Tilemap> movingPlatforms;
+        [HideInInspector] public List<Tilemap> movingPlatforms;
     }
 }
