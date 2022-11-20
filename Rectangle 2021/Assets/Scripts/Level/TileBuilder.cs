@@ -258,57 +258,57 @@ namespace Rectangle.Level
 
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.up), builderSettings.backgroundLayer) == null)
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth/2 - tileWidth/8, tileHeight - 1);
-                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, tileHeight - 1);
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth/2 - 4, tileHeight - 1);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, tileHeight - 1);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
             }
             else
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - tileWidth / 8, tileHeight - 1);
-                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, tileHeight - 1);
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - 4, tileHeight - 1);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, tileHeight - 1);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
             }
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.right), builderSettings.backgroundLayer) == null)
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - tileHeight / 8);
-                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + tileHeight / 8);
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - 4);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + 4);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
             }
             else
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - tileHeight / 8);
-                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + tileHeight / 8);
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - 4);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + 4);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
             }
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.down), builderSettings.backgroundLayer) == null)
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - tileWidth / 8, 0);
-                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, 0);
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - 4, 0);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, 0);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
             }
             else
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - tileWidth / 8, 0);
-                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + tileWidth / 8, 0);
+                Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - 4, 0);
+                Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, 0);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
             }
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.left), builderSettings.backgroundLayer) == null)
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - tileHeight / 8);
-                Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + tileHeight / 8);
+                Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - 4);
+                Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + 4);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
             }
             else
             {
-                Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - tileHeight / 8);
-                Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + tileHeight / 8);
+                Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - 4);
+                Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + 4);
 
                 levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
             }

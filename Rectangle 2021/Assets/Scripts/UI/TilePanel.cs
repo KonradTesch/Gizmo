@@ -12,8 +12,14 @@ namespace Rectangle.UI
         [SerializeField] private GameObject tileButtonReference;
 
         [SerializeField] public List<GridField> usedGridFields;
-        public void InitTileButtons(List<TileGroupData> tileGroups)
+        public void InitTileButtons(List<TileGroupData> tileGroups, float levelWidth)
         {
+            SpriteRenderer rend = GetComponent<SpriteRenderer>();
+
+            transform.position = new Vector3(levelWidth / 2, -rend.size.y / 2 - 3, 0);
+
+            rend.size = new Vector2(levelWidth, rend.size.y);
+
             foreach(Transform child in transform)
             {
                 if(child.gameObject != tileButtonReference)
@@ -21,7 +27,6 @@ namespace Rectangle.UI
             }
 
             int i = 1;
-            float panelHeight = GetComponent<SpriteRenderer>().size.y;
 
             foreach (TileGroupData tileGroup in tileGroups)
             {
@@ -29,7 +34,7 @@ namespace Rectangle.UI
                 {
                     TileButton newButton = Instantiate(tileButtonReference, transform).GetComponent<TileButton>();
 
-                    newButton.transform.localPosition = new Vector3(0, i * (panelHeight / (tileGroups.Count + 1)) - panelHeight / 2, 0);
+                    newButton.transform.localPosition = new Vector3( (levelWidth / (tileGroups.Count + 1)) * i - levelWidth / 2 , 0, 0);
 
                     newButton.tileCount = tileGroup.tileCount;
                     newButton.tileType = tileGroup.tileType;

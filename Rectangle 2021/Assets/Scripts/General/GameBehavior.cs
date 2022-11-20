@@ -38,12 +38,6 @@ namespace Rectangle.General
         [SerializeField] private TilePanel tilePanel;
 
         /// <summary>
-        /// The UI canvas for gebugging.
-        /// </summary>
-        [Tooltip("The UI canvas for gebugging.")]
-        [SerializeField] private GameObject debugUI;
-
-        /// <summary>
         /// The UI canvas with the button at the begin of a level.
         /// </summary>
         [Tooltip("The UI canvas with the button at the begin of a level.")]
@@ -104,11 +98,12 @@ namespace Rectangle.General
             camController = Camera.main.GetComponent<CameraController>();
 
             levelBuilder.BuildLevel();
-            tilePanel.InitTileButtons(tileInventory);
+            tilePanel.InitTileButtons(tileInventory, levelBuilder.gridData.width * builderSettings.tileSize.x);
 
             cancelBuildingButton.interactable = false;
             buildLevelButton.interactable = false;
-            debugUI.GetComponent<DebugUI>().enabled = false;
+
+            camController.SetBuildingCamera(levelBuilder.gridData);
 
             canStart = false;
         }
@@ -128,7 +123,6 @@ namespace Rectangle.General
 
                 tileBuilder.BuildLevel(levelBuilder.placedTiles, levelBuilder.anchorTiles);
 
-                debugUI.GetComponent<DebugUI>().enabled = true;
                 //TimerUI.timer = true;
                 player.gameObject.SetActive(true);
                 buttonUI.SetActive(false);
@@ -154,8 +148,8 @@ namespace Rectangle.General
                 buttonUI.SetActive(true);
                 cancelBuildingButton.interactable = true;
                 buildLevelButton.interactable = false;
-                camController.SetBuildingCamera();
-                tilePanel.InitTileButtons(tileInventory);
+                camController.SetBuildingCamera(levelBuilder.gridData);
+                tilePanel.InitTileButtons(tileInventory, levelBuilder.gridData.width * builderSettings.tileSize.x);
                 tilePanel.gameObject.SetActive(true);
                 buildingMode = true;
 

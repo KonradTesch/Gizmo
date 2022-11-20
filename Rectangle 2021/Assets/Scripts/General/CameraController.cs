@@ -32,7 +32,7 @@ namespace Rectangle.General
         [Tooltip("The time in seconds of the transition betwenn two camera positions.")]
         [SerializeField] private float transitionTime = 1;
 
-        private Vector3 LevelBuildingPosition;
+        private Vector3 levelBuildingPosition;
 
         private float timer = 0;
         private bool transition;
@@ -41,7 +41,7 @@ namespace Rectangle.General
 
         private void Start()
         {
-            LevelBuildingPosition = transform.position;
+            levelBuildingPosition = transform.position;
         }
 
         void Update()
@@ -89,10 +89,23 @@ namespace Rectangle.General
         /// <summary>
         /// Let the camera zoom out to the building view.
         /// </summary>
-        public void SetBuildingCamera()
+        public void SetBuildingCamera(Level.LevelGrid gridData)
         {
-            GetComponent<Camera>().orthographicSize = buildingCamSize;
-            transform.position = LevelBuildingPosition;
+            float minWidth = ((gridData.width / 2f) * GameBehavior.instance.builderSettings.tileSize.x) / (16f / 9f);
+            float minHeight = (gridData.height / 2f) * GameBehavior.instance.builderSettings.tileSize.y;
+
+            if(minWidth + 8 > minHeight + 14)
+            {
+                GetComponent<Camera>().orthographicSize = minWidth + 8;
+            }
+            else
+            {
+                GetComponent<Camera>().orthographicSize = minHeight + 14;
+            }
+
+            transform.position = new Vector3(minWidth * (16f / 9f), minHeight - 11f, camOffset.z);
+
+            //transform.position = levelBuildingPosition;
         }
     }
 

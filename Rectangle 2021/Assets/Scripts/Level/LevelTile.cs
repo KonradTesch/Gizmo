@@ -11,7 +11,7 @@ namespace Rectangle.Level
     {
         public TileCreator.TileTypes tileType;
         public PlayerController.PlayerModes playerMode;
-        public Vector2Int tileSize = new Vector2Int(32, 32);
+        public Vector2Int tileSize = new Vector2Int(32, 18);
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [HideInInspector] public TileButton button;

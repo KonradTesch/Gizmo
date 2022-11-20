@@ -2605,7 +2605,7 @@ MonoBehaviour:
     waypoints:
     - {x: 0, y: 0}
     - {x: -6, y: 0}
-    - {x: 2, y: 0}
+    - {x: 1, y: 0}
     platformTileChanges:
     - position: {x: 8, y: 12, z: 0}
       tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
@@ -2687,7 +2687,7 @@ MonoBehaviour:
     waypoints:
     - {x: 0, y: 0}
     - {x: 6, y: 0}
-    - {x: -2, y: 0}
+    - {x: -1, y: 0}
     platformTileChanges:
     - position: {x: 20, y: 12, z: 0}
       tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
@@ -2768,7 +2768,7 @@ MonoBehaviour:
   - moveSpeed: 0.5
     waypoints:
     - {x: 0, y: 0}
-    - {x: 0, y: 6}
+    - {x: 0, y: 7}
     platformTileChanges:
     - position: {x: 22, y: 2, z: 0}
       tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}
@@ -2849,7 +2849,7 @@ MonoBehaviour:
   - moveSpeed: 0.5
     waypoints:
     - {x: 0, y: 0}
-    - {x: 0, y: 6}
+    - {x: 0, y: 7}
     platformTileChanges:
     - position: {x: 6, y: 2, z: 0}
       tile: {fileID: 11400000, guid: 3811d24e8b09aba40896a0c9b7b0b8bc, type: 2}

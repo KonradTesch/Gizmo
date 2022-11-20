@@ -18,10 +18,12 @@ namespace Rectangle.Player
         /// <summary>
         /// Wheter the player is next to a wall.
         /// </summary>
-        [HideInInspector] public bool onWall;
+        private bool onWall;
         private bool onWallEnd;
 
         private bool climb;
+
+        public bool pOnRamp;
 
         private void Update()
         {
@@ -55,14 +57,16 @@ namespace Rectangle.Player
         /// </summary>
         public override void Move(Vector2 horizontalMove)
         {
+            pOnRamp = onRamp;
+
             climb = horizontalMove.y > 0.1f && onWall;
 
             Vector2 targetVelocity = Vector2.zero;
 
 
-            if (grounded || airControl)
+            if (grounded || airControl )
             {
-                targetVelocity = new Vector2(horizontalMove.x * moveSpeed * Time.fixedDeltaTime, rigidBody.velocity.y);
+                  targetVelocity = new Vector2(horizontalMove.x * moveSpeed * Time.fixedDeltaTime, rigidBody.velocity.y);
 
                 if (targetVelocity.y < maxFallingSpped)
                 {
@@ -79,6 +83,8 @@ namespace Rectangle.Player
             if (onWallEnd && Mathf.Abs(horizontalMove.x) > 0.2f)
             {
                 targetVelocity = horizontalMove * moveSpeed * Time.fixedDeltaTime;
+                targetVelocity = new Vector2(horizontalMove.x * moveSpeed, horizontalMove.y * climbSpeed) * Time.deltaTime;
+
             }
 
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
@@ -87,15 +93,16 @@ namespace Rectangle.Player
             {
                 StartCoroutine(FallThroughPlatform());
             }
-
-
         }
 
         public override void Jump()
         {
-            base.Jump();
+            if (grounded || onRamp)
+            {
+                rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
+            }
 
-                     if (climb && Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.05f, groundLayer))
+            if (climb && Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.05f, groundLayer))
             {
                 rigidBody.AddForce(new Vector2(-jumpForce * 10, jumpForce * 5), ForceMode2D.Force);
             }
