@@ -3265,14 +3265,14 @@ MonoBehaviour:
   - position: {x: 10, y: 1, z: 0}
     tile: {fileID: 11400000, guid: 6a155320da7cf044cb8d05e9898daede, type: 2}
     transform:
-      e00: -1
+      e00: 1
       e01: 0
       e02: 0
-      e03: 0.00560385
+      e03: 0
       e10: 0
-      e11: -1
+      e11: 1
       e12: 0
-      e13: 0.0057119858
+      e13: 0
       e20: 0
       e21: 0
       e22: 1
