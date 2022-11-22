@@ -18,34 +18,16 @@ namespace Rectangle.Player
         /// <summary>
         /// Wheter the player is next to a wall.
         /// </summary>
-        [HideInInspector] public bool onWall;
+        private bool onWall;
         private bool onWallEnd;
 
         private bool climb;
 
+        public bool pOnRamp;
+
         private void Update()
         {
             PositionCheck();
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
-
-            if (Input.GetKey(KeyCode.W))
-            {
-                climb = true;
-            }
-            else
-            {
-                climb = false;
-            }
-            horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
-            Move();
-        }
-
-        protected override void FixedUpdate()
-        {
         }
 
         /// <summary>
@@ -57,15 +39,15 @@ namespace Rectangle.Player
 
             onWall = false;
 
-            if (Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.2f, groundLayer))
+            if (Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.05f, groundLayer))
                 onWall = true;
-            else if (Physics2D.Raycast(new Vector2(col.bounds.min.x, col.bounds.center.y), Vector2.left, 0.2f, groundLayer))
+            else if (Physics2D.Raycast(new Vector2(col.bounds.min.x, col.bounds.center.y), Vector2.left, 0.05f, groundLayer))
                 onWall = true;
 
             onWallEnd = false;
-            if (Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y - 0.1f), Vector2.right, 0.2f, groundLayer) && !onWall)
+            if (Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y - 0.1f), Vector2.right, 0.05f, groundLayer) && !onWall)
                 onWallEnd = true;
-            else if (Physics2D.Raycast(new Vector2(col.bounds.min.x, col.bounds.center.y - 0.1f), Vector2.left, 0.2f, groundLayer) && !onWall)
+            else if (Physics2D.Raycast(new Vector2(col.bounds.min.x, col.bounds.center.y - 0.1f), Vector2.left, 0.05f, groundLayer) && !onWall)
                 onWallEnd = true;
 
         }
@@ -73,43 +55,61 @@ namespace Rectangle.Player
         /// <summary>
         /// Moves of the spikey player.
         /// </summary>
-        protected override void Move()
+        public override void Move(Vector2 horizontalMove)
         {
+            pOnRamp = onRamp;
 
-            if (grounded || airControl  || onWallEnd)
+            climb = horizontalMove.y > 0.1f && onWall;
+
+            Vector2 targetVelocity = Vector2.zero;
+
+
+            if (grounded || airControl )
             {
-                Vector2 targetVelocity = new Vector2(horizontalMove * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
+                  targetVelocity = new Vector2(horizontalMove.x * moveSpeed * Time.fixedDeltaTime, rigidBody.velocity.y);
 
-                if(targetVelocity.y < maxFallingSpped)
+                if (targetVelocity.y < maxFallingSpped)
                 {
                     targetVelocity.y = maxFallingSpped;
                 }
 
-                rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
             }
 
-            if (onWall && climb )
+            if (onWall && climb)
             {
-                rigidBody.gravityScale = 0f;
-                rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rigidBody.MovePosition(transform.position + Vector3.up * climbSpeed * Time.fixedDeltaTime);
+                targetVelocity = new Vector2(0, horizontalMove.y * climbSpeed * Time.fixedDeltaTime);
             }
-            else
+
+            if (onWallEnd && Mathf.Abs(horizontalMove.x) > 0.2f)
             {
-                rigidBody.constraints = RigidbodyConstraints2D.None;
-                rigidBody.gravityScale = 2f;
+                targetVelocity = horizontalMove * moveSpeed * Time.fixedDeltaTime;
+                targetVelocity = new Vector2(horizontalMove.x * moveSpeed, horizontalMove.y * climbSpeed) * Time.deltaTime;
+
             }
 
-            if (onWallEnd)
+            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
+
+            if (onPlatform && horizontalMove.y < -0.2f && platformCollider != null)
             {
-                rigidBody.gravityScale = 0f;
-                rigidBody.MovePosition(transform.position + Vector3.up * climbSpeed * Time.fixedDeltaTime);
-                rigidBody.constraints = RigidbodyConstraints2D.None;
+                StartCoroutine(FallThroughPlatform());
+            }
+        }
 
+        public override void Jump()
+        {
+            if (grounded || onRamp)
+            {
+                rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
             }
 
-
+            if (climb && Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.05f, groundLayer))
+            {
+                rigidBody.AddForce(new Vector2(-jumpForce * 10, jumpForce * 5), ForceMode2D.Force);
+            }
+            else if(climb && Physics2D.Raycast(new Vector2(col.bounds.min.x, col.bounds.center.y), Vector2.left, 0.05f, groundLayer))
+            {
+                rigidBody.AddForce(new Vector2(jumpForce * 10, jumpForce * 5), ForceMode2D.Force);
+            }
         }
     }
 }

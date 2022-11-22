@@ -13,28 +13,36 @@ namespace Rectangle.Player
         /// The gravity scale when the player floats.
         /// </summary>
         [Tooltip("The gravity scale when the player floats.")]
-        [SerializeField] private float lowGravityScale = 0.4f;
+        [SerializeField] private float lowGravityScale = 0.2f;
 
         private bool falling;
         private float lastYPosition;
+        private float normalGravity;
+
+        private void Start()
+        {
+            normalGravity = rigidBody.gravityScale;
+        }
 
         /// <summary>
         /// Moves the bubble player.
         /// </summary>
-        protected override void Move()
+        public override void Move(Vector2 horizontalMove)
         {
             falling = CheckFalling();
 
-            if(falling & !onRamp)
+            if (!falling || onRamp || horizontalMove.y < - 0.2f)
             {
-                rigidBody.gravityScale = lowGravityScale;
+                rigidBody.gravityScale = normalGravity;
+                animator.SetBool("float", false);
             }
             else
             {
-                rigidBody.gravityScale = 1.5f;
+                rigidBody.gravityScale = lowGravityScale;
+                animator.SetBool("float", true);
             }
 
-            base.Move();
+            base.Move(horizontalMove);
         }
 
         /// <summary>

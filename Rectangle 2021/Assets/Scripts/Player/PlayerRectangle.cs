@@ -14,14 +14,12 @@ namespace Rectangle.Player
         /// <summary>
         /// Let the rectangle player jump.
         /// </summary>
-        protected override void Jump()
+        public override void Jump()
         {
             if (grounded)
             {
                 grounded = false;
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
-
-                canDoubleJump = true;
             }
             else if (canDoubleJump)
             {
@@ -31,6 +29,15 @@ namespace Rectangle.Player
                 //Add the jump force
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
                 canDoubleJump = false;
+            }
+        }
+
+        protected override void PositionCheck()
+        {
+            base.PositionCheck();
+            if(grounded)
+            {
+                canDoubleJump = true;
             }
         }
     }

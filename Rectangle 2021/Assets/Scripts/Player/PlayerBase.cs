@@ -57,12 +57,18 @@ namespace Rectangle.Player
         /// <summary>
         /// Whetser the player is on the ground.
         /// </summary>
-        [HideInInspector] public bool grounded;
+        protected bool grounded;
 
         /// <summary>
         /// Wheter the player is on a ramp.
         /// </summary>
-        [HideInInspector] public bool onRamp;
+        protected bool onRamp;
+
+        /// <summary>
+        /// Wheter the player is on a one-way platform.
+        /// </summary>
+        protected bool onPlatform;
+
 
         /// <summary>
         /// The current velocity of the player.
@@ -72,40 +78,31 @@ namespace Rectangle.Player
         protected Rigidbody2D rigidBody;
         protected Collider2D col;
 
-        protected float horizontalMove;
+        protected Collider2D platformCollider;
+
+        protected Animator animator;
+
 
         private void Awake()
         {
             rigidBody = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
-
-        }
-
-        private void Update()
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
+            animator = GetComponent<Animator>();
         }
 
         protected virtual void FixedUpdate()
         {
             PositionCheck();
-
-            horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
-            Move();
         }
 
         /// <summary>
         /// Moves the player
         /// </summary>
-        protected virtual void Move()
+        public virtual void Move(Vector2 horizontalMove)
         {
-
             if (grounded || airControl && !onRamp)
             {
-                Vector2 targetVelocity = new Vector2(horizontalMove * 10 * Time.fixedDeltaTime, rigidBody.velocity.y);
+                Vector2 targetVelocity = new Vector2(horizontalMove.x * moveSpeed * Time.fixedDeltaTime, rigidBody.velocity.y);
 
                 if(targetVelocity.y < maxFallingSpped)
                 {
@@ -114,16 +111,20 @@ namespace Rectangle.Player
 
                 rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
             }
+
+            if (onPlatform && horizontalMove.y < -0.2f && platformCollider != null)
+            {
+                StartCoroutine(FallThroughPlatform());
+            }
         }
 
         /// <summary>
         /// Let the player jump.
         /// </summary>
-        protected virtual void Jump()
+        public virtual void Jump()
         {
             if (grounded)
             {
-                grounded = false;
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
             }
         }
@@ -133,8 +134,50 @@ namespace Rectangle.Player
         /// </summary>
         protected virtual void PositionCheck()
         {
-            grounded = Physics2D.Raycast(new Vector2(col.bounds.center.x, col.bounds.min.y), Vector3.down, 0.2f, groundLayer);
             onRamp = Physics2D.Raycast(new Vector2(col.bounds.center.x, col.bounds.min.y), Vector3.down, 0.3f, rampLayer);
+
+            RaycastHit2D[] hits = new RaycastHit2D[3];
+            ContactFilter2D filter = new ContactFilter2D
+            {
+                layerMask = groundLayer,
+                useLayerMask = true
+            };
+
+            if (Physics2D.Raycast(new Vector2(col.bounds.center.x, col.bounds.min.y), Vector3.down, filter, hits , 0.2f) > 0)
+            {
+                grounded = true;
+                for(int i = 0; i < hits.Length; i++)
+                {
+                    if (hits[i].collider != null && hits[i].collider.CompareTag("OneWayPlatform"))
+                    {
+                        onPlatform = true;
+                        platformCollider = hits[i].collider;
+                        break;
+                    }
+                    else
+                    {
+                        onPlatform = false;
+                        platformCollider = null;
+                    }
+                }
+            }
+            else
+            {
+                grounded = false;
+                onPlatform = false;
+                platformCollider = null;
+            }
+        }
+
+        protected IEnumerator FallThroughPlatform()
+        {
+            Collider2D platformCol = platformCollider;
+
+            Physics2D.IgnoreCollision(col, platformCol);
+
+            yield return new WaitForSeconds(0.25f);
+            Physics2D.IgnoreCollision(col, platformCol, false);
+            
         }
     }
 }

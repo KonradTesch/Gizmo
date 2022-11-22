@@ -19,19 +19,16 @@ namespace Rectangle.Level
         [Header("LevelText")]
         [SerializeField] private GameObject startText;
         [SerializeField] private GameObject endText;
-
-        /// <summary>
-        /// The UI panel with the tiles.
-        /// </summary>
-        [Tooltip("The UI panel with the tiles.")]
-        [SerializeField] private UI.TilePanel tilePanel;
+        [SerializeField] private GameObject anchorTextPrefab;
 
         [HideInInspector] public List<LevelTile> placedTiles;
+        [HideInInspector] public List<LevelTile> anchorTiles = new();
 
-        private LevelGrid gridData;
+        [HideInInspector] public LevelGrid gridData;
+
         private Vector2Int startDirection;
         private Vector2Int endDirection;
-
+        private List<Vector2Int> blockedPositions;
 
         public void BuildLevel()
         {
@@ -47,7 +44,9 @@ namespace Rectangle.Level
             col.size = Vector2.one * builderSettings.tileSize * gridTilemap.transform.lossyScale;
             col.isTrigger = true;
 
-            gridCollider.AddComponent<IsGridUsed>();
+            gridCollider.AddComponent<GridField>();
+
+            anchorTiles.Clear();
 
             gridTilemap.ClearAllTiles();
             borderTilemap.ClearAllTiles();
@@ -63,7 +62,7 @@ namespace Rectangle.Level
                             TileChangeData tileChange = new()
                             {
                                 tile = change.tile,
-                                position = change.position + (new Vector3Int(x, y, 0) * builderSettings.tileSize),
+                                position = change.position + (Vector3Int)(new Vector2Int(x, y) * builderSettings.tileSize),
                                 transform = change.transform
                             };
 
@@ -71,33 +70,36 @@ namespace Rectangle.Level
                         }
 
                         GameObject newGridCol = Instantiate(gridCollider, new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale, Quaternion.identity, gridColliders.transform);
-                        newGridCol.gameObject.layer = LayerMask.NameToLayer("Grid");
+                        newGridCol.layer = LayerMask.NameToLayer("Grid");
                         SpriteRenderer backgroundRend = newGridCol.AddComponent<SpriteRenderer>();
                         backgroundRend.sortingLayerName = "Background";
                         backgroundRend.sprite = builderSettings.backgroundImage;
+                        backgroundRend.sortingOrder = -1;
 
-                        int randomModeIndex = Random.Range(1, 2);
-                        newGridCol.AddComponent<BackgroundMode>().playerMode = (Player.ModeController.PlayerModes)randomModeIndex;
+                        backgroundRend.color = Color.grey;
 
-                        switch (randomModeIndex)
+                        newGridCol.AddComponent<BackgroundMode>();
+
+                        if (gridData.anchorTiles.Contains(new Vector2Int(x, y)))
                         {
-                            case 1:
-                                backgroundRend.color = builderSettings.rectangleColor;
-                                break;
-                            case 2:
-                                backgroundRend.color = builderSettings.bubbleColor;
-                                break;
-                            case 3:
-                                backgroundRend.color = builderSettings.spikeyColor;
-                                break;
-                            case 4:
-                                backgroundRend.color = builderSettings.littleColor;
-                                break;
+                            LevelTile anchorTile = new GameObject("Anchor_Tile").AddComponent<LevelTile>();
+                            anchorTile.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
+                            anchorTile.gameObject.layer = LayerMask.NameToLayer("Background");
+
+                            anchorTile.tileType = TileCreator.TileTypes.AllSides;
+                            anchorTile.tileSize = builderSettings.tileSize;
+
+                            SpriteRenderer tileRend = anchorTile.gameObject.AddComponent<SpriteRenderer>();
+                            tileRend.sortingLayerName = "Level";
+                            tileRend.sprite = builderSettings.anchorTileSprite;
+
+                            anchorTiles.Add(anchorTile);
                         }
+
                     }
                     else
                     {
-                        DrawBox(borderTilemap, new Vector2Int(x, y) * builderSettings.tileSize, new Vector2Int((x + 1) * builderSettings.tileSize - 1, (y + 1) * builderSettings.tileSize - 1), builderSettings.borderTile);
+                        DrawBox(borderTilemap, new Vector2Int(x, y) * builderSettings.tileSize, new Vector2Int(x + 1, y + 1) * builderSettings.tileSize - Vector2Int.one, builderSettings.borderTile);
                     }
                 }
             }
@@ -115,8 +117,8 @@ namespace Rectangle.Level
             startCollider.gameObject.layer = LayerMask.NameToLayer("Grid");
             startCollider.transform.position = startPos;
             startCollider.AddComponent<BoxCollider2D>().isTrigger = true;
-            startCollider.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
-            startCollider.AddComponent<BackgroundMode>().playerMode = Player.ModeController.PlayerModes.Rectangle;
+            startCollider.GetComponent<BoxCollider2D>().size = new Vector2(8, 8);
+            startCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
 
             endDirection = GetEndDirection();
             Vector2 endPos = DrawStartOrEnd(gridData.end, endDirection);
@@ -128,50 +130,107 @@ namespace Rectangle.Level
             endCollider.gameObject.layer = LayerMask.NameToLayer("Grid");
             endCollider.transform.position = endPos;
             endCollider.AddComponent<BoxCollider2D>().isTrigger = true;
-            endCollider.GetComponent<BoxCollider2D>().size = new Vector2(2, 2);
-            endCollider.AddComponent<BackgroundMode>().playerMode = Player.ModeController.PlayerModes.Rectangle;
+            endCollider.GetComponent<BoxCollider2D>().size = new Vector2(8, 8);
+            endCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
             SuccessTrigger success = endCollider.AddComponent<SuccessTrigger>();
-            success.successCanvas = GameObject.Find("Success_Canvas");
+            success.successPanel = General.GameBehavior.instance.sucessPanel;
             success.timerUI = FindObjectOfType<UI.TimerUI>();
 
 
             gridTilemap.RefreshAllTiles();
             borderTilemap.RefreshAllTiles();
 
-            List<TileCreator.TileTypes> tileTypes =  CalculateLevelPath();
+            List<TileCreator.TileTypes> tileTypes = new();
 
-            tilePanel.InitTileButtons(tileTypes, builderSettings);
+            for(int i = 0; i < anchorTiles.Count; i++)
+            {
+                tileTypes.AddRange(CalculatePathToAnchor(gridData.anchorTiles[i]));
+                anchorTiles[i].collectableTiles = new(CalculatePathToEnd(gridData.anchorTiles[i]));
+
+                List<Player.PlayerController.PlayerModes> tileModes = new();
+
+                for(int n = 0; n < anchorTiles[i].collectableTiles.Count; n++)
+                {
+                    tileModes.Add(General.GameBehavior.instance.CheckTileInventoryModes(anchorTiles[i].collectableTiles[n]));
+                }
+
+                Instantiate(anchorTextPrefab, anchorTiles[i].transform.position, Quaternion.identity).GetComponent<UI.AnchorText>().SetTileNumbers(tileModes);
+            }
+
+            General.GameBehavior.instance.InitLevelTiles(tileTypes);
 
             DestroyImmediate(gridCollider);
 
+
         }
 
-        public bool CheckLevelPath()
+        public bool CheckLevelPath(Vector2Int startPosition)
         {
-            Vector2Int currentDirection = startDirection;
-            Vector2Int currentPosition = gridData.start;
+            placedTiles.Clear();
+
+            Vector2Int currentDirection = Vector2Int.zero;
+            Vector2Int currentPosition = startPosition;
+
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.up), builderSettings.backgroundLayer) != null)
+            {
+                if(Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.up), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.up) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.up;
+                }
+            }
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.right), builderSettings.backgroundLayer) != null)
+            {
+                if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.right), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.right) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.right;
+                }
+            }
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.down), builderSettings.backgroundLayer) != null)
+            {
+                if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.down), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.down) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.down;
+                }
+            }
+            if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.left), builderSettings.backgroundLayer) != null)
+            {
+                if (Physics2D.OverlapPoint(CoordinateToWorldPosition(startPosition + Vector2Int.left), builderSettings.backgroundLayer).TryGetComponent(out LevelTile tile) && !tile.locked && GetNextDirection(tile.tileType, Vector2Int.left) != Vector2Int.zero)
+                {
+                    currentDirection = Vector2Int.left;
+                }
+            }
+
+            if(currentDirection == Vector2Int.zero)
+            {
+                return false;
+            }
+
 
             do
             {
                 currentPosition += currentDirection;
 
-                if(Physics2D.OverlapPoint(((Vector2)currentPosition + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x, builderSettings.backgroundLayer) == null)
+                if (Physics2D.OverlapPoint(((Vector2)currentPosition + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x, builderSettings.backgroundLayer) == null)
                 {
                     return false;
                 }
                 else
                 {
-                    LevelTile tile = Physics2D.OverlapPoint(((Vector2)currentPosition + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x, builderSettings.backgroundLayer).GetComponent<LevelTile>();
+                    LevelTile tile = Physics2D.OverlapPoint(CoordinateToWorldPosition(currentPosition), builderSettings.backgroundLayer).GetComponent<LevelTile>();
 
-                    placedTiles.Add(tile);
+                    if(!placedTiles.Contains(tile))
+                    {
+                        placedTiles.Add(tile);
+                    }
 
                     currentDirection = GetNextDirection(tile.tileType, currentDirection);
                     if(currentDirection == Vector2Int.zero)
                     {
                         return false;
                     }
+
                 }
-            } while (!(currentPosition + currentDirection == gridData.end));
+            } while (!(currentPosition + currentDirection == gridData.end) && !(gridData.anchorTiles.Contains(currentPosition + currentDirection)));
 
             return true;
         }
@@ -180,6 +239,7 @@ namespace Rectangle.Level
             LevelGrid gridData = new();
 
             gridData.grid = new Dictionary<Vector2Int, bool>();
+            gridData.anchorTiles = new();
 
             Texture2D levelLayout = levelLayouts[Random.Range(0, levelLayouts.Length)];
 
@@ -216,6 +276,11 @@ namespace Rectangle.Level
                     {
                         gridData.end = new Vector2Int(x, y) - Vector2Int.one;
                     }
+                    else if(levelLayout.GetPixel(x, y) == Color.cyan)
+                    {
+                        gridData.anchorTiles.Add(new Vector2Int(x, y) - Vector2Int.one);
+                        gridData.grid[new Vector2Int(x, y) - Vector2Int.one] = true;
+                    }
                 }
             }
 
@@ -224,45 +289,50 @@ namespace Rectangle.Level
 
         private void DrawBorder(LevelGrid gridData)
         {
-            DrawBox(borderTilemap, new Vector2Int(-2, builderSettings.tileSize * gridData.height), new Vector2Int(builderSettings.tileSize * gridData.width - 1, builderSettings.tileSize * gridData.height + 1), builderSettings.borderTile);
-            DrawBox(borderTilemap, new Vector2Int(builderSettings.tileSize * gridData.width, builderSettings.tileSize * gridData.height + 1), new Vector2Int(builderSettings.tileSize * gridData.width + 1, 0), builderSettings.borderTile);
-            DrawBox(borderTilemap, new Vector2Int(0, -1), new Vector2Int(builderSettings.tileSize * gridData.width + 1, -2), builderSettings.borderTile);
-            DrawBox(borderTilemap, new Vector2Int(-1, -2), new Vector2Int(-2, builderSettings.tileSize * gridData.height - 1), builderSettings.borderTile);
+            //top border
+            DrawBox(borderTilemap, new Vector2Int(-2, builderSettings.tileSize.y * gridData.height), new Vector2Int(builderSettings.tileSize.x * gridData.width - 1, builderSettings.tileSize.y * gridData.height + 1), builderSettings.borderTile);
+            //right border
+            DrawBox(borderTilemap, new Vector2Int(builderSettings.tileSize.x * gridData.width, builderSettings.tileSize.y * gridData.height + 1), new Vector2Int(builderSettings.tileSize.x * gridData.width + 1, 0), builderSettings.borderTile);
+            //bottom border
+            DrawBox(borderTilemap, new Vector2Int(0, -1), new Vector2Int(builderSettings.tileSize.x * gridData.width + 1, -2), builderSettings.borderTile);
+            //right border
+            DrawBox(borderTilemap, new Vector2Int(-1, -2), new Vector2Int(-2, builderSettings.tileSize.y * gridData.height - 1), builderSettings.borderTile);
         }
 
         private Vector2 DrawStartOrEnd(Vector2Int position, Vector2Int direction)
         {
 
-            int size = builderSettings.tileSize;
+            Vector2Int size = builderSettings.tileSize;
 
             if (direction == Vector2Int.right)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size + (size - 6), position.y * size + (size / 2 - 4)), new Vector2Int(position.x * size + (size - 1), position.y * size + (size / 2 + 3)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size + (size - 4), position.y * size + (size / 2 - 2)), new Vector2Int(position.x * size + (size - 1), position.y * size + (size / 2 + 1)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 10), position.y * size.y + (size.y / 2 - 6)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 5)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 8), position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 3)), null);
 
-                return new Vector2((position.x + 1) * size * borderTilemap.transform.lossyScale.x - (2 * borderTilemap.transform.lossyScale.x), (position.y + 0.5f) * size * borderTilemap.transform.lossyScale.y);
+
+                return new Vector2((position.x + 1) * size.x - 4, (position.y + 0.5f) * size.y);
             }
             else if (direction == Vector2Int.left)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size, position.y * size + (size / 2 - 4)), new Vector2Int(position.x * size + 5, position.y * size + (size / 2 + 3)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size, position.y * size + (size / 2 - 2)), new Vector2Int(position.x * size + 3, position.y * size + (size / 2 + 1)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 6)), new Vector2Int(position.x * size.x + 9, position.y * size.y + (size.y / 2 + 5)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + 7, position.y * size.y + (size.y / 2 + 3)), null);
 
-                return new Vector2(position.x * size * borderTilemap.transform.lossyScale.x + (2 * borderTilemap.transform.lossyScale.x), (position.y + 0.5f) * size * borderTilemap.transform.lossyScale.y);
+                return new Vector2(position.x * size.x + 4 , (position.y + 0.5f) * size.y);
             }
             else if (direction == Vector2Int.down)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size + (size / 2 - 4), position.y * size), new Vector2Int(position.x * size + (size / 2 + 3), position.y * size + 5), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size + (size / 2 - 2), position.y * size), new Vector2Int(position.x * size + (size / 2 + 1), position.y * size + 3), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 8), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 7), position.y * size.y + 11), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), null);
 
-                return new Vector2((position.x + 0.5f) * size * borderTilemap.transform.lossyScale.x, position.y * size * borderTilemap.transform.lossyScale.y + (2 * borderTilemap.transform.lossyScale.y));
+                return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 4);
 
             }
             else if (direction == Vector2Int.up)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size + (size / 2 - 4), position.y * size + (size - 6)), new Vector2Int(position.x * size + (size / 2 + 3), position.y * size + (size - 1)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size + (size / 2 - 2), position.y * size + (size - 4)), new Vector2Int(position.x * size + (size / 2 + 1), position.y * size + (size - 1)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 8), position.y * size.y + (size.y - 12)), new Vector2Int(position.x * size.x + (size.x / 2 + 7), position.y * size.y + (size.y - 1)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y + (size.y - 8)), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + (size.y - 1)), null);
 
-                return new Vector2((position.x + 0.5f) * size * borderTilemap.transform.lossyScale.x, (position.y + 1) * size * borderTilemap.transform.lossyScale.y - (2 * borderTilemap.transform.lossyScale.y))
+                return new Vector2((position.x + 0.5f) * size.x, (position.y + 1) * size.y - 4)
 ;
             }
 
@@ -319,28 +389,36 @@ namespace Rectangle.Level
             return direction;
         }
 
-        private List<TileCreator.TileTypes> CalculateLevelPath()
+        private List<TileCreator.TileTypes> CalculatePathToAnchor(Vector2Int anchorPosition)
         {
+            blockedPositions = new();
             List<Vector2Int> pathPositions = new();
             List<TileCreator.TileTypes> pathTiles = new();
 
-            endDirection = -endDirection;
 
             Vector2Int currentDirection = startDirection;
             Vector2Int currentPosition = gridData.start + startDirection;
             pathPositions.Add(currentPosition);
+            blockedPositions.Add(currentPosition);
             do
             {
-
-                List<Vector2Int> freeDirections = GetFreeDirections(currentPosition, pathPositions);
-                if (freeDirections.Count == 0)
+                List<Vector2Int> freeDirections = GetFreeDirections(currentPosition, gridData.start.x, anchorPosition.x);
+                if (freeDirections.Count == 0 || gridData.anchorTiles.Contains(currentPosition))
                 {
+                    blockedPositions.Add(currentPosition);
+
                     pathTiles.RemoveAt(pathTiles.Count - 1);
                     pathPositions.Remove(currentPosition);
                     currentPosition = pathPositions[pathPositions.Count - 1];
 
-                    currentDirection = currentPosition - pathPositions[pathPositions.Count - 2];
-
+                    if (pathPositions.Count - 2 < 0)
+                    {
+                        currentDirection = currentPosition - gridData.start;
+                    }
+                    else
+                    {
+                        currentDirection = currentPosition - pathPositions[pathPositions.Count - 2];
+                    }
 
                     continue;
                 }
@@ -349,52 +427,123 @@ namespace Rectangle.Level
                 currentDirection = freeDirections[Random.Range(0, freeDirections.Count)];
                 currentPosition += currentDirection;
 
+                blockedPositions.Add(currentPosition);
                 pathPositions.Add(currentPosition);
                 pathTiles.Add(GetTileType(lastDirection, currentDirection));
 
-            } while (!(currentPosition + endDirection == gridData.end));
-
-            pathTiles.Add(GetTileType(currentDirection, endDirection));
+            } while (currentPosition != anchorPosition);
 
             return pathTiles;
         }
 
-        private List<Vector2Int> GetFreeDirections(Vector2Int currentPos, List<Vector2Int> currentPath)
+        private List<TileCreator.TileTypes> CalculatePathToEnd(Vector2Int start)
+        {
+            blockedPositions = new();
+            List<Vector2Int> pathPositions = new();
+            List<TileCreator.TileTypes> pathTiles = new();
+
+            gridData.grid[start] = false;
+
+            List<Vector2Int> freeDirections = GetFreeDirections(start, start.x, gridData.end.x);
+
+            int randomIndex = Random.Range(0, freeDirections.Count);
+
+            Vector2Int currentDirection = freeDirections[randomIndex];
+
+            Vector2Int currentPosition = start + currentDirection;
+            pathPositions.Add(start);
+            pathPositions.Add(currentPosition);
+            blockedPositions.Add(currentPosition);
+            do
+            {
+                freeDirections = GetFreeDirections(currentPosition, start.x, gridData.end.x);
+                if (freeDirections.Count == 0 || gridData.anchorTiles.Contains(currentPosition))
+                {
+
+                    pathTiles.RemoveAt(pathTiles.Count - 1);
+                    pathPositions.Remove(currentPosition);
+                    currentPosition = pathPositions[pathPositions.Count - 1];
+
+                    if (pathPositions.Count - 2 < 0)
+                    {
+                        currentDirection = currentPosition - gridData.start;
+                    }
+                    else
+                    {
+                        currentDirection = currentPosition - pathPositions[pathPositions.Count - 2];
+                    }
+
+                    continue;
+                }
+                Vector2Int lastDirection = currentDirection;
+
+                currentDirection = freeDirections[Random.Range(0, freeDirections.Count)];
+                currentPosition += currentDirection;
+
+                blockedPositions.Add(currentPosition);
+                pathPositions.Add(currentPosition);
+                pathTiles.Add(GetTileType(lastDirection, currentDirection));
+
+            } while (currentPosition - endDirection != gridData.end);
+
+            pathTiles.Add(GetTileType(currentDirection, -endDirection));
+            return pathTiles;
+        }
+        private List<Vector2Int> GetFreeDirections(Vector2Int currentPos, int startX, int endX)
         {
             List<Vector2Int> freeDirections = new();
 
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.up))
+            int minX;
+            int maxX;
+
+            if(startX > endX)
             {
-                if (gridData.grid[currentPos + Vector2Int.up] && !currentPath.Contains(currentPos + Vector2Int.up))
+                minX = endX;
+                maxX = startX;
+            }
+            else
+            {
+                minX = startX;
+                maxX = endX;
+            }
+
+            Vector2Int checkPosition;
+
+            checkPosition = currentPos + Vector2Int.up;
+
+            if (gridData.grid.ContainsKey(checkPosition))
+            {
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.up);
                 }
             }
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.right))
+
+            checkPosition = currentPos + Vector2Int.right;
+            if (gridData.grid.ContainsKey(checkPosition) && currentPos.x + 1 <= maxX)
             {
-                if (gridData.grid[currentPos + Vector2Int.right] && !currentPath.Contains(currentPos + Vector2Int.right))
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.right);
                 }
             }
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.down))
+
+            checkPosition = currentPos + Vector2Int.down;
+            if (gridData.grid.ContainsKey(checkPosition))
             {
-                if (gridData.grid[currentPos + Vector2Int.down] && !currentPath.Contains(currentPos + Vector2Int.down))
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.down);
                 }
             }
-            if (gridData.grid.ContainsKey(currentPos + Vector2Int.left))
+
+            checkPosition = currentPos + Vector2Int.left;
+            if (gridData.grid.ContainsKey(checkPosition) && currentPos.x - 1 >= minX)
             {
-                if (gridData.grid[currentPos + Vector2Int.left] && !currentPath.Contains(currentPos + Vector2Int.left))
+                if (gridData.grid[checkPosition] && !blockedPositions.Contains(checkPosition))
                 {
                     freeDirections.Add(Vector2Int.left);
                 }
-            }
-
-            if (freeDirections.Count == 0)
-            {
-                gridData.grid[currentPos] = false;
             }
 
             return freeDirections;
@@ -470,7 +619,7 @@ namespace Rectangle.Level
             return tileType;
         }
 
-        private void DrawBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, TileBase tile)
+        public void DrawBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, TileBase tile)
         {
             Vector2 diff = pos2 - pos1;
 
@@ -567,11 +716,22 @@ namespace Rectangle.Level
 
             return Vector2Int.zero;
         }
+
+        public Vector2 CoordinateToWorldPosition(Vector2Int coordinate)
+        {
+            return ((Vector2)coordinate + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x;
+        }
+
+        public Vector2Int WorldPositionToCoordinate(Vector2 position)
+        {
+            return Vector2Int.FloorToInt(position / builderSettings.tileSize / gridTilemap.transform.lossyScale.x);
+        }
     }
 
     public class LevelGrid
     {
         public Dictionary<Vector2Int, bool> grid;
+        public List<Vector2Int> anchorTiles;
         public int height;
         public int width;
         public Vector2Int start;

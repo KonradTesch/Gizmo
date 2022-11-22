@@ -8,7 +8,7 @@ namespace Rectangle.Level
     public class LevelBuilderSettings : ScriptableObject
     {
         [Header("Tiles")]
-        public int tileSize = 8;
+        public Vector2Int tileSize;
         public LevelTileData gridTiles;
         public TileBase borderTile;
 
@@ -24,6 +24,7 @@ namespace Rectangle.Level
 
         [Header("LevelTiles")]
 
+        public Sprite anchorTileSprite;
         public TileType[] tileTypes; 
 
         public Sprite GetTileTypeSprite(TileCreator.TileTypes tileType)
@@ -40,17 +41,17 @@ namespace Rectangle.Level
             return null;
         }
 
-        public Color GetModeColor(Player.ModeController.PlayerModes mode)
+        public Color GetModeColor(Player.PlayerController.PlayerModes mode)
         {
             switch(mode)
             {
-                case Player.ModeController.PlayerModes.Rectangle:
+                case Player.PlayerController.PlayerModes.Rectangle:
                     return rectangleColor;
-                case Player.ModeController.PlayerModes.Bubble:
+                case Player.PlayerController.PlayerModes.Bubble:
                     return bubbleColor;
-                case Player.ModeController.PlayerModes.Spikey:
+                case Player.PlayerController.PlayerModes.Spikey:
                     return spikeyColor;
-                case Player.ModeController.PlayerModes.Little:
+                case Player.PlayerController.PlayerModes.Little:
                     return littleColor;
             }
 
@@ -62,7 +63,7 @@ namespace Rectangle.Level
     [System.Serializable]
     public class TileType
     {
-        public TileCreation.TileCreator.TileTypes tileType;
+        public TileCreator.TileTypes tileType;
         public Sprite tileSprite;
     }
 }

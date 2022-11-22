@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c42378e7f8c9941bde580ed3271819, type: 3}
   m_Name: LevelBuilderSettings
   m_EditorClassIdentifier: 
-  tileSize: 16
-  gridTiles: {fileID: 11400000, guid: 6e584c4787543ea4e89b9fd7986586c6, type: 2}
+  tileSize: {x: 32, y: 18}
+  gridTiles: {fileID: 11400000, guid: cc5eb9e85f09778489507c1695470d46, type: 2}
   borderTile: {fileID: 11400000, guid: 6877d2a183d758f489621d5dd20de567, type: 2}
   gridLayer:
     serializedVersion: 2
@@ -26,6 +26,7 @@ MonoBehaviour:
   spikeyColor: {r: 0.972549, g: 0.7019608, b: 0.22745098, a: 1}
   bubbleColor: {r: 0.3137255, g: 0.74509805, b: 0.3019608, a: 1}
   littleColor: {r: 0.94509804, g: 0.30588236, b: 0.30588236, a: 1}
+  anchorTileSprite: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
   tileTypes:
   - tileType: 2
     tileSprite: {fileID: 21300000, guid: 2bdeddf9f62ac5c4b801ed49cbc2d6fd, type: 3}

@@ -15,7 +15,7 @@ namespace Rectangle.Level
         /// Mode of this background shape.
         /// </summary>
         [Tooltip("The mode of this background shape.")]
-        public ModeController.PlayerModes playerMode;
+        public PlayerController.PlayerModes playerMode;
 
         /// <summary>
         /// Collider of this background shape.

@@ -11,7 +11,7 @@ namespace Rectangle.Level
         /// Canvas Object of the success canvas.
         /// </summary>
         [Tooltip("The canvas Object of the success canvas.")]
-        public GameObject successCanvas;
+        public GameObject successPanel;
 
         /// <summary>
         /// TimerUI script of the UI timer.
@@ -23,7 +23,7 @@ namespace Rectangle.Level
         {
             if (collision.CompareTag("Player"))
             {
-                successCanvas.SetActive(true);
+                successPanel.SetActive(true);
             }
 
             timerUI.StopTimer();
