@@ -61,6 +61,12 @@ namespace Rectangle.General
         [Tooltip("The success panel object.")]
         public GameObject sucessPanel;
 
+        /// <summary>
+        /// The game over screen object.
+        /// </summary>
+        [Tooltip("The game over screen object.")]
+        public GameObject gameOverPanel;
+
         [Header("Builder Settings")]
 
         /// <summary>

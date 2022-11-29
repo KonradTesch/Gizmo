@@ -12,7 +12,8 @@ namespace Rectangle.TileCreation
         public Tilemap backgroundTilemap;
         public Tilemap groundTilemap;
         public Tilemap rampTilemap;
-        public Tilemap platformTilemap;
+        public Tilemap onewayPlatformTilemap;
+        public Tilemap spikesTilemap;
         public Vector2Int tileSize = new Vector2Int(32, 32);
 
         [Header("Asset Folder")]
@@ -29,6 +30,6 @@ namespace Rectangle.TileCreation
 
         public enum TileTypes { undefined, AllSides, LeftAndRight, LeftAndDown, LeftAndUp, UpAndRight, DownAndRight, UpAndDown};
 
-        [HideInInspector] public List<Tilemap> movingPlatforms;
+        [HideInInspector] public List<Tilemap> movingObjects;
     }
 }

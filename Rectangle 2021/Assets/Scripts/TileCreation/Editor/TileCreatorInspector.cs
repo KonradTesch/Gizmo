@@ -24,32 +24,31 @@ namespace Rectangle.TileCreation
 
             GUILayout.Space(10);
 
-            GUILayout.Label("Moving Platforms", EditorStyles.boldLabel);
+            GUILayout.Label("Moving Objects", EditorStyles.boldLabel);
 
-            //Debug.Log("moving Platform Count: " + movingPlatforms.Count);
 
-            if (builder.movingPlatforms != null && builder.movingPlatforms.Count > 0)
+            if (builder.movingObjects != null && builder.movingObjects.Count > 0)
             {
                 bool rename = false;
 
-                for(int i = 0; i < builder.movingPlatforms.Count; i++)
+                for(int i = 0; i < builder.movingObjects.Count; i++)
                 {
                     EditorGUILayout.BeginHorizontal();
 
-                    EditorGUILayout.ObjectField(builder.movingPlatforms[i], typeof(Tilemap), true);
+                    EditorGUILayout.ObjectField(builder.movingObjects[i], typeof(Tilemap), true);
 
                     if(GUILayout.Button("Edit"))
                     {
-                        Selection.activeGameObject = builder.movingPlatforms[i].gameObject;
+                        Selection.activeGameObject = builder.movingObjects[i].gameObject;
                     }
 
                     if(GUILayout.Button("Delete"))
                     {
-                        if (builder.movingPlatforms[i] != null)
+                        if (builder.movingObjects[i] != null)
                         {
-                            DestroyImmediate(builder.movingPlatforms[i].gameObject);
+                            DestroyImmediate(builder.movingObjects[i].gameObject);
                         }
-                        builder.movingPlatforms.Remove(builder.movingPlatforms[i]);
+                        builder.movingObjects.Remove(builder.movingObjects[i]);
                         rename = true;
                         break;
                     }
@@ -62,33 +61,31 @@ namespace Rectangle.TileCreation
 
                 if(rename)
                 {
-                    for (int i = 0; i < builder.movingPlatforms.Count; i++)
+                    for (int i = 0; i < builder.movingObjects.Count; i++)
                     {
-                        builder.movingPlatforms[i].gameObject.name = $"LevelTilemap_MovingPLatform({i})";
+                        builder.movingObjects[i].gameObject.name = $"LevelTilemap_MovingObject({i})";
                     }
                 }
             }
 
             GUILayout.Space(10);
 
-            if(GUILayout.Button("Delete All"))
-            {
-                foreach(Tilemap platform in builder.movingPlatforms)
-                {
-                    if(platform != null)
-                    {
-                        DestroyImmediate(platform.gameObject);
-                    }
-                }
-                builder.movingPlatforms.Clear();
-            }
-
-            if (GUILayout.Button("Add Moving Platform"))
+            if (GUILayout.Button("Add Moving Object"))
             {
                 CreateMovingPlatform(builder);
             }
 
-
+            if (GUILayout.Button("Delete All Moving Objects"))
+            {
+                foreach (Tilemap platform in builder.movingObjects)
+                {
+                    if (platform != null)
+                    {
+                        DestroyImmediate(platform.gameObject);
+                    }
+                }
+                builder.movingObjects.Clear();
+            }
 
             GUILayout.Space(15);
 
@@ -227,13 +224,14 @@ namespace Rectangle.TileCreation
             tile.groundTileChanges = new();
             tile.rampTileChanges = new();
             tile.platformTileChanges = new();
-            tile.movingPlatforms = new();
+            tile.spikesTileChanges = new();
+            tile.movingObjects = new();
 
-            for(int i = 0; i < builder.movingPlatforms.Count; i++)
+            for(int i = 0; i < builder.movingObjects.Count; i++)
             {
-                WaypointFollower platform = builder.movingPlatforms[i].GetComponent<WaypointFollower>();
+                WaypointFollower movingObject = builder.movingObjects[i].GetComponent<WaypointFollower>();
 
-                tile.movingPlatforms.Add(new MovingPlatformData(platform.moveSpeed, platform.waypoints));
+                tile.movingObjects.Add(new MovingObjectData(movingObject.moveSpeed, movingObject.waypoints, movingObject.movingType, movingObject.vanishing, movingObject.vanishingTime));
             }
 
 
@@ -279,32 +277,44 @@ namespace Rectangle.TileCreation
                         tile.rampTileChanges.Add(change);
                     }
 
-                    if (builder.platformTilemap.HasTile(pos))
+                    if (builder.onewayPlatformTilemap.HasTile(pos))
                     {
                         ChangeData change = new()
                         {
                             position = pos,
-                            tile = builder.platformTilemap.GetTile(pos),
-                            transform = builder.platformTilemap.GetTransformMatrix(pos)
+                            tile = builder.onewayPlatformTilemap.GetTile(pos),
+                            transform = builder.onewayPlatformTilemap.GetTransformMatrix(pos)
                         };
 
                         tile.platformTileChanges.Add(change);
                     }
 
-                    if(builder.movingPlatforms != null && builder.movingPlatforms.Count > 0)
+                    if (builder.spikesTilemap.HasTile(pos))
                     {
-                        for (int i = 0; i < builder.movingPlatforms.Count; i++)
+                        ChangeData change = new()
                         {
-                            if (builder.movingPlatforms[i].HasTile(pos))
+                            position = pos,
+                            tile = builder.spikesTilemap.GetTile(pos),
+                            transform = builder.spikesTilemap.GetTransformMatrix(pos)
+                        };
+
+                        tile.spikesTileChanges.Add(change);
+                    }
+
+                    if (builder.movingObjects != null && builder.movingObjects.Count > 0)
+                    {
+                        for (int i = 0; i < builder.movingObjects.Count; i++)
+                        {
+                            if (builder.movingObjects[i].HasTile(pos))
                             {
                                 ChangeData change = new()
                                 {
                                     position = pos,
-                                    tile = builder.movingPlatforms[i].GetTile(pos),
-                                    transform = builder.movingPlatforms[i].GetTransformMatrix(pos)
+                                    tile = builder.movingObjects[i].GetTile(pos),
+                                    transform = builder.movingObjects[i].GetTransformMatrix(pos)
                                 };
 
-                                tile.movingPlatforms[i].platformTileChanges.Add(change);
+                                tile.movingObjects[i].tileChanges.Add(change);
                             }
                         }
 
@@ -347,7 +357,7 @@ namespace Rectangle.TileCreation
             builder.backgroundTilemap.ClearAllTiles();
             builder.groundTilemap.ClearAllTiles();
             builder.rampTilemap.ClearAllTiles();
-            builder.platformTilemap.ClearAllTiles();
+            builder.onewayPlatformTilemap.ClearAllTiles();
             builder.tileSize = tile.tileSize;
             builder.tileName = tile.name;
 
@@ -387,18 +397,18 @@ namespace Rectangle.TileCreation
                     transform = change.transform
                 };
 
-                builder.platformTilemap.SetTile(tileChane, true);
+                builder.onewayPlatformTilemap.SetTile(tileChane, true);
             }
-            builder.platformTilemap.RefreshAllTiles();
+            builder.onewayPlatformTilemap.RefreshAllTiles();
 
-            foreach(Tilemap platformTilemap in builder.movingPlatforms)
+            foreach(Tilemap platformTilemap in builder.movingObjects)
             {
                 if(platformTilemap != null)
                     DestroyImmediate(platformTilemap.gameObject);
             }
-            builder.movingPlatforms.Clear();
+            builder.movingObjects.Clear();
 
-            foreach(MovingPlatformData platformData in tile.movingPlatforms)
+            foreach(MovingObjectData platformData in tile.movingObjects)
             {
                 Tilemap newPlatform = CreateMovingPlatform(builder);
 
@@ -407,7 +417,7 @@ namespace Rectangle.TileCreation
                 waypointFollower.moveSpeed = platformData.moveSpeed;
                 waypointFollower.waypoints = platformData.waypoints;
 
-                foreach (ChangeData change in platformData.platformTileChanges)
+                foreach (ChangeData change in platformData.tileChanges)
                 {
                     TileChangeData tileChane = new()
                     {
@@ -426,17 +436,17 @@ namespace Rectangle.TileCreation
         private Tilemap CreateMovingPlatform(TileCreator builder)
         {
             int platformIndex;
-            if(builder.movingPlatforms == null)
+            if(builder.movingObjects == null)
             {
-                builder.movingPlatforms = new();
+                builder.movingObjects = new();
                 platformIndex = 1;
             }
             else
             {
-                platformIndex = builder.movingPlatforms.Count;
+                platformIndex = builder.movingObjects.Count;
             }
 
-            GameObject platformTilemap = new GameObject("LevelTilemap_MovingPlatform(" + platformIndex + ")");
+            GameObject platformTilemap = new GameObject("LevelTilemap_MovingObject(" + platformIndex + ")");
 
             platformTilemap.transform.SetParent(builder.groundTilemap.transform.parent);
             platformTilemap.AddComponent<Tilemap>();
@@ -448,7 +458,7 @@ namespace Rectangle.TileCreation
             platformTilemap.transform.localScale = builder.groundTilemap.transform.localScale;
             platformTilemap.layer = builder.groundTilemap.gameObject.layer;
 
-            builder.movingPlatforms.Add(platformTilemap.GetComponent<Tilemap>());
+            builder.movingObjects.Add(platformTilemap.GetComponent<Tilemap>());
 
             return platformTilemap.GetComponent<Tilemap>();
         }
@@ -461,8 +471,8 @@ namespace Rectangle.TileCreation
             builder.rampTilemap.ClearAllTiles();
             builder.rampTilemap.RefreshAllTiles();
 
-            builder.platformTilemap.ClearAllTiles();
-            builder.platformTilemap.RefreshAllTiles();
+            builder.onewayPlatformTilemap.ClearAllTiles();
+            builder.onewayPlatformTilemap.RefreshAllTiles();
         }
         private void StartTest(TileCreator builder)
         {

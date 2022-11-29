@@ -23,6 +23,7 @@ namespace Rectangle.Level
         [SerializeField] private Tilemap groundTilemap;
         [SerializeField] private Tilemap rampTilemap;
         [SerializeField] private Tilemap onewayPlatformTilemap;
+        [SerializeField] private Tilemap spikesTilemap;
 
 
         private Dictionary<TileCreator.TileTypes, List<LevelTileData>> modeTiles;
@@ -219,16 +220,35 @@ namespace Rectangle.Level
             }
             onewayPlatformTilemap.RefreshAllTiles();
 
-            foreach(MovingPlatformData platform in tile.movingPlatforms)
+            foreach (ChangeData change in tile.spikesTileChanges)
+            {
+                TileChangeData tileChange = new()
+                {
+                    position = change.position + (Vector3Int)originPosition,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+                spikesTilemap.SetTile(tileChange, true);
+            }
+            spikesTilemap.RefreshAllTiles();
+
+
+            foreach (MovingObjectData movingObject in tile.movingObjects)
             {
                 Tilemap platformTilemap = Instantiate(movingPlatformPrefab, groundTilemap.transform.parent).GetComponent<Tilemap>();
+                platformTilemap.gameObject.SetActive(false);
                 platformTilemap.transform.localScale = groundTilemap.transform.localScale;
 
-                WaypointFollower platformFollower = platformTilemap.GetComponent<WaypointFollower>();
-                platformFollower.moveSpeed = platform.moveSpeed;
-                platformFollower.waypoints = platform.waypoints;
+                WaypointFollower objjectFollower = platformTilemap.GetComponent<WaypointFollower>();
+                objjectFollower.moveSpeed = movingObject.moveSpeed;
+                objjectFollower.waypoints = movingObject.waypoints;
+                objjectFollower.movingType = movingObject.movingType;
+                objjectFollower.vanishing = movingObject.vanishing;
+                objjectFollower.vanishingTime = movingObject.vanishTime;
 
-                foreach (ChangeData change in platform.platformTileChanges)
+                platformTilemap.gameObject.SetActive(true);
+
+                foreach (ChangeData change in movingObject.tileChanges)
                 {
                     TileChangeData tileChange = new()
                     {

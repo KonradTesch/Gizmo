@@ -11,8 +11,9 @@ namespace Rectangle.TileCreation
         public List<ChangeData> groundTileChanges;
         public List<ChangeData> platformTileChanges;
         public List<ChangeData> rampTileChanges;
+        public List<ChangeData> spikesTileChanges;
 
-        public List<MovingPlatformData> movingPlatforms;
+        public List<MovingObjectData> movingObjects;
 
         public Vector2[] collectablePositions;
 
@@ -30,19 +31,25 @@ namespace Rectangle.TileCreation
     }
 
     [System.Serializable]
-    public class MovingPlatformData
+    public class MovingObjectData
     {
         public float moveSpeed;
         public Vector2[] waypoints;
+        public Level.WaypointFollower.MovingType movingType;
+        public bool vanishing;
+        public float vanishTime;
 
-        public List<ChangeData> platformTileChanges;
+        public List<ChangeData> tileChanges;
 
-        public MovingPlatformData(float speed, Vector2[] points)
+        public MovingObjectData(float moveSpeed, Vector2[] waypoints, Level.WaypointFollower.MovingType movingType, bool vanishing, float vanishTime)
         {
-            moveSpeed = speed;
-            waypoints = points;
-            platformTileChanges = new();
-        }
+            this.moveSpeed = moveSpeed;
+            this.waypoints = waypoints;
+            this.movingType = movingType;
+            this.vanishing = vanishing;
+            this.vanishTime = vanishTime;
 
+            tileChanges = new();
+        }
     }
 }

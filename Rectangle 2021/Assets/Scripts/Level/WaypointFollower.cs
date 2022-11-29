@@ -7,14 +7,41 @@ namespace Rectangle.Level
     public class WaypointFollower : MonoBehaviour
     {
         public float moveSpeed;
+        public MovingType movingType;
         public Vector2[] waypoints = new Vector2[] { Vector2.zero };
+
+        [Header("Vanishing")]
+        public bool vanishing;
+        public float vanishingTime;
 
         private float timer;
         private int waypointIndex = 0;
 
+        public enum MovingType { Platform, Spikes, Ramp, Background};
+
+        private void OnEnable()
+        {
+            switch (movingType)
+            {
+                case MovingType.Platform:
+                    gameObject.layer = LayerMask.NameToLayer("Ground");
+                    break;
+                case MovingType.Spikes:
+                    gameObject.AddComponent<Spikes>();
+                    break;
+                case MovingType.Ramp:
+                    gameObject.layer = LayerMask.NameToLayer("Ramp");
+                    break;
+                case MovingType.Background:
+                    Destroy(GetComponent<Collider2D>());
+                    break;
+            }
+
+        }
+
         void Update()
         {
-            timer += Time.fixedDeltaTime * moveSpeed * transform.lossyScale.x;
+            timer += Time.deltaTime * moveSpeed * transform.lossyScale.x;
 
             Vector2 lastStop = waypoints[waypointIndex] * transform.lossyScale;
             Vector2 nextStop;
