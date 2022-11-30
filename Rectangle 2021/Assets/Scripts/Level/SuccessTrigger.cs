@@ -13,11 +13,6 @@ namespace Rectangle.Level
         [Tooltip("The canvas Object of the success canvas.")]
         public GameObject successPanel;
 
-        /// <summary>
-        /// TimerUI script of the UI timer.
-        /// </summary>
-        [Tooltip("The TimerUI script of the UI timer.")]
-        public TimerUI timerUI;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -26,7 +21,7 @@ namespace Rectangle.Level
                 successPanel.SetActive(true);
             }
 
-            timerUI.StopTimer();
+            //timerUI.StopTimer();
         }
     }
 }

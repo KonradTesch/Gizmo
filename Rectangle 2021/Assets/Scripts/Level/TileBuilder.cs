@@ -89,7 +89,7 @@ namespace Rectangle.Level
             }
 
             int randomIndex = Random.Range(0, modeTiles[tileType].Count);
-
+            Debug.Log($"GetRandomPlayerMode({tileType.ToString()})");
             return modeTiles[tileType][randomIndex].playerMode;
         }
 
