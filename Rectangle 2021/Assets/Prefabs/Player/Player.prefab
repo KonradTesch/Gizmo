@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 400
-  movementSmoothing: 0.2
+  movementSmoothing: 0.1
   jumpForce: 260
   maxFallingSpped: -10
   airControl: 1
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 400
-  movementSmoothing: 0.2
+  movementSmoothing: 0.1
   jumpForce: 88
   maxFallingSpped: -10
   airControl: 1
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 400
-  movementSmoothing: 0.2
+  movementSmoothing: 0.1
   jumpForce: 260
   maxFallingSpped: -10
   airControl: 1
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 400
-  movementSmoothing: 0.2
+  movementSmoothing: 0.1
   jumpForce: 260
   maxFallingSpped: -10
   airControl: 1

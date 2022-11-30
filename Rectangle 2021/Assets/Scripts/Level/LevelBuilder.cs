@@ -134,7 +134,6 @@ namespace Rectangle.Level
             endCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
             SuccessTrigger success = endCollider.AddComponent<SuccessTrigger>();
             success.successPanel = General.GameBehavior.instance.sucessPanel;
-            success.timerUI = FindObjectOfType<UI.TimerUI>();
 
 
             gridTilemap.RefreshAllTiles();

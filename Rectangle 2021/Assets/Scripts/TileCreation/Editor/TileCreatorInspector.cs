@@ -358,6 +358,7 @@ namespace Rectangle.TileCreation
             builder.groundTilemap.ClearAllTiles();
             builder.rampTilemap.ClearAllTiles();
             builder.onewayPlatformTilemap.ClearAllTiles();
+            builder.spikesTilemap.ClearAllTiles();
             builder.tileSize = tile.tileSize;
             builder.tileName = tile.name;
 
@@ -401,7 +402,21 @@ namespace Rectangle.TileCreation
             }
             builder.onewayPlatformTilemap.RefreshAllTiles();
 
-            foreach(Tilemap platformTilemap in builder.movingObjects)
+            foreach (ChangeData change in tile.spikesTileChanges)
+            {
+                TileChangeData tileChane = new()
+                {
+                    position = change.position,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+
+                builder.spikesTilemap.SetTile(tileChane, true);
+            }
+            builder.spikesTilemap.RefreshAllTiles();
+
+
+            foreach (Tilemap platformTilemap in builder.movingObjects)
             {
                 if(platformTilemap != null)
                     DestroyImmediate(platformTilemap.gameObject);
@@ -465,6 +480,9 @@ namespace Rectangle.TileCreation
 
         private void ClearTilemap(TileCreator builder)
         {
+            builder.backgroundTilemap.ClearAllTiles();
+            builder.backgroundTilemap.RefreshAllTiles();
+
             builder.groundTilemap.ClearAllTiles();
             builder.groundTilemap.RefreshAllTiles();
 
@@ -473,6 +491,9 @@ namespace Rectangle.TileCreation
 
             builder.onewayPlatformTilemap.ClearAllTiles();
             builder.onewayPlatformTilemap.RefreshAllTiles();
+
+            builder.spikesTilemap.ClearAllTiles();
+            builder.spikesTilemap.RefreshAllTiles();
         }
         private void StartTest(TileCreator builder)
         {

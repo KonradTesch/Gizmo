@@ -388,7 +388,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -699655507
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 298339190}
   - component: {fileID: 298339189}
   - component: {fileID: 298339188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap_Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27957,16 +27957,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTiles:
-  - {fileID: 11400000, guid: 9722bfd9fb8568646b0081bf1109a96e, type: 2}
+  - {fileID: 11400000, guid: f4eb4dcc366a0434b87d70c3dd055c25, type: 2}
   - {fileID: 11400000, guid: 3d342187101666a4b91f36326b522cda, type: 2}
-  - {fileID: 11400000, guid: df174c80ead584a4599c07b0b92cf896, type: 2}
-  - {fileID: 11400000, guid: d94353f59d212b644b21a79722325707, type: 2}
-  - {fileID: 11400000, guid: 34139f812d84cff4297c82352f15a2f2, type: 2}
+  - {fileID: 11400000, guid: 185b3ae8d077e6c47983ff09f811d6c4, type: 2}
+  - {fileID: 11400000, guid: 727538f93d4da3f4b8420481be55c51e, type: 2}
+  - {fileID: 11400000, guid: 359cdaba025230f4cbb03e1266c39639, type: 2}
   - {fileID: 11400000, guid: d4638d8d5f09c1c4faa35e3870b55be7, type: 2}
-  - {fileID: 11400000, guid: dcecac6c4c5cb6146b9a91f254771923, type: 2}
-  - {fileID: 11400000, guid: 5b644d960b8da5e41a865112caed6cc3, type: 2}
-  - {fileID: 11400000, guid: 35b65d64ac713b140a04930f8feda881, type: 2}
-  - {fileID: 11400000, guid: 4f2eb6b85b0b2254d92469c398aa6b7e, type: 2}
   anchorTiles:
   - {fileID: 11400000, guid: 8b4fea390b9aba048a430be9c0ed7ec3, type: 2}
   - {fileID: 11400000, guid: 815e029391356d246b7b587895b145bf, type: 2}
