@@ -48,6 +48,9 @@ TagManager:
   - name: Level
     uniqueID: 3595311789
     locked: 0
+  - name: Moving
+    uniqueID: 605943695
+    locked: 0
   - name: Player
     uniqueID: 681935141
     locked: 0
