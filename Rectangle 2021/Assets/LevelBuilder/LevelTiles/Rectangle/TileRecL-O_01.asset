@@ -6793,5 +6793,5 @@ MonoBehaviour:
         e33: 1
   collectablePositions: []
   tileSize: {x: 32, y: 18}
-  tileType: 5
+  tileType: 4
   playerMode: 1
