@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8c3556e06b28f8f41a7cafabf3e7140f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3683547977414959946
 Transform:
   m_ObjectHideFlags: 0
@@ -633,8 +633,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   headAnimator: {fileID: 0}
-  climbSpeed: 1000
-  pOnRamp: 0
+  climbSpeed: 450
+  rotationSpeed: 45
 --- !u!212 &3683547979103905856
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -785,6 +785,7 @@ MonoBehaviour:
     m_Bits: 512
   headAnimator: {fileID: 0}
   lowGravityScale: 0.3
+  rotationSpeed: 45
 --- !u!212 &3683547979325627246
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -826,7 +827,7 @@ SpriteRenderer:
   m_SortingLayerID: 681935141
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3853e050af458134584a505e58ecabf1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e09b8eded7737740940092cae588745, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -850,9 +851,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0036096573}
+  m_Offset: {x: -0.01, y: 0.01}
   serializedVersion: 2
-  m_Radius: 0.4196272
+  m_Radius: 0.46
 --- !u!50 &3683547979325627244
 Rigidbody2D:
   serializedVersion: 4

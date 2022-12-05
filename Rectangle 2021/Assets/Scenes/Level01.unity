@@ -12485,6 +12485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3560512412813246610, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3683547977390433008, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
       propertyPath: m_Name
       value: Player
@@ -12533,22 +12537,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3683547977414959957, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 449414a617889b5419e47c0b6d06382b, type: 2}
-    - target: {fileID: 3683547978436954696, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 449414a617889b5419e47c0b6d06382b, type: 2}
-    - target: {fileID: 3683547979103905856, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 449414a617889b5419e47c0b6d06382b, type: 2}
-    - target: {fileID: 3683547979325627246, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 449414a617889b5419e47c0b6d06382b, type: 2}
+    - target: {fileID: 3683547979103905857, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: climbSpeed
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683547979103905857, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: rotationSpeed
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683547979325627234, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683547979325627247, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: rotationSpeed
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
 --- !u!1 &1422954950
@@ -28501,12 +28505,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTiles:
-  - {fileID: 11400000, guid: f4eb4dcc366a0434b87d70c3dd055c25, type: 2}
-  - {fileID: 11400000, guid: 3d342187101666a4b91f36326b522cda, type: 2}
-  - {fileID: 11400000, guid: 185b3ae8d077e6c47983ff09f811d6c4, type: 2}
   - {fileID: 11400000, guid: 727538f93d4da3f4b8420481be55c51e, type: 2}
-  - {fileID: 11400000, guid: 359cdaba025230f4cbb03e1266c39639, type: 2}
   - {fileID: 11400000, guid: d4638d8d5f09c1c4faa35e3870b55be7, type: 2}
+  - {fileID: 11400000, guid: 5b644d960b8da5e41a865112caed6cc3, type: 2}
+  - {fileID: 11400000, guid: 3d342187101666a4b91f36326b522cda, type: 2}
+  - {fileID: 11400000, guid: 35b65d64ac713b140a04930f8feda881, type: 2}
+  - {fileID: 11400000, guid: 4f2eb6b85b0b2254d92469c398aa6b7e, type: 2}
   anchorTiles:
   - {fileID: 11400000, guid: 8b4fea390b9aba048a430be9c0ed7ec3, type: 2}
   - {fileID: 11400000, guid: 815e029391356d246b7b587895b145bf, type: 2}

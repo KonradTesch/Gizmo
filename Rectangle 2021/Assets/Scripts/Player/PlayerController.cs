@@ -132,6 +132,7 @@ namespace Rectangle.Player
 
             headAnimator.transform.SetParent(activePlayer.transform);
             headAnimator.transform.localPosition = Vector3.zero;
+            headAnimator.transform.localScale = Vector3.one;
 
             Debug.Log("ModeController: <- ChangeMode()");
 

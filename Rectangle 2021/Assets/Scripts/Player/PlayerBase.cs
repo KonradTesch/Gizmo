@@ -96,7 +96,7 @@ namespace Rectangle.Player
         {
             PositionCheck();
 
-            if(Mathf.Abs(transform.rotation.eulerAngles.z) % 90 < 1 && Mathf.Abs(transform.rotation.eulerAngles.z) > 45)
+            if((Mathf.Abs(transform.rotation.eulerAngles.z) % 90 < 1 || Mathf.Abs(transform.rotation.eulerAngles.z) % 90 > 89) && Mathf.Abs(transform.rotation.eulerAngles.z) > 45)
             {
                 Debug.Log("rotate");
                 transform.rotation = Quaternion.identity;
