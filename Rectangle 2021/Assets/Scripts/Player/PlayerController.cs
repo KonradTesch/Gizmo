@@ -31,6 +31,8 @@ namespace Rectangle.Player
 
         [SerializeField] private LayerMask backgroundLayer;
 
+        [SerializeField] private Animator headAnimator;
+
         /// <summary>
         /// The player that is active at the moment.
         /// </summary>
@@ -74,6 +76,17 @@ namespace Rectangle.Player
             {
                 Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
                 activePlayer.Move(movement);
+
+                if(movement.x > 0)
+                {
+                    activePlayer.transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else
+                {
+                    activePlayer.transform.localScale = Vector3.one;
+                }
+
+                headAnimator.transform.rotation = Quaternion.identity;
             }
         }
 
@@ -117,6 +130,9 @@ namespace Rectangle.Player
             activePlayer.gameObject.SetActive(true);
             activePlayer.GetComponent<Rigidbody2D>().velocity = currentVelocity;
 
+            headAnimator.transform.SetParent(activePlayer.transform);
+            headAnimator.transform.localPosition = Vector3.zero;
+
             Debug.Log("ModeController: <- ChangeMode()");
 
         }
@@ -152,6 +168,7 @@ namespace Rectangle.Player
                 {
                     modes.Add(mode.playerMode, mode.player);
                 }
+                mode.player.headAnimator = headAnimator;
             }
             Debug.Log("ModeController: <- InitModes()");
 

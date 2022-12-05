@@ -75,6 +75,8 @@ namespace Rectangle.Player
         /// </summary>
         protected Vector3 velocity;
 
+        [HideInInspector]public Animator headAnimator;
+
         protected Rigidbody2D rigidBody;
         protected Collider2D col;
 
@@ -93,6 +95,12 @@ namespace Rectangle.Player
         protected virtual void FixedUpdate()
         {
             PositionCheck();
+
+            if(Mathf.Abs(transform.rotation.eulerAngles.z) % 90 < 1 && Mathf.Abs(transform.rotation.eulerAngles.z) > 45)
+            {
+                Debug.Log("rotate");
+                transform.rotation = Quaternion.identity;
+            }
         }
 
         /// <summary>
@@ -100,6 +108,8 @@ namespace Rectangle.Player
         /// </summary>
         public virtual void Move(Vector2 horizontalMove)
         {
+            animator.SetFloat("horizontalMove", horizontalMove.x);
+
             if (grounded || airControl && !onRamp)
             {
                 Vector2 targetVelocity = new Vector2(horizontalMove.x * moveSpeed * Time.fixedDeltaTime, rigidBody.velocity.y);

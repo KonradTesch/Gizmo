@@ -18,10 +18,11 @@ namespace Rectangle.Player
         {
             if (grounded)
             {
+                animator.SetTrigger("jump");
                 grounded = false;
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
             }
-            else if (canDoubleJump)
+            else if (canDoubleJump && !onRamp)
             {
                 //Resets the velocity on the y axis
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
