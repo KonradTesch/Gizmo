@@ -221,11 +221,13 @@ namespace Rectangle.TileCreation
             LevelTileData tile = (LevelTileData)CreateInstance(typeof(LevelTileData));
 
             tile.backgroundTileChanges = new();
+            tile.borderTileChanges = new();
             tile.groundTileChanges = new();
             tile.rampTileChanges = new();
             tile.platformTileChanges = new();
             tile.spikesTileChanges = new();
             tile.movingObjects = new();
+
 
             for(int i = 0; i < builder.movingObjects.Count; i++)
             {
@@ -251,6 +253,18 @@ namespace Rectangle.TileCreation
                         };
 
                         tile.backgroundTileChanges.Add(change);
+                    }
+
+                    if (builder.borderTilemap.HasTile(pos))
+                    {
+                        ChangeData change = new()
+                        {
+                            position = pos,
+                            tile = builder.borderTilemap.GetTile(pos),
+                            transform = builder.borderTilemap.GetTransformMatrix(pos)
+                        };
+
+                        tile.borderTileChanges.Add(change);
                     }
 
                     if (builder.groundTilemap.HasTile(pos))
@@ -354,13 +368,18 @@ namespace Rectangle.TileCreation
 
         private void DrawTile(TileCreator builder, LevelTileData tile)
         {
+            builder.tileSize = tile.tileSize;
+            builder.tileName = tile.name;
+            builder.tileType = tile.tileType;
+            builder.hasCollactables = tile.collectablePositions.Length > 0;
+            builder.playerMode = tile.playerMode;
+
             builder.backgroundTilemap.ClearAllTiles();
+            builder.borderTilemap.ClearAllTiles();
             builder.groundTilemap.ClearAllTiles();
             builder.rampTilemap.ClearAllTiles();
             builder.onewayPlatformTilemap.ClearAllTiles();
             builder.spikesTilemap.ClearAllTiles();
-            builder.tileSize = tile.tileSize;
-            builder.tileName = tile.name;
 
 
             foreach(ChangeData change in tile.groundTileChanges)
@@ -375,6 +394,20 @@ namespace Rectangle.TileCreation
                 builder.groundTilemap.SetTile(tileChane, true);
             }
             builder.groundTilemap.RefreshAllTiles();
+
+            foreach (ChangeData change in builder.builderSettings.openBorderTile.borderTileChanges)
+            {
+                TileChangeData tileChane = new()
+                {
+                    position = change.position,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+
+                builder.borderTilemap.SetTile(tileChane, true);
+            }
+            builder.borderTilemap.RefreshAllTiles();
+
 
             foreach (ChangeData change in tile.rampTileChanges)
             {
@@ -482,6 +515,9 @@ namespace Rectangle.TileCreation
         {
             builder.backgroundTilemap.ClearAllTiles();
             builder.backgroundTilemap.RefreshAllTiles();
+
+            builder.borderTilemap.ClearAllTiles();
+            builder.borderTilemap.RefreshAllTiles();
 
             builder.groundTilemap.ClearAllTiles();
             builder.groundTilemap.RefreshAllTiles();

@@ -10,6 +10,7 @@ namespace Rectangle.TileCreation
     {
         [Header("TileMaps")]
         public Tilemap backgroundTilemap;
+        public Tilemap borderTilemap;
         public Tilemap groundTilemap;
         public Tilemap rampTilemap;
         public Tilemap onewayPlatformTilemap;

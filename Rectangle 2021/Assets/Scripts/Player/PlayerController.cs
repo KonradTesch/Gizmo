@@ -88,6 +88,10 @@ namespace Rectangle.Player
 
                 headAnimator.transform.rotation = Quaternion.identity;
             }
+            else
+            {
+                activePlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
         }
 
         private void CheckBackground()

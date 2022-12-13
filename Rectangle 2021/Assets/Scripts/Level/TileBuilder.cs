@@ -20,6 +20,7 @@ namespace Rectangle.Level
         [Header("Tilemaps")]
 
         [SerializeField] private Tilemap backgroundTilemap;
+        [SerializeField] private Tilemap borderTilemap;
         [SerializeField] private Tilemap groundTilemap;
         [SerializeField] private Tilemap rampTilemap;
         [SerializeField] private Tilemap onewayPlatformTilemap;
@@ -183,6 +184,18 @@ namespace Rectangle.Level
                 backgroundTilemap.SetTile(tileChange, true);
             }
             backgroundTilemap.RefreshAllTiles();
+
+            foreach(ChangeData change in tile.borderTileChanges)
+            {
+                TileChangeData tileChange = new()
+                {
+                    position = change.position + (Vector3Int)originPosition,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+                borderTilemap.SetTile(tileChange, true);
+            }
+            borderTilemap.RefreshAllTiles();
 
             foreach (ChangeData change in tile.groundTileChanges)
             {

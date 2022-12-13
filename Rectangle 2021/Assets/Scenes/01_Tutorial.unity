@@ -678,7 +678,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &157879474
@@ -24810,7 +24810,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &723852010
@@ -24982,7 +24982,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &750495367
@@ -25426,7 +25426,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &822767793
@@ -25755,7 +25755,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1111432781
@@ -25968,7 +25968,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1165894370 stripped
@@ -26381,9 +26381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camOffset: {x: 0, y: 0, z: -10}
-  buildingCamSize: 17
-  levelCamSize: 4
-  transitionTime: 0
+  transitionTime: 0.5
 --- !u!1 &1422954950
 GameObject:
   m_ObjectHideFlags: 0
@@ -26533,7 +26531,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1422954955
@@ -26860,7 +26858,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1521520078
@@ -31991,7 +31989,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1567240323
@@ -32976,6 +32974,8 @@ GameObject:
   - component: {fileID: 2001858576}
   - component: {fileID: 2001858577}
   - component: {fileID: 2001858579}
+  - component: {fileID: 2001858581}
+  - component: {fileID: 2001858580}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -32997,11 +32997,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 94041364}
   tilePanel: {fileID: 750495368}
-  debugUI: {fileID: 604020119}
   buttonUI: {fileID: 1628222964}
   buildLevelButton: {fileID: 277051589}
   cancelBuildingButton: {fileID: 1244814870}
   sucessPanel: {fileID: 1528619786}
+  gameOverPanel: {fileID: 0}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   tileInventory: []
   levelBuilder: {fileID: 0}
@@ -33044,24 +33044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45b32ecbf0bf484381ad7ff3e59021c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTiles:
-  - {fileID: 11400000, guid: dcecac6c4c5cb6146b9a91f254771923, type: 2}
-  - {fileID: 11400000, guid: df174c80ead584a4599c07b0b92cf896, type: 2}
-  - {fileID: 11400000, guid: d4638d8d5f09c1c4faa35e3870b55be7, type: 2}
-  - {fileID: 11400000, guid: d94353f59d212b644b21a79722325707, type: 2}
-  - {fileID: 11400000, guid: 35b65d64ac713b140a04930f8feda881, type: 2}
-  - {fileID: 11400000, guid: 4f2eb6b85b0b2254d92469c398aa6b7e, type: 2}
-  anchorTiles:
-  - {fileID: 11400000, guid: 8b4fea390b9aba048a430be9c0ed7ec3, type: 2}
-  gridLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  collectableTilePrefab: {fileID: 8622568014851585060, guid: 3f25c73a77d08e94f951a5323722ad9c, type: 3}
-  movingPlatformPrefab: {fileID: 6355737876298299246, guid: 68d24b80eddf74c40abe202196ad1d0d, type: 3}
-  backgroundTilemap: {fileID: 1977866389}
-  groundTilemap: {fileID: 1679745063}
-  rampTilemap: {fileID: 1067170}
-  onewayPlatformTilemap: {fileID: 822767798}
 --- !u!114 &2001858579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33074,17 +33056,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9d1ec5239a6cc49aff7840d4609cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLayouts:
-  - {fileID: 2800000, guid: 051f227b709831843aba1d48fad41156, type: 3}
-  builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
-  gridTilemap: {fileID: 1521520081}
-  borderTilemap: {fileID: 298339190}
-  startText: {fileID: 1567240318}
-  endText: {fileID: 1422954950}
-  anchorTextPrefab: {fileID: 1410625091615380301, guid: 0638f6083567cd94aba8421951fbc75c, type: 3}
+--- !u!114 &2001858580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001858573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77ee3165237daf4e81aab700304aa3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelTiles: []
+  anchorTiles: []
+  gridLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  collectableTilePrefab: {fileID: 0}
+  movingPlatformPrefab: {fileID: 0}
+  backgroundTilemap: {fileID: 0}
+  groundTilemap: {fileID: 0}
+  rampTilemap: {fileID: 0}
+  onewayPlatformTilemap: {fileID: 0}
+  spikesTilemap: {fileID: 0}
+--- !u!114 &2001858581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001858573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df6c5d77808b76c41ae6118182c28f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelLayouts: []
+  builderSettings: {fileID: 0}
+  gridTilemap: {fileID: 0}
+  borderTilemap: {fileID: 0}
+  startText: {fileID: 0}
+  endText: {fileID: 0}
+  anchorTextPrefab: {fileID: 0}
   placedTiles: []
-  anchorTiles:
-  - {fileID: 0}
+  anchorTiles: []
 --- !u!1001 &4564017793431121653
 PrefabInstance:
   m_ObjectHideFlags: 0

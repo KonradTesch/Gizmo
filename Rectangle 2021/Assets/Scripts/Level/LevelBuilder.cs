@@ -82,6 +82,8 @@ namespace Rectangle.Level
 
                         if (gridData.anchorTiles.Contains(new Vector2Int(x, y)))
                         {
+                            newGridCol.GetComponent<GridField>().isUsed = true;
+
                             LevelTile anchorTile = new GameObject("Anchor_Tile").AddComponent<LevelTile>();
                             anchorTile.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
                             anchorTile.gameObject.layer = LayerMask.NameToLayer("Background");
@@ -119,6 +121,7 @@ namespace Rectangle.Level
             startCollider.AddComponent<BoxCollider2D>().isTrigger = true;
             startCollider.GetComponent<BoxCollider2D>().size = new Vector2(8, 8);
             startCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
+            startCollider.AddComponent<GridField>().isUsed = true;
 
             endDirection = GetEndDirection();
             Vector2 endPos = DrawStartOrEnd(gridData.end, endDirection);
@@ -132,8 +135,10 @@ namespace Rectangle.Level
             endCollider.AddComponent<BoxCollider2D>().isTrigger = true;
             endCollider.GetComponent<BoxCollider2D>().size = new Vector2(8, 8);
             endCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
+            endCollider.AddComponent<GridField>().isUsed = true;
             SuccessTrigger success = endCollider.AddComponent<SuccessTrigger>();
             success.successPanel = General.GameBehavior.instance.sucessPanel;
+            success.timerUI = GameObject.FindObjectOfType<UI.TimerUI>().GetComponent<UI.TimerUI>();
 
 
             gridTilemap.RefreshAllTiles();
@@ -165,6 +170,7 @@ namespace Rectangle.Level
 
         public bool CheckLevelPath(Vector2Int startPosition)
         {
+            Debug.Log($"LevelBuilder: ->CheckLevePath({startPosition})");
             placedTiles.Clear();
 
             Vector2Int currentDirection = Vector2Int.zero;
@@ -201,6 +207,7 @@ namespace Rectangle.Level
 
             if(currentDirection == Vector2Int.zero)
             {
+                Debug.Log($"LevelBuilder: <- CheckLevePath() false at pos: {currentPosition}, dir:{currentDirection} (wrong beginning Tile Block))");
                 return false;
             }
 
@@ -211,6 +218,8 @@ namespace Rectangle.Level
 
                 if (Physics2D.OverlapPoint(((Vector2)currentPosition + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x, builderSettings.backgroundLayer) == null)
                 {
+                    Debug.Log($"LevelBuilder: <- CheckLevePath() false at pos: {currentPosition}, dir:{currentDirection} (no next TileBlock)");
+
                     return false;
                 }
                 else
@@ -225,11 +234,16 @@ namespace Rectangle.Level
                     currentDirection = GetNextDirection(tile.tileType, currentDirection);
                     if(currentDirection == Vector2Int.zero)
                     {
+
+                        Debug.Log($"LevelBuilder: <- CheckLevePath() false at pos: {currentPosition}, dir:{currentDirection} (wrong next Tile Block)");
+
                         return false;
                     }
 
                 }
             } while (!(currentPosition + currentDirection == gridData.end) && !(gridData.anchorTiles.Contains(currentPosition + currentDirection)));
+
+            Debug.Log($"LevelBuilder: <- CheckLevePath() true at pos: {currentPosition}, dir:{currentDirection}");
 
             return true;
         }

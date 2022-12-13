@@ -8,6 +8,7 @@ namespace Rectangle.TileCreation
     public class LevelTileData : ScriptableObject
     {
         public List<ChangeData> backgroundTileChanges;
+        public List<ChangeData> borderTileChanges;
         public List<ChangeData> groundTileChanges;
         public List<ChangeData> platformTileChanges;
         public List<ChangeData> rampTileChanges;

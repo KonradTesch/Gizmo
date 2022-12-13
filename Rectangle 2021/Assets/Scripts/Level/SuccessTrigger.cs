@@ -13,15 +13,24 @@ namespace Rectangle.Level
         [Tooltip("The canvas Object of the success canvas.")]
         public GameObject successPanel;
 
+        public TimerUI timerUI;
+
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
+                StartCoroutine(nameof(StopPlayer));
                 successPanel.SetActive(true);
             }
 
-            //timerUI.StopTimer();
+            timerUI.StopTimer();
+        }
+
+        private IEnumerator StopPlayer()
+        {
+            yield return new WaitForSeconds(0.25f);
+            General.GameBehavior.instance.player.playerActive = false;
         }
     }
 }

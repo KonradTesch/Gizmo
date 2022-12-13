@@ -12,18 +12,6 @@ namespace Rectangle.General
         [Tooltip("The offset position of the camera.")]
         [SerializeField] private Vector3 camOffset;
 
-        /// <summary>
-        /// The Camera Size (Zoom) during the building view.
-        /// </summary>
-        [Tooltip("The Camera Size (Zoom) during the building view.")]
-        [SerializeField] private float buildingCamSize;
-
-        /// <summary>
-        /// The Camera Size (Zoom) during the jump 'n' run level.
-        /// </summary>
-        [Tooltip("The Camera Size (Zoom) during the jump 'n' run level.")]
-        [SerializeField] private float levelCamSize;
-
         [Header("Camera Transition")]
 
         /// <summary>
@@ -32,17 +20,10 @@ namespace Rectangle.General
         [Tooltip("The time in seconds of the transition betwenn two camera positions.")]
         [SerializeField] private float transitionTime = 1;
 
-        private Vector3 levelBuildingPosition;
-
         private float timer = 0;
         private bool transition;
         private Vector3 startPosition;
         private Vector3 newPosition;
-
-        private void Start()
-        {
-            levelBuildingPosition = transform.position;
-        }
 
         void Update()
         {
@@ -83,7 +64,17 @@ namespace Rectangle.General
         /// </summary>
         public void SetLevelCamera()
         {
-            GetComponent<Camera>().orthographicSize = levelCamSize;
+            float minWidth = GameBehavior.instance.builderSettings.tileSize.x / 2f / ((float)Screen.width / (float)Screen.height);
+            float minHeight = GameBehavior.instance.builderSettings.tileSize.y / 2f;
+
+            if(minWidth > minHeight)
+            {
+                GetComponent<Camera>().orthographicSize = minWidth;
+            }
+            else
+            {
+                GetComponent<Camera>().orthographicSize = minHeight;
+            }
         }
 
         /// <summary>
@@ -91,21 +82,20 @@ namespace Rectangle.General
         /// </summary>
         public void SetBuildingCamera(Level.LevelGrid gridData)
         {
-            float minWidth = ((gridData.width / 2f) * GameBehavior.instance.builderSettings.tileSize.x) / (16f / 9f);
+            float minWidth = ((gridData.width / 2f) * GameBehavior.instance.builderSettings.tileSize.x) / ((float)Screen.width / (float)Screen.height);
             float minHeight = (gridData.height / 2f) * GameBehavior.instance.builderSettings.tileSize.y;
 
-            if(minWidth + 8 > minHeight + 14)
+            if(minWidth + 8 > minHeight + 16)
             {
                 GetComponent<Camera>().orthographicSize = minWidth + 8;
             }
             else
             {
-                GetComponent<Camera>().orthographicSize = minHeight + 14;
+                GetComponent<Camera>().orthographicSize = minHeight + 18;
             }
 
-            transform.position = new Vector3(minWidth * (16f / 9f), minHeight - 11f, camOffset.z);
+            transform.position = new Vector3(minWidth * ((float)Screen.width / (float)Screen.height), minHeight - 8f, camOffset.z);
 
-            //transform.position = levelBuildingPosition;
         }
     }
 
