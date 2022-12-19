@@ -15,7 +15,6 @@ namespace Rectangle.Level
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [HideInInspector] public TileButton button;
-        [HideInInspector] public bool locked = false;
 
         public List<TileCreator.TileTypes> collectableTiles;
 
@@ -26,10 +25,14 @@ namespace Rectangle.Level
         [HideInInspector]public GridField gridCollider;
         private GridField lastGrid;
 
+        private LevelBuilder levelBuilder;
+
         private void Start()
         {
             gridLayer = LayerMask.GetMask("Grid");
             rend = GetComponent<SpriteRenderer>();
+
+            levelBuilder = General.GameBehavior.instance.levelBuilder;
         }
 
         private void OnMouseDrag()
@@ -67,6 +70,7 @@ namespace Rectangle.Level
             }
 
             transform.position = gridCollider.transform.position;
+            levelBuilder.gridData.grid[levelBuilder.WorldPositionToCoordinate(transform.position)].placedTile = this;
             gridCollider.isUsed = true;
 
             General.GameBehavior.instance.CheckGridCollider();
@@ -89,6 +93,8 @@ namespace Rectangle.Level
                 gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
 
+                levelBuilder.gridData.grid[levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position)].placedTile = null;
+
                 lastGrid = gridCollider;
 
                 gridCollider = null;
@@ -101,17 +107,21 @@ namespace Rectangle.Level
         {
             if (Input.GetMouseButtonDown(1))
             {
-                Return();
-
-                lastGrid = null;
                 if(gridCollider != null)
                 {
+                    Return();
+
+                    lastGrid = null;
+
                     button.ResetTile(gridCollider);
+
+                    levelBuilder.gridData.grid[levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position)].placedTile = null;
 
                     gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                     gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
                     gridCollider.isUsed = false;
                     gridCollider = null;
+
                 }
 
                 General.GameBehavior.instance.CheckGridCollider();
