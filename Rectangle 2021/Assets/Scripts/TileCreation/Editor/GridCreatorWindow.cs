@@ -94,7 +94,6 @@ namespace Rectangle.TileCreation
                 levelData = (LevelData)EditorGUI.ObjectField(new Rect(80, 2.5f, 135, 20), levelData, typeof(LevelData), false);
                 if (EditorGUI.EndChangeCheck() && levelData != null)
                 {
-                    ClearGrid();
                     gridWidth = levelData.gridData.width;
                     gridHeight = levelData.gridData.height;
                 }
@@ -469,6 +468,15 @@ namespace Rectangle.TileCreation
                     GUI.backgroundColor = Color.grey;
                 }
 
+                if (spot.coordinates == levelData.gridData.start)
+                {
+                    GUI.backgroundColor = Color.green;
+                }
+                else if (spot.coordinates == levelData.gridData.end)
+                {
+                    GUI.backgroundColor = Color.blue;
+                }
+
                 if(spot.star)
                 {
                     GUI.contentColor = Color.white;
@@ -507,38 +515,46 @@ namespace Rectangle.TileCreation
                     else if (e.button == 1)
                     {
                         GenericMenu tileMenu = new GenericMenu();
-
-                        if (spot.anchor)
+                        if(spot.coordinates.x < 0 || spot.coordinates.y < 0 || spot.coordinates.x == levelData.gridData.width || spot.coordinates.y == levelData.gridData.height)
                         {
-                            tileMenu.AddItem(new GUIContent("Clear AnchorTile"), false, ClearAnchor, spot.coordinates);
+                            tileMenu.AddItem(new GUIContent("Set Start"), false, SetStart, spot.coordinates);
+                            tileMenu.AddItem(new GUIContent("SetEnd"), false, SetEnd, spot.coordinates);
                         }
                         else
                         {
-                            tileMenu.AddItem(new GUIContent("Set AnchorTile"), false, SetAnchor, spot.coordinates);
-                        }
+                            if (spot.anchor)
+                            {
+                                tileMenu.AddItem(new GUIContent("Clear AnchorTile"), false, ClearAnchor, spot.coordinates);
+                            }
+                            else
+                            {
+                                tileMenu.AddItem(new GUIContent("Set AnchorTile"), false, SetAnchor, spot.coordinates);
+                            }
 
-                        if (spot.star)
-                        {
-                            tileMenu.AddItem(new GUIContent("Clear Star"), false, ClearStar, spot.coordinates);
-                        }
-                        else
-                        {
-                            tileMenu.AddItem(new GUIContent("Set Star"), false, SetStar, spot.coordinates);
-                        }
+                            if (spot.star)
+                            {
+                                tileMenu.AddItem(new GUIContent("Clear Star"), false, ClearStar, spot.coordinates);
+                            }
+                            else
+                            {
+                                tileMenu.AddItem(new GUIContent("Set Star"), false, SetStar, spot.coordinates);
+                            }
 
-                        if (spot.blocked)
-                        {
-                            tileMenu.AddItem(new GUIContent("Unblock Tile"), false, UnblockTile, spot.coordinates);
-                        }
-                        else
-                        {
-                            tileMenu.AddItem(new GUIContent("Block Tile"), false, BlockTile, spot.coordinates);
+                            if (spot.blocked)
+                            {
+                                tileMenu.AddItem(new GUIContent("Unblock Tile"), false, UnblockTile, spot.coordinates);
+                            }
+                            else
+                            {
+                                tileMenu.AddItem(new GUIContent("Block Tile"), false, BlockTile, spot.coordinates);
 
-                        }
+                            }
 
-                        if (levelData.GetTileByCoordinates(spot.coordinates, currentAnchor) != null)
-                        {
-                            tileMenu.AddItem(new GUIContent("Remove Tile"), false, RemoveTile, spot.coordinates);
+                            if (levelData.GetTileByCoordinates(spot.coordinates, currentAnchor) != null)
+                            {
+                                tileMenu.AddItem(new GUIContent("Remove Tile"), false, RemoveTile, spot.coordinates);
+                            }
+
                         }
 
                         tileMenu.ShowAsContext();
@@ -576,11 +592,18 @@ namespace Rectangle.TileCreation
         {
             Dictionary<Vector2Int, LevelSpot> newGrid = new();
 
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = -1; x < gridWidth + 1; x++)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int y = -1; y < gridHeight + 1; y++)
                 {
-                    newGrid.Add(new Vector2Int(x, y), new LevelSpot(new Vector2Int(x, y), false, false));
+                    if(x < 0 || x == gridWidth || y < 0 || y == gridHeight)
+                    {
+                        newGrid.Add(new Vector2Int(x, y), new LevelSpot(new Vector2Int(x, y), true, false));
+                    }
+                    else
+                    {
+                        newGrid.Add(new Vector2Int(x, y), new LevelSpot(new Vector2Int(x, y), false, false));
+                    }
                 }
             }
 
@@ -696,5 +719,16 @@ namespace Rectangle.TileCreation
             }
             return anchorColor;
         }
+
+        private void SetStart(object coordinates)
+        {
+            levelData.gridData.start = (Vector2Int)coordinates;
+        }
+
+        private void SetEnd(object coordinates)
+        {
+            levelData.gridData.end = (Vector2Int)coordinates;
+        }
+
     }
 }

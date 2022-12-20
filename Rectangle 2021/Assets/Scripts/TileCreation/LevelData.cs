@@ -122,8 +122,8 @@ namespace Rectangle.TileCreation
         public List<AnchorTile> anchorTiles = new();
         public int height;
         public int width;
-        public Vector2Int start;
-        public Vector2Int end;
+        public Vector2Int start = new Vector2Int(-1, -1);
+        public Vector2Int end = new Vector2Int(-1, -1);
     }
 
     [System.Serializable]
@@ -158,7 +158,7 @@ namespace Rectangle.TileCreation
         public Vector2Int coordinates;
         public PlayerController.PlayerModes playerMode;
         public TileCreator.TileTypes tileType;
-        public AnchorTile anchor;
+        [HideInInspector]public AnchorTile anchor;
     }
 
     [System.Serializable]
