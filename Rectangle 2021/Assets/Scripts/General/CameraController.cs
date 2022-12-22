@@ -80,7 +80,7 @@ namespace Rectangle.General
         /// <summary>
         /// Let the camera zoom out to the building view.
         /// </summary>
-        public void SetBuildingCamera(Level.LevelGrid gridData)
+        public void SetBuildingCamera(LevelCreation.LevelGrid gridData)
         {
             float minWidth = ((gridData.width / 2f) * GameBehavior.instance.builderSettings.tileSize.x) / ((float)Screen.width / (float)Screen.height);
             float minHeight = (gridData.height / 2f) * GameBehavior.instance.builderSettings.tileSize.y;

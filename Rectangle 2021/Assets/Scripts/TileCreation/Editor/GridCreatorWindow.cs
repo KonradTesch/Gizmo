@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
-using Rectangle.Level;
 
-namespace Rectangle.TileCreation
+namespace Rectangle.LevelCreation
 {
     public class GridCreatorWindow : EditorWindow
     {
@@ -15,7 +14,7 @@ namespace Rectangle.TileCreation
 
         private readonly float menuBarHeight = 55f;
         private readonly float sideBarWidth = 50f;
-        private readonly string path = "Assets/Resources/LevelData";
+        private readonly string path = "Assets/LevelBuilder/LevelData";
 
         private LevelData levelData;
         private string newLevelName;
@@ -65,6 +64,12 @@ namespace Rectangle.TileCreation
             DrawMenuBar();
             DrawSideBar();
             DrawMainWinow();
+
+            InitLevelData();
+
+            
+            AssetDatabase.SaveAssetIfDirty(levelData);
+            AssetDatabase.SaveAssets();
 
             offset += drag;
             if (offset.x > position.width)
@@ -118,6 +123,7 @@ namespace Rectangle.TileCreation
                 {
                     SaveData();
                     createNew = false;
+                    currentAnchor = null;
                 }
 
                 if (GUI.Button(new Rect(150, 30, 80, 20), "Cancel"))
@@ -127,7 +133,7 @@ namespace Rectangle.TileCreation
 
             }
 
-            if (GUI.Button(new Rect(260, 2.5f, 120, 20), "Create Tiles"))
+            if (GUI.Button(new Rect(260, 2.5f, 120, 20), "Create Grid"))
             {
                 CreateGrid();
             }
@@ -153,20 +159,22 @@ namespace Rectangle.TileCreation
                     currentAnchor = null;
                 }
             }
-
-            for (int i = 0; i < levelData.gridData.anchorTiles.Count; i++)
+            if(levelData != null && levelData.gridData != null && levelData.gridData.anchorTiles != null)
             {
-                GUI.backgroundColor = GetAnchorColor(levelData.gridData.anchorTiles[i].anchorCoordinates);
+                for (int i = 0; i < levelData.gridData.anchorTiles.Count; i++)
+                {
+                    GUI.backgroundColor = GetAnchorColor(levelData.gridData.anchorTiles[i].anchorCoordinates);
 
-                if(currentAnchor == levelData.gridData.anchorTiles[i])
-                {
-                    if (GUI.Button(new Rect(440 + (i * 25), 30, 20, 20), "O")) { };
-                }
-                else
-                {
-                    if (GUI.Button(new Rect(440 + (i * 25), 30, 20, 20), ""))
+                    if (currentAnchor == levelData.gridData.anchorTiles[i])
                     {
-                        currentAnchor = levelData.gridData.anchorTiles[i];
+                        if (GUI.Button(new Rect(440 + (i * 25), 30, 20, 20), "O")) { };
+                    }
+                    else
+                    {
+                        if (GUI.Button(new Rect(440 + (i * 25), 30, 20, 20), ""))
+                        {
+                            currentAnchor = levelData.gridData.anchorTiles[i];
+                        }
                     }
                 }
             }
@@ -565,6 +573,40 @@ namespace Rectangle.TileCreation
             }
         }
 
+        private void InitLevelData()
+        {
+            if (levelData != null)
+            {
+                if (levelData.gridData == null)
+                {
+                    levelData.gridData = new LevelGrid();
+                }
+
+                if (levelData.plannedTiles == null)
+                {
+                    levelData.plannedTiles = new();
+                }
+
+                if (levelData.gridData.grid == null)
+                {
+                    levelData.gridData.grid = new();
+                }
+
+                if (levelData.gridData.anchorTiles == null)
+                {
+                    levelData.gridData.anchorTiles = new();
+                }
+
+                for(int i = 0; i < levelData.plannedTiles.Count; i++)
+                {
+                    if (levelData.plannedTiles[i].anchor == null)
+                    {
+                        levelData.plannedTiles[i].anchor = new();
+                    }
+                }
+            }
+        }
+
         private void SaveData()
         {
             if (!Directory.Exists(path))
@@ -584,7 +626,12 @@ namespace Rectangle.TileCreation
 
             AssetDatabase.CreateAsset(newLevelData, path + "/" + newLevelName + ".asset");
 
-            levelData = newLevelData;
+            levelData = (LevelData)CreateInstance(typeof(LevelData));
+
+            levelData.gridData = newLevelData.gridData;
+            levelData.plannedTiles = newLevelData.plannedTiles;
+
+            EditorUtility.SetDirty(levelData);
             Debug.Log("RectangleBuilder: Created '" + newLevelName + ".asset' at '" + path + "'");
         }
 
@@ -611,8 +658,6 @@ namespace Rectangle.TileCreation
 
             levelData.gridData.width = gridWidth;
             levelData.gridData.height = gridHeight;
-
-            //UpdateData();
         }
 
         private void SetMode(object color)

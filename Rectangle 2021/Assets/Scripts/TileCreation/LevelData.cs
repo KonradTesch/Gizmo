@@ -4,13 +4,13 @@ using UnityEngine;
 using Rectangle.Level;
 using Rectangle.Player;
 
-namespace Rectangle.TileCreation
+namespace Rectangle.LevelCreation
 {
     [System.Serializable]
     public class LevelData : ScriptableObject
     {
-        public LevelGrid gridData = new LevelGrid();
-        public List<PlannedTile> plannedTiles = new();
+        public LevelGrid gridData;
+        public List<PlannedTile> plannedTiles;
 
         public PlannedTile GetTileByCoordinates(Vector2Int coordinates, AnchorTile anchor)
         {
@@ -118,12 +118,12 @@ namespace Rectangle.TileCreation
     [System.Serializable]
     public class LevelGrid
     {
-        public Dictionary<Vector2Int, LevelSpot> grid = new();
-        public List<AnchorTile> anchorTiles = new();
+        public Dictionary<Vector2Int, LevelSpot> grid;
+        public List<AnchorTile> anchorTiles;
         public int height;
         public int width;
-        public Vector2Int start = new Vector2Int(-1, -1);
-        public Vector2Int end = new Vector2Int(-1, -1);
+        public Vector2Int start;
+        public Vector2Int end;
     }
 
     [System.Serializable]

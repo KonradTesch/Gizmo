@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Rectangle.Level;
 
-namespace Rectangle.TileCreation
+namespace Rectangle.LevelCreation
 {
     public class TileCreator : MonoBehaviour
     {

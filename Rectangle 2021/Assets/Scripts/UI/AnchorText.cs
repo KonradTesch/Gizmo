@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 
 using Rectangle.Player;
+using Rectangle.LevelCreation;
 
 namespace Rectangle.UI
 {
@@ -13,15 +14,15 @@ namespace Rectangle.UI
         [SerializeField] private TextMeshPro bubbleNuimber;
         [SerializeField] private TextMeshPro spikeyNumber;
 
-        public void SetTileNumbers(List<PlayerController.PlayerModes> tileModes)
+        public void SetTileNumbers(List<PlannedTile> collectableTiles)
         {
             int rectCount = 0;
             int bubbleCount = 0;
             int spikeyCount = 0;
 
-            foreach(PlayerController.PlayerModes mode in tileModes)
+            foreach(PlannedTile tile in collectableTiles)
             {
-                switch(mode)
+                switch(tile.playerMode)
                 {
                     case PlayerController.PlayerModes.Rectangle:
                         rectCount++;

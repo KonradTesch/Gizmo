@@ -28771,11 +28771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c5d77808b76c41ae6118182c28f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLayouts:
-  - {fileID: 2800000, guid: d571966f06577db468eec2ab709cb924, type: 3}
-  - {fileID: 2800000, guid: b1e241f7f0a50524b9e9c9d58cb6e67a, type: 3}
-  - {fileID: 2800000, guid: 85de4e3837151ec4d9c5e3302fe2dde9, type: 3}
-  - {fileID: 2800000, guid: b9d679071cfdb98438df958a3d200e0b, type: 3}
+  levelData: {fileID: 11400000, guid: b932e668cb2f05e4e99b4dbe61b51c5c, type: 2}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   gridTilemap: {fileID: 1521520081}
   borderTilemap: {fileID: 298339190}
@@ -28784,3 +28780,9 @@ MonoBehaviour:
   anchorTextPrefab: {fileID: 41922099928284676, guid: 2915ec6b9604e1f43b2ae1916f7195ce, type: 3}
   placedTiles: []
   anchorTiles: []
+  gridData:
+    anchorTiles: []
+    height: 0
+    width: 0
+    start: {x: -1, y: -1}
+    end: {x: -1, y: -1}

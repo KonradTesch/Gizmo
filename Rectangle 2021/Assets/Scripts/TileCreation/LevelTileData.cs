@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Rectangle.TileCreation
+namespace Rectangle.LevelCreation
 {
     public class LevelTileData : ScriptableObject
     {

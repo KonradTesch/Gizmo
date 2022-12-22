@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using Rectangle.Player;
 using Rectangle.UI;
 using Rectangle.Level;
-using Rectangle.TileCreation;
+using Rectangle.LevelCreation;
 
 namespace Rectangle.General
 {
@@ -196,30 +196,30 @@ namespace Rectangle.General
             }
         }
 
-        public void InitLevelTiles(List<TileCreator.TileTypes> tileTypes)
+        public void InitLevelTiles(List<PlannedTile> inventoryTiles)
         {
-            Dictionary<TileCreator.TileTypes, int> levelTiles = new();
+            Dictionary<PlannedTile, int> levelTiles = new();
 
-            foreach (TileCreator.TileTypes type in tileTypes)
+            foreach (PlannedTile tile in inventoryTiles)
             {
-                if (levelTiles.ContainsKey(type))
+                if (levelTiles.ContainsKey(tile))
                 {
-                    levelTiles[type]++;
+                    levelTiles[tile]++;
                 }
                 else
                 {
-                    levelTiles.Add(type, 1);
+                    levelTiles.Add(tile, 1);
                 }
             }
 
-            foreach (KeyValuePair<TileCreator.TileTypes, int> tileType in levelTiles)
+            foreach (KeyValuePair<PlannedTile, int> newTileGroup in levelTiles)
             {
                 bool alreadyAdded = false;
                 for(int i = 0; i < tileInventory.Count; i++)
                 {
-                    if (tileInventory[i].tileType == tileType.Key)
+                    if (tileInventory[i].tileType == newTileGroup.Key.tileType && tileInventory[i].playerMode == newTileGroup.Key.playerMode)
                     {
-                        tileInventory[i].tileCount = tileType.Value;
+                        tileInventory[i].tileCount = newTileGroup.Value;
                         alreadyAdded = true;
                     }
                 }
@@ -231,10 +231,10 @@ namespace Rectangle.General
 
                 TileGroupData tileGroup = new()
                 {
-                    tileType = tileType.Key,
-                    playerMode = tileBuilder.GetRandomPlayerMode(tileType.Key),
-                    tileCount = tileType.Value,
-                    tileSprite = builderSettings.GetTileTypeSprite(tileType.Key),
+                    tileType = newTileGroup.Key.tileType,
+                    playerMode = newTileGroup.Key.playerMode,
+                    tileCount = newTileGroup.Value,
+                    tileSprite = builderSettings.GetTileTypeSprite(newTileGroup.Key.tileType),
                 };
 
                 tileGroup.tileColor = builderSettings.GetModeColor(tileGroup.playerMode);

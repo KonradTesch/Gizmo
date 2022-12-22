@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Rectangle.Level;
 
-namespace Rectangle.TileCreation
+namespace Rectangle.LevelCreation
 {
     [CustomEditor(typeof(TileCreator))]
     public class TileCreatorInspector : Editor

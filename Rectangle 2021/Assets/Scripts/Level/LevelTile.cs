@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Rectangle.TileCreation;
+using Rectangle.LevelCreation;
 using Rectangle.Player;
 using Rectangle.UI;
 
