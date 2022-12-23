@@ -74,6 +74,32 @@ namespace Rectangle.LevelCreation
             plannedTiles.Add(tile);
         }
 
+        public LevelSpot GetGridSpot(Vector2Int coordinates)
+        {
+            for(int i = 0; i < gridData.grid.Count; i++)
+            {
+                if (gridData.grid[i].coordinates == coordinates)
+                {
+                    return gridData.grid[i].levelSpot;
+                }
+            }
+
+            return null;
+        }
+
+        public void SetGridSpot(Vector2Int coordinates, LevelSpot levelSpot)
+        {
+            for (int i = 0; i < gridData.grid.Count; i++)
+            {
+                if (gridData.grid[i].coordinates == coordinates)
+                {
+                    gridData.grid[i].levelSpot = levelSpot;
+
+                    return;
+                }
+            }
+        }
+
         public void ChangeCollectableTile(AnchorTile anchor, PlannedTile tile)
         {
             for(int i = 0; i < gridData.anchorTiles.Count; i++)
@@ -118,12 +144,25 @@ namespace Rectangle.LevelCreation
     [System.Serializable]
     public class LevelGrid
     {
-        public Dictionary<Vector2Int, LevelSpot> grid;
+        public List<GridSpot> grid;
         public List<AnchorTile> anchorTiles;
         public int height;
         public int width;
         public Vector2Int start;
         public Vector2Int end;
+    }
+
+    [System.Serializable]
+    public class GridSpot
+    {
+        public Vector2Int coordinates;
+        public LevelSpot levelSpot;
+
+        public GridSpot(Vector2Int coordinates, LevelSpot levelSpot)
+        {
+            this.coordinates = coordinates;
+            this.levelSpot = levelSpot;
+        }
     }
 
     [System.Serializable]
@@ -158,7 +197,6 @@ namespace Rectangle.LevelCreation
         public Vector2Int coordinates;
         public PlayerController.PlayerModes playerMode;
         public TileCreator.TileTypes tileType;
-        [HideInInspector]public AnchorTile anchor;
     }
 
     [System.Serializable]

@@ -10,7 +10,7 @@ namespace Rectangle.Level
     {
         [Header("Builder Data")]
         //[SerializeField] private Texture2D[] levelLayouts;
-        [SerializeField] private LevelData levelData;
+        public LevelData levelData;
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [Header("Tilemaps")]
@@ -53,7 +53,7 @@ namespace Rectangle.Level
             {
                 for (int x = 0; x < gridData.width; x++)
                 {
-                    if (!gridData.grid[new Vector2Int(x, y)].blocked)
+                    if (!levelData.GetGridSpot(new Vector2Int(x, y)).blocked)
                     {
                         foreach (ChangeData change in builderSettings.gridTiles.groundTileChanges)
                         {
@@ -74,11 +74,19 @@ namespace Rectangle.Level
                         backgroundRend.sprite = builderSettings.backgroundImage;
                         backgroundRend.sortingOrder = -1;
 
-                        backgroundRend.color = Color.grey;
+
+                        if(levelData.GetGridSpot(new Vector2Int(x, y)).star)
+                        {
+                            backgroundRend.color = Color.white;
+                        }
+                        else
+                        {
+                            backgroundRend.color = Color.grey;
+                        }
 
                         newGridCol.AddComponent<BackgroundMode>();
 
-                        if (gridData.grid[new Vector2Int(x, y)].anchor)
+                        if (levelData.GetGridSpot(new Vector2Int(x, y)).anchor)
                         {
                             newGridCol.GetComponent<GridField>().isUsed = true;
 
@@ -161,33 +169,33 @@ namespace Rectangle.Level
             Vector2Int currentDirection = Vector2Int.zero;
             Vector2Int currentPosition = startPosition;
 
-            if (gridData.grid.ContainsKey(startPosition + Vector2Int.up) && gridData.grid[startPosition + Vector2Int.up].placedTile != null)
+            if (levelData.GetGridSpot(startPosition + Vector2Int.up) != null && levelData.GetGridSpot(startPosition + Vector2Int.up).placedTile != null)
             {
-                LevelTile startTile = gridData.grid[startPosition + Vector2Int.up].placedTile;
+                LevelTile startTile = levelData.GetGridSpot(startPosition + Vector2Int.up).placedTile;
                 if (GetNextDirection(startTile.tileType, Vector2Int.up) != Vector2Int.zero)
                 {
                     currentDirection = Vector2Int.up;
                 }
             }
-            if (gridData.grid.ContainsKey(startPosition + Vector2Int.right) && gridData.grid[startPosition + Vector2Int.right].placedTile != null)
+            if (levelData.GetGridSpot(startPosition + Vector2Int.right) != null && levelData.GetGridSpot(startPosition + Vector2Int.right).placedTile != null)
             {
-                LevelTile startTile = gridData.grid[startPosition + Vector2Int.right].placedTile;
+                LevelTile startTile = levelData.GetGridSpot(startPosition + Vector2Int.right).placedTile;
                 if (GetNextDirection(startTile.tileType, Vector2Int.right) != Vector2Int.zero)
                 {
                     currentDirection = Vector2Int.right;
                 }
             }
-            if (gridData.grid.ContainsKey(startPosition + Vector2Int.down) && gridData.grid[startPosition + Vector2Int.down].placedTile != null)
+            if (levelData.GetGridSpot(startPosition + Vector2Int.down) != null && levelData.GetGridSpot(startPosition + Vector2Int.down).placedTile != null)
             {
-                LevelTile startTile = gridData.grid[startPosition + Vector2Int.down].placedTile;
+                LevelTile startTile = levelData.GetGridSpot(startPosition + Vector2Int.down).placedTile;
                 if (GetNextDirection(startTile.tileType, Vector2Int.down) != Vector2Int.zero)
                 {
                     currentDirection = Vector2Int.down;
                 }
             }
-            if (gridData.grid.ContainsKey(startPosition + Vector2Int.left) && gridData.grid[startPosition + Vector2Int.left].placedTile != null)
+            if (levelData.GetGridSpot(startPosition + Vector2Int.left) != null && levelData.GetGridSpot(startPosition + Vector2Int.left).placedTile != null)
             {
-                LevelTile startTile = gridData.grid[startPosition + Vector2Int.left].placedTile;
+                LevelTile startTile = levelData.GetGridSpot(startPosition + Vector2Int.left).placedTile;
                 if (GetNextDirection(startTile.tileType, Vector2Int.left) != Vector2Int.zero)
                 {
                     currentDirection = Vector2Int.left;
@@ -205,7 +213,7 @@ namespace Rectangle.Level
             {
                 currentPosition += currentDirection;
 
-                if (gridData.grid.ContainsKey(currentPosition) && gridData.grid[currentPosition].placedTile == null)
+                if (levelData.GetGridSpot(currentPosition) != null && levelData.GetGridSpot(currentPosition).placedTile == null)
                 {
                     Debug.Log($"LevelBuilder: <- CheckLevePath() false at pos: {currentPosition}, dir:{currentDirection} (no next TileBlock)");
 
@@ -213,7 +221,7 @@ namespace Rectangle.Level
                 }
                 else
                 {
-                    LevelTile tile = gridData.grid[currentPosition].placedTile;
+                    LevelTile tile = levelData.GetGridSpot(currentPosition).placedTile;
 
                     if(!placedTiles.Contains(tile))
                     {
@@ -293,19 +301,19 @@ namespace Rectangle.Level
         {
             Vector2Int direction = Vector2Int.zero;
 
-            if (gridData.grid.ContainsKey(gridData.start + Vector2Int.right) && !gridData.grid[gridData.start + Vector2Int.right].blocked)
+            if (levelData.GetGridSpot(gridData.start + Vector2Int.right) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.right).blocked)
             {
                 direction = Vector2Int.right;
             }
-            else if (gridData.grid.ContainsKey(gridData.start + Vector2Int.left) && !gridData.grid[gridData.start + Vector2Int.left].blocked)
+            else if (levelData.GetGridSpot(gridData.start + Vector2Int.left) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.left).blocked)
             {
                 direction = Vector2Int.left;
             }
-            else if (gridData.grid.ContainsKey(gridData.start + Vector2Int.down) && !gridData.grid[gridData.start + Vector2Int.down].blocked)
+            else if (levelData.GetGridSpot(gridData.start + Vector2Int.down) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.down).blocked)
             {
                 direction = Vector2Int.down;
             }
-            else if (gridData.grid.ContainsKey(gridData.start + Vector2Int.up) && !gridData.grid[gridData.start + Vector2Int.up].blocked)
+            else if (levelData.GetGridSpot(gridData.start + Vector2Int.up) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.up).blocked)
             {
                 direction = Vector2Int.up;
             }
@@ -317,19 +325,19 @@ namespace Rectangle.Level
         {
             Vector2Int direction = Vector2Int.zero;
 
-            if (gridData.grid.ContainsKey(gridData.end + Vector2Int.left) && !gridData.grid[gridData.end + Vector2Int.left].blocked)
+            if (levelData.GetGridSpot(gridData.end + Vector2Int.left) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.left).blocked)
             {
                 direction = Vector2Int.left;
             }
-            else if (gridData.grid.ContainsKey(gridData.end + Vector2Int.right) && !gridData.grid[gridData.end + Vector2Int.right].blocked)
+            else if (levelData.GetGridSpot(gridData.end + Vector2Int.right) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.right).blocked)
             {
                 direction = Vector2Int.right;
             }
-            else if (gridData.grid.ContainsKey(gridData.end + Vector2Int.up) && !gridData.grid[gridData.end + Vector2Int.up].blocked)
+            else if (levelData.GetGridSpot(gridData.end + Vector2Int.up) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.up).blocked)
             {
                 direction = Vector2Int.up;
             }
-            else if (gridData.grid.ContainsKey(gridData.end + Vector2Int.down) && !gridData.grid[gridData.end + Vector2Int.down].blocked)
+            else if (levelData.GetGridSpot(gridData.end + Vector2Int.down) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.down).blocked)
             {
                 direction = Vector2Int.down;
             }
@@ -337,9 +345,6 @@ namespace Rectangle.Level
 
             return direction;
         }
-
-
-
 
         public void DrawBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, TileBase tile)
         {

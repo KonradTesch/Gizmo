@@ -124,10 +124,10 @@ namespace Rectangle.General
             {
                 foreach (LevelTile tile in levelBuilder.placedTiles)
                 {
-                    TileInventoryChange(tile.tileType, -1);
+                    TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), -1);
                 }
 
-                tileBuilder.BuildLevel(levelBuilder.placedTiles, levelBuilder.anchorTiles);
+                tileBuilder.BuildLevel(levelBuilder.placedTiles, levelBuilder.anchorTiles, levelBuilder.levelData);
 
                 //TimerUI.timer = true;
                 player.gameObject.SetActive(true);
@@ -198,29 +198,16 @@ namespace Rectangle.General
 
         public void InitLevelTiles(List<PlannedTile> inventoryTiles)
         {
-            Dictionary<PlannedTile, int> levelTiles = new();
-
-            foreach (PlannedTile tile in inventoryTiles)
-            {
-                if (levelTiles.ContainsKey(tile))
-                {
-                    levelTiles[tile]++;
-                }
-                else
-                {
-                    levelTiles.Add(tile, 1);
-                }
-            }
-
-            foreach (KeyValuePair<PlannedTile, int> newTileGroup in levelTiles)
+            foreach (PlannedTile newTile in inventoryTiles)
             {
                 bool alreadyAdded = false;
                 for(int i = 0; i < tileInventory.Count; i++)
                 {
-                    if (tileInventory[i].tileType == newTileGroup.Key.tileType && tileInventory[i].playerMode == newTileGroup.Key.playerMode)
+                    if (tileInventory[i].tileType == newTile.tileType && tileInventory[i].playerMode == newTile.playerMode)
                     {
-                        tileInventory[i].tileCount = newTileGroup.Value;
+                        tileInventory[i].tileCount++;
                         alreadyAdded = true;
+                        break;
                     }
                 }
 
@@ -231,10 +218,10 @@ namespace Rectangle.General
 
                 TileGroupData tileGroup = new()
                 {
-                    tileType = newTileGroup.Key.tileType,
-                    playerMode = newTileGroup.Key.playerMode,
-                    tileCount = newTileGroup.Value,
-                    tileSprite = builderSettings.GetTileTypeSprite(newTileGroup.Key.tileType),
+                    tileType = newTile.tileType,
+                    playerMode = newTile.playerMode,
+                    tileCount = 1,
+                    tileSprite = builderSettings.GetTileTypeSprite(newTile.tileType),
                 };
 
                 tileGroup.tileColor = builderSettings.GetModeColor(tileGroup.playerMode);
@@ -243,17 +230,29 @@ namespace Rectangle.General
             }
         }
 
-        public void TileInventoryChange(TileCreator.TileTypes tileType, int count)
+        public void TileInventoryChange(InventoryTile tile, int count)
         {
             foreach(TileGroupData tileGroup in tileInventory)
             {
-                if(tileGroup.tileType == tileType)
+                if(tileGroup.tileType == tile.tileType && tileGroup.playerMode == tile.playerMode)
                 {
                     tileGroup.tileCount += count;
                     return;
                 }
             }
 
+            if(count > 0)
+            {
+                TileGroupData newTileGroup = new TileGroupData()
+                {
+                    playerMode = tile.playerMode,
+                    tileType = tile.tileType,
+                    tileCount = count,
+                    tileColor = builderSettings.GetModeColor(tile.playerMode),
+                    tileSprite = builderSettings.GetTileTypeSprite(tile.tileType)
+                };
+                tileInventory.Add(newTileGroup);
+            }
         }
 
         public PlayerController.PlayerModes CheckTileInventoryModes(TileCreator.TileTypes tileType)
@@ -280,6 +279,19 @@ namespace Rectangle.General
 
 
 
+        }
+    }
+
+    public class InventoryTile
+    {
+        public int count;
+        public PlayerController.PlayerModes playerMode;
+        public TileCreator.TileTypes tileType;
+
+        public InventoryTile(PlayerController.PlayerModes playerMode, TileCreator.TileTypes tileType)
+        {
+            this.playerMode = playerMode;
+            this.tileType = tileType;
         }
     }
 }

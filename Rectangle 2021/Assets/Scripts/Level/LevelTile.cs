@@ -70,7 +70,15 @@ namespace Rectangle.Level
             }
 
             transform.position = gridCollider.transform.position;
-            levelBuilder.gridData.grid[levelBuilder.WorldPositionToCoordinate(transform.position)].placedTile = this;
+
+            for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+            {
+                if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(transform.position))
+                {
+                    levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                }
+            }
+
             gridCollider.isUsed = true;
 
             General.GameBehavior.instance.CheckGridCollider();
@@ -93,7 +101,13 @@ namespace Rectangle.Level
                 gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
 
-                levelBuilder.gridData.grid[levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position)].placedTile = null;
+                for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                {
+                    if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
+                    {
+                        levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = null;
+                    }
+                }
 
                 lastGrid = gridCollider;
 
@@ -115,7 +129,14 @@ namespace Rectangle.Level
 
                     button.ResetTile(gridCollider);
 
-                    levelBuilder.gridData.grid[levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position)].placedTile = null;
+
+                    for(int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                    {
+                        if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
+                        {
+                            levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                        }
+                    }
 
                     gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                     gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;

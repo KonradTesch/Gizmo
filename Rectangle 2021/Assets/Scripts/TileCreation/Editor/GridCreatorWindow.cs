@@ -67,10 +67,6 @@ namespace Rectangle.LevelCreation
 
             InitLevelData();
 
-            
-            AssetDatabase.SaveAssetIfDirty(levelData);
-            AssetDatabase.SaveAssets();
-
             offset += drag;
             if (offset.x > position.width)
                 offset.x = position.width;
@@ -108,6 +104,11 @@ namespace Rectangle.LevelCreation
                     createNew = true;
                     newLevelName = "";
                 }
+
+                if (GUI.Button(new Rect(100, 30, 80, 20), "Save"))
+                {
+                    SaveData();
+                }
             }
             else
             {
@@ -121,7 +122,7 @@ namespace Rectangle.LevelCreation
                 }
                 else if (GUI.Button(new Rect(10, 30, 80, 20), "Create"))
                 {
-                    SaveData();
+                    CreateLevelData();
                     createNew = false;
                     currentAnchor = null;
                 }
@@ -133,9 +134,11 @@ namespace Rectangle.LevelCreation
 
             }
 
-            if (GUI.Button(new Rect(260, 2.5f, 120, 20), "Create Grid"))
+            if (GUI.Button(new Rect(260, 2.5f, 120, 20), "Create new Grid"))
             {
+                ClearGrid();
                 CreateGrid();
+                SaveData();
             }
 
             GUI.Label(new Rect(240, 30, 45, 20), "width:");
@@ -157,6 +160,7 @@ namespace Rectangle.LevelCreation
                 if (GUI.Button(new Rect(415, 30, 20, 20), ""))
                 {
                     currentAnchor = null;
+                    SaveData();
                 }
             }
             if(levelData != null && levelData.gridData != null && levelData.gridData.anchorTiles != null)
@@ -174,6 +178,7 @@ namespace Rectangle.LevelCreation
                         if (GUI.Button(new Rect(440 + (i * 25), 30, 20, 20), ""))
                         {
                             currentAnchor = levelData.gridData.anchorTiles[i];
+                            SaveData();
                         }
                     }
                 }
@@ -213,7 +218,7 @@ namespace Rectangle.LevelCreation
                 {
                     currentColor = blue;
                     currentMode = Player.PlayerController.PlayerModes.Rectangle;
-
+                    SaveData();
                 }
             }
 
@@ -233,7 +238,7 @@ namespace Rectangle.LevelCreation
                 {
                     currentColor = green;
                     currentMode = Player.PlayerController.PlayerModes.Bubble;
-
+                    SaveData();
                 }
             }
 
@@ -253,6 +258,7 @@ namespace Rectangle.LevelCreation
                 {
                     currentColor = yellow;
                     currentMode = Player.PlayerController.PlayerModes.Spikey;
+                    SaveData();
                 }
             }
 
@@ -408,20 +414,20 @@ namespace Rectangle.LevelCreation
 
         private void DrawTiles()
         {
-            foreach(LevelSpot spot in levelData.gridData.grid.Values)
+            foreach(GridSpot gridSpot in levelData.gridData.grid)
             {
 
-                Vector2 coordinates = spot.coordinates * 100 + new Vector2(5, 5);
+                Vector2 coordinates = gridSpot.coordinates * 100 + new Vector2(5, 5);
 
                 Rect tileRect = new Rect(coordinates.x * zoom + offset.x,
-                        coordinates.y * zoom + offset.y,
+                        (gridHeight) - coordinates.y * zoom + offset.y,
                         95 * zoom,
                         95 * zoom);
                 Texture tileTexture = null;
 
-                if (levelData.GetTileByCoordinates(spot.coordinates, currentAnchor) != null)
+                if (levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor) != null)
                 {
-                    switch (levelData.GetTileByCoordinates(spot.coordinates, currentAnchor).playerMode)
+                    switch (levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor).playerMode)
                     {
                         case Player.PlayerController.PlayerModes.Rectangle:
                             GUI.backgroundColor = blue;
@@ -433,7 +439,7 @@ namespace Rectangle.LevelCreation
                             GUI.backgroundColor = green;
                             break;
                     }
-                    switch(levelData.GetTileByCoordinates(spot.coordinates, currentAnchor).tileType)
+                    switch(levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor).tileType)
                     {
                         case TileCreator.TileTypes.LeftAndRight:
                             tileTexture = (Texture)AssetDatabase.LoadAssetAtPath("Assets/LevelBuilder/EditorImages/EditorTile_l+r.png", typeof(Texture));
@@ -463,29 +469,29 @@ namespace Rectangle.LevelCreation
                         GUI.contentColor = Color.black;
                     }
                 }
-                else if (spot.blocked)
+                else if (gridSpot.levelSpot.blocked)
                 {
                     GUI.backgroundColor = Color.black;
                 }
-                else if (spot.anchor)
+                else if (gridSpot.levelSpot.anchor)
                 {
-                    GUI.backgroundColor = GetAnchorColor(spot.coordinates);
+                    GUI.backgroundColor = GetAnchorColor(gridSpot.coordinates);
                 }
                 else
                 {
                     GUI.backgroundColor = Color.grey;
                 }
 
-                if (spot.coordinates == levelData.gridData.start)
+                if (gridSpot.coordinates == levelData.gridData.start)
                 {
                     GUI.backgroundColor = Color.green;
                 }
-                else if (spot.coordinates == levelData.gridData.end)
+                else if (gridSpot.coordinates == levelData.gridData.end)
                 {
                     GUI.backgroundColor = Color.blue;
                 }
 
-                if(spot.star)
+                if(gridSpot.levelSpot.star)
                 {
                     GUI.contentColor = Color.white;
                 }
@@ -496,16 +502,14 @@ namespace Rectangle.LevelCreation
                 {
                     if (e.button == 0)
                     {
-                        if (!spot.anchor && !spot.blocked)
+                        if (!gridSpot.levelSpot.anchor && !gridSpot.levelSpot.blocked)
                         {
                             PlannedTile plannedTile = new PlannedTile()
                             {
-                                coordinates = spot.coordinates,
+                                coordinates = gridSpot.coordinates,
                                 playerMode = currentMode,
                                 tileType = currentTileType,
-                                anchor = currentAnchor
                             };
-
 
                             if (currentAnchor != null)
                             {
@@ -523,44 +527,44 @@ namespace Rectangle.LevelCreation
                     else if (e.button == 1)
                     {
                         GenericMenu tileMenu = new GenericMenu();
-                        if(spot.coordinates.x < 0 || spot.coordinates.y < 0 || spot.coordinates.x == levelData.gridData.width || spot.coordinates.y == levelData.gridData.height)
+                        if(gridSpot.coordinates.x < 0 || gridSpot.coordinates.y < 0 || gridSpot.coordinates.x == levelData.gridData.width || gridSpot.coordinates.y == levelData.gridData.height)
                         {
-                            tileMenu.AddItem(new GUIContent("Set Start"), false, SetStart, spot.coordinates);
-                            tileMenu.AddItem(new GUIContent("SetEnd"), false, SetEnd, spot.coordinates);
+                            tileMenu.AddItem(new GUIContent("Set Start"), false, SetStart, gridSpot.coordinates);
+                            tileMenu.AddItem(new GUIContent("SetEnd"), false, SetEnd, gridSpot.coordinates);
                         }
                         else
                         {
-                            if (spot.anchor)
+                            if (gridSpot.levelSpot.anchor)
                             {
-                                tileMenu.AddItem(new GUIContent("Clear AnchorTile"), false, ClearAnchor, spot.coordinates);
+                                tileMenu.AddItem(new GUIContent("Clear AnchorTile"), false, ClearAnchor, gridSpot.coordinates);
                             }
                             else
                             {
-                                tileMenu.AddItem(new GUIContent("Set AnchorTile"), false, SetAnchor, spot.coordinates);
+                                tileMenu.AddItem(new GUIContent("Set AnchorTile"), false, SetAnchor, gridSpot.coordinates);
                             }
 
-                            if (spot.star)
+                            if (gridSpot.levelSpot.star)
                             {
-                                tileMenu.AddItem(new GUIContent("Clear Star"), false, ClearStar, spot.coordinates);
+                                tileMenu.AddItem(new GUIContent("Clear Star"), false, ClearStar, gridSpot.coordinates);
                             }
                             else
                             {
-                                tileMenu.AddItem(new GUIContent("Set Star"), false, SetStar, spot.coordinates);
+                                tileMenu.AddItem(new GUIContent("Set Star"), false, SetStar, gridSpot.coordinates);
                             }
 
-                            if (spot.blocked)
+                            if (gridSpot.levelSpot.blocked)
                             {
-                                tileMenu.AddItem(new GUIContent("Unblock Tile"), false, UnblockTile, spot.coordinates);
+                                tileMenu.AddItem(new GUIContent("Unblock Tile"), false, UnblockTile, gridSpot.coordinates);
                             }
                             else
                             {
-                                tileMenu.AddItem(new GUIContent("Block Tile"), false, BlockTile, spot.coordinates);
+                                tileMenu.AddItem(new GUIContent("Block Tile"), false, BlockTile, gridSpot.coordinates);
 
                             }
 
-                            if (levelData.GetTileByCoordinates(spot.coordinates, currentAnchor) != null)
+                            if (levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor) != null)
                             {
-                                tileMenu.AddItem(new GUIContent("Remove Tile"), false, RemoveTile, spot.coordinates);
+                                tileMenu.AddItem(new GUIContent("Remove Tile"), false, RemoveTile, gridSpot.coordinates);
                             }
 
                         }
@@ -596,48 +600,42 @@ namespace Rectangle.LevelCreation
                 {
                     levelData.gridData.anchorTiles = new();
                 }
-
-                for(int i = 0; i < levelData.plannedTiles.Count; i++)
-                {
-                    if (levelData.plannedTiles[i].anchor == null)
-                    {
-                        levelData.plannedTiles[i].anchor = new();
-                    }
-                }
             }
         }
 
-        private void SaveData()
+        private void CreateLevelData()
         {
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            LevelData newLevelData = CreateInstance<LevelData>();
             if (AssetDatabase.LoadAssetAtPath(path + "/" + newLevelName + ".asset", typeof(LevelData)) != null)
             {
                 AssetDatabase.DeleteAsset(path + "/" + newLevelName + ".asset");
             }
 
-            newLevelData.gridData = new LevelGrid();
-            newLevelData.gridData.grid = new();
-            newLevelData.plannedTiles = new();
-
-            AssetDatabase.CreateAsset(newLevelData, path + "/" + newLevelName + ".asset");
-
             levelData = (LevelData)CreateInstance(typeof(LevelData));
 
-            levelData.gridData = newLevelData.gridData;
-            levelData.plannedTiles = newLevelData.plannedTiles;
+            levelData.gridData = new();
+            levelData.gridData.grid = new();
+            levelData.plannedTiles = new();
+            levelData.gridData.anchorTiles = new();
 
-            EditorUtility.SetDirty(levelData);
+            AssetDatabase.CreateAsset(levelData, path + "/" + newLevelName + ".asset");
+
             Debug.Log("RectangleBuilder: Created '" + newLevelName + ".asset' at '" + path + "'");
         }
 
+        private void SaveData()
+        {
+            EditorUtility.SetDirty(levelData);
+
+            AssetDatabase.SaveAssetIfDirty(levelData);
+        }
         private void CreateGrid()
         {
-            Dictionary<Vector2Int, LevelSpot> newGrid = new();
+            List<GridSpot> newGrid = new();
 
             for (int x = -1; x < gridWidth + 1; x++)
             {
@@ -645,11 +643,11 @@ namespace Rectangle.LevelCreation
                 {
                     if(x < 0 || x == gridWidth || y < 0 || y == gridHeight)
                     {
-                        newGrid.Add(new Vector2Int(x, y), new LevelSpot(new Vector2Int(x, y), true, false));
+                        newGrid.Add(new GridSpot(new Vector2Int(x, y), new LevelSpot(new Vector2Int(x, y), true, false)));
                     }
                     else
                     {
-                        newGrid.Add(new Vector2Int(x, y), new LevelSpot(new Vector2Int(x, y), false, false));
+                        newGrid.Add(new GridSpot(new Vector2Int(x, y), new LevelSpot(new Vector2Int(x, y), false, false)));
                     }
                 }
             }
@@ -683,6 +681,7 @@ namespace Rectangle.LevelCreation
             levelData.gridData = new LevelGrid();
             levelData.gridData.grid = new();
             levelData.plannedTiles = new();
+            levelData.gridData.anchorTiles = new();
         }
 
         private void BlockTile(object coordinates)
@@ -694,14 +693,20 @@ namespace Rectangle.LevelCreation
                     levelData.RemoveTile(levelData.GetTileByCoordinates((Vector2Int)coordinates, anchor), anchor);
                 }
             }
-            levelData.gridData.grid[(Vector2Int)coordinates].blocked = true;
-            levelData.gridData.grid[(Vector2Int)coordinates].anchor = false;
-            levelData.gridData.grid[(Vector2Int)coordinates].star = false;
+
+            if(levelData.GetAnchorByCoordinates((Vector2Int)coordinates) != null)
+            {
+                levelData.gridData.anchorTiles.Remove(levelData.GetAnchorByCoordinates((Vector2Int)coordinates));
+            }
+
+            levelData.GetGridSpot((Vector2Int)coordinates).blocked = true;
+            levelData.GetGridSpot((Vector2Int)coordinates).anchor = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).star = false;
         }
 
         private void UnblockTile(object coordinates)
         {
-            levelData.gridData.grid[(Vector2Int)coordinates].blocked = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).blocked = false;
         }
 
         private void SetAnchor(object coordinates)
@@ -713,9 +718,9 @@ namespace Rectangle.LevelCreation
                     levelData.RemoveTile(levelData.GetTileByCoordinates((Vector2Int)coordinates, anchor), anchor);
                 }
             }
-            levelData.gridData.grid[(Vector2Int)coordinates].blocked = false;
-            levelData.gridData.grid[(Vector2Int)coordinates].star = false;
-            levelData.gridData.grid[(Vector2Int)coordinates].anchor = true;
+            levelData.GetGridSpot((Vector2Int)coordinates).blocked = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).star = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).anchor = true;
 
             if(levelData.gridData.anchorTiles == null)
             {
@@ -735,19 +740,19 @@ namespace Rectangle.LevelCreation
 
         private void ClearAnchor(object coordinates)
         {
-            levelData.gridData.grid[(Vector2Int)coordinates].anchor = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).anchor = false;
             levelData.gridData.anchorTiles.Remove(levelData.GetAnchorByCoordinates((Vector2Int)coordinates));
         }
 
         private void SetStar(object coordinates)
         {
-            levelData.gridData.grid[(Vector2Int)coordinates].blocked = false;
-            levelData.gridData.grid[(Vector2Int)coordinates].anchor = false;
-            levelData.gridData.grid[(Vector2Int)coordinates].star = true;
+            levelData.GetGridSpot((Vector2Int)coordinates).blocked = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).anchor = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).star = true;
         }
         private void ClearStar(object coordinate)
         {
-            levelData.gridData.grid[(Vector2Int)coordinate].star = false;
+            levelData.GetGridSpot((Vector2Int)coordinate).star = false;
         }
 
         private Color GetAnchorColor(Vector2Int coordinates)

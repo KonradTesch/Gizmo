@@ -28746,6 +28746,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185b3ae8d077e6c47983ff09f811d6c4, type: 2}
   - {fileID: 11400000, guid: 359cdaba025230f4cbb03e1266c39639, type: 2}
   - {fileID: 11400000, guid: f4eb4dcc366a0434b87d70c3dd055c25, type: 2}
+  - {fileID: 11400000, guid: dcecac6c4c5cb6146b9a91f254771923, type: 2}
   anchorTiles:
   - {fileID: 11400000, guid: 8b4fea390b9aba048a430be9c0ed7ec3, type: 2}
   gridLayer:
@@ -28771,7 +28772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c5d77808b76c41ae6118182c28f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: b932e668cb2f05e4e99b4dbe61b51c5c, type: 2}
+  levelData: {fileID: 11400000, guid: b3e4e98cfe4c23e4abfe93afe86c2937, type: 2}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   gridTilemap: {fileID: 1521520081}
   borderTilemap: {fileID: 298339190}
@@ -28781,6 +28782,7 @@ MonoBehaviour:
   placedTiles: []
   anchorTiles: []
   gridData:
+    grid: []
     anchorTiles: []
     height: 0
     width: 0
