@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Rectangle.Level;
-using Rectangle.TileCreation;
+using Rectangle.LevelCreation;
 
 namespace Rectangle.UI
 {

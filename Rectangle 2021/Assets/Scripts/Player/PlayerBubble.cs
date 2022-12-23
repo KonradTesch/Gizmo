@@ -18,6 +18,7 @@ namespace Rectangle.Player
         [SerializeField] private float rotationSpeed;
 
         private bool falling;
+        private bool floating = false;
         private float lastYPosition;
         private float normalGravity;
 
@@ -33,29 +34,37 @@ namespace Rectangle.Player
         {
             falling = CheckFalling();
 
-            if (!falling || onRamp || horizontalMove.y < - 0.2f)
+            if(floating)
             {
-                rigidBody.gravityScale = normalGravity;
-                animator.SetBool("float", false);
-            }
-            else
-            {
-                rigidBody.gravityScale = lowGravityScale;
+                if(falling)
+                {
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, rotationSpeed * 20 * Time.deltaTime);
+                    rigidBody.gravityScale = lowGravityScale;
+                }
+
                 animator.SetBool("float", true);
+
+
+                if (onRamp || grounded)
+                {
+                    rigidBody.gravityScale = normalGravity;
+                    animator.SetBool("float", false);
+                    floating = false;
+                }
             }
 
-            if(grounded && horizontalMove.x < 0.1f)
+            if((grounded || onRamp) && rigidBody.velocity.x < -0.1f)
             {
             transform.rotation = Quaternion.Euler(0, 0, (transform.rotation.eulerAngles.z - rigidBody.velocity.x * rotationSpeed * Time.deltaTime) % 360);
             }
-            else if(grounded && horizontalMove.x > 0.1f)
+            else if((grounded || onRamp) && rigidBody.velocity.x > 0.1f)
             {
 
                 transform.rotation = Quaternion.Euler(0, 0, (transform.rotation.eulerAngles.z - rigidBody.velocity.x * rotationSpeed * Time.deltaTime) % 360);
             }
             else if(falling)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, rotationSpeed * 20 * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, rotationSpeed * 5 * Time.deltaTime);
             }
 
             base.Move(horizontalMove);
@@ -67,7 +76,7 @@ namespace Rectangle.Player
         /// <returns></returns>
         private bool CheckFalling()
         {
-            if (lastYPosition > transform.position.y && !grounded)
+            if (lastYPosition > transform.position.y && !grounded && currentCoyoteTime < 0)
             {
                 lastYPosition = transform.position.y;
                 return true;
@@ -75,6 +84,22 @@ namespace Rectangle.Player
 
             lastYPosition = transform.position.y;
             return false;
+        }
+
+        public override void Jump()
+        {
+            base.Jump();
+
+            if (!grounded && !onRamp && !floating && !timeAfterJump)
+            {
+                floating = true;
+            }
+            else if (floating)
+            {
+                rigidBody.gravityScale = normalGravity;
+                animator.SetBool("float", false);
+                floating = false;
+            }
         }
     }
 }

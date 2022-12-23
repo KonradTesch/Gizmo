@@ -24,9 +24,19 @@ namespace Rectangle.Player
         private bool climb;
 
 
-        private void Update()
+        protected override void FixedUpdate()
         {
             PositionCheck();
+
+            if ((grounded || onRamp) && !timeAfterJump)
+            {
+                currentCoyoteTime = coyoteTime;
+            }
+            else
+            {
+                currentCoyoteTime -= Time.deltaTime;
+            }
+
         }
 
         /// <summary>
@@ -71,11 +81,11 @@ namespace Rectangle.Player
                     targetVelocity.y = maxFallingSpped;
                 }
 
-                if (grounded && rigidBody.velocity.x < 0.1f)
+                if ((grounded || onRamp) && rigidBody.velocity.x < -0.1f)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, (transform.rotation.eulerAngles.z - rigidBody.velocity.x * rotationSpeed * Time.deltaTime) % 360);
                 }
-                else if (grounded && rigidBody.velocity.x > 0.1f)
+                else if ((grounded || onRamp) && rigidBody.velocity.x > 0.1f)
                 {
 
                     transform.rotation = Quaternion.Euler(0, 0, (transform.rotation.eulerAngles.z - rigidBody.velocity.x * rotationSpeed * Time.deltaTime) % 360);
@@ -113,9 +123,11 @@ namespace Rectangle.Player
 
         public override void Jump()
         {
-            if (grounded || onRamp)
+            if (currentCoyoteTime > 0)
             {
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
+                StartCoroutine(nameof(TimeAfterJump));
+                currentCoyoteTime = 0;
             }
 
             if (climb && onWallRight)

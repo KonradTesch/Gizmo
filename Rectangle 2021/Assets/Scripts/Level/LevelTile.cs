@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Rectangle.TileCreation;
+using Rectangle.LevelCreation;
 using Rectangle.Player;
 using Rectangle.UI;
 
@@ -15,7 +15,6 @@ namespace Rectangle.Level
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [HideInInspector] public TileButton button;
-        [HideInInspector] public bool locked = false;
 
         public List<TileCreator.TileTypes> collectableTiles;
 
@@ -26,10 +25,14 @@ namespace Rectangle.Level
         [HideInInspector]public GridField gridCollider;
         private GridField lastGrid;
 
+        private LevelBuilder levelBuilder;
+
         private void Start()
         {
             gridLayer = LayerMask.GetMask("Grid");
             rend = GetComponent<SpriteRenderer>();
+
+            levelBuilder = General.GameBehavior.instance.levelBuilder;
         }
 
         private void OnMouseDrag()
@@ -67,6 +70,15 @@ namespace Rectangle.Level
             }
 
             transform.position = gridCollider.transform.position;
+
+            for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+            {
+                if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(transform.position))
+                {
+                    levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                }
+            }
+
             gridCollider.isUsed = true;
 
             General.GameBehavior.instance.CheckGridCollider();
@@ -89,6 +101,14 @@ namespace Rectangle.Level
                 gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
 
+                for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                {
+                    if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
+                    {
+                        levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = null;
+                    }
+                }
+
                 lastGrid = gridCollider;
 
                 gridCollider = null;
@@ -101,17 +121,28 @@ namespace Rectangle.Level
         {
             if (Input.GetMouseButtonDown(1))
             {
-                Return();
-
-                lastGrid = null;
                 if(gridCollider != null)
                 {
+                    Return();
+
+                    lastGrid = null;
+
                     button.ResetTile(gridCollider);
+
+
+                    for(int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                    {
+                        if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
+                        {
+                            levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                        }
+                    }
 
                     gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
                     gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
                     gridCollider.isUsed = false;
                     gridCollider = null;
+
                 }
 
                 General.GameBehavior.instance.CheckGridCollider();

@@ -29,6 +29,8 @@ namespace Rectangle.Player
         [Tooltip("The jump force.")]
         [SerializeField] protected float jumpForce = 45;
 
+        [SerializeField] protected float coyoteTime = 0.2f;
+
         /// <summary>
         /// The maximum speed when falling.
         /// </summary>
@@ -84,6 +86,10 @@ namespace Rectangle.Player
 
         protected Animator animator;
 
+        protected float currentCoyoteTime;
+        protected bool timeAfterJump = false;
+
+
 
         private void Awake()
         {
@@ -92,14 +98,22 @@ namespace Rectangle.Player
             animator = GetComponent<Animator>();
         }
 
+        private void OnEnable()
+        {
+            timeAfterJump = false;
+        }
+
         protected virtual void FixedUpdate()
         {
             PositionCheck();
 
-            if((Mathf.Abs(transform.rotation.eulerAngles.z) % 90 < 1 || Mathf.Abs(transform.rotation.eulerAngles.z) % 90 > 89) && Mathf.Abs(transform.rotation.eulerAngles.z) > 45)
+            if (grounded && !timeAfterJump)
             {
-                Debug.Log("rotate");
-                transform.rotation = Quaternion.identity;
+                currentCoyoteTime = coyoteTime;
+            }
+            else
+            {
+                currentCoyoteTime -= Time.deltaTime;
             }
         }
 
@@ -108,7 +122,8 @@ namespace Rectangle.Player
         /// </summary>
         public virtual void Move(Vector2 horizontalMove)
         {
-            animator.SetFloat("horizontalMove", horizontalMove.x);
+            if(animator != null)
+                animator.SetFloat("horizontalMove", horizontalMove.x);
 
             if (grounded || airControl && !onRamp)
             {
@@ -133,9 +148,13 @@ namespace Rectangle.Player
         /// </summary>
         public virtual void Jump()
         {
-            if (grounded)
+            if (currentCoyoteTime > 0)
             {
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
+                StartCoroutine(nameof(TimeAfterJump));
+
+                grounded = false;
+                currentCoyoteTime = 0;
             }
         }
 
@@ -188,6 +207,14 @@ namespace Rectangle.Player
             yield return new WaitForSeconds(0.25f);
             Physics2D.IgnoreCollision(col, platformCol, false);
             
+        }
+
+        protected IEnumerator TimeAfterJump()
+        {
+            timeAfterJump = true;
+            yield return new WaitForSeconds(coyoteTime + 0.1f);
+
+            timeAfterJump = false;
         }
     }
 }
