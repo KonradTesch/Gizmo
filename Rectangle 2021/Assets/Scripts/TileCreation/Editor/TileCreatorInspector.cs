@@ -395,7 +395,7 @@ namespace Rectangle.LevelCreation
             }
             builder.groundTilemap.RefreshAllTiles();
 
-            foreach (ChangeData change in builder.builderSettings.openBorderTile.borderTileChanges)
+            foreach (ChangeData change in tile.borderTileChanges)
             {
                 TileChangeData tileChane = new()
                 {

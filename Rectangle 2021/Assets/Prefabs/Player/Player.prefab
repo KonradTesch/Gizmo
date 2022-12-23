@@ -637,7 +637,7 @@ MonoBehaviour:
     m_Bits: 512
   headAnimator: {fileID: 0}
   climbSpeed: 450
-  rotationSpeed: 45
+  rotationSpeed: 55
 --- !u!212 &3683547979103905856
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -789,7 +789,7 @@ MonoBehaviour:
     m_Bits: 512
   headAnimator: {fileID: 0}
   lowGravityScale: 0.3
-  rotationSpeed: 45
+  rotationSpeed: 55
 --- !u!212 &3683547979325627246
 SpriteRenderer:
   m_ObjectHideFlags: 0

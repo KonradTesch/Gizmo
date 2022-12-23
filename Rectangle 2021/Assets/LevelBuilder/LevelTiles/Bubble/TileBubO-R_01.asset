@@ -6153,7 +6153,7 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 17, y: 15, z: 0}
-    tile: {fileID: 11400000, guid: cf9605bf53e978d44a07b7686d03b0da, type: 2}
+    tile: {fileID: 11400000, guid: e6261b8be710b7b4580b9d4dc47a6ad1, type: 2}
     transform:
       e00: 1
       e01: 0
@@ -6172,16 +6172,16 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 17, y: 16, z: 0}
-    tile: {fileID: 11400000, guid: ce2bf9da248585743b3050ddb3dbad36, type: 2}
+    tile: {fileID: 11400000, guid: 40f63c9ce5c21a54586f96e6dfd59586, type: 2}
     transform:
       e00: 1
       e01: 0
       e02: 0
-      e03: 0
+      e03: 0.0002837181
       e10: 0
       e11: 1
       e12: 0
-      e13: 0
+      e13: 0.0003312929
       e20: 0
       e21: 0
       e22: 1
@@ -6419,7 +6419,7 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 18, y: 15, z: 0}
-    tile: {fileID: 11400000, guid: e6261b8be710b7b4580b9d4dc47a6ad1, type: 2}
+    tile: {fileID: 11400000, guid: 79f6aa3d994b8c3448f34e8fa98f3140, type: 2}
     transform:
       e00: 1
       e01: 0
@@ -6438,14 +6438,14 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 18, y: 16, z: 0}
-    tile: {fileID: 11400000, guid: 742405bc8db9f604b81cdde1027ab618, type: 2}
+    tile: {fileID: 11400000, guid: e6261b8be710b7b4580b9d4dc47a6ad1, type: 2}
     transform:
-      e00: 0
-      e01: -1
+      e00: 1
+      e01: 0
       e02: 0
       e03: 0.0002837181
-      e10: 1
-      e11: 0
+      e10: 0
+      e11: 1
       e12: 0
       e13: 0.0003312929
       e20: 0
@@ -13749,5 +13749,5 @@ MonoBehaviour:
         e33: 1
   collectablePositions: []
   tileSize: {x: 32, y: 18}
-  tileType: 2
+  tileType: 5
   playerMode: 2

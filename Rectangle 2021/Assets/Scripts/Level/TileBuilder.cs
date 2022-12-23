@@ -97,10 +97,11 @@ namespace Rectangle.Level
         private void PlaceCollectableTiles( List<PlannedTile> collectableTiles, Vector2[] positions, Vector2 tilePosition)
         {
             List<CollectableTile> collectables = new();
-            bool alreadyAdded = false;
             int i;
             foreach (PlannedTile tile in collectableTiles)
             {
+                bool alreadyAdded = false;
+
                 if (collectedTiles.ContainsKey(tilePosition))
                 {
                     bool alreadyCollected = false;

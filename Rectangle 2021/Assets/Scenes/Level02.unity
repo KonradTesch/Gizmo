@@ -28180,6 +28180,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2001858576}
+    - target: {fileID: 4032747297680890190, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2001858576}
     - target: {fileID: 4576247714632724279, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -28723,16 +28727,14 @@ MonoBehaviour:
   levelTiles:
   - {fileID: 11400000, guid: 727538f93d4da3f4b8420481be55c51e, type: 2}
   - {fileID: 11400000, guid: d4638d8d5f09c1c4faa35e3870b55be7, type: 2}
-  - {fileID: 11400000, guid: 5bde2d6f25526364c942c6a541d27f30, type: 2}
+  - {fileID: 11400000, guid: 5b644d960b8da5e41a865112caed6cc3, type: 2}
   - {fileID: 11400000, guid: 3d342187101666a4b91f36326b522cda, type: 2}
   - {fileID: 11400000, guid: 35b65d64ac713b140a04930f8feda881, type: 2}
   - {fileID: 11400000, guid: 4f2eb6b85b0b2254d92469c398aa6b7e, type: 2}
   - {fileID: 11400000, guid: 185b3ae8d077e6c47983ff09f811d6c4, type: 2}
   - {fileID: 11400000, guid: 359cdaba025230f4cbb03e1266c39639, type: 2}
   - {fileID: 11400000, guid: f4eb4dcc366a0434b87d70c3dd055c25, type: 2}
-  - {fileID: 11400000, guid: 5dcb734daa955184385d962e78a2ba11, type: 2}
-  - {fileID: 11400000, guid: 46c54492732719343acd1a4237c5e048, type: 2}
-  - {fileID: 11400000, guid: 01d01f8704b82324bb74a08742463680, type: 2}
+  - {fileID: 11400000, guid: dcecac6c4c5cb6146b9a91f254771923, type: 2}
   anchorTiles:
   - {fileID: 11400000, guid: 8b4fea390b9aba048a430be9c0ed7ec3, type: 2}
   gridLayer:
@@ -28758,7 +28760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c5d77808b76c41ae6118182c28f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: b3e4e98cfe4c23e4abfe93afe86c2937, type: 2}
+  levelData: {fileID: 11400000, guid: 5371dc1b6e8dd934ab34cab71d038bf3, type: 2}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   gridTilemap: {fileID: 1521520081}
   borderTilemap: {fileID: 298339190}

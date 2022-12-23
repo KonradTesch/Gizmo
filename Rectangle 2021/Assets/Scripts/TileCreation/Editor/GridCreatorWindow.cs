@@ -50,10 +50,10 @@ namespace Rectangle.LevelCreation
             skin = CreateInstance<GUISkin>();
             skin.button.alignment = TextAnchor.MiddleCenter;
             skin.button.normal.textColor = Color.white;
-            skin.button.fontSize = (int)(40 * zoom);
-            if (skin.button.fontSize < 12)
+            skin.button.fontSize = (int)(60 * zoom);
+            if (skin.button.fontSize < 16)
             {
-                skin.button.fontSize = 12;
+                skin.button.fontSize = 16;
             }
 
             borderStyle.normal.background = EditorGUIUtility.Load("icons/d_AvatarBlendBackground.png") as Texture2D;
@@ -62,10 +62,12 @@ namespace Rectangle.LevelCreation
         private void OnGUI()
         {
             DrawMenuBar();
+
+            InitLevelData();
+
             DrawSideBar();
             DrawMainWinow();
 
-            InitLevelData();
 
             offset += drag;
             if (offset.x > position.width)
@@ -414,8 +416,17 @@ namespace Rectangle.LevelCreation
 
         private void DrawTiles()
         {
+
             foreach(GridSpot gridSpot in levelData.gridData.grid)
             {
+                GUI.skin.button.fontStyle = FontStyle.Normal;
+
+                bool anchor = false;
+                bool start = false;
+                bool end = false;
+                bool star = false;
+
+                bool pressed = false;
 
                 Vector2 coordinates = gridSpot.coordinates * 100 + new Vector2(5, 5);
 
@@ -475,6 +486,7 @@ namespace Rectangle.LevelCreation
                 }
                 else if (gridSpot.levelSpot.anchor)
                 {
+                    anchor = true;
                     GUI.backgroundColor = GetAnchorColor(gridSpot.coordinates);
                 }
                 else
@@ -482,23 +494,88 @@ namespace Rectangle.LevelCreation
                     GUI.backgroundColor = Color.grey;
                 }
 
-                if (gridSpot.coordinates == levelData.gridData.start)
+                if (gridSpot.coordinates == levelData.gridData.start.coordinates)
                 {
+                    start = true;
                     GUI.backgroundColor = Color.green;
+                    tileTexture = GetDirectionTexture(levelData.gridData.start.direction);
                 }
-                else if (gridSpot.coordinates == levelData.gridData.end)
+                else if (gridSpot.coordinates == levelData.gridData.end.coordinates)
                 {
+                    end = true;
                     GUI.backgroundColor = Color.blue;
+                    tileTexture = GetDirectionTexture(levelData.gridData.end.direction);
+
                 }
 
-                if(gridSpot.levelSpot.star)
+                if (gridSpot.levelSpot.star)
                 {
+                    star = true;
                     GUI.contentColor = Color.white;
+                    if(levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor) == null)
+                    {
+                        tileTexture = (Texture)AssetDatabase.LoadAssetAtPath("Assets/LevelBuilder/EditorImages/GridEditor_Star.png", typeof(Texture));
+                    }
                 }
 
                 Event e = Event.current;
 
-                if (GUI.Button(tileRect, tileTexture))
+                if(anchor)
+                {
+                    if (levelData.GetAnchorByCoordinates(gridSpot.coordinates) == currentAnchor)
+                    {
+                        GUI.skin.button.fontStyle = FontStyle.Bold;
+                        GUI.skin.button.fontSize += 2;
+
+                    }
+
+                    if (GUI.Button(tileRect, "Anchor"))
+                    {
+                        pressed = true;
+                    }
+
+                    if (levelData.GetAnchorByCoordinates(gridSpot.coordinates) == currentAnchor)
+                    {
+                        GUI.skin.button.fontStyle = FontStyle.Normal;
+                        GUI.skin.button.fontSize -= 2;
+
+                    }
+
+
+                }
+                else if(start)
+                {
+                    if (GUI.Button(tileRect, tileTexture))
+                    {
+                        pressed = true;
+                    }
+                }
+                else if (end)
+                {
+                    if (GUI.Button(tileRect, tileTexture))
+                    {
+                        pressed = true;
+                    }
+                }
+                else if (star && levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor) == null)
+                {
+                    if (GUI.Button(tileRect, tileTexture))
+                    {
+                        pressed = true;
+                    }
+                }
+                else
+                {
+                    if (GUI.Button(tileRect, tileTexture))
+                    {
+                        pressed = true;
+                    }
+
+                    GUI.contentColor = Color.white;
+                }
+
+
+                if (pressed)
                 {
                     if (e.button == 0)
                     {
@@ -523,58 +600,77 @@ namespace Rectangle.LevelCreation
                             }
 
                         }
+                        else if(gridSpot.levelSpot.anchor)
+                        {
+                            currentAnchor = levelData.GetAnchorByCoordinates(gridSpot.coordinates);
+                        }
+                        else if(gridSpot.coordinates == levelData.gridData.start.coordinates)
+                        {
+                            levelData.gridData.start.direction = RotateDirection(levelData.gridData.start.direction);
+                        }
+                        else if (gridSpot.coordinates == levelData.gridData.end.coordinates)
+                        {
+                            levelData.gridData.end.direction = RotateDirection(levelData.gridData.end.direction);
+                        }
+
                     }
                     else if (e.button == 1)
                     {
-                        GenericMenu tileMenu = new GenericMenu();
-                        if(gridSpot.coordinates.x < 0 || gridSpot.coordinates.y < 0 || gridSpot.coordinates.x == levelData.gridData.width || gridSpot.coordinates.y == levelData.gridData.height)
-                        {
-                            tileMenu.AddItem(new GUIContent("Set Start"), false, SetStart, gridSpot.coordinates);
-                            tileMenu.AddItem(new GUIContent("SetEnd"), false, SetEnd, gridSpot.coordinates);
-                        }
-                        else
-                        {
-                            if (gridSpot.levelSpot.anchor)
-                            {
-                                tileMenu.AddItem(new GUIContent("Clear AnchorTile"), false, ClearAnchor, gridSpot.coordinates);
-                            }
-                            else
-                            {
-                                tileMenu.AddItem(new GUIContent("Set AnchorTile"), false, SetAnchor, gridSpot.coordinates);
-                            }
-
-                            if (gridSpot.levelSpot.star)
-                            {
-                                tileMenu.AddItem(new GUIContent("Clear Star"), false, ClearStar, gridSpot.coordinates);
-                            }
-                            else
-                            {
-                                tileMenu.AddItem(new GUIContent("Set Star"), false, SetStar, gridSpot.coordinates);
-                            }
-
-                            if (gridSpot.levelSpot.blocked)
-                            {
-                                tileMenu.AddItem(new GUIContent("Unblock Tile"), false, UnblockTile, gridSpot.coordinates);
-                            }
-                            else
-                            {
-                                tileMenu.AddItem(new GUIContent("Block Tile"), false, BlockTile, gridSpot.coordinates);
-
-                            }
-
-                            if (levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor) != null)
-                            {
-                                tileMenu.AddItem(new GUIContent("Remove Tile"), false, RemoveTile, gridSpot.coordinates);
-                            }
-
-                        }
-
-                        tileMenu.ShowAsContext();
-
+                        ContextMenu(gridSpot);
                     }
 
                 }
             }
+        }
+
+        private void ContextMenu(GridSpot gridSpot)
+        {
+            GenericMenu tileMenu = new GenericMenu();
+            if (gridSpot.coordinates.x < 0 || gridSpot.coordinates.y < 0 || gridSpot.coordinates.x == levelData.gridData.width || gridSpot.coordinates.y == levelData.gridData.height)
+            {
+                tileMenu.AddItem(new GUIContent("Set Start"), false, SetStart, gridSpot.coordinates);
+                tileMenu.AddItem(new GUIContent("Set End"), false, SetEnd, gridSpot.coordinates);
+            }
+            else
+            {
+                if (gridSpot.levelSpot.anchor)
+                {
+                    tileMenu.AddItem(new GUIContent("Clear AnchorTile"), false, ClearAnchor, gridSpot.coordinates);
+                }
+                else
+                {
+                    tileMenu.AddItem(new GUIContent("Set AnchorTile"), false, SetAnchor, gridSpot.coordinates);
+                }
+
+                if (gridSpot.levelSpot.star)
+                {
+                    tileMenu.AddItem(new GUIContent("Clear Star"), false, ClearStar, gridSpot.coordinates);
+                }
+                else
+                {
+                    tileMenu.AddItem(new GUIContent("Set Star"), false, SetStar, gridSpot.coordinates);
+                }
+
+                if (gridSpot.levelSpot.blocked)
+                {
+                    tileMenu.AddItem(new GUIContent("Unblock Tile"), false, UnblockTile, gridSpot.coordinates);
+                    tileMenu.AddSeparator("");
+                    tileMenu.AddItem(new GUIContent("Set Start"), false, SetStart, gridSpot.coordinates);
+                    tileMenu.AddItem(new GUIContent("Set End"), false, SetEnd, gridSpot.coordinates);
+                }
+                else
+                {
+                    tileMenu.AddItem(new GUIContent("Block Tile"), false, BlockTile, gridSpot.coordinates);
+
+                }
+
+                if (levelData.GetTileByCoordinates(gridSpot.coordinates, currentAnchor) != null)
+                {
+                    tileMenu.AddItem(new GUIContent("Remove Tile"), false, RemoveTile, gridSpot.coordinates);
+                }
+            }
+
+            tileMenu.ShowAsContext();
         }
 
         private void InitLevelData()
@@ -600,6 +696,17 @@ namespace Rectangle.LevelCreation
                 {
                     levelData.gridData.anchorTiles = new();
                 }
+
+                if(levelData.gridData.start == null)
+                {
+                    levelData.gridData.start = new TileDirection(new Vector2Int(-1, -1), new Vector2Int(1, 0));
+                }
+
+                if (levelData.gridData.end == null)
+                {
+                    levelData.gridData.end = new TileDirection(new Vector2Int(-1, -1), new Vector2Int(1, 0));
+                }
+
             }
         }
 
@@ -706,6 +813,17 @@ namespace Rectangle.LevelCreation
 
         private void UnblockTile(object coordinates)
         {
+            if(levelData.gridData.start.coordinates == (Vector2Int)coordinates)
+            {
+                levelData.gridData.start.coordinates = new Vector2Int(-1, -1);
+            }
+
+            if (levelData.gridData.end.coordinates == (Vector2Int)coordinates)
+            {
+                levelData.gridData.end.coordinates = new Vector2Int(gridWidth, gridHeight);
+            }
+
+
             levelData.GetGridSpot((Vector2Int)coordinates).blocked = false;
         }
 
@@ -772,12 +890,83 @@ namespace Rectangle.LevelCreation
 
         private void SetStart(object coordinates)
         {
-            levelData.gridData.start = (Vector2Int)coordinates;
+            levelData.gridData.start.coordinates = (Vector2Int)coordinates;
+            levelData.gridData.start.direction = FindFreeDirection((Vector2Int)coordinates);
         }
 
         private void SetEnd(object coordinates)
         {
-            levelData.gridData.end = (Vector2Int)coordinates;
+            levelData.gridData.end.coordinates = (Vector2Int)coordinates;
+            levelData.gridData.end.direction = FindFreeDirection((Vector2Int)coordinates);
+        }
+
+        private Vector2Int FindFreeDirection(Vector2Int coordinates)
+        {
+            if(levelData.GetGridSpot(coordinates + Vector2Int.right) != null && !levelData.GetGridSpot(coordinates + Vector2Int.right).blocked)
+            {
+                return Vector2Int.right;
+            }
+            else if (levelData.GetGridSpot(coordinates + Vector2Int.left) != null && !levelData.GetGridSpot(coordinates + Vector2Int.left).blocked)
+            {
+                return Vector2Int.left;
+            }
+            else if (levelData.GetGridSpot(coordinates + Vector2Int.up) != null && !levelData.GetGridSpot(coordinates + Vector2Int.up).blocked)
+            {
+                return Vector2Int.up;
+            }
+            else if (levelData.GetGridSpot(coordinates + Vector2Int.down) != null && !levelData.GetGridSpot(coordinates + Vector2Int.down).blocked)
+            {
+                return Vector2Int.down;
+            }
+
+            return Vector2Int.right;
+        }
+
+        private Texture GetDirectionTexture(Vector2Int direction)
+        {
+            if(direction == Vector2Int.right)
+            {
+                return (Texture)AssetDatabase.LoadAssetAtPath("Assets/LevelBuilder/EditorImages/GridEditor_Arrow_right.png", typeof(Texture));
+            }
+            else if (direction == Vector2Int.down)
+            {
+                return (Texture)AssetDatabase.LoadAssetAtPath("Assets/LevelBuilder/EditorImages/GridEditor_Arrow_down.png", typeof(Texture));
+            }
+            else if (direction == Vector2Int.left)
+            {
+                return (Texture)AssetDatabase.LoadAssetAtPath("Assets/LevelBuilder/EditorImages/GridEditor_Arrow_left.png", typeof(Texture));
+            }
+            else if (direction == Vector2Int.up)
+            {
+                return (Texture)AssetDatabase.LoadAssetAtPath("Assets/LevelBuilder/EditorImages/GridEditor_Arrow_up.png", typeof(Texture));
+            }
+
+
+            return (Texture)AssetDatabase.LoadAssetAtPath("Assets/LevelBuilder/EditorImages/GridEditor_Arrow_right.png", typeof(Texture));
+
+        }
+
+        private Vector2Int RotateDirection(Vector2Int direction)
+        {
+            if (direction == Vector2Int.right)
+            {
+                return Vector2Int.down;
+            }
+            else if (direction == Vector2Int.down)
+            {
+                return Vector2Int.left;
+            }
+            else if (direction == Vector2Int.left)
+            {
+                return Vector2Int.up;
+            }
+            else if (direction == Vector2Int.up)
+            {
+                return Vector2Int.right;
+            }
+
+            return Vector2Int.right;
+
         }
 
     }

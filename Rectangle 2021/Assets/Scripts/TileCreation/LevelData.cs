@@ -148,8 +148,8 @@ namespace Rectangle.LevelCreation
         public List<AnchorTile> anchorTiles;
         public int height;
         public int width;
-        public Vector2Int start;
-        public Vector2Int end;
+        public TileDirection start;
+        public TileDirection end;
     }
 
     [System.Serializable]
@@ -204,5 +204,18 @@ namespace Rectangle.LevelCreation
     {
         public List<PlannedTile> collectableTiles = new();
         public Vector2Int anchorCoordinates;
+    }
+
+    [System.Serializable]
+    public class TileDirection
+    {
+        public Vector2Int coordinates;
+        public Vector2Int direction;
+
+        public TileDirection(Vector2Int coordinates, Vector2Int direction)
+        {
+            this.coordinates = coordinates;
+            this.direction = direction;
+        }
     }
 }
