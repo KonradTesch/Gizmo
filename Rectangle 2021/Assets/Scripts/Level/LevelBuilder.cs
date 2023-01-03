@@ -77,7 +77,7 @@ namespace Rectangle.Level
 
                         if(levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
-                            backgroundRend.color = Color.white;
+                            backgroundRend.color = Color.yellow;
                         }
                         else
                         {
@@ -117,8 +117,7 @@ namespace Rectangle.Level
             DrawBorder(gridData);
 
             //Setup start box
-            startDirection = GetStartDirection();
-            Vector2 startPos = DrawStartOrEnd(gridData.start, startDirection);
+            Vector2 startPos = DrawStartOrEnd(gridData.start.coordinates, gridData.start.direction);
 
             startText.transform.position = startPos;
             General.GameBehavior.instance.player.transform.position = startPos;
@@ -133,8 +132,7 @@ namespace Rectangle.Level
             startCollider.AddComponent<GridField>().isUsed = true;
 
             //Setup end box
-            endDirection = GetEndDirection();
-            Vector2 endPos = DrawStartOrEnd(gridData.end, endDirection);
+            Vector2 endPos = DrawStartOrEnd(gridData.end.coordinates, gridData.end.direction);
 
             endText.transform.position = endPos;
 
@@ -237,7 +235,7 @@ namespace Rectangle.Level
                     }
 
                 }
-            } while (!(currentPosition + currentDirection == gridData.end) && levelData.GetAnchorByCoordinates(currentPosition + currentDirection) == null);
+            } while (!(currentPosition + currentDirection == gridData.end.coordinates) && levelData.GetAnchorByCoordinates(currentPosition + currentDirection) == null);
 
             Debug.Log($"LevelBuilder: <- CheckLevePath() true at pos: {currentPosition}, dir:{currentDirection}");
 
@@ -295,55 +293,6 @@ namespace Rectangle.Level
 
             return Vector2.zero;
 
-        }
-
-        private Vector2Int GetStartDirection()
-        {
-            Vector2Int direction = Vector2Int.zero;
-
-            if (levelData.GetGridSpot(gridData.start + Vector2Int.right) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.right).blocked)
-            {
-                direction = Vector2Int.right;
-            }
-            else if (levelData.GetGridSpot(gridData.start + Vector2Int.left) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.left).blocked)
-            {
-                direction = Vector2Int.left;
-            }
-            else if (levelData.GetGridSpot(gridData.start + Vector2Int.down) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.down).blocked)
-            {
-                direction = Vector2Int.down;
-            }
-            else if (levelData.GetGridSpot(gridData.start + Vector2Int.up) != null && !levelData.GetGridSpot(gridData.start + Vector2Int.up).blocked)
-            {
-                direction = Vector2Int.up;
-            }
-
-            return direction;
-        }
-
-        private Vector2Int GetEndDirection()
-        {
-            Vector2Int direction = Vector2Int.zero;
-
-            if (levelData.GetGridSpot(gridData.end + Vector2Int.left) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.left).blocked)
-            {
-                direction = Vector2Int.left;
-            }
-            else if (levelData.GetGridSpot(gridData.end + Vector2Int.right) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.right).blocked)
-            {
-                direction = Vector2Int.right;
-            }
-            else if (levelData.GetGridSpot(gridData.end + Vector2Int.up) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.up).blocked)
-            {
-                direction = Vector2Int.up;
-            }
-            else if (levelData.GetGridSpot(gridData.end + Vector2Int.down) != null && !levelData.GetGridSpot(gridData.end + Vector2Int.down).blocked)
-            {
-                direction = Vector2Int.down;
-            }
-
-
-            return direction;
         }
 
         public void DrawBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, TileBase tile)
@@ -405,7 +354,7 @@ namespace Rectangle.Level
                     }
                     else if (input == Vector2Int.down)
                     {
-                        return Vector2Int.right;
+                        return Vector2Int.left;
                     }
                     break;
                 case TileCreator.TileTypes.DownAndRight:
@@ -454,32 +403,4 @@ namespace Rectangle.Level
             return Vector2Int.FloorToInt(position / builderSettings.tileSize / gridTilemap.transform.lossyScale.x);
         }
     }
-    /*
-    public class LevelGrid
-    {
-        public Dictionary<Vector2Int, LevelSpot> grid;
-        public List<Vector2Int> anchorTiles;
-        public int height;
-        public int width;
-        public Vector2Int start;
-        public Vector2Int end;
-    }
-
-    public class LevelSpot
-    {
-        public Vector2Int coordinates;
-        public Vector2 worldPosition;
-        public LevelTile placedTile;
-        public bool anchor;
-        public bool blocked;
-
-        public LevelSpot(Vector2Int coordinates, Vector2 worldPosition, bool blocked, bool anchor)
-        {
-            this.coordinates = coordinates;
-            this.worldPosition = worldPosition;
-            this.blocked = blocked;
-            this.anchor = anchor;
-        }
-    }
-    */
 }
