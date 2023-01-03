@@ -8941,5 +8941,5 @@ MonoBehaviour:
     tileChanges: []
   collectablePositions: []
   tileSize: {x: 32, y: 18}
-  tileType: 5
+  tileType: 3
   playerMode: 2
