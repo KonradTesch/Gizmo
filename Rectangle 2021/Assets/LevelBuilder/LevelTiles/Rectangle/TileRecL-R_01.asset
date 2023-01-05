@@ -5412,7 +5412,102 @@ MonoBehaviour:
       e32: 0
       e33: 1
   platformTileChanges: []
-  rampTileChanges: []
+  rampTileChanges:
+  - position: {x: 2, y: 6, z: 0}
+    tile: {fileID: 11400000, guid: 40f63c9ce5c21a54586f96e6dfd59586, type: 2}
+    transform:
+      e00: 0
+      e01: 1
+      e02: 0
+      e03: 0.0002837181
+      e10: -1
+      e11: 0
+      e12: 0
+      e13: 0.0003312929
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 2, y: 11, z: 0}
+    tile: {fileID: 11400000, guid: 40f63c9ce5c21a54586f96e6dfd59586, type: 2}
+    transform:
+      e00: -1
+      e01: 0
+      e02: 0
+      e03: 0.0002837181
+      e10: 0
+      e11: -1
+      e12: 0
+      e13: 0.0003312929
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 26, y: 16, z: 0}
+    tile: {fileID: 11400000, guid: 06c3bde6b764e0d42a2f8ebecb8d844a, type: 2}
+    transform:
+      e00: 0
+      e01: 1
+      e02: 0
+      e03: 0.0002837181
+      e10: -1
+      e11: 0
+      e12: 0
+      e13: 0.0003312929
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 29, y: 6, z: 0}
+    tile: {fileID: 11400000, guid: 40f63c9ce5c21a54586f96e6dfd59586, type: 2}
+    transform:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0.0002837181
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0.0003312929
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - position: {x: 29, y: 11, z: 0}
+    tile: {fileID: 11400000, guid: 40f63c9ce5c21a54586f96e6dfd59586, type: 2}
+    transform:
+      e00: 0
+      e01: -1
+      e02: 0
+      e03: 0.0002837181
+      e10: 1
+      e11: 0
+      e12: 0
+      e13: 0.0003312929
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   spikesTileChanges:
   - position: {x: 3, y: 5, z: 0}
     tile: {fileID: 11400000, guid: 8b7ea902c92529142ab3d7083d3f6b11, type: 2}
