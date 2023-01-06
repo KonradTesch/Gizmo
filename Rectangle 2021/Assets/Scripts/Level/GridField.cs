@@ -5,12 +5,12 @@ using UnityEngine;
 namespace Rectangle.Level
 {
     /// <summary>
-    /// T#Storest wheter this tile is alredy used by a shape.
+    /// Stores wheter this tile is alredy used by a level block.
     /// </summary>
     public class GridField : MonoBehaviour
     {
         /// <summary>
-        /// Whether this tile is alredy used by a shape.
+        /// Whether this tile is alredy used by a levelblock.
         /// </summary>
         public bool isUsed = false;
     }

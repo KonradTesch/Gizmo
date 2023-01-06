@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TileRecO-U_01
   m_EditorClassIdentifier: 
   backgroundTileChanges: []
+  borderTileChanges: []
   groundTileChanges:
   - position: {x: 0, y: 0, z: 0}
     tile: {fileID: 11400000, guid: 628661577bba30644b3e72aa098837ff, type: 2}
@@ -2618,7 +2619,7 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 15, y: 13, z: 0}
-    tile: {fileID: 11400000, guid: 40f63c9ce5c21a54586f96e6dfd59586, type: 2}
+    tile: {fileID: 11400000, guid: f365c52d284ca4b4db169d29b8edb8ac, type: 2}
     transform:
       e00: 0
       e01: -1
@@ -2713,7 +2714,7 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 16, y: 14, z: 0}
-    tile: {fileID: 11400000, guid: 40f63c9ce5c21a54586f96e6dfd59586, type: 2}
+    tile: {fileID: 11400000, guid: f365c52d284ca4b4db169d29b8edb8ac, type: 2}
     transform:
       e00: 0
       e01: 1
@@ -5394,14 +5395,14 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 3, y: 13, z: 0}
-    tile: {fileID: 11400000, guid: fb15153c355dd9643836b66cc29562c3, type: 2}
+    tile: {fileID: 11400000, guid: f4cf5e7c52c9a6d428238864c8bddbed, type: 2}
     transform:
-      e00: -1
-      e01: 0
+      e00: 0
+      e01: 1
       e02: 0
       e03: 0.0002837181
-      e10: 0
-      e11: -1
+      e10: -1
+      e11: 0
       e12: 0
       e13: 0.0003312929
       e20: 0
@@ -5413,14 +5414,14 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 4, y: 12, z: 0}
-    tile: {fileID: 11400000, guid: fb15153c355dd9643836b66cc29562c3, type: 2}
+    tile: {fileID: 11400000, guid: f4cf5e7c52c9a6d428238864c8bddbed, type: 2}
     transform:
-      e00: -1
-      e01: 0
+      e00: 0
+      e01: 1
       e02: 0
       e03: 0.0002837181
-      e10: 0
-      e11: -1
+      e10: -1
+      e11: 0
       e12: 0
       e13: 0.0003312929
       e20: 0
@@ -5432,14 +5433,14 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 15, y: 6, z: 0}
-    tile: {fileID: 11400000, guid: fb15153c355dd9643836b66cc29562c3, type: 2}
+    tile: {fileID: 11400000, guid: f4cf5e7c52c9a6d428238864c8bddbed, type: 2}
     transform:
-      e00: 0
-      e01: -1
+      e00: -1
+      e01: 0
       e02: 0
       e03: 0.0002837181
-      e10: 1
-      e11: 0
+      e10: 0
+      e11: -1
       e12: 0
       e13: 0.0003312929
       e20: 0
@@ -5470,14 +5471,14 @@ MonoBehaviour:
       e32: 0
       e33: 1
   - position: {x: 16, y: 7, z: 0}
-    tile: {fileID: 11400000, guid: fb15153c355dd9643836b66cc29562c3, type: 2}
+    tile: {fileID: 11400000, guid: f4cf5e7c52c9a6d428238864c8bddbed, type: 2}
     transform:
-      e00: 0
-      e01: -1
+      e00: -1
+      e01: 0
       e02: 0
       e03: 0.0002837181
-      e10: 1
-      e11: 0
+      e10: 0
+      e11: -1
       e12: 0
       e13: 0.0003312929
       e20: 0
@@ -6175,7 +6176,7 @@ MonoBehaviour:
     waypoints:
     - {x: 0, y: 0}
     - {x: 4, y: 0}
-    movingType: 1
+    movingType: 0
     vanishing: 0
     vanishTime: 0
     tileChanges:
@@ -6202,7 +6203,7 @@ MonoBehaviour:
     waypoints:
     - {x: 0, y: 0}
     - {x: 4, y: 0}
-    movingType: 1
+    movingType: 0
     vanishing: 0
     vanishTime: 0
     tileChanges:

@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Rectangle.Level;
 
-namespace Rectangle.TileCreation
+namespace Rectangle.LevelCreation
 {
     public class TileCreator : MonoBehaviour
     {
         [Header("TileMaps")]
         public Tilemap backgroundTilemap;
+        public Tilemap borderTilemap;
         public Tilemap groundTilemap;
         public Tilemap rampTilemap;
         public Tilemap onewayPlatformTilemap;

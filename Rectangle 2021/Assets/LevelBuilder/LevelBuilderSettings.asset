@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileSize: {x: 32, y: 18}
   gridTiles: {fileID: 11400000, guid: cc5eb9e85f09778489507c1695470d46, type: 2}
+  closedBorderTile: {fileID: 11400000, guid: 1a463e5f1de665345b62dada1599ce5c, type: 2}
+  openBorderTile: {fileID: 11400000, guid: 04e8e986db5bca344b91ae89a3e10d58, type: 2}
   borderTile: {fileID: 11400000, guid: 6877d2a183d758f489621d5dd20de567, type: 2}
   gridLayer:
     serializedVersion: 2

@@ -1,4 +1,4 @@
-using Rectangle.TileCreation;
+using Rectangle.LevelCreation;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +10,8 @@ namespace Rectangle.Level
         [Header("Tiles")]
         public Vector2Int tileSize;
         public LevelTileData gridTiles;
+        public LevelTileData closedBorderTile;
+        public LevelTileData openBorderTile;
         public TileBase borderTile;
 
         [Header("Level Backgrounds")]
