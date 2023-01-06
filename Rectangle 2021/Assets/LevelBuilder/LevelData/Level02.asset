@@ -376,13 +376,13 @@ MonoBehaviour:
         playerMode: 3
         tileType: 7
       - coordinates: {x: 4, y: 3}
-        playerMode: 1
+        playerMode: 3
         tileType: 3
       - coordinates: {x: 4, y: 1}
-        playerMode: 1
+        playerMode: 3
         tileType: 5
       - coordinates: {x: 2, y: 0}
-        playerMode: 1
+        playerMode: 3
         tileType: 4
       - coordinates: {x: 3, y: 1}
         playerMode: 1

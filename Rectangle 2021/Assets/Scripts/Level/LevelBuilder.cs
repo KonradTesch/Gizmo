@@ -94,7 +94,7 @@ namespace Rectangle.Level
                             anchorTile.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
                             anchorTile.gameObject.layer = LayerMask.NameToLayer("Background");
 
-                            anchorTile.tileType = TileCreator.TileTypes.AllSides;
+                            anchorTile.tileType = TileCreator.TileTypes.Anchor;
                             anchorTile.tileSize = builderSettings.tileSize;
 
                             anchorTiles.Add(anchorTile);
@@ -103,7 +103,7 @@ namespace Rectangle.Level
                             tileRend.sortingLayerName = "Level";
                             tileRend.sprite = builderSettings.anchorTileSprite;
 
-                            Instantiate(anchorTextPrefab, anchorTile.transform.position, Quaternion.identity).GetComponent<UI.AnchorText>().SetTileNumbers(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
+                            Instantiate(anchorTextPrefab, anchorTile.transform.position, Quaternion.identity).GetComponentInChildren<UI.AnchorText>().SetTileNumbers(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
                         }
 
                     }

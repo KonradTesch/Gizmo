@@ -13,11 +13,14 @@ namespace Rectangle.LevelCreation
         public List<ChangeData> platformTileChanges;
         public List<ChangeData> rampTileChanges;
         public List<ChangeData> spikesTileChanges;
-
+        [Space()]
         public List<MovingObjectData> movingObjects;
-
+        [Space()]
         public Vector2[] collectablePositions;
-
+        [Space()]
+        public bool isRespawn;
+        public Vector3 respawnPosition;
+        [Space()]
         public Vector2Int tileSize;
         public TileCreator.TileTypes tileType;
         public Player.PlayerController.PlayerModes playerMode;

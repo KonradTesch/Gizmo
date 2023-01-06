@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rectangle.General;
 
 namespace Rectangle.UI
 {
@@ -20,6 +21,10 @@ namespace Rectangle.UI
         /// </summary>
         [Tooltip("The panel object of the pause menu screen.")]
         [SerializeField] private GameObject menuPanel;
+
+        [SerializeField] private GameObject gameOverPanel;
+
+        [SerializeField] private TimerUI timerUI;
 
         void Update()
         {
@@ -48,6 +53,13 @@ namespace Rectangle.UI
         {
             menuPanel.SetActive(false);
             Time.timeScale = 1;
+        }
+
+        public void Respawn()
+        {
+            gameOverPanel.SetActive(false);
+            GameBehavior.instance.player.PlayerRespawn();
+            timerUI.ResumeTimer();
         }
     }
 }

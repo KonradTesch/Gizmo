@@ -314,13 +314,13 @@ MonoBehaviour:
         playerMode: 1
         tileType: 2
       - coordinates: {x: 3, y: 1}
-        playerMode: 3
+        playerMode: 1
         tileType: 6
       - coordinates: {x: 4, y: 1}
         playerMode: 1
         tileType: 2
       - coordinates: {x: 3, y: 0}
-        playerMode: 1
+        playerMode: 3
         tileType: 4
       anchorCoordinates: {x: 1, y: 0}
     height: 3

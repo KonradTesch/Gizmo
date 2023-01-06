@@ -228,7 +228,6 @@ namespace Rectangle.LevelCreation
             tile.spikesTileChanges = new();
             tile.movingObjects = new();
 
-
             for(int i = 0; i < builder.movingObjects.Count; i++)
             {
                 WaypointFollower movingObject = builder.movingObjects[i].GetComponent<WaypointFollower>();
@@ -337,9 +336,13 @@ namespace Rectangle.LevelCreation
                 }
             }
 
+            if (builder.isRespawn && builder.respawnPosition != null)
+            {
+                tile.isRespawn = true;
+                tile.respawnPosition = builder.respawnPosition.localPosition;
+            }
 
-
-            if(builder.hasCollactables)
+            if (builder.hasCollactables)
             {
                 tile.collectablePositions = new Vector2[builder.collectableParent.childCount];
                 int i = 0;
@@ -479,6 +482,12 @@ namespace Rectangle.LevelCreation
                 newPlatform.RefreshAllTiles();
             }
 
+            if (tile.respawnPosition != null)
+            {
+                builder.respawnPosition.transform.localPosition = tile.respawnPosition;
+            }
+
+            builder.isRespawn = tile.isRespawn;
         }
 
         private Tilemap CreateMovingPlatform(TileCreator builder)
