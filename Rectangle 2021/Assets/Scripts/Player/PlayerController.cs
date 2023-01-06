@@ -46,6 +46,8 @@ namespace Rectangle.Player
         private CameraController camController;
         private PlayerInputActions inputActions;
 
+        private Vector2 currentCheckpoint;
+
         /// <summary>
         /// The enum with all player modes.
         /// </summary>
@@ -65,9 +67,17 @@ namespace Rectangle.Player
 
         }
 
+        private void Start()
+        {
+            currentCheckpoint = transform.position;
+        }
+
         void Update()
         {
-            CheckBackground();
+            if(playerActive)
+            {
+                CheckBackground();
+            }
         }
 
         private void FixedUpdate()
@@ -156,7 +166,15 @@ namespace Rectangle.Player
             {
                 playerActive = false;
                 GameBehavior.instance.BuildingMode();
+                currentCheckpoint = activePlayer.transform.position;
             }
+        }
+
+        public void PlayerRespawn()
+        {
+            activePlayer.transform.position = currentCheckpoint;
+            playerActive = true;
+            CheckBackground();
         }
 
         /// <summary>

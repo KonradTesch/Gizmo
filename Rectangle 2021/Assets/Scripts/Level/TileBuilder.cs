@@ -153,7 +153,7 @@ namespace Rectangle.Level
         {
             modeTiles = new()
             {
-                { TileCreator.TileTypes.AllSides, new()},
+                { TileCreator.TileTypes.Anchor, new()},
                 { TileCreator.TileTypes.LeftAndRight, new()},
                 { TileCreator.TileTypes.LeftAndUp, new()},
                 { TileCreator.TileTypes.LeftAndDown, new()},
@@ -167,8 +167,8 @@ namespace Rectangle.Level
             {
                 switch (tile.tileType)
                 {
-                    case TileCreator.TileTypes.AllSides:
-                        modeTiles[TileCreator.TileTypes.AllSides].Add(tile);
+                    case TileCreator.TileTypes.Anchor:
+                        modeTiles[TileCreator.TileTypes.Anchor].Add(tile);
                         break;
                     case TileCreator.TileTypes.LeftAndRight:
                         modeTiles[TileCreator.TileTypes.LeftAndRight].Add(tile);
