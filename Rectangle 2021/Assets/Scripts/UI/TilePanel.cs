@@ -68,7 +68,7 @@ namespace Rectangle.UI
             foreach (GridField gridCollider in usedGridFields)
             {
                 gridCollider.isUsed = false;
-                gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
+                gridCollider.backgroundRend.color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.None;
             }
 
