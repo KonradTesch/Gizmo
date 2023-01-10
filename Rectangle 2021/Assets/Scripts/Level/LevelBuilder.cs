@@ -17,6 +17,9 @@ namespace Rectangle.Level
         [SerializeField] private Tilemap gridTilemap;
         [SerializeField] private Tilemap borderTilemap;
 
+        [Header("Background")]
+        [SerializeField] private BackgroundController background;
+
         [Header("LevelText")]
         [SerializeField] private GameObject startText;
         [SerializeField] private GameObject endText;
@@ -39,6 +42,9 @@ namespace Rectangle.Level
             GameObject gridColliders = new GameObject("GridColliders");
 
             GameObject gridCollider = new GameObject("GridCollider");
+
+            GameObject gridBackground = new GameObject("GridBackground");
+            General.GameBehavior.instance.gridBackground = gridBackground;
 
             BoxCollider2D col = gridCollider.AddComponent<BoxCollider2D>();
             col.size = Vector2.one * builderSettings.tileSize * gridTilemap.transform.lossyScale;
@@ -69,10 +75,18 @@ namespace Rectangle.Level
 
                         GameObject newGridCol = Instantiate(gridCollider, new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale, Quaternion.identity, gridColliders.transform);
                         newGridCol.layer = LayerMask.NameToLayer("Grid");
-                        SpriteRenderer backgroundRend = newGridCol.AddComponent<SpriteRenderer>();
+                        newGridCol.AddComponent<BackgroundMode>();
+
+
+                        GameObject fieldBackgound = new GameObject("Field Background (" + x + "/" + y + ")");
+                        fieldBackgound.transform.SetParent(gridBackground.transform);
+                        fieldBackgound.transform.position = newGridCol.transform.position;
+
+                        SpriteRenderer backgroundRend = fieldBackgound.AddComponent<SpriteRenderer>();
                         backgroundRend.sortingLayerName = "Background";
                         backgroundRend.sprite = builderSettings.backgroundImage;
                         backgroundRend.sortingOrder = -1;
+
 
 
                         if(levelData.GetGridSpot(new Vector2Int(x, y)).star)
@@ -84,7 +98,7 @@ namespace Rectangle.Level
                             backgroundRend.color = Color.grey;
                         }
 
-                        newGridCol.AddComponent<BackgroundMode>();
+                        newGridCol.GetComponent<GridField>().backgroundRend = backgroundRend;
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).anchor)
                         {
@@ -113,6 +127,8 @@ namespace Rectangle.Level
                     }
                 }
             }
+            //Set the background to the center of the level
+            background.transform.position = new Vector3(gridData.width, gridData.height, 0) / 2 * (Vector2)builderSettings.tileSize;
 
             DrawBorder(gridData);
 

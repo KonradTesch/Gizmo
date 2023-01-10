@@ -87,7 +87,7 @@ namespace Rectangle.Player
                 Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
                 activePlayer.Move(movement);
 
-                if(movement.x > 0)
+                if(movement.x < 0)
                 {
                     activePlayer.transform.localScale = new Vector3(-1, 1, 1);
                 }
@@ -147,6 +147,8 @@ namespace Rectangle.Player
             headAnimator.transform.SetParent(activePlayer.transform);
             headAnimator.transform.localPosition = Vector3.zero;
             headAnimator.transform.localScale = Vector3.one;
+
+            GameBehavior.instance.background.SetBGColor(GameBehavior.instance.builderSettings.GetModeColor(mode));
 
             Debug.Log("ModeController: <- ChangeMode()");
 

@@ -13,5 +13,7 @@ namespace Rectangle.Level
         /// Whether this tile is alredy used by a levelblock.
         /// </summary>
         public bool isUsed = false;
+
+        [HideInInspector] public SpriteRenderer backgroundRend;
     }
 }
