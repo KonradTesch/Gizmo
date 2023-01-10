@@ -28138,6 +28138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450093, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1358079958}
     - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -28601,6 +28605,7 @@ MonoBehaviour:
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   tileInventory: []
   levelBuilder: {fileID: 0}
+  gridBackground: {fileID: 0}
 --- !u!4 &2001858575
 Transform:
   m_ObjectHideFlags: 0

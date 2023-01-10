@@ -87,7 +87,7 @@ namespace Rectangle.Player
                 Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
                 activePlayer.Move(movement);
 
-                if(movement.x > 0)
+                if(movement.x < 0)
                 {
                     activePlayer.transform.localScale = new Vector3(-1, 1, 1);
                 }

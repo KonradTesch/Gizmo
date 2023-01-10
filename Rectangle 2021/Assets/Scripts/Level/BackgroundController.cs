@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Rectangle
+namespace Rectangle.Level
 {
     public class BackgroundController : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer lastLayer;
 
         [Header("Parallax Effect")]
-        [SerializeField] private Camera mainCam;
-        [SerializeField] private float parallaxMultiplierMultiplier;
+        [SerializeField] private float parallaxMultiplier;
         [SerializeField] private GameObject[] parallaxLayers;
+
+        private Camera mainCam;
+
+        private void Start()
+        {
+            mainCam = Camera.main;
+        }
 
         private void FixedUpdate()
         {
@@ -27,7 +33,7 @@ namespace Rectangle
         {
             for (int i = 0; i < parallaxLayers.Length; i++)
             {
-                parallaxLayers[i].transform.localPosition = mainCam.transform.position * parallaxMultiplierMultiplier * i;
+                parallaxLayers[i].transform.localPosition = mainCam.transform.position * parallaxMultiplier * i;
             }
         }
     }

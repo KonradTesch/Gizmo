@@ -28737,6 +28737,7 @@ MonoBehaviour:
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   tileInventory: []
   levelBuilder: {fileID: 0}
+  gridBackground: {fileID: 0}
 --- !u!4 &2001858575
 Transform:
   m_ObjectHideFlags: 0
