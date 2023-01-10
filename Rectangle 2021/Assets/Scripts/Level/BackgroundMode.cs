@@ -16,15 +16,5 @@ namespace Rectangle.Level
         /// </summary>
         [Tooltip("The mode of this background shape.")]
         public PlayerController.PlayerModes playerMode;
-
-        /// <summary>
-        /// Collider of this background shape.
-        /// </summary>
-        [HideInInspector] public BoxCollider2D bgCollider;
-
-        private void Awake()
-        {
-            bgCollider = GetComponent<BoxCollider2D>();
-        }
     }
 }

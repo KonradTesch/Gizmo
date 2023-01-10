@@ -27821,6 +27821,17 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &1694414731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1551824154964450093, guid: b22af7be932f7024e96296789c241a26, type: 3}
+  m_PrefabInstance: {fileID: 1860370280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a498cd12e54e12e46b130443cdca8257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1762109797
 GameObject:
   m_ObjectHideFlags: 0
@@ -28116,6 +28127,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809719488}
   m_CullTransparentMesh: 0
+--- !u!1001 &1860370280
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1551824154964450092, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_Name
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450093, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1358079958}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b22af7be932f7024e96296789c241a26, type: 3}
 --- !u!1001 &1871441103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28529,9 +28601,11 @@ MonoBehaviour:
   cancelBuildingButton: {fileID: 1244814870}
   sucessPanel: {fileID: 1528619786}
   gameOverPanel: {fileID: 1894007919}
+  background: {fileID: 1694414731}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   tileInventory: []
   levelBuilder: {fileID: 0}
+  gridBackground: {fileID: 0}
 --- !u!4 &2001858575
 Transform:
   m_ObjectHideFlags: 0
@@ -28615,6 +28689,7 @@ MonoBehaviour:
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   gridTilemap: {fileID: 1521520081}
   borderTilemap: {fileID: 298339190}
+  background: {fileID: 1694414731}
   startText: {fileID: 1567240318}
   endText: {fileID: 1422954950}
   anchorTextPrefab: {fileID: 41922099928284676, guid: 2915ec6b9604e1f43b2ae1916f7195ce, type: 3}

@@ -18,7 +18,6 @@ namespace Rectangle.Player
         {
             if (currentCoyoteTime > 0)
             {
-                animator.SetTrigger("jump");
                 grounded = false;
 
                 //Resets the velocity on the y axis

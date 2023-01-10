@@ -68,7 +68,7 @@ namespace Rectangle.Level
                 BackgroundMode background =  Physics2D.OverlapPoint(anchorTile.transform.position, gridLayer).GetComponent<BackgroundMode>();
 
                 background.playerMode = randomAnchorTile.playerMode;
-                background.GetComponent<SpriteRenderer>().color = GameBehavior.instance.builderSettings.GetModeColor(randomAnchorTile.playerMode);
+                background.GetComponent<GridField>().backgroundRend.color = GameBehavior.instance.builderSettings.GetModeColor(randomAnchorTile.playerMode);
 
                 anchorTile.gameObject.SetActive(false);
 
