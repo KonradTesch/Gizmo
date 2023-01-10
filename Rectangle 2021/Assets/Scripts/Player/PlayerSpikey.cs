@@ -17,6 +17,8 @@ namespace Rectangle.Player
 
         [SerializeField] private float rotationSpeed;
 
+        [SerializeField] private ParticleSystem dust;
+
         private bool onWallRight;
         private bool onWallLeft;
         private bool onWallEnd;
@@ -128,6 +130,7 @@ namespace Rectangle.Player
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
                 StartCoroutine(nameof(TimeAfterJump));
                 currentCoyoteTime = 0;
+                CreateDust();
             }
 
             if (climb && onWallRight)
@@ -138,6 +141,11 @@ namespace Rectangle.Player
             {
                 rigidBody.AddForce(new Vector2(jumpForce * 10, jumpForce * 5), ForceMode2D.Force);
             }
+        }
+
+        void CreateDust()
+        {
+            dust.Play();
         }
     }
 }

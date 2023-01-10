@@ -9,6 +9,7 @@ namespace Rectangle.Player
     /// </summary>
     public class PlayerRectangle : PlayerBase
     {
+      [SerializeField] private ParticleSystem dust;
         private bool canDoubleJump;
 
         /// <summary>
@@ -26,6 +27,8 @@ namespace Rectangle.Player
                 //Add the jump force
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
                 currentCoyoteTime = 0;
+
+                CreateDust();
             }
             else if (canDoubleJump && !onRamp)
             {
@@ -51,6 +54,11 @@ namespace Rectangle.Player
                 transform.rotation = Quaternion.identity;
             }
 
+        }
+
+        void CreateDust()
+        {
+            dust.Play();
         }
     }
 }

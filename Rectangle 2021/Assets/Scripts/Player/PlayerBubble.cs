@@ -16,6 +16,7 @@ namespace Rectangle.Player
         [SerializeField] private float lowGravityScale = 0.2f;
 
         [SerializeField] private float rotationSpeed;
+        [SerializeField] private ParticleSystem dust;
 
         private bool falling;
         private bool floating = false;
@@ -89,6 +90,7 @@ namespace Rectangle.Player
         public override void Jump()
         {
             base.Jump();
+            CreateDust();
 
             if (!grounded && !onRamp && !floating && !timeAfterJump)
             {
@@ -100,6 +102,10 @@ namespace Rectangle.Player
                 animator.SetBool("float", false);
                 floating = false;
             }
+        }
+        void CreateDust()
+        {
+            dust.Play();
         }
     }
 }
