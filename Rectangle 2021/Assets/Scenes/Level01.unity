@@ -17312,12 +17312,28 @@ PrefabInstance:
       propertyPath: dust
       value: 
       objectReference: {fileID: 1114303194}
+    - target: {fileID: 3683547977414959958, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: dustParticle
+      value: 
+      objectReference: {fileID: 1114303194}
+    - target: {fileID: 3683547978436954697, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: dustParticle
+      value: 
+      objectReference: {fileID: 1114303194}
     - target: {fileID: 3683547979103905857, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
       propertyPath: dust
       value: 
       objectReference: {fileID: 1114303194}
+    - target: {fileID: 3683547979103905857, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: dustParticle
+      value: 
+      objectReference: {fileID: 1114303194}
     - target: {fileID: 3683547979325627247, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
       propertyPath: dust
+      value: 
+      objectReference: {fileID: 1114303194}
+    - target: {fileID: 3683547979325627247, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: dustParticle
       value: 
       objectReference: {fileID: 1114303194}
     - target: {fileID: 3683547979325627247, guid: 96603931c961d0c488035f0cde3561eb, type: 3}

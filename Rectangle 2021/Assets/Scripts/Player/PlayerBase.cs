@@ -10,7 +10,6 @@ namespace Rectangle.Player
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(AudioSource))]
-    [RequireComponent (typeof(ParticleSystem))]
     public class PlayerBase : MonoBehaviour
     {
         [Header("Movement")]
@@ -46,6 +45,8 @@ namespace Rectangle.Player
         /// </summary>
         [Tooltip("Whether it is possible to control the player in the air.")]
         [SerializeField] protected bool airControl = true;
+
+        [SerializeField]protected ParticleSystem dustParticle;
 
         [Header("Layers")]
         /// <summary>
@@ -90,7 +91,6 @@ namespace Rectangle.Player
         protected Rigidbody2D rigidBody;
         protected Collider2D col;
         protected AudioSource audioSource;
-        protected ParticleSystem dustParticle;
 
 
         protected Collider2D platformCollider;
@@ -108,7 +108,6 @@ namespace Rectangle.Player
             col = GetComponent<Collider2D>();
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
-            dustParticle = GetComponent<ParticleSystem>();
         }
 
         private void OnEnable()
