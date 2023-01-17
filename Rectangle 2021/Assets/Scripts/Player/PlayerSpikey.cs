@@ -145,12 +145,7 @@ namespace Rectangle.Player
 
         public override void Jump()
         {
-            if (currentCoyoteTime > 0)
-            {
-                rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
-                StartCoroutine(nameof(TimeAfterJump));
-                currentCoyoteTime = 0;
-            }
+            base.Jump();
 
             if (climb && onWallRight)
             {

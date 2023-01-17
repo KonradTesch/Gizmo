@@ -28,6 +28,8 @@ namespace Rectangle.Player
 
                 audioSource.PlayOneShot(jumpSound);
 
+                CreateDust();
+
                 grounded = false;
 
                 //Resets the velocity on the y axis
