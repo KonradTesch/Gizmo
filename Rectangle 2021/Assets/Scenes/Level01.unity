@@ -12144,7 +12144,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2001858574}
         m_TargetAssemblyTypeName: Rectangle.General.GameBehavior, Assembly-CSharp
-        m_MethodName: CanncelGameMode
+        m_MethodName: CanncelBuildingMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

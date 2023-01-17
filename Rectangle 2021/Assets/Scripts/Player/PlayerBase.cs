@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Rectangle.Player
 {
     /// <summary>
     /// The base scipt for the player movement.
     /// </summary>
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(AudioSource))]
     public class PlayerBase : MonoBehaviour
     {
         [Header("Movement")]
@@ -56,6 +59,10 @@ namespace Rectangle.Player
         [Tooltip("The layer of the ramp tiles.")]
         [SerializeField] private LayerMask rampLayer;
 
+        [Header("Sounds")]
+        [SerializeField] protected AudioClip moveSound;
+        [SerializeField] protected AudioClip jumpSound;
+        [SerializeField] protected AudioClip landingSound;
         /// <summary>
         /// Whetser the player is on the ground.
         /// </summary>
@@ -81,6 +88,7 @@ namespace Rectangle.Player
 
         protected Rigidbody2D rigidBody;
         protected Collider2D col;
+        protected AudioSource audioSource;
 
         protected Collider2D platformCollider;
 
@@ -96,6 +104,7 @@ namespace Rectangle.Player
             rigidBody = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
             animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         private void OnEnable()
@@ -114,6 +123,20 @@ namespace Rectangle.Player
             else
             {
                 currentCoyoteTime -= Time.deltaTime;
+            }
+
+
+            if((grounded || onRamp) && Mathf.Abs(rigidBody.velocity.x) >  0.1f && !audioSource.isPlaying)
+            {
+                audioSource.clip = moveSound;
+                audioSource.loop = true;
+                audioSource.Play();
+
+            }
+            else if (audioSource.clip == moveSound && Mathf.Abs(rigidBody.velocity.x) < 0.1f)
+            {
+                audioSource.Stop();
+                audioSource.clip = null;
             }
         }
 
@@ -137,6 +160,7 @@ namespace Rectangle.Player
                 rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
             }
 
+
             if (onPlatform && horizontalMove.y < -0.2f && platformCollider != null)
             {
                 StartCoroutine(FallThroughPlatform());
@@ -150,6 +174,14 @@ namespace Rectangle.Player
         {
             if (currentCoyoteTime > 0)
             {
+                if(audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                    audioSource.clip = null;
+                }
+
+                audioSource.PlayOneShot(jumpSound);
+
                 rigidBody.AddForce(new Vector2(0f, jumpForce * 10));
                 StartCoroutine(nameof(TimeAfterJump));
 
@@ -174,6 +206,11 @@ namespace Rectangle.Player
 
             if (Physics2D.Raycast(new Vector2(col.bounds.center.x, col.bounds.min.y), Vector3.down, filter, hits , 0.2f) > 0)
             {
+                if(!grounded && rigidBody.velocity.y < -0.1f) 
+                {
+                    audioSource.PlayOneShot(landingSound);
+                }
+
                 grounded = true;
                 for(int i = 0; i < hits.Length; i++)
                 {

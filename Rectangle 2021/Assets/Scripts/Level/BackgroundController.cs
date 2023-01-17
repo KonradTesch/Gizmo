@@ -24,11 +24,6 @@ namespace Rectangle.Level
             ParallaxScrolling();
         }
 
-        public void SetBGColor(Color color)
-        {
-            lastLayer.color = color;
-        }
-
         private void ParallaxScrolling()
         {
             for (int i = 0; i < parallaxLayers.Length; i++)

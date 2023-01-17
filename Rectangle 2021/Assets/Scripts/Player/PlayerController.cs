@@ -148,8 +148,6 @@ namespace Rectangle.Player
             headAnimator.transform.localPosition = Vector3.zero;
             headAnimator.transform.localScale = Vector3.one;
 
-            GameBehavior.instance.background.SetBGColor(GameBehavior.instance.builderSettings.GetModeColor(mode));
-
             Debug.Log("ModeController: <- ChangeMode()");
 
         }

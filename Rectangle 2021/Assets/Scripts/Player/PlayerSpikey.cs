@@ -9,6 +9,8 @@ namespace Rectangle.Player
     /// </summary>
     public class PlayerSpikey : PlayerBase
     {
+        [Header("Special Ability")]
+
         /// <summary>
         /// The speed of the climbing player.
         /// </summary>
@@ -17,11 +19,17 @@ namespace Rectangle.Player
 
         [SerializeField] private float rotationSpeed;
 
+        [Space()]
+
+        [SerializeField] private AudioClip climbSound;
+
+
+
         private bool onWallRight;
         private bool onWallLeft;
         private bool onWallEnd;
 
-        private bool climb;
+        public bool climb;
 
 
         protected override void FixedUpdate()
@@ -49,9 +57,9 @@ namespace Rectangle.Player
             onWallRight = false;
             onWallLeft = false;
 
-            if (Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.01f, groundLayer))
+            if (Physics2D.Raycast(new Vector2(col.bounds.max.x, col.bounds.center.y), Vector2.right, 0.03f, groundLayer))
                 onWallRight = true;
-            else if (Physics2D.Raycast(new Vector2(col.bounds.min.x, col.bounds.center.y), Vector2.left, 0.01f, groundLayer))
+            else if (Physics2D.Raycast(new Vector2(col.bounds.min.x, col.bounds.center.y), Vector2.left, 0.03f, groundLayer))
                 onWallLeft = true;
 
             onWallEnd = false;
@@ -93,8 +101,16 @@ namespace Rectangle.Player
 
             }
 
-            if ((onWallRight || onWallLeft) && climb)
+            if (climb)
             {
+                if(!audioSource.isPlaying)
+                {
+                    Debug.Log("Start playing climbing");
+                    audioSource.clip = climbSound;
+                    audioSource.loop = true;
+                    audioSource.Play();
+                }
+
                 targetVelocity = new Vector2(0, horizontalMove.y * climbSpeed * Time.fixedDeltaTime);
                 if(onWallRight)
                 {
@@ -104,6 +120,12 @@ namespace Rectangle.Player
                 {
                     transform.rotation = Quaternion.Euler(0, 0, (transform.rotation.eulerAngles.z + (rigidBody.velocity.y * rotationSpeed * Time.deltaTime)) % 360);
                 }
+            }
+            else if(audioSource.clip == climbSound)
+            {
+                Debug.Log("Stop playing climbing");
+                audioSource.clip = null;
+                audioSource.Stop();
             }
 
             if (onWallEnd && Mathf.Abs(horizontalMove.x) > 0.2f)
