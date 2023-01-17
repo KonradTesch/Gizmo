@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Rectangle.Audio
 {
-    public class PlayAudioOnEvent : MonoBehaviour
+    public class PlayAudioOnEventOne : MonoBehaviour
     {
         public AudioSource source;
-        public AudioClip clip;
+        public AudioClip clipOne;
 
-        public void PlayAudio()
+        public void PlayAudioOne()
         {
-            source.PlayOneShot(clip);
+            source.PlayOneShot(clipOne);
         }
     }
 }
