@@ -9,7 +9,6 @@ namespace Rectangle.Level
     public class LevelBuilder : MonoBehaviour
     {
         [Header("Builder Data")]
-        //[SerializeField] private Texture2D[] levelLayouts;
         public LevelData levelData;
         [SerializeField] private LevelBuilderSettings builderSettings;
 
@@ -277,33 +276,33 @@ namespace Rectangle.Level
 
             if (direction == Vector2Int.right)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 10), position.y * size.y + (size.y / 2 - 6)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 5)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 8), position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 3)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 6), position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 3)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 4), position.y * size.y + (size.y / 2 - 2)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 1)), null);
 
 
-                return new Vector2((position.x + 1) * size.x - 4, (position.y + 0.5f) * size.y);
+                return new Vector2((position.x + 1) * size.x - 2, (position.y + 0.5f) * size.y);
             }
             else if (direction == Vector2Int.left)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 6)), new Vector2Int(position.x * size.x + 9, position.y * size.y + (size.y / 2 + 5)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + 7, position.y * size.y + (size.y / 2 + 3)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + 5, position.y * size.y + (size.y / 2 + 3)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 2)), new Vector2Int(position.x * size.x + 3, position.y * size.y + (size.y / 2 + 1)), null);
 
-                return new Vector2(position.x * size.x + 4 , (position.y + 0.5f) * size.y);
+                return new Vector2(position.x * size.x + 2 , (position.y + 0.5f) * size.y);
             }
             else if (direction == Vector2Int.down)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 8), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 7), position.y * size.y + 11), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + 5), null);
 
-                return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 4);
+                return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 2);
 
             }
             else if (direction == Vector2Int.up)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 8), position.y * size.y + (size.y - 12)), new Vector2Int(position.x * size.x + (size.x / 2 + 7), position.y * size.y + (size.y - 1)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y + (size.y - 8)), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + (size.y - 1)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y + (size.y - 6)), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + (size.y - 1)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y + (size.y - 4)), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + (size.y - 1)), null);
 
-                return new Vector2((position.x + 0.5f) * size.x, (position.y + 1) * size.y - 4)
+                return new Vector2((position.x + 0.5f) * size.x, (position.y + 1) * size.y - 2)
 ;
             }
 
