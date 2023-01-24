@@ -4960,6 +4960,10 @@ MonoBehaviour:
   spikesTileChanges: []
   movingObjects: []
   collectablePositions: []
+  hasStar: 1
+  starPosition: {x: 12.5, y: 10, z: 0}
+  isRespawn: 0
+  respawnPosition: {x: 0, y: 0, z: 0}
   tileSize: {x: 32, y: 18}
   tileType: 3
   playerMode: 1

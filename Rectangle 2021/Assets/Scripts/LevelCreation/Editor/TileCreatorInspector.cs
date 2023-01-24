@@ -342,6 +342,12 @@ namespace Rectangle.LevelCreation
                 tile.respawnPosition = builder.respawnPosition.localPosition;
             }
 
+            if(builder.hasStar && builder.starTransform != null)
+            {
+                tile.hasStar = true;
+                tile.starPosition = builder.starTransform.localPosition;
+            }
+
             if (builder.hasCollactables)
             {
                 tile.collectablePositions = new Vector2[builder.collectableParent.childCount];
@@ -482,12 +488,18 @@ namespace Rectangle.LevelCreation
                 newPlatform.RefreshAllTiles();
             }
 
-            if (tile.respawnPosition != null)
+            builder.isRespawn = tile.isRespawn;
+            if (tile.isRespawn && builder.respawnPosition != null)
             {
-                builder.respawnPosition.transform.localPosition = tile.respawnPosition;
+                builder.respawnPosition.localPosition = tile.respawnPosition;
             }
 
-            builder.isRespawn = tile.isRespawn;
+            builder.hasStar = tile.hasStar;
+            if (tile.hasStar && builder.starTransform != null)
+            {
+                builder.starTransform.localPosition = tile.starPosition;
+            }
+
         }
 
         private Tilemap CreateMovingPlatform(TileCreator builder)
