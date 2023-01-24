@@ -29,12 +29,18 @@ namespace Rectangle.Level
 
         private Dictionary<TileCreator.TileTypes, List<LevelTileData>> modeTiles;
 
+        private LevelBuilderSettings builderSettings;
+
         public enum Direction { None, Up, Right, Down, Left}
 
         private void Awake()
         {
             InitModeTiles();
+        }
 
+        private void Start()
+        {
+            builderSettings = GameBehavior.instance.builderSettings;
         }
 
         public void BuildLevel(List<LevelTile> placedTiles, List<LevelTile> anchorLevelTiles, LevelData levelData)
@@ -296,12 +302,18 @@ namespace Rectangle.Level
                 platformTilemap.RefreshAllTiles();
             }
 
+            if (GameBehavior.instance.levelBuilder.levelData.GetGridSpot(GameBehavior.instance.levelBuilder.WorldPositionToCoordinate((Vector2)originPosition)).star)
+            {
+                GameObject star = Instantiate(builderSettings.starPrefab);
+
+                star.transform.position = (Vector2)originPosition + (Vector2)tile.starPosition;
+            }
+
         }
 
         private void CloseAnkerTile(LevelTile anchorTile)
         {
             LevelBuilder levelBuilder = GameBehavior.instance.levelBuilder;
-            LevelBuilderSettings builderSettings = GameBehavior.instance.builderSettings;
 
             Vector2Int anchorCoordinate = levelBuilder.WorldPositionToCoordinate(anchorTile.transform.position);
 

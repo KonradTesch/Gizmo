@@ -27,7 +27,12 @@ namespace Rectangle.Level
         [Header("LevelTiles")]
 
         public Sprite anchorTileSprite;
-        public TileType[] tileTypes; 
+        public TileType[] tileTypes;
+
+        [Header("Star")]
+
+        public GameObject starPrefab;
+        public Sprite starSprite;
 
         public Sprite GetTileTypeSprite(TileCreator.TileTypes tileType)
         {

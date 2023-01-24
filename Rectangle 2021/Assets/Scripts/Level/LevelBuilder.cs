@@ -29,21 +29,21 @@ namespace Rectangle.Level
 
         [HideInInspector] public LevelGrid gridData;
 
-        private Vector2Int startDirection;
-        private Vector2Int endDirection;
-
         public void BuildLevel()
         {
             DestroyImmediate(GameObject.Find("GridColliders"));
 
             gridData = levelData.gridData;
 
-            GameObject gridColliders = new GameObject("GridColliders");
-
-            GameObject gridCollider = new GameObject("GridCollider");
-
+            //Create parent for the grid backgrounds.
             GameObject gridBackground = new GameObject("GridBackground");
             General.GameBehavior.instance.gridBackground = gridBackground;
+
+            //Create parent for the grid colliders.
+            GameObject gridColliders = new GameObject("GridColliders");
+
+            //Create reference for the grid colliders.
+            GameObject gridCollider = new GameObject("GridCollider");
 
             BoxCollider2D col = gridCollider.AddComponent<BoxCollider2D>();
             col.size = Vector2.one * builderSettings.tileSize * gridTilemap.transform.lossyScale;
@@ -86,15 +86,23 @@ namespace Rectangle.Level
                         backgroundRend.sprite = builderSettings.backgroundImage;
                         backgroundRend.sortingOrder = -1;
 
+                        backgroundRend.color = Color.grey;
 
 
-                        if(levelData.GetGridSpot(new Vector2Int(x, y)).star)
+                        if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
-                            backgroundRend.color = Color.yellow;
-                        }
-                        else
-                        {
-                            backgroundRend.color = Color.grey;
+                            GameObject starSprite = new GameObject("StarSprite");
+                            starSprite.transform.SetParent(fieldBackgound.transform);
+                            starSprite.transform.localPosition = Vector3.zero;
+                            starSprite.transform.localScale = Vector3.one * 10;
+
+                            SpriteRenderer starRend = starSprite.AddComponent<SpriteRenderer>();
+                            starRend.sprite = builderSettings.starSprite;
+                            starRend.sortingLayerName = "Background";
+                            starRend.sortingOrder = 0;
+                            starRend.color = Color.yellow;
+
+                            newGridCol.GetComponent<BackgroundMode>().hasStar = true;
                         }
 
                         newGridCol.GetComponent<GridField>().backgroundRend = backgroundRend;
@@ -122,6 +130,7 @@ namespace Rectangle.Level
                     }
                     else
                     {
+                        //block the spot with border tiles.
                         DrawBox(borderTilemap, new Vector2Int(x, y) * builderSettings.tileSize, new Vector2Int(x + 1, y + 1) * builderSettings.tileSize - Vector2Int.one, builderSettings.borderTile);
                     }
                 }

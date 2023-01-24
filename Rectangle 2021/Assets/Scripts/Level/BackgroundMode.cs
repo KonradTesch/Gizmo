@@ -16,5 +16,7 @@ namespace Rectangle.Level
         /// </summary>
         [Tooltip("The mode of this background shape.")]
         public PlayerController.PlayerModes playerMode;
+
+        public bool hasStar = false;
     }
 }
