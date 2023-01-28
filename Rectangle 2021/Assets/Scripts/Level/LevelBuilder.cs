@@ -111,16 +111,17 @@ namespace Rectangle.Level
                         {
                             newGridCol.GetComponent<GridField>().isUsed = true;
 
-                            LevelTile anchorTile = new GameObject("Anchor_Tile").AddComponent<LevelTile>();
+                            LevelTile anchorTile = Instantiate(builderSettings.levelTilePrefab).GetComponent<LevelTile>();
+                            anchorTile.gameObject.name = "Anchor_Tile";
                             anchorTile.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
                             anchorTile.gameObject.layer = LayerMask.NameToLayer("Background");
 
                             anchorTile.tileType = TileCreator.TileTypes.Anchor;
-                            anchorTile.tileSize = builderSettings.tileSize;
+                            anchorTile.playerMode = Player.PlayerController.PlayerModes.Rectangle;
 
                             anchorTiles.Add(anchorTile);
 
-                            SpriteRenderer tileRend = anchorTile.gameObject.AddComponent<SpriteRenderer>();
+                            SpriteRenderer tileRend = anchorTile.GetComponent<SpriteRenderer>();
                             tileRend.sortingLayerName = "Level";
                             tileRend.sprite = builderSettings.anchorTileSprite;
 
@@ -151,7 +152,7 @@ namespace Rectangle.Level
             startCollider.gameObject.layer = LayerMask.NameToLayer("Grid");
             startCollider.transform.position = startPos;
             startCollider.AddComponent<BoxCollider2D>().isTrigger = true;
-            startCollider.GetComponent<BoxCollider2D>().size = new Vector2(8, 8);
+            startCollider.GetComponent<BoxCollider2D>().size = new Vector2(4, 4);
             startCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
             startCollider.AddComponent<GridField>().isUsed = true;
 
@@ -165,7 +166,7 @@ namespace Rectangle.Level
             endCollider.gameObject.layer = LayerMask.NameToLayer("Grid");
             endCollider.transform.position = endPos;
             endCollider.AddComponent<BoxCollider2D>().isTrigger = true;
-            endCollider.GetComponent<BoxCollider2D>().size = new Vector2(8, 8);
+            endCollider.GetComponent<BoxCollider2D>().size = new Vector2(4, 4);
             endCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
             endCollider.AddComponent<GridField>().isUsed = true;
             SuccessTrigger success = endCollider.AddComponent<SuccessTrigger>();
@@ -346,6 +347,7 @@ namespace Rectangle.Level
                 }
             }
         }
+
 
         private Vector2Int GetNextDirection(TileCreator.TileTypes tileType, Vector2Int input)
         {
