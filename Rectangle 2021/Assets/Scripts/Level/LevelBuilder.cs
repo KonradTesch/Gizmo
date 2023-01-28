@@ -9,13 +9,15 @@ namespace Rectangle.Level
     public class LevelBuilder : MonoBehaviour
     {
         [Header("Builder Data")]
-        //[SerializeField] private Texture2D[] levelLayouts;
         public LevelData levelData;
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [Header("Tilemaps")]
         [SerializeField] private Tilemap gridTilemap;
         [SerializeField] private Tilemap borderTilemap;
+
+        [Header("Background")]
+        [SerializeField] private BackgroundController background;
 
         [Header("LevelText")]
         [SerializeField] private GameObject startText;
@@ -27,17 +29,20 @@ namespace Rectangle.Level
 
         [HideInInspector] public LevelGrid gridData;
 
-        private Vector2Int startDirection;
-        private Vector2Int endDirection;
-
         public void BuildLevel()
         {
             DestroyImmediate(GameObject.Find("GridColliders"));
 
             gridData = levelData.gridData;
 
+            //Create parent for the grid backgrounds.
+            GameObject gridBackground = new GameObject("GridBackground");
+            General.GameBehavior.instance.gridBackground = gridBackground;
+
+            //Create parent for the grid colliders.
             GameObject gridColliders = new GameObject("GridColliders");
 
+            //Create reference for the grid colliders.
             GameObject gridCollider = new GameObject("GridCollider");
 
             BoxCollider2D col = gridCollider.AddComponent<BoxCollider2D>();
@@ -69,22 +74,38 @@ namespace Rectangle.Level
 
                         GameObject newGridCol = Instantiate(gridCollider, new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale, Quaternion.identity, gridColliders.transform);
                         newGridCol.layer = LayerMask.NameToLayer("Grid");
-                        SpriteRenderer backgroundRend = newGridCol.AddComponent<SpriteRenderer>();
+                        newGridCol.AddComponent<BackgroundMode>();
+
+
+                        GameObject fieldBackgound = new GameObject("Field Background (" + x + "/" + y + ")");
+                        fieldBackgound.transform.SetParent(gridBackground.transform);
+                        fieldBackgound.transform.position = newGridCol.transform.position;
+
+                        SpriteRenderer backgroundRend = fieldBackgound.AddComponent<SpriteRenderer>();
                         backgroundRend.sortingLayerName = "Background";
                         backgroundRend.sprite = builderSettings.backgroundImage;
                         backgroundRend.sortingOrder = -1;
 
+                        backgroundRend.color = Color.grey;
 
-                        if(levelData.GetGridSpot(new Vector2Int(x, y)).star)
+
+                        if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
-                            backgroundRend.color = Color.yellow;
-                        }
-                        else
-                        {
-                            backgroundRend.color = Color.grey;
+                            GameObject starSprite = new GameObject("StarSprite");
+                            starSprite.transform.SetParent(fieldBackgound.transform);
+                            starSprite.transform.localPosition = Vector3.zero;
+                            starSprite.transform.localScale = Vector3.one * 10;
+
+                            SpriteRenderer starRend = starSprite.AddComponent<SpriteRenderer>();
+                            starRend.sprite = builderSettings.starSprite;
+                            starRend.sortingLayerName = "Background";
+                            starRend.sortingOrder = 0;
+                            starRend.color = Color.yellow;
+
+                            newGridCol.GetComponent<BackgroundMode>().hasStar = true;
                         }
 
-                        newGridCol.AddComponent<BackgroundMode>();
+                        newGridCol.GetComponent<GridField>().backgroundRend = backgroundRend;
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).anchor)
                         {
@@ -109,10 +130,13 @@ namespace Rectangle.Level
                     }
                     else
                     {
+                        //block the spot with border tiles.
                         DrawBox(borderTilemap, new Vector2Int(x, y) * builderSettings.tileSize, new Vector2Int(x + 1, y + 1) * builderSettings.tileSize - Vector2Int.one, builderSettings.borderTile);
                     }
                 }
             }
+            //Set the background to the center of the level
+            background.transform.position = new Vector3(gridData.width, gridData.height, 0) / 2 * (Vector2)builderSettings.tileSize;
 
             DrawBorder(gridData);
 
@@ -261,33 +285,33 @@ namespace Rectangle.Level
 
             if (direction == Vector2Int.right)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 10), position.y * size.y + (size.y / 2 - 6)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 5)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 8), position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 3)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 6), position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 3)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 4), position.y * size.y + (size.y / 2 - 2)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 1)), null);
 
 
-                return new Vector2((position.x + 1) * size.x - 4, (position.y + 0.5f) * size.y);
+                return new Vector2((position.x + 1) * size.x - 2, (position.y + 0.5f) * size.y);
             }
             else if (direction == Vector2Int.left)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 6)), new Vector2Int(position.x * size.x + 9, position.y * size.y + (size.y / 2 + 5)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + 7, position.y * size.y + (size.y / 2 + 3)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + 5, position.y * size.y + (size.y / 2 + 3)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x, position.y * size.y + (size.y / 2 - 2)), new Vector2Int(position.x * size.x + 3, position.y * size.y + (size.y / 2 + 1)), null);
 
-                return new Vector2(position.x * size.x + 4 , (position.y + 0.5f) * size.y);
+                return new Vector2(position.x * size.x + 2 , (position.y + 0.5f) * size.y);
             }
             else if (direction == Vector2Int.down)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 8), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 7), position.y * size.y + 11), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + 5), null);
 
-                return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 4);
+                return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 2);
 
             }
             else if (direction == Vector2Int.up)
             {
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 8), position.y * size.y + (size.y - 12)), new Vector2Int(position.x * size.x + (size.x / 2 + 7), position.y * size.y + (size.y - 1)), builderSettings.borderTile);
-                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y + (size.y - 8)), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + (size.y - 1)), null);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y + (size.y - 6)), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + (size.y - 1)), builderSettings.borderTile);
+                DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y + (size.y - 4)), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + (size.y - 1)), null);
 
-                return new Vector2((position.x + 0.5f) * size.x, (position.y + 1) * size.y - 4)
+                return new Vector2((position.x + 0.5f) * size.x, (position.y + 1) * size.y - 2)
 ;
             }
 

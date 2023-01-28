@@ -51,7 +51,7 @@ namespace Rectangle.Level
             if (positionCollider != null ? !positionCollider.GetComponent<GridField>().isUsed : false)
             {
                 gridCollider = positionCollider.GetComponent<GridField>();
-                gridCollider.GetComponent<SpriteRenderer>().color = rend.color;
+                gridCollider.backgroundRend.color = rend.color;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
 
                 button.PlaceTile(gridCollider);
@@ -98,7 +98,7 @@ namespace Rectangle.Level
                 button.ResetTile(gridCollider);
 
                 gridCollider.isUsed = false;
-                gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
+                gridCollider.backgroundRend.color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
 
                 for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
@@ -138,7 +138,7 @@ namespace Rectangle.Level
                         }
                     }
 
-                    gridCollider.GetComponent<SpriteRenderer>().color = Color.gray;
+                    gridCollider.backgroundRend.color = Color.gray;
                     gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
                     gridCollider.isUsed = false;
                     gridCollider = null;

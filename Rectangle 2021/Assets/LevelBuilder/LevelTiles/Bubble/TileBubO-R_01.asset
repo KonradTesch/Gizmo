@@ -7558,44 +7558,6 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  - position: {x: 24, y: 4, z: 0}
-    tile: {fileID: 11400000, guid: a1c441882b4eb7347ad91876ef032260, type: 2}
-    transform:
-      e00: 0
-      e01: -1
-      e02: 0
-      e03: 0.0002837181
-      e10: 1
-      e11: 0
-      e12: 0
-      e13: 0.0003312929
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - position: {x: 24, y: 5, z: 0}
-    tile: {fileID: 11400000, guid: a1c441882b4eb7347ad91876ef032260, type: 2}
-    transform:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0.0002837181
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0.0003312929
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
   - position: {x: 24, y: 6, z: 0}
     tile: {fileID: 11400000, guid: ce2bf9da248585743b3050ddb3dbad36, type: 2}
     transform:
@@ -7795,44 +7757,6 @@ MonoBehaviour:
       e03: 0.0002837181
       e10: 0
       e11: 1
-      e12: 0
-      e13: 0.0003312929
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - position: {x: 25, y: 4, z: 0}
-    tile: {fileID: 11400000, guid: a1c441882b4eb7347ad91876ef032260, type: 2}
-    transform:
-      e00: -1
-      e01: 0
-      e02: 0
-      e03: 0.0002837181
-      e10: 0
-      e11: -1
-      e12: 0
-      e13: 0.0003312929
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - position: {x: 25, y: 5, z: 0}
-    tile: {fileID: 11400000, guid: a1c441882b4eb7347ad91876ef032260, type: 2}
-    transform:
-      e00: 0
-      e01: 1
-      e02: 0
-      e03: 0.0002837181
-      e10: -1
-      e11: 0
       e12: 0
       e13: 0.0003312929
       e20: 0
@@ -13767,6 +13691,10 @@ MonoBehaviour:
         e32: 0
         e33: 1
   collectablePositions: []
+  hasStar: 1
+  starPosition: {x: 25, y: 5, z: 0}
+  isRespawn: 0
+  respawnPosition: {x: 0, y: 0, z: 0}
   tileSize: {x: 32, y: 18}
   tileType: 5
   playerMode: 2

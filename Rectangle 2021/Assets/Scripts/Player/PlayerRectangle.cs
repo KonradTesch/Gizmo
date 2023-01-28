@@ -9,6 +9,8 @@ namespace Rectangle.Player
     /// </summary>
     public class PlayerRectangle : PlayerBase
     {
+        [SerializeField] private AudioClip doubleJumpSound;
+
         private bool canDoubleJump;
 
         /// <summary>
@@ -18,7 +20,16 @@ namespace Rectangle.Player
         {
             if (currentCoyoteTime > 0)
             {
-                animator.SetTrigger("jump");
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                    audioSource.clip = null;
+                }
+
+                audioSource.PlayOneShot(jumpSound);
+
+                CreateDust();
+
                 grounded = false;
 
                 //Resets the velocity on the y axis
@@ -30,6 +41,14 @@ namespace Rectangle.Player
             }
             else if (canDoubleJump && !onRamp)
             {
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                    audioSource.clip = null;
+                }
+
+                audioSource.PlayOneShot(doubleJumpSound);
+
                 //Resets the velocity on the y axis
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
 

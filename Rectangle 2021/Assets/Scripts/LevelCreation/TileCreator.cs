@@ -22,12 +22,19 @@ namespace Rectangle.LevelCreation
 
         [Header("Tile Settings")]
         public LevelBuilderSettings builderSettings;
+
         [Space()]
         public bool hasCollactables;
         public Transform collectableParent;
+
+        [Space()]
+        public bool hasStar;
+        public Transform starTransform;
+
         [Space()]
         public bool isRespawn;
         public Transform respawnPosition;
+
         [Space()]
         public string tileName;
         public TileTypes tileType;

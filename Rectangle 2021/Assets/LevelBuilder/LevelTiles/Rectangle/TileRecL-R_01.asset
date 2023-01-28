@@ -6005,6 +6005,10 @@ MonoBehaviour:
       e33: 1
   movingObjects: []
   collectablePositions: []
+  hasStar: 1
+  starPosition: {x: 15, y: 13.5, z: 0}
+  isRespawn: 0
+  respawnPosition: {x: 0, y: 0, z: 0}
   tileSize: {x: 32, y: 18}
   tileType: 2
   playerMode: 1

@@ -296,6 +296,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &61681529
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1551824154964450092, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_Name
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551824154964450094, guid: b22af7be932f7024e96296789c241a26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b22af7be932f7024e96296789c241a26, type: 3}
 --- !u!1 &157879474
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +397,6 @@ GameObject:
   - component: {fileID: 207839592}
   - component: {fileID: 207839595}
   - component: {fileID: 207839594}
-  - component: {fileID: 207839593}
   m_Layer: 8
   m_Name: LevelTilemap_Background
   m_TagString: Untagged
@@ -363,22 +419,6 @@ Transform:
   m_Father: {fileID: 1792412752}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!19719996 &207839593
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207839591}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0.00001
 --- !u!483693784 &207839594
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -417,9 +457,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -699655507
-  m_SortingLayer: 2
-  m_SortingOrder: -1
+  m_SortingLayerID: -2076315063
+  m_SortingLayer: -1
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -12161,7 +12201,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2001858574}
         m_TargetAssemblyTypeName: Rectangle.General.GameBehavior, Assembly-CSharp
-        m_MethodName: CanncelGameMode
+        m_MethodName: CanncelBuildingMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12548,7 +12588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ziel
+  m_text: Z
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12575,13 +12615,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -12658,8 +12698,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2011800873
-  m_SortingLayer: 5
+  m_SortingLayerID: 1666118441
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1422954955
@@ -27426,6 +27466,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5470789994069522050, guid: e1fc4cc2ed99b134b99ce83df80223ee, type: 3}
   m_PrefabInstance: {fileID: 1871441103}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1529346048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1551824154964450093, guid: b22af7be932f7024e96296789c241a26, type: 3}
+  m_PrefabInstance: {fileID: 61681529}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a498cd12e54e12e46b130443cdca8257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1567240318
 GameObject:
   m_ObjectHideFlags: 0
@@ -27464,7 +27515,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: S
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -27491,8 +27542,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9
-  m_fontSizeBase: 9
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -27574,8 +27625,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2011800873
-  m_SortingLayer: 5
+  m_SortingLayerID: 1666118441
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1567240323
@@ -28682,9 +28733,11 @@ MonoBehaviour:
   cancelBuildingButton: {fileID: 1244814870}
   sucessPanel: {fileID: 1528619786}
   gameOverPanel: {fileID: 1894007919}
+  background: {fileID: 1529346048}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   tileInventory: []
   levelBuilder: {fileID: 0}
+  gridBackground: {fileID: 0}
 --- !u!4 &2001858575
 Transform:
   m_ObjectHideFlags: 0
@@ -28727,23 +28780,27 @@ MonoBehaviour:
   levelTiles:
   - {fileID: 11400000, guid: 727538f93d4da3f4b8420481be55c51e, type: 2}
   - {fileID: 11400000, guid: d4638d8d5f09c1c4faa35e3870b55be7, type: 2}
-  - {fileID: 11400000, guid: 5b644d960b8da5e41a865112caed6cc3, type: 2}
+  - {fileID: 11400000, guid: 5bde2d6f25526364c942c6a541d27f30, type: 2}
   - {fileID: 11400000, guid: 3d342187101666a4b91f36326b522cda, type: 2}
-  - {fileID: 11400000, guid: 35b65d64ac713b140a04930f8feda881, type: 2}
-  - {fileID: 11400000, guid: 4f2eb6b85b0b2254d92469c398aa6b7e, type: 2}
   - {fileID: 11400000, guid: 185b3ae8d077e6c47983ff09f811d6c4, type: 2}
   - {fileID: 11400000, guid: 359cdaba025230f4cbb03e1266c39639, type: 2}
   - {fileID: 11400000, guid: f4eb4dcc366a0434b87d70c3dd055c25, type: 2}
-  - {fileID: 11400000, guid: dcecac6c4c5cb6146b9a91f254771923, type: 2}
+  - {fileID: 11400000, guid: 5dcb734daa955184385d962e78a2ba11, type: 2}
+  - {fileID: 11400000, guid: 46c54492732719343acd1a4237c5e048, type: 2}
+  - {fileID: 11400000, guid: 01d01f8704b82324bb74a08742463680, type: 2}
+  - {fileID: 11400000, guid: 85e0aaf1de3941a4f929daf0d3c2def5, type: 2}
+  - {fileID: 11400000, guid: 2590e10ebfb8d6149977ca6d1e3af400, type: 2}
+  - {fileID: 11400000, guid: 65aba1abd7b9d8e49ac6e338dc7ebe5f, type: 2}
+  - {fileID: 11400000, guid: ada67b2d14ad8504d8490f89bd00a52f, type: 2}
   anchorTiles:
-  - {fileID: 11400000, guid: 8b4fea390b9aba048a430be9c0ed7ec3, type: 2}
+  - {fileID: 11400000, guid: 651b3ea6fad43014a8d9f8e112365cd5, type: 2}
   gridLayer:
     serializedVersion: 2
     m_Bits: 128
   collectableTilePrefab: {fileID: 8622568014851585060, guid: 3f25c73a77d08e94f951a5323722ad9c, type: 3}
   movingPlatformPrefab: {fileID: 6355737876298299246, guid: 68d24b80eddf74c40abe202196ad1d0d, type: 3}
   backgroundTilemap: {fileID: 207839595}
-  borderTilemap: {fileID: 1983963566}
+  borderTilemap: {fileID: 298339190}
   groundTilemap: {fileID: 1679745063}
   rampTilemap: {fileID: 1067170}
   onewayPlatformTilemap: {fileID: 822767798}
@@ -28764,6 +28821,7 @@ MonoBehaviour:
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   gridTilemap: {fileID: 1521520081}
   borderTilemap: {fileID: 298339190}
+  background: {fileID: 1529346048}
   startText: {fileID: 1567240318}
   endText: {fileID: 1422954950}
   anchorTextPrefab: {fileID: 41922099928284676, guid: 2915ec6b9604e1f43b2ae1916f7195ce, type: 3}

@@ -9,6 +9,8 @@ namespace Rectangle.Player
     /// </summary>
     public class PlayerBubble : PlayerBase
     {
+        [Header("Special Ability")]
+
         /// <summary>
         /// The gravity scale when the player floats.
         /// </summary>
@@ -17,6 +19,11 @@ namespace Rectangle.Player
 
         [SerializeField] private float rotationSpeed;
 
+        [Space()]
+
+        [SerializeField] private AudioClip openWingsSound;
+        [SerializeField] private AudioClip floatSound;
+ 
         private bool falling;
         private bool floating = false;
         private float lastYPosition;
@@ -40,6 +47,18 @@ namespace Rectangle.Player
                 {
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, rotationSpeed * 20 * Time.deltaTime);
                     rigidBody.gravityScale = lowGravityScale;
+
+                    if(!audioSource.isPlaying)
+                    {
+                        audioSource.clip = floatSound;
+                        audioSource.loop = true;
+                        audioSource.Play();
+                    }
+                }
+                else if (audioSource.clip == floatSound)
+                {
+                    audioSource.clip = null;
+                    audioSource.Stop();
                 }
 
                 animator.SetBool("float", true);
@@ -93,6 +112,7 @@ namespace Rectangle.Player
             if (!grounded && !onRamp && !floating && !timeAfterJump)
             {
                 floating = true;
+                audioSource.PlayOneShot(openWingsSound);
             }
             else if (floating)
             {

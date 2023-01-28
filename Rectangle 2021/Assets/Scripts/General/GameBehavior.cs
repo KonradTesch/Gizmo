@@ -67,6 +67,9 @@ namespace Rectangle.General
         [Tooltip("The game over screen object.")]
         public GameObject gameOverPanel;
 
+        [Header("Background")]
+        public BackgroundController background;
+
         [Header("Builder Settings")]
 
         /// <summary>
@@ -84,6 +87,8 @@ namespace Rectangle.General
         private bool canStart;
 
         private bool buildingMode = true;
+
+        [HideInInspector] public GameObject gridBackground;
 
         void Awake()
         {
@@ -122,6 +127,9 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> StartPlayMode()");
             if (canStart)
             {
+                background.gameObject.SetActive(true);
+                gridBackground.SetActive(false);
+
                 foreach (LevelTile tile in levelBuilder.placedTiles)
                 {
                     TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), -1);
@@ -151,6 +159,9 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> ChangeGameMode()");
             if (!buildingMode)
             {
+                background.gameObject.SetActive(false);
+                gridBackground.SetActive(true);
+
                 buttonUI.SetActive(true);
                 cancelBuildingButton.interactable = true;
                 buildLevelButton.interactable = false;
@@ -164,7 +175,7 @@ namespace Rectangle.General
 
         }
 
-        public void CanncelGameMode()
+        public void CanncelBuildingMode()
         {
             if(buildingMode)
             {

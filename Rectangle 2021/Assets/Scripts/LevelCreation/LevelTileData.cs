@@ -13,13 +13,21 @@ namespace Rectangle.LevelCreation
         public List<ChangeData> platformTileChanges;
         public List<ChangeData> rampTileChanges;
         public List<ChangeData> spikesTileChanges;
+
         [Space()]
         public List<MovingObjectData> movingObjects;
+
         [Space()]
         public Vector2[] collectablePositions;
+
         [Space()]
-        public bool isRespawn;
+        public bool hasStar = false;
+        public Vector3 starPosition;
+
+        [Space()]
+        public bool isRespawn = false;
         public Vector3 respawnPosition;
+
         [Space()]
         public Vector2Int tileSize;
         public TileCreator.TileTypes tileType;
