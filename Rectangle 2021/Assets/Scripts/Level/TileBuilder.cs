@@ -47,7 +47,7 @@ namespace Rectangle.Level
         {
             foreach (LevelTile tile in placedTiles)
             {
-                Vector2 originPosition = ((Vector2)tile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(tile.tileSize.x / 2, tile.tileSize.y / 2);
+                Vector2 originPosition = ((Vector2)tile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(builderSettings.tileSize.x / 2, builderSettings.tileSize.y / 2);
 
                 List<LevelTileData> possibleTiles = new();
 
@@ -67,7 +67,7 @@ namespace Rectangle.Level
 
             foreach(LevelTile anchorTile in anchorLevelTiles)
             {
-                Vector2 originPosition = ((Vector2)anchorTile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(anchorTile.tileSize.x / 2, anchorTile.tileSize.y / 2);
+                Vector2 originPosition = ((Vector2)anchorTile.transform.position / groundTilemap.transform.lossyScale) - new Vector2(builderSettings.tileSize.x / 2, builderSettings.tileSize.y / 2);
 
                 LevelTileData randomAnchorTile = anchorTiles[Random.Range(0, anchorTiles.Length)];
 
@@ -324,62 +324,143 @@ namespace Rectangle.Level
 
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.up), builderSettings.backgroundLayer) == null)
             {
+                
                 Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth/2 - 4, tileHeight - 1);
                 Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, tileHeight - 1);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.closedBorderTile);
             }
             else
             {
                 Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - 4, tileHeight - 1);
                 Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, tileHeight - 1);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.openBorderTile);
             }
+
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.right), builderSettings.backgroundLayer) == null)
             {
                 Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - 4);
                 Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + 4);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.closedBorderTile);
             }
             else
             {
                 Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 - 4);
                 Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth - 1, tileHeight / 2 + 4);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.openBorderTile);
             }
+
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.down), builderSettings.backgroundLayer) == null)
             {
                 Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - 4, 0);
                 Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, 0);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.closedBorderTile);
             }
             else
             {
                 Vector2Int startPos = tileOrigin + new Vector2Int(tileWidth / 2 - 4, 0);
                 Vector2Int endPos = tileOrigin + new Vector2Int(tileWidth / 2 + 4, 0);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.openBorderTile);
             }
+
             if (Physics2D.OverlapPoint(levelBuilder.CoordinateToWorldPosition(anchorCoordinate + Vector2Int.left), builderSettings.backgroundLayer) == null)
             {
                 Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - 4);
                 Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + 4);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, builderSettings.borderTile);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.closedBorderTile);
             }
             else
             {
                 Vector2Int startPos = tileOrigin + new Vector2Int(0, tileHeight / 2 - 4);
                 Vector2Int endPos = tileOrigin + new Vector2Int(0, tileHeight / 2 + 4);
 
-                levelBuilder.DrawBox(groundTilemap, startPos, endPos, null);
+                ReplaceBox(borderTilemap, startPos, endPos, builderSettings.openBorderTile);
             }
 
+            borderTilemap.RefreshAllTiles();
         }
+
+        public void ReplaceBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, LevelTileData replaceTile)
+        {
+            Vector2 diff = pos2 - pos1;
+
+            List<ChangeData> changes = new List<ChangeData>();
+
+            if (tilemap == borderTilemap)
+            {
+                changes = replaceTile.borderTileChanges;
+            }
+            else if (tilemap == backgroundTilemap)
+            {
+                changes = replaceTile.backgroundTileChanges;
+            }
+            else if (tilemap == groundTilemap)
+            {
+                changes = replaceTile.groundTileChanges;
+            }
+            else if (tilemap == spikesTilemap)
+            {
+                changes = replaceTile.spikesTileChanges;
+            }
+            else if (tilemap == rampTilemap)
+            {
+                changes = replaceTile.rampTileChanges;
+            }
+
+
+            for (int y = 0; y <= Mathf.Abs(diff.y); y++)
+            {
+                for (int x = 0; x <= Mathf.Abs(diff.x); x++)
+                {
+                    Vector3Int pos;
+
+                    if (diff.x < 0 && diff.y < 0)
+                    {
+                        pos = (Vector3Int)pos1 - new Vector3Int(x, y, 0);
+                    }
+                    else if (diff.x < 0)
+                    {
+                        pos = (Vector3Int)pos1 + new Vector3Int(-x, y, 0);
+                    }
+                    else if (diff.y < 0)
+                    {
+                        pos = (Vector3Int)pos1 + new Vector3Int(x, -y, 0);
+                    }
+                    else
+                    {
+                        pos = (Vector3Int)pos1 + new Vector3Int(x, y, 0);
+                    }
+
+                    ChangeData changeData = replaceTile.GetChangeData(changes, new Vector3Int(pos.x % builderSettings.tileSize.x, pos.y % builderSettings.tileSize.y, 0));
+
+                    if (changeData != null)
+                    {
+                        TileChangeData tileChangeData = new TileChangeData()
+                        {
+                            position = pos,
+                            tile = changeData.tile,
+                            transform = changeData.transform
+                        };
+
+                        tilemap.SetTile(pos, null);
+
+                        tilemap.SetTile(tileChangeData, true);
+                    }
+                    else
+                    {
+                        tilemap.SetTile(pos, null);
+                    }
+
+                }
+            }
+        }
+
     }
 
     [System.Serializable]

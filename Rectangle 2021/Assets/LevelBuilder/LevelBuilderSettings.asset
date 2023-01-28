@@ -24,23 +24,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   backgroundImage: {fileID: 21300000, guid: 5496e99933d4b674aadf0a7834d8ff98, type: 3}
-  rectangleColor: {r: 0.4392157, g: 0.42745098, b: 0.9372549, a: 1}
-  spikeyColor: {r: 0.972549, g: 0.7019608, b: 0.22745098, a: 1}
-  bubbleColor: {r: 0.3137255, g: 0.74509805, b: 0.3019608, a: 1}
-  littleColor: {r: 0.94509804, g: 0.30588236, b: 0.30588236, a: 1}
+  rectangleColor: {r: 1, g: 1, b: 1, a: 1}
+  spikeyColor: {r: 1, g: 1, b: 1, a: 1}
+  bubbleColor: {r: 1, g: 1, b: 1, a: 1}
+  littleColor: {r: 1, g: 1, b: 1, a: 1}
+  levelTilePrefab: {fileID: 852341010236262845, guid: c62f07b76baa0734cb79cce40d213818, type: 3}
   anchorTileSprite: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
   tileTypes:
   - tileType: 2
-    tileSprite: {fileID: 21300000, guid: 2bdeddf9f62ac5c4b801ed49cbc2d6fd, type: 3}
+    tileSprite: {fileID: 21300000, guid: ab19e65485a72c94f99e2dfa12559bf6, type: 3}
   - tileType: 3
-    tileSprite: {fileID: 21300000, guid: b22777ebab04b8e4ab0cd5aaa4efac43, type: 3}
+    tileSprite: {fileID: 21300000, guid: 84ba7b85db5656e4cb2efc89a5d6b7c6, type: 3}
   - tileType: 4
-    tileSprite: {fileID: 21300000, guid: c525f6dc0cf32774bb8b7f159c47c5d2, type: 3}
+    tileSprite: {fileID: 21300000, guid: 37ae6bb35042e5446aff6ecf2b9155ae, type: 3}
   - tileType: 5
-    tileSprite: {fileID: 21300000, guid: 6864c54d6df403d4d8d73706ac94bd7d, type: 3}
+    tileSprite: {fileID: 21300000, guid: 45cc07392445e4449a899fee42c3fbdf, type: 3}
   - tileType: 6
-    tileSprite: {fileID: 21300000, guid: ffc33de62c4345040a4e2e161617df20, type: 3}
+    tileSprite: {fileID: 21300000, guid: 06e42ddc4b4a9ad4b828d040267a2bee, type: 3}
   - tileType: 7
-    tileSprite: {fileID: 21300000, guid: e962c0bc62be796488e3f9dc0b50e60a, type: 3}
+    tileSprite: {fileID: 21300000, guid: cf107eb4b71ae834284a25bc6c784c5a, type: 3}
   starPrefab: {fileID: 3031384222072285329, guid: 4de7d0dfcee78154fae23ad4393196ec, type: 3}
   starSprite: {fileID: 21300000, guid: 9b929adbbad68db4e82a5ac99dd16978, type: 3}

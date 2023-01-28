@@ -32,6 +32,19 @@ namespace Rectangle.LevelCreation
         public Vector2Int tileSize;
         public TileCreator.TileTypes tileType;
         public Player.PlayerController.PlayerModes playerMode;
+
+        public ChangeData GetChangeData(List<ChangeData> changeList, Vector3Int position)
+        {
+            for(int i = 0; i < changeList.Count; i++)
+            {
+                if(position == changeList[i].position)
+                {
+                    return changeList[i];
+                }
+            }
+
+            return null;
+        }
     }
 
     [System.Serializable]

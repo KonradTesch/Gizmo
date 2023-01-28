@@ -404,6 +404,20 @@ namespace Rectangle.LevelCreation
             }
             builder.groundTilemap.RefreshAllTiles();
 
+            foreach (ChangeData change in tile.backgroundTileChanges)
+            {
+                TileChangeData tileChane = new()
+                {
+                    position = change.position,
+                    tile = change.tile,
+                    transform = change.transform
+                };
+
+                builder.backgroundTilemap.SetTile(tileChane, true);
+            }
+            builder.backgroundTilemap.RefreshAllTiles();
+
+
             foreach (ChangeData change in tile.borderTileChanges)
             {
                 TileChangeData tileChane = new()
