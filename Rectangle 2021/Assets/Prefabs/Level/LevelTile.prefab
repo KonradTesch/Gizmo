@@ -100,10 +100,120 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   playerMode: 0
-  tileSize: {x: 32, y: 18}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
+  tileSprites:
+  - playerMode: 1
+    typeSprites:
+    - tileType: 1
+      normal: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      pressed: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      highlighted: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      hover: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+    - tileType: 2
+      normal: {fileID: 21300000, guid: ab19e65485a72c94f99e2dfa12559bf6, type: 3}
+      pressed: {fileID: 21300000, guid: a104a4da841248f4e870f9a85d4b726e, type: 3}
+      highlighted: {fileID: 21300000, guid: 86ec70e78c2fcd649b55a2966dbeda96, type: 3}
+      hover: {fileID: 21300000, guid: 3ccae60c4418a574a9efb6d969549eb3, type: 3}
+    - tileType: 3
+      normal: {fileID: 21300000, guid: 84ba7b85db5656e4cb2efc89a5d6b7c6, type: 3}
+      pressed: {fileID: 21300000, guid: 8db5d0a5202a61143adc7013ee668b7c, type: 3}
+      highlighted: {fileID: 21300000, guid: 781b7e207ee0659468be5bf13e1fce7b, type: 3}
+      hover: {fileID: 21300000, guid: 5e476fbaa340dae4db29a5368f994888, type: 3}
+    - tileType: 4
+      normal: {fileID: 21300000, guid: 37ae6bb35042e5446aff6ecf2b9155ae, type: 3}
+      pressed: {fileID: 21300000, guid: 88b7a4fab44e06f4bad3dbb6704b3615, type: 3}
+      highlighted: {fileID: 21300000, guid: 365fefc9484fe9340bc65b8e765255a4, type: 3}
+      hover: {fileID: 21300000, guid: 0783209484949d2418e60bdeafd13403, type: 3}
+    - tileType: 5
+      normal: {fileID: 21300000, guid: 45cc07392445e4449a899fee42c3fbdf, type: 3}
+      pressed: {fileID: 21300000, guid: e1d5d45a06aa7e24686e4ffcd32ccfec, type: 3}
+      highlighted: {fileID: 21300000, guid: 835591f4a36b6404fb24d4de31c118af, type: 3}
+      hover: {fileID: 21300000, guid: 693703ea742763e48a01d49913a2e5d0, type: 3}
+    - tileType: 6
+      normal: {fileID: 21300000, guid: 06e42ddc4b4a9ad4b828d040267a2bee, type: 3}
+      pressed: {fileID: 21300000, guid: d81c93722faf6464bb3ec3eb6e17a52e, type: 3}
+      highlighted: {fileID: 21300000, guid: cd4e789bb32529a45b8b0f19a9278d56, type: 3}
+      hover: {fileID: 21300000, guid: 06f3c5f7280f3354988756cde32660fc, type: 3}
+    - tileType: 7
+      normal: {fileID: 21300000, guid: cf107eb4b71ae834284a25bc6c784c5a, type: 3}
+      pressed: {fileID: 21300000, guid: 444e1d21f770bb840a989620e55a57f1, type: 3}
+      highlighted: {fileID: 21300000, guid: 4e7e358f5a93a96479449155a608ff31, type: 3}
+      hover: {fileID: 21300000, guid: bf8538616670ce140a31947da120b18e, type: 3}
+  - playerMode: 2
+    typeSprites:
+    - tileType: 1
+      normal: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      pressed: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      highlighted: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      hover: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+    - tileType: 2
+      normal: {fileID: 21300000, guid: 68477b08f0bb244468f70bc41208f034, type: 3}
+      pressed: {fileID: 21300000, guid: a61a6566090f1c64fa6c2029e4e99bed, type: 3}
+      highlighted: {fileID: 21300000, guid: 3322dff4e02bb41488fc4f9d5a75701d, type: 3}
+      hover: {fileID: 21300000, guid: 8ac44ae5970e501489858fc5cf60fb03, type: 3}
+    - tileType: 3
+      normal: {fileID: 21300000, guid: e19f9743acd7ee1428d1e32f7d3ca363, type: 3}
+      pressed: {fileID: 21300000, guid: 2b5daf5ad7b655c4cb9fca8030623278, type: 3}
+      highlighted: {fileID: 21300000, guid: 0a91ca2f7011f9c44a3c89c3f30951fd, type: 3}
+      hover: {fileID: 21300000, guid: 1a068581772514b4c9c98a22eb0d95e3, type: 3}
+    - tileType: 4
+      normal: {fileID: 21300000, guid: 12a1031baa7fab1449a43bf78d926a11, type: 3}
+      pressed: {fileID: 21300000, guid: 61a1c123b27cdd6469eb31427e18fb8b, type: 3}
+      highlighted: {fileID: 21300000, guid: b094f080372cdc94dbf3ce35d9da7a12, type: 3}
+      hover: {fileID: 21300000, guid: 4dcf31663f419964995473b7e5af7414, type: 3}
+    - tileType: 5
+      normal: {fileID: 21300000, guid: 5c0f2b00b30ca9d4cbe3639fe7ac6745, type: 3}
+      pressed: {fileID: 21300000, guid: 81e66008216274849b8baa4d7880a180, type: 3}
+      highlighted: {fileID: 21300000, guid: efe8c8e10791311409c9ac8fa0bd01ce, type: 3}
+      hover: {fileID: 21300000, guid: 9c917a9806960684fadb12437dbf71e8, type: 3}
+    - tileType: 6
+      normal: {fileID: 21300000, guid: 77399e8f0caecca4999f9a4bf6012ad1, type: 3}
+      pressed: {fileID: 21300000, guid: 4e48f84b9e792ef41aaea33017945c56, type: 3}
+      highlighted: {fileID: 21300000, guid: 3d63691b8645fe649ab1030b8167c2ff, type: 3}
+      hover: {fileID: 21300000, guid: 6ebd9cad54394214f90ea19a4eafb8b4, type: 3}
+    - tileType: 7
+      normal: {fileID: 21300000, guid: 8b64b484a2a9e734c9ffbed0916d6b96, type: 3}
+      pressed: {fileID: 21300000, guid: 200f611da76b26043b8b42828d25ad6d, type: 3}
+      highlighted: {fileID: 21300000, guid: d501d628970aaff4893a6e74677ed74d, type: 3}
+      hover: {fileID: 21300000, guid: a061f7c9ecadc2e4498c1a58d8b3344e, type: 3}
+  - playerMode: 3
+    typeSprites:
+    - tileType: 1
+      normal: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      pressed: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      highlighted: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+      hover: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+    - tileType: 2
+      normal: {fileID: 21300000, guid: d7e7c0df51dfd024ebeae3c1cd710e32, type: 3}
+      pressed: {fileID: 21300000, guid: 5f7441f46718e4b4da74b89e5ba70170, type: 3}
+      highlighted: {fileID: 21300000, guid: fdfd1bd0e1f020348abb2b4d0fce642f, type: 3}
+      hover: {fileID: 21300000, guid: 3ba904623f4849244a792da22bca3e53, type: 3}
+    - tileType: 3
+      normal: {fileID: 21300000, guid: 2c4e3384f8a75344f87b794196cc9a07, type: 3}
+      pressed: {fileID: 21300000, guid: ed3d4f50268549944a4061843e3867ab, type: 3}
+      highlighted: {fileID: 21300000, guid: cdb4fb728e0435847b799363bd17d68e, type: 3}
+      hover: {fileID: 21300000, guid: 6b7cd9ed8dc5dc742ba040446b11db6d, type: 3}
+    - tileType: 4
+      normal: {fileID: 21300000, guid: e8bc6637c4c257e4bb6184025df7e227, type: 3}
+      pressed: {fileID: 21300000, guid: 8ed00792b216e82428c143e080f66fe1, type: 3}
+      highlighted: {fileID: 21300000, guid: 88891db2e04f70946a1a6460d49cf957, type: 3}
+      hover: {fileID: 21300000, guid: 4230f1aea25f9a0488f1caa5b8e6f9f4, type: 3}
+    - tileType: 5
+      normal: {fileID: 21300000, guid: 103e1fa226584304fb43279cc72b2475, type: 3}
+      pressed: {fileID: 21300000, guid: 1f9015f1c3a087c49b40017b5669890f, type: 3}
+      highlighted: {fileID: 21300000, guid: 11d9cfe3914038a409802d45a4e3f4d3, type: 3}
+      hover: {fileID: 21300000, guid: 84360f779f6d17d468f1baf7e3e894a2, type: 3}
+    - tileType: 6
+      normal: {fileID: 21300000, guid: bea710e28d86b4448bcbb7ed42ebcd33, type: 3}
+      pressed: {fileID: 21300000, guid: 32fc8ac4912e0c947800d598dcf98652, type: 3}
+      highlighted: {fileID: 21300000, guid: 29202d5820d3e2449a783bfd01083f37, type: 3}
+      hover: {fileID: 21300000, guid: fd725a068b9f7864d82aca383553baeb, type: 3}
+    - tileType: 7
+      normal: {fileID: 21300000, guid: e6a5b01e5c9a7b94086bd0381f7a070d, type: 3}
+      pressed: {fileID: 21300000, guid: 8977f4214fd53bc43b54cb2e0a1873b1, type: 3}
+      highlighted: {fileID: 21300000, guid: 69b9e5c19ca71e040b941e42d797b945, type: 3}
+      hover: {fileID: 21300000, guid: d3ef702bb12c7d448a6e0e4cf2c056a3, type: 3}
   button: {fileID: 0}
-  locked: 0
   collectableTiles: 
   gridCollider: {fileID: 0}
 --- !u!61 &-2580002084943614951
