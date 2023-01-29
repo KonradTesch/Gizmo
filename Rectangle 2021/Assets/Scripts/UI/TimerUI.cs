@@ -22,7 +22,7 @@ namespace Rectangle.UI
         /// Wheter the timer is running.
         /// </summary>
         public static bool timer;
-        private float time = 0;
+        [HideInInspector]public float time = 0;
         void Start()
         {
             if (startTimeAtStart)
@@ -38,9 +38,12 @@ namespace Rectangle.UI
                 time += Time.deltaTime;
 
                 int min = Mathf.FloorToInt(time / 60);
-                int sec = Mathf.RoundToInt(time - (min * 60));
+                int sec = Mathf.FloorToInt(time % 60);
 
-                timeText.text = min + ":" + sec;
+                string currentTime = string.Format("{0:00}:{1:00}", min, sec);
+
+
+                timeText.text = currentTime;
             }
         }
 

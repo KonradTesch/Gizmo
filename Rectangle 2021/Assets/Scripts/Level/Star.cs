@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rectangle.General;
 
 namespace Rectangle.Level
 {
@@ -8,7 +9,7 @@ namespace Rectangle.Level
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            // Collect Star Code here
+            SaveGameManager.instance.CollectStar(GameBehavior.instance.levelName);
 
             Destroy(this.gameObject);
         }

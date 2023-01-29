@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rectangle.UI;
+using Rectangle.General;
 
 namespace Rectangle.Level
 {
@@ -25,6 +26,8 @@ namespace Rectangle.Level
             }
 
             timerUI.StopTimer();
+
+            SaveGameManager.instance.FinishLevel(GameBehavior.instance.levelName, timerUI.time);
         }
 
         private IEnumerator StopPlayer()
