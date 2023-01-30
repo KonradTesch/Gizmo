@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5767c9b5eec4a1c4788c514f90709749, type: 3}
-  m_Name: Level_Mittel_01
+  m_Name: Level_Schwer_02
   m_EditorClassIdentifier: 
   gridData:
     grid:
@@ -62,6 +62,14 @@ MonoBehaviour:
         anchor: 0
         blocked: 1
         star: 0
+    - coordinates: {x: -1, y: 5}
+      levelSpot:
+        coordinates: {x: -1, y: 5}
+        worldPosition: {x: 0, y: 0}
+        placedTile: {fileID: 0}
+        anchor: 0
+        blocked: 1
+        star: 0
     - coordinates: {x: 0, y: -1}
       levelSpot:
         coordinates: {x: 0, y: -1}
@@ -91,7 +99,7 @@ MonoBehaviour:
         coordinates: {x: 0, y: 2}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
-        anchor: 0
+        anchor: 1
         blocked: 0
         star: 0
     - coordinates: {x: 0, y: 3}
@@ -105,6 +113,14 @@ MonoBehaviour:
     - coordinates: {x: 0, y: 4}
       levelSpot:
         coordinates: {x: 0, y: 4}
+        worldPosition: {x: 0, y: 0}
+        placedTile: {fileID: 0}
+        anchor: 0
+        blocked: 0
+        star: 0
+    - coordinates: {x: 0, y: 5}
+      levelSpot:
+        coordinates: {x: 0, y: 5}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
         anchor: 0
@@ -131,7 +147,7 @@ MonoBehaviour:
         coordinates: {x: 1, y: 1}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
-        anchor: 1
+        anchor: 0
         blocked: 0
         star: 0
     - coordinates: {x: 1, y: 2}
@@ -148,11 +164,19 @@ MonoBehaviour:
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
         anchor: 0
-        blocked: 0
+        blocked: 1
         star: 0
     - coordinates: {x: 1, y: 4}
       levelSpot:
         coordinates: {x: 1, y: 4}
+        worldPosition: {x: 0, y: 0}
+        placedTile: {fileID: 0}
+        anchor: 0
+        blocked: 0
+        star: 0
+    - coordinates: {x: 1, y: 5}
+      levelSpot:
+        coordinates: {x: 1, y: 5}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
         anchor: 0
@@ -179,7 +203,7 @@ MonoBehaviour:
         coordinates: {x: 2, y: 1}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
-        anchor: 0
+        anchor: 1
         blocked: 0
         star: 0
     - coordinates: {x: 2, y: 2}
@@ -195,12 +219,20 @@ MonoBehaviour:
         coordinates: {x: 2, y: 3}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
-        anchor: 1
-        blocked: 0
+        anchor: 0
+        blocked: 1
         star: 0
     - coordinates: {x: 2, y: 4}
       levelSpot:
         coordinates: {x: 2, y: 4}
+        worldPosition: {x: 0, y: 0}
+        placedTile: {fileID: 0}
+        anchor: 1
+        blocked: 0
+        star: 0
+    - coordinates: {x: 2, y: 5}
+      levelSpot:
+        coordinates: {x: 2, y: 5}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
         anchor: 0
@@ -252,6 +284,14 @@ MonoBehaviour:
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
         anchor: 0
+        blocked: 0
+        star: 0
+    - coordinates: {x: 3, y: 5}
+      levelSpot:
+        coordinates: {x: 3, y: 5}
+        worldPosition: {x: 0, y: 0}
+        placedTile: {fileID: 0}
+        anchor: 0
         blocked: 1
         star: 0
     - coordinates: {x: 4, y: -1}
@@ -277,7 +317,7 @@ MonoBehaviour:
         placedTile: {fileID: 0}
         anchor: 0
         blocked: 0
-        star: 0
+        star: 1
     - coordinates: {x: 4, y: 2}
       levelSpot:
         coordinates: {x: 4, y: 2}
@@ -285,18 +325,26 @@ MonoBehaviour:
         placedTile: {fileID: 0}
         anchor: 0
         blocked: 0
-        star: 1
+        star: 0
     - coordinates: {x: 4, y: 3}
       levelSpot:
         coordinates: {x: 4, y: 3}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
         anchor: 0
-        blocked: 0
+        blocked: 1
         star: 0
     - coordinates: {x: 4, y: 4}
       levelSpot:
         coordinates: {x: 4, y: 4}
+        worldPosition: {x: 0, y: 0}
+        placedTile: {fileID: 0}
+        anchor: 0
+        blocked: 0
+        star: 0
+    - coordinates: {x: 4, y: 5}
+      levelSpot:
+        coordinates: {x: 4, y: 5}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
         anchor: 0
@@ -350,44 +398,60 @@ MonoBehaviour:
         anchor: 0
         blocked: 1
         star: 0
+    - coordinates: {x: 5, y: 5}
+      levelSpot:
+        coordinates: {x: 5, y: 5}
+        worldPosition: {x: 0, y: 0}
+        placedTile: {fileID: 0}
+        anchor: 0
+        blocked: 1
+        star: 0
     anchorTiles:
     - collectableTiles:
-      - coordinates: {x: 1, y: 2}
-        playerMode: 1
-        tileType: 7
-      - coordinates: {x: 1, y: 3}
+      - coordinates: {x: 2, y: 2}
         playerMode: 1
         tileType: 6
-      - coordinates: {x: 0, y: 2}
+      - coordinates: {x: 3, y: 2}
         playerMode: 1
-        tileType: 2
-      anchorCoordinates: {x: 1, y: 1}
+        tileType: 4
+      anchorCoordinates: {x: 2, y: 4}
     - collectableTiles:
-      - coordinates: {x: 3, y: 3}
+      - coordinates: {x: 1, y: 2}
+        playerMode: 2
+        tileType: 3
+      - coordinates: {x: 1, y: 1}
+        playerMode: 2
+        tileType: 5
+      anchorCoordinates: {x: 0, y: 2}
+    - collectableTiles:
+      - coordinates: {x: 2, y: 0}
+        playerMode: 2
+        tileType: 6
+      - coordinates: {x: 3, y: 0}
+        playerMode: 2
+        tileType: 4
+      - coordinates: {x: 3, y: 1}
         playerMode: 3
         tileType: 3
-      - coordinates: {x: 3, y: 2}
-        playerMode: 3
-        tileType: 5
-      - coordinates: {x: 4, y: 2}
-        playerMode: 3
-        tileType: 4
-      anchorCoordinates: {x: 2, y: 3}
-    height: 4
+      anchorCoordinates: {x: 2, y: 1}
+    height: 5
     width: 5
     start:
-      coordinates: {x: -1, y: 0}
+      coordinates: {x: -1, y: 4}
       direction: {x: 1, y: 0}
     end:
-      coordinates: {x: 5, y: 3}
-      direction: {x: -1, y: 0}
+      coordinates: {x: 2, y: -1}
+      direction: {x: 0, y: 1}
   plannedTiles:
-  - coordinates: {x: 0, y: 1}
-    playerMode: 2
-    tileType: 6
-  - coordinates: {x: 1, y: 0}
-    playerMode: 1
-    tileType: 4
-  - coordinates: {x: 0, y: 0}
+  - coordinates: {x: 0, y: 4}
+    playerMode: 3
+    tileType: 2
+  - coordinates: {x: 1, y: 4}
     playerMode: 2
     tileType: 2
+  - coordinates: {x: 0, y: 3}
+    playerMode: 3
+    tileType: 3
+  - coordinates: {x: 1, y: 2}
+    playerMode: 3
+    tileType: 7
