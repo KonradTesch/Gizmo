@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
-using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 using Rectangle.Player;
@@ -80,6 +79,7 @@ namespace Rectangle.General
 
         public List<TileGroupData> tileInventory;
 
+        [HideInInspector] public string levelName;
         private TileBuilder tileBuilder;
         [HideInInspector] public LevelBuilder levelBuilder;
 
@@ -101,6 +101,8 @@ namespace Rectangle.General
                 Destroy(this);
                 return;
             }
+
+            levelName = SceneManager.GetActiveScene().name;
 
             player.playerActive = false;
 
