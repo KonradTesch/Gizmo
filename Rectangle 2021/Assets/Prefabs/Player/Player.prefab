@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -2070,7 +2070,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0
@@ -4779,9 +4779,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 681935141
+  m_SortingLayer: 4
+  m_SortingOrder: -5
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5244,11 +5244,11 @@ MonoBehaviour:
   rampLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSound: {fileID: 0}
-  jumpSound: {fileID: 0}
-  landingSound: {fileID: 0}
+  moveSound: {fileID: 8300000, guid: 5bce514318d9b18428072df5cc484b38, type: 3}
+  jumpSound: {fileID: 8300000, guid: 81e310fdc95b5ff4290b65420c7cad05, type: 3}
+  landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
   headAnimator: {fileID: 0}
-  doubleJumpSound: {fileID: 0}
+  doubleJumpSound: {fileID: 8300000, guid: f013b7d1d74fcd4499e890a652bc523d, type: 3}
 --- !u!212 &3683547977414959957
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6145,14 +6145,14 @@ MonoBehaviour:
   rampLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSound: {fileID: 0}
-  jumpSound: {fileID: 0}
-  landingSound: {fileID: 0}
+  moveSound: {fileID: 8300000, guid: b097af7169422db4a83e3a7929d29c36, type: 3}
+  jumpSound: {fileID: 8300000, guid: 81e310fdc95b5ff4290b65420c7cad05, type: 3}
+  landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
   headAnimator: {fileID: 0}
   lowGravityScale: 0.3
   rotationSpeed: 55
-  openWingsSound: {fileID: 0}
-  floatSound: {fileID: 0}
+  openWingsSound: {fileID: 8300000, guid: 31fcde2aa8d39d24dafa3519b3449e6e, type: 3}
+  floatSound: {fileID: 8300000, guid: 38e1302be518c8043a463929e08f43ba, type: 3}
 --- !u!212 &3683547979325627246
 SpriteRenderer:
   m_ObjectHideFlags: 0
