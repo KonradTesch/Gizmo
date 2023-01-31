@@ -14,7 +14,6 @@ namespace Rectangle.UI
         [SerializeField] private GameObject tilePrefab;
 
         [HideInInspector] public Sprite tileSprite;
-        [HideInInspector] public Color tileColor;
         [HideInInspector] public int tileCount;
         [HideInInspector] public TileCreator.TileTypes tileType;
         [HideInInspector] public PlayerController.PlayerModes playerMode;
@@ -36,7 +35,6 @@ namespace Rectangle.UI
                 SpriteRenderer tileRend = newTile.GetComponent<SpriteRenderer>();
 
                 tileRend.sprite = tileSprite;
-                tileRend.color = tileColor;
             }
         }
 

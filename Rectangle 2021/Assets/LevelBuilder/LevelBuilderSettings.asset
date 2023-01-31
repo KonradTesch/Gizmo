@@ -23,7 +23,7 @@ MonoBehaviour:
   backgroundLayer:
     serializedVersion: 2
     m_Bits: 8
-  backgroundImage: {fileID: 21300000, guid: 5496e99933d4b674aadf0a7834d8ff98, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 2f19566887c381a458df68ef3dcb4fd9, type: 3}
   rectangleColor: {r: 1, g: 1, b: 1, a: 1}
   spikeyColor: {r: 1, g: 1, b: 1, a: 1}
   bubbleColor: {r: 1, g: 1, b: 1, a: 1}

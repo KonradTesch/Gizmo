@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Rectangle.Level;
-using Rectangle.LevelCreation;
 
 namespace Rectangle.UI
 {
@@ -12,13 +10,9 @@ namespace Rectangle.UI
         [SerializeField] private GameObject tileButtonReference;
 
         [SerializeField] public List<GridField> usedGridFields;
-        public void InitTileButtons(List<TileGroupData> tileGroups, float levelWidth)
+        public void InitTileButtons(List<TileGroupData> tileGroups)
         {
             SpriteRenderer rend = GetComponent<SpriteRenderer>();
-
-            transform.position = new Vector3(levelWidth / 2, -rend.size.y / 2 - 3, 0);
-
-            rend.size = new Vector2(levelWidth, rend.size.y);
 
             foreach(Transform child in transform)
             {
@@ -34,13 +28,13 @@ namespace Rectangle.UI
                 {
                     TileButton newButton = Instantiate(tileButtonReference, transform).GetComponent<TileButton>();
 
-                    newButton.transform.localPosition = new Vector3( (levelWidth / (tileGroups.Count + 1)) * i - levelWidth / 2 , 0, 0);
+                    newButton.transform.localPosition = new Vector3( (rend.bounds.size.x / (tileGroups.Count + 1)) * i - (rend.bounds.size.x / 2) , 0, 0);
+
 
                     newButton.tileCount = tileGroup.tileCount;
                     newButton.tileType = tileGroup.tileType;
                     newButton.tileSprite = tileGroup.tileSprite;
                     newButton.playerMode = tileGroup.playerMode;
-                    newButton.tileColor = tileGroup.tileColor;
 
                     SpriteRenderer tileRend = newButton.GetComponent<SpriteRenderer>();
 
@@ -68,7 +62,6 @@ namespace Rectangle.UI
             foreach (GridField gridCollider in usedGridFields)
             {
                 gridCollider.isUsed = false;
-                gridCollider.backgroundRend.color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.None;
             }
 

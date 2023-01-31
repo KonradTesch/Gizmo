@@ -12,6 +12,11 @@ namespace Rectangle.General
         [Tooltip("The offset position of the camera.")]
         [SerializeField] private Vector3 camOffset;
 
+        [SerializeField] private UI.BuildingScreens buildingScreens;
+
+        public Vector3 buildingScreenOffset;
+        public Vector2 resolutionOffset;
+
         [Header("Camera Transition")]
 
         /// <summary>
@@ -85,16 +90,21 @@ namespace Rectangle.General
             float minWidth = ((gridData.width / 2f) * GameBehavior.instance.builderSettings.tileSize.x) / ((float)Screen.width / (float)Screen.height);
             float minHeight = (gridData.height / 2f) * GameBehavior.instance.builderSettings.tileSize.y;
 
-            if(minWidth + 8 > minHeight + 16)
+            Camera cam = GetComponent<Camera>();
+
+            if(minWidth + resolutionOffset.x > minHeight + resolutionOffset.y)
             {
-                GetComponent<Camera>().orthographicSize = minWidth + 8;
+                cam.orthographicSize = minWidth + resolutionOffset.x;
             }
             else
             {
-                GetComponent<Camera>().orthographicSize = minHeight + 18;
+                cam.orthographicSize = minHeight + resolutionOffset.y;
             }
 
-            transform.position = new Vector3(minWidth * ((float)Screen.width / (float)Screen.height), minHeight - 8f, camOffset.z);
+            transform.position = new Vector3(minWidth * ((float)Screen.width / (float)Screen.height), minHeight - 8f, camOffset.z) + buildingScreenOffset;
+
+            buildingScreens.transform.position = transform.position - camOffset;
+            buildingScreens.transform.localScale = Vector3.one * cam.orthographicSize / 53f;
 
         }
     }
