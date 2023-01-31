@@ -16,7 +16,7 @@ MonoBehaviour:
   gridTiles: {fileID: 11400000, guid: cc5eb9e85f09778489507c1695470d46, type: 2}
   closedBorderTile: {fileID: 11400000, guid: 1a463e5f1de665345b62dada1599ce5c, type: 2}
   openBorderTile: {fileID: 11400000, guid: 04e8e986db5bca344b91ae89a3e10d58, type: 2}
-  borderTile: {fileID: 11400000, guid: 6877d2a183d758f489621d5dd20de567, type: 2}
+  borderTile: {fileID: 11400000, guid: 79f6aa3d994b8c3448f34e8fa98f3140, type: 2}
   gridLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -44,4 +44,4 @@ MonoBehaviour:
   - tileType: 7
     tileSprite: {fileID: 21300000, guid: cf107eb4b71ae834284a25bc6c784c5a, type: 3}
   starPrefab: {fileID: 3031384222072285329, guid: 4de7d0dfcee78154fae23ad4393196ec, type: 3}
-  starSprite: {fileID: 21300000, guid: 9b929adbbad68db4e82a5ac99dd16978, type: 3}
+  starSprite: {fileID: 21300000, guid: 2a19f2725fcee7742bfadf471c7b08d0, type: 3}

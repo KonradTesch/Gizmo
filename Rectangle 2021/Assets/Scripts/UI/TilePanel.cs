@@ -28,8 +28,7 @@ namespace Rectangle.UI
                 {
                     TileButton newButton = Instantiate(tileButtonReference, transform).GetComponent<TileButton>();
 
-                    newButton.transform.localPosition = new Vector3( (rend.bounds.size.x / (tileGroups.Count + 1)) * i - (rend.bounds.size.x / 2) , 0, 0);
-
+                    newButton.transform.localPosition = new Vector3( (rend.bounds.size.x / (tileGroups.Count + 1)) * i - (rend.bounds.size.x / 2) , newButton.transform.localPosition.y, 0);
 
                     newButton.tileCount = tileGroup.tileCount;
                     newButton.tileType = tileGroup.tileType;

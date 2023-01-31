@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f960b66c69860d44ba2637cae59bf24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridBackground: {fileID: 5740847855110787390}
 --- !u!1 &5740847855092658040
 GameObject:
   m_ObjectHideFlags: 0

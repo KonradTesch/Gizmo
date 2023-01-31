@@ -97,7 +97,6 @@ namespace Rectangle.Level
                             starRend.sprite = builderSettings.starSprite;
                             starRend.sortingLayerName = "Background";
                             starRend.sortingOrder = 0;
-                            starRend.color = Color.yellow;
 
                             newGridCol.GetComponent<BackgroundMode>().hasStar = true;
                         }

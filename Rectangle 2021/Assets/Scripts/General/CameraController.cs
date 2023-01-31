@@ -103,9 +103,7 @@ namespace Rectangle.General
 
             transform.position = new Vector3(minWidth * ((float)Screen.width / (float)Screen.height), minHeight - 8f, camOffset.z) + buildingScreenOffset;
 
-            buildingScreens.transform.position = transform.position - camOffset;
-            buildingScreens.transform.localScale = Vector3.one * cam.orthographicSize / 53f;
-
+            buildingScreens.InitBuildingScreens(transform.position ,cam.orthographicSize, new Vector2(gridData.width, gridData.height));
         }
     }
 

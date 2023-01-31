@@ -30,6 +30,8 @@ namespace Rectangle.Level
 
         private LevelBuilder levelBuilder;
 
+        private Camera cam;
+
         private Sprite normal;
         private Sprite pressed;
         private Sprite highlighted;
@@ -39,6 +41,8 @@ namespace Rectangle.Level
         {
             gridLayer = LayerMask.GetMask("Grid");
             rend = GetComponent<SpriteRenderer>();
+
+            cam = Camera.main;
 
             levelBuilder = General.GameBehavior.instance.levelBuilder;
 
@@ -149,7 +153,7 @@ namespace Rectangle.Level
                 gridCollider = null;
             }
 
-            transform.localScale = Vector3.one * 2;
+            transform.localScale = new Vector3(2 / transform.lossyScale.x, 2 / transform.lossyScale.y, 1);
         }
 
         private void OnMouseOver()

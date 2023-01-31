@@ -22,7 +22,7 @@ namespace Rectangle.UI
 
         private void OnEnable()
         {
-            tileCountText.text = tileCount.ToString();
+            tileCountText.text = tileCount.ToString() +" x";
 
             for(int i = 0; i < tileCount; i++)
             {
@@ -42,7 +42,7 @@ namespace Rectangle.UI
         {
             tileCount--;
 
-            tileCountText.text = tileCount.ToString();
+            tileCountText.text = tileCount.ToString() + " x";
         }
 
         public void ReturnTile()
@@ -50,7 +50,7 @@ namespace Rectangle.UI
 
             tileCount++;
 
-            tileCountText.text = tileCount.ToString();
+            tileCountText.text = tileCount.ToString() + " x";
 
             General.GameBehavior.instance.CheckGridCollider();
         }
