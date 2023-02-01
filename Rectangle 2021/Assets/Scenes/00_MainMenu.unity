@@ -446,7 +446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Beenden
+  m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
   m_sharedMaterial: {fileID: -4877907141646005558, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
@@ -3892,7 +3892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LEVEL
+  m_text: choose Level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
   m_sharedMaterial: {fileID: -4877907141646005558, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
@@ -5124,7 +5124,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OPTIONEN
+  m_text: Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
   m_sharedMaterial: {fileID: -4877907141646005558, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
@@ -5363,7 +5363,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685680744}
-  m_LocalRotation: {x: 0, y: 0, z: -0.009860983, w: 0.99995136}
+  m_LocalRotation: {x: 0, y: 0, z: 0.015096553, w: 0.99988604}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5371,11 +5371,11 @@ RectTransform:
   - {fileID: 1315008368}
   m_Father: {fileID: 1918991890}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.13}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.73}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 301, y: -197}
-  m_SizeDelta: {x: 384, y: 96}
+  m_SizeDelta: {x: 650, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1685680746
 MonoBehaviour:
@@ -5631,7 +5631,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CREDITS
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
   m_sharedMaterial: {fileID: -4877907141646005558, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
@@ -6528,7 +6528,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: START
+  m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}
   m_sharedMaterial: {fileID: -4877907141646005558, guid: 7027d4d8407dde244b74d775dfde3393, type: 2}

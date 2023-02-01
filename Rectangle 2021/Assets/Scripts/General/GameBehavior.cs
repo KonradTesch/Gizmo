@@ -111,7 +111,7 @@ namespace Rectangle.General
             camController = Camera.main.GetComponent<CameraController>();
 
             levelBuilder.BuildLevel();
-            tilePanel.InitTileButtons(tileInventory, levelBuilder.gridData.width * builderSettings.tileSize.x);
+            tilePanel.InitTileButtons(tileInventory);
 
             cancelBuildingButton.interactable = false;
             buildLevelButton.interactable = false;
@@ -168,7 +168,7 @@ namespace Rectangle.General
                 cancelBuildingButton.interactable = true;
                 buildLevelButton.interactable = false;
                 camController.SetBuildingCamera(levelBuilder.gridData);
-                tilePanel.InitTileButtons(tileInventory, levelBuilder.gridData.width * builderSettings.tileSize.x);
+                tilePanel.InitTileButtons(tileInventory);
                 tilePanel.gameObject.SetActive(true);
                 buildingMode = true;
 
