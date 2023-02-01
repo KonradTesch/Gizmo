@@ -30,6 +30,8 @@ namespace Rectangle.Level
 
         private LevelBuilder levelBuilder;
 
+        private Camera cam;
+
         private Sprite normal;
         private Sprite pressed;
         private Sprite highlighted;
@@ -39,6 +41,8 @@ namespace Rectangle.Level
         {
             gridLayer = LayerMask.GetMask("Grid");
             rend = GetComponent<SpriteRenderer>();
+
+            cam = Camera.main;
 
             levelBuilder = General.GameBehavior.instance.levelBuilder;
 
@@ -87,7 +91,6 @@ namespace Rectangle.Level
             if (positionCollider != null ? !positionCollider.GetComponent<GridField>().isUsed : false)
             {
                 gridCollider = positionCollider.GetComponent<GridField>();
-                gridCollider.backgroundRend.color = rend.color;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
 
                 button.PlaceTile(gridCollider);
@@ -135,7 +138,6 @@ namespace Rectangle.Level
                 button.ResetTile(gridCollider);
 
                 gridCollider.isUsed = false;
-                gridCollider.backgroundRend.color = Color.gray;
                 gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
 
                 for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
@@ -151,7 +153,7 @@ namespace Rectangle.Level
                 gridCollider = null;
             }
 
-            transform.localScale = Vector3.one * 2;
+            transform.localScale = new Vector3(2 / transform.lossyScale.x, 2 / transform.lossyScale.y, 1);
         }
 
         private void OnMouseOver()
@@ -180,7 +182,6 @@ namespace Rectangle.Level
                         }
                     }
 
-                    gridCollider.backgroundRend.color = Color.gray;
                     gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
                     gridCollider.isUsed = false;
                     gridCollider = null;

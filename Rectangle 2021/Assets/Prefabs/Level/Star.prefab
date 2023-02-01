@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 375687127986628520}
   - component: {fileID: 8502172374324868532}
-  - component: {fileID: 7955694718932749680}
   - component: {fileID: 7574237473392777721}
+  - component: {fileID: 960961555920673289}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -699655507
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b929adbbad68db4e82a5ac99dd16978, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a19f2725fcee7742bfadf471c7b08d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,41 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7955694718932749680
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3031384222072285329}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.30096325, y: -0.13076156}
-      - {x: 0.49440193, y: -0.6951189}
-      - {x: 0.00993824, y: -0.36277008}
-      - {x: -0.4688301, y: -0.69304085}
-      - {x: -0.29264545, y: -0.17356586}
-      - {x: -0.7928963, y: 0.2046156}
-      - {x: -0.17293262, y: 0.20671844}
-      - {x: 0.009417534, y: 0.7669344}
-      - {x: 0.21906215, y: 0.19085251}
-      - {x: 0.7860999, y: 0.19793698}
 --- !u!114 &7574237473392777721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,3 +98,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd416e7981bb2e346b09f2335f7133cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &960961555920673289
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031384222072285329}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1

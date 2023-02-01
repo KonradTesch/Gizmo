@@ -86,9 +86,6 @@ namespace Rectangle.Level
                         backgroundRend.sprite = builderSettings.backgroundImage;
                         backgroundRend.sortingOrder = -1;
 
-                        backgroundRend.color = Color.grey;
-
-
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
                             GameObject starSprite = new GameObject("StarSprite");
@@ -100,7 +97,6 @@ namespace Rectangle.Level
                             starRend.sprite = builderSettings.starSprite;
                             starRend.sortingLayerName = "Background";
                             starRend.sortingOrder = 0;
-                            starRend.color = Color.yellow;
 
                             newGridCol.GetComponent<BackgroundMode>().hasStar = true;
                         }
@@ -288,7 +284,6 @@ namespace Rectangle.Level
             {
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 6), position.y * size.y + (size.y / 2 - 4)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 3)), builderSettings.borderTile);
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x - 4), position.y * size.y + (size.y / 2 - 2)), new Vector2Int(position.x * size.x + (size.x - 1), position.y * size.y + (size.y / 2 + 1)), null);
-
 
                 return new Vector2((position.x + 1) * size.x - 2, (position.y + 0.5f) * size.y);
             }

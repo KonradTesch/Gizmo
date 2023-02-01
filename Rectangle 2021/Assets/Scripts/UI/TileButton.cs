@@ -14,7 +14,6 @@ namespace Rectangle.UI
         [SerializeField] private GameObject tilePrefab;
 
         [HideInInspector] public Sprite tileSprite;
-        [HideInInspector] public Color tileColor;
         [HideInInspector] public int tileCount;
         [HideInInspector] public TileCreator.TileTypes tileType;
         [HideInInspector] public PlayerController.PlayerModes playerMode;
@@ -23,7 +22,7 @@ namespace Rectangle.UI
 
         private void OnEnable()
         {
-            tileCountText.text = tileCount.ToString();
+            tileCountText.text = tileCount.ToString() +" x";
 
             for(int i = 0; i < tileCount; i++)
             {
@@ -36,7 +35,6 @@ namespace Rectangle.UI
                 SpriteRenderer tileRend = newTile.GetComponent<SpriteRenderer>();
 
                 tileRend.sprite = tileSprite;
-                tileRend.color = tileColor;
             }
         }
 
@@ -44,7 +42,7 @@ namespace Rectangle.UI
         {
             tileCount--;
 
-            tileCountText.text = tileCount.ToString();
+            tileCountText.text = tileCount.ToString() + " x";
         }
 
         public void ReturnTile()
@@ -52,7 +50,7 @@ namespace Rectangle.UI
 
             tileCount++;
 
-            tileCountText.text = tileCount.ToString();
+            tileCountText.text = tileCount.ToString() + " x";
 
             General.GameBehavior.instance.CheckGridCollider();
         }
