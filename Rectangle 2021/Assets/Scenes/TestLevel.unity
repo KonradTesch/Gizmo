@@ -12503,6 +12503,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camOffset: {x: 0, y: 0, z: -10}
+  buildingScreens: {fileID: 0}
+  buildingScreenOffset: {x: 0, y: 0, z: 0}
+  resolutionOffset: {x: 0, y: 0}
   transitionTime: 0.5
 --- !u!1001 &1389906528
 PrefabInstance:
@@ -27922,7 +27925,6 @@ MonoBehaviour:
   tileCountText: {fileID: 772686419}
   tilePrefab: {fileID: 852341010236262845, guid: c62f07b76baa0734cb79cce40d213818, type: 3}
   tileSprite: {fileID: 0}
-  tileColor: {r: 0, g: 0, b: 0, a: 0}
   tileCount: 0
   tileType: 0
   playerMode: 0
