@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Rectangle.LevelCreation;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -35,13 +37,19 @@ namespace Rectangle.Level
         public GameObject starPrefab;
         public Sprite starSprite;
 
-        public Sprite GetTileTypeSprite(TileCreator.TileTypes tileType)
+        public Sprite GetTileTypeSprite(TileCreator.TileTypes tileType, Player.PlayerController.PlayerModes playerMode)
         {
             foreach(TileType type in tileTypes)
             {
                 if(type.tileType == tileType)
                 {
-                    return type.tileSprite;
+                    for(int i = 0; i < type.modeSprites.Count; i++)
+                    {
+                        if (type.modeSprites[i].playerMode == playerMode)
+                        {
+                            return type.modeSprites[i].tileSprite;
+                        }
+                    }
                 }
             }
 
@@ -72,6 +80,13 @@ namespace Rectangle.Level
     public class TileType
     {
         public TileCreator.TileTypes tileType;
+        public List<TileSprite> modeSprites;
+    }
+
+    [System.Serializable]
+    public class TileSprite
+    {
+        public Player.PlayerController.PlayerModes playerMode;
         public Sprite tileSprite;
     }
 }

@@ -32,16 +32,52 @@ MonoBehaviour:
   anchorTileSprite: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
   tileTypes:
   - tileType: 2
-    tileSprite: {fileID: 21300000, guid: ab19e65485a72c94f99e2dfa12559bf6, type: 3}
+    modeSprites:
+    - playerMode: 1
+      tileSprite: {fileID: 21300000, guid: ab19e65485a72c94f99e2dfa12559bf6, type: 3}
+    - playerMode: 2
+      tileSprite: {fileID: 21300000, guid: 68477b08f0bb244468f70bc41208f034, type: 3}
+    - playerMode: 3
+      tileSprite: {fileID: 21300000, guid: d7e7c0df51dfd024ebeae3c1cd710e32, type: 3}
   - tileType: 3
-    tileSprite: {fileID: 21300000, guid: 84ba7b85db5656e4cb2efc89a5d6b7c6, type: 3}
+    modeSprites:
+    - playerMode: 1
+      tileSprite: {fileID: 21300000, guid: 84ba7b85db5656e4cb2efc89a5d6b7c6, type: 3}
+    - playerMode: 2
+      tileSprite: {fileID: 21300000, guid: e19f9743acd7ee1428d1e32f7d3ca363, type: 3}
+    - playerMode: 3
+      tileSprite: {fileID: 21300000, guid: 2c4e3384f8a75344f87b794196cc9a07, type: 3}
   - tileType: 4
-    tileSprite: {fileID: 21300000, guid: 37ae6bb35042e5446aff6ecf2b9155ae, type: 3}
+    modeSprites:
+    - playerMode: 1
+      tileSprite: {fileID: 21300000, guid: 37ae6bb35042e5446aff6ecf2b9155ae, type: 3}
+    - playerMode: 2
+      tileSprite: {fileID: 21300000, guid: 12a1031baa7fab1449a43bf78d926a11, type: 3}
+    - playerMode: 3
+      tileSprite: {fileID: 21300000, guid: e8bc6637c4c257e4bb6184025df7e227, type: 3}
   - tileType: 5
-    tileSprite: {fileID: 21300000, guid: 45cc07392445e4449a899fee42c3fbdf, type: 3}
+    modeSprites:
+    - playerMode: 1
+      tileSprite: {fileID: 21300000, guid: 45cc07392445e4449a899fee42c3fbdf, type: 3}
+    - playerMode: 2
+      tileSprite: {fileID: 21300000, guid: 5c0f2b00b30ca9d4cbe3639fe7ac6745, type: 3}
+    - playerMode: 3
+      tileSprite: {fileID: 21300000, guid: 103e1fa226584304fb43279cc72b2475, type: 3}
   - tileType: 6
-    tileSprite: {fileID: 21300000, guid: 06e42ddc4b4a9ad4b828d040267a2bee, type: 3}
+    modeSprites:
+    - playerMode: 1
+      tileSprite: {fileID: 21300000, guid: 06e42ddc4b4a9ad4b828d040267a2bee, type: 3}
+    - playerMode: 2
+      tileSprite: {fileID: 21300000, guid: 77399e8f0caecca4999f9a4bf6012ad1, type: 3}
+    - playerMode: 3
+      tileSprite: {fileID: 21300000, guid: bea710e28d86b4448bcbb7ed42ebcd33, type: 3}
   - tileType: 7
-    tileSprite: {fileID: 21300000, guid: cf107eb4b71ae834284a25bc6c784c5a, type: 3}
+    modeSprites:
+    - playerMode: 1
+      tileSprite: {fileID: 21300000, guid: cf107eb4b71ae834284a25bc6c784c5a, type: 3}
+    - playerMode: 2
+      tileSprite: {fileID: 21300000, guid: 8b64b484a2a9e734c9ffbed0916d6b96, type: 3}
+    - playerMode: 3
+      tileSprite: {fileID: 21300000, guid: e6a5b01e5c9a7b94086bd0381f7a070d, type: 3}
   starPrefab: {fileID: 3031384222072285329, guid: 4de7d0dfcee78154fae23ad4393196ec, type: 3}
   starSprite: {fileID: 21300000, guid: 2a19f2725fcee7742bfadf471c7b08d0, type: 3}

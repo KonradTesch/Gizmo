@@ -146,7 +146,7 @@ namespace Rectangle.Level
                 newCollectable.tilePosition = tilePosition;
                 newCollectable.tileBuilder = this;
 
-                newCollectable.GetComponent<SpriteRenderer>().sprite = General.GameBehavior.instance.builderSettings.GetTileTypeSprite(tile.tileType);
+                newCollectable.GetComponent<SpriteRenderer>().sprite = General.GameBehavior.instance.builderSettings.GetTileTypeSprite(tile.tileType, tile.playerMode);
 
                 collectables.Add(newCollectable);
             }
@@ -468,6 +468,5 @@ namespace Rectangle.Level
         public PlayerController.PlayerModes playerMode;
         public int tileCount;
         public Sprite tileSprite;
-        public Color tileColor;
     }
 }

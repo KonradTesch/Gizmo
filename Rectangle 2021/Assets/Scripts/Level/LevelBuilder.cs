@@ -115,6 +115,8 @@ namespace Rectangle.Level
                             anchorTile.tileType = TileCreator.TileTypes.Anchor;
                             anchorTile.playerMode = Player.PlayerController.PlayerModes.Rectangle;
 
+                            anchorTile.gameObject.AddComponent<AnchorTile>().InitAnchorTiles(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
+
                             anchorTiles.Add(anchorTile);
 
                             SpriteRenderer tileRend = anchorTile.GetComponent<SpriteRenderer>();

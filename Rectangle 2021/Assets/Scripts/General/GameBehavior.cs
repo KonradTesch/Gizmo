@@ -36,6 +36,8 @@ namespace Rectangle.General
         [Tooltip("The UI panel with the tiles.")]
         [SerializeField] private TilePanel tilePanel;
 
+        public AnchorTilePanel anchorTilePanel;
+
         /// <summary>
         /// The UI canvas with the button at the begin of a level.
         /// </summary>
@@ -234,10 +236,9 @@ namespace Rectangle.General
                     tileType = newTile.tileType,
                     playerMode = newTile.playerMode,
                     tileCount = 1,
-                    tileSprite = builderSettings.GetTileTypeSprite(newTile.tileType),
+                    tileSprite = builderSettings.GetTileTypeSprite(newTile.tileType, newTile.playerMode),
                 };
 
-                tileGroup.tileColor = builderSettings.GetModeColor(tileGroup.playerMode);
 
                 tileInventory.Add(tileGroup);
             }
@@ -261,8 +262,7 @@ namespace Rectangle.General
                     playerMode = tile.playerMode,
                     tileType = tile.tileType,
                     tileCount = count,
-                    tileColor = builderSettings.GetModeColor(tile.playerMode),
-                    tileSprite = builderSettings.GetTileTypeSprite(tile.tileType)
+                    tileSprite = builderSettings.GetTileTypeSprite(tile.tileType, tile.playerMode)
                 };
                 tileInventory.Add(newTileGroup);
             }
@@ -283,9 +283,8 @@ namespace Rectangle.General
                 tileType = tileType,
                 playerMode = tileBuilder.GetRandomPlayerMode(tileType),
                 tileCount = 0,
-                tileSprite = builderSettings.GetTileTypeSprite(tileType),
+                tileSprite = builderSettings.GetTileTypeSprite(tileType, tileBuilder.GetRandomPlayerMode(tileType)),
             };
-            newTileGroup.tileColor = builderSettings.GetModeColor(newTileGroup.playerMode);
             tileInventory.Add(newTileGroup);
 
             return newTileGroup.playerMode;

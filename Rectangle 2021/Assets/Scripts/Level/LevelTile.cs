@@ -30,8 +30,6 @@ namespace Rectangle.Level
 
         private LevelBuilder levelBuilder;
 
-        private Camera cam;
-
         private Sprite normal;
         private Sprite pressed;
         private Sprite highlighted;
@@ -42,11 +40,13 @@ namespace Rectangle.Level
             gridLayer = LayerMask.GetMask("Grid");
             rend = GetComponent<SpriteRenderer>();
 
-            cam = Camera.main;
-
             levelBuilder = General.GameBehavior.instance.levelBuilder;
 
             InitSprites();
+            if(tileType != TileCreator.TileTypes.Anchor)
+            {
+                transform.localScale = new Vector3(1 / transform.parent.lossyScale.x, 1 / transform.parent.lossyScale.y, 1);
+            }
         }
 
         private void InitSprites()
@@ -75,126 +75,142 @@ namespace Rectangle.Level
 
         private void OnMouseDrag()
         {
-            rend.sprite = pressed;
-            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y , 0);
+            if(tileType != TileCreator.TileTypes.Anchor)
+            {
+                rend.sprite = pressed;
+                transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+            }
         }
 
         private void OnMouseUp()
         {
-            rend.sprite = normal;
-            rend.sortingOrder = 1;
-
-            Collider2D positionCollider;
-
-            positionCollider = Physics2D.OverlapPoint(transform.position, gridLayer);
-
-            if (positionCollider != null ? !positionCollider.GetComponent<GridField>().isUsed : false)
+            if (tileType != TileCreator.TileTypes.Anchor)
             {
-                gridCollider = positionCollider.GetComponent<GridField>();
-                gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
+                rend.sprite = normal;
+                rend.sortingOrder = 1;
 
-                button.PlaceTile(gridCollider);
-            }
-            else
-            {
-                if (lastGrid != null)
+                Collider2D positionCollider;
+
+                positionCollider = Physics2D.OverlapPoint(transform.position, gridLayer);
+
+                if (positionCollider != null ? !positionCollider.GetComponent<GridField>().isUsed : false)
                 {
-                    gridCollider = lastGrid;
+                    gridCollider = positionCollider.GetComponent<GridField>();
+                    gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
+
+                    button.PlaceTile(gridCollider);
                 }
                 else
                 {
-                    Return();
-                    return;
+                    if (lastGrid != null)
+                    {
+                        gridCollider = lastGrid;
+                    }
+                    else
+                    {
+                        Return();
+                        return;
+                    }
                 }
-            }
 
-            transform.position = gridCollider.transform.position;
+                transform.position = gridCollider.transform.position;
 
-            for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
-            {
-                if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(transform.position))
+                for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
                 {
-                    levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                    if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(transform.position))
+                    {
+                        levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                    }
                 }
+
+                gridCollider.isUsed = true;
+
+                General.GameBehavior.instance.CheckGridCollider();
             }
 
-            gridCollider.isUsed = true;
-
-            General.GameBehavior.instance.CheckGridCollider();
         }
 
         void OnMouseDown()
         {
-            rend.sprite = pressed;
-            rend.sortingOrder = 2;
-
-            if (transform.localPosition == Vector3.zero)
+            if(tileType != TileCreator.TileTypes.Anchor)
             {
-                button.GetTile();
-            }
+                rend.sprite = pressed;
+                rend.sortingOrder = 2;
 
-            if(gridCollider != null)
-            {
-                button.ResetTile(gridCollider);
-
-                gridCollider.isUsed = false;
-                gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
-
-                for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                if (transform.localPosition == Vector3.zero)
                 {
-                    if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
-                    {
-                        levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = null;
-                    }
+                    button.GetTile();
                 }
 
-                lastGrid = gridCollider;
+                if (gridCollider != null)
+                {
+                    button.ResetTile(gridCollider);
 
-                gridCollider = null;
+                    gridCollider.isUsed = false;
+                    gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
+
+                    for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                    {
+                        if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
+                        {
+                            levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = null;
+                        }
+                    }
+
+                    lastGrid = gridCollider;
+
+                    gridCollider = null;
+                }
+
+                transform.localScale = new Vector3(2 / transform.parent.lossyScale.x, 2 / transform.parent.lossyScale.y, 1);
             }
-
-            transform.localScale = new Vector3(2 / transform.lossyScale.x, 2 / transform.lossyScale.y, 1);
         }
 
         private void OnMouseOver()
         {
-            if (!Input.GetMouseButton(0))
+            if(tileType != TileCreator.TileTypes.Anchor)
             {
-                rend.sprite = hover;
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                if(gridCollider != null)
+                if (!Input.GetMouseButton(0))
                 {
-                    Return();
-
-                    lastGrid = null;
-
-                    button.ResetTile(gridCollider);
-
-
-                    for(int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
-                    {
-                        if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
-                        {
-                            levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
-                        }
-                    }
-
-                    gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
-                    gridCollider.isUsed = false;
-                    gridCollider = null;
-
+                    rend.sprite = hover;
                 }
 
-                General.GameBehavior.instance.CheckGridCollider();
+                if (Input.GetMouseButtonDown(1))
+                {
+                    if (gridCollider != null)
+                    {
+                        Return();
+
+                        lastGrid = null;
+
+                        button.ResetTile(gridCollider);
+
+
+                        for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                        {
+                            if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
+                            {
+                                levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                            }
+                        }
+
+                        gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
+                        gridCollider.isUsed = false;
+                        gridCollider = null;
+
+                    }
+
+                    General.GameBehavior.instance.CheckGridCollider();
+                }
             }
         }
 
         private void OnMouseExit()
         {
-            rend.sprite = normal;
+            if(tileType != TileCreator.TileTypes.Anchor)
+            {
+                rend.sprite = normal;
+            }
         }
 
         private void Return()
@@ -202,7 +218,7 @@ namespace Rectangle.Level
             rend.sortingOrder = 1;
 
             transform.localPosition = Vector3.zero;
-            transform.localScale = Vector2.one;
+            transform.localScale = new Vector3(1 / transform.parent.lossyScale.x, 1 / transform.parent.lossyScale.y, 1);
             button.ReturnTile();
 
         }
