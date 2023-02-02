@@ -5846,13 +5846,13 @@ MonoBehaviour:
   rampLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSound: {fileID: 0}
+  moveSound: {fileID: 8300000, guid: d04691d39f1b6d741a1905b99edc7a56, type: 3}
   jumpSound: {fileID: 8300000, guid: 81e310fdc95b5ff4290b65420c7cad05, type: 3}
   landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
   headAnimator: {fileID: 0}
   climbSpeed: 450
   rotationSpeed: 55
-  climbSound: {fileID: 0}
+  climbSound: {fileID: 8300000, guid: 97fcd4e1df8381a4ea0a12c91a7de4b6, type: 3}
   climb: 0
 --- !u!212 &3683547979103905856
 SpriteRenderer:
@@ -6445,7 +6445,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3218692303520583889, guid: ffc491559f62705459aecaa76d1f7af9, type: 2}
   m_audioClip: {fileID: 8300000, guid: 1997a9629ed135544b7cc492d33547cd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.629
   m_Pitch: 1
   Loop: 1
   Mute: 0
