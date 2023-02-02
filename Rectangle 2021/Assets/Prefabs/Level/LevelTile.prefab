@@ -102,6 +102,10 @@ MonoBehaviour:
   playerMode: 0
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   nutInCornerSprite: {fileID: 21300000, guid: 138a7bca765c00147875df231ac1edba, type: 3}
+  pressSound: {fileID: 8300000, guid: a5f84614c0c4e5f488b95c2f7b9990d0, type: 3}
+  placeSound: {fileID: 8300000, guid: f5313324f9f600149858b7728e82199c, type: 3}
+  returnSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
+  hoverSound: {fileID: 8300000, guid: 49f6fd8398d588a4aa190f9f259e5f5d, type: 3}
   tileSprites:
   - playerMode: 1
     typeSprites:
