@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rectangle.LevelCreation;
+using Rectangle.Audio;
 using Rectangle.Player;
 using Rectangle.UI;
 
@@ -12,6 +13,15 @@ namespace Rectangle.Level
         public TileCreator.TileTypes tileType;
         public PlayerController.PlayerModes playerMode;
         [SerializeField] private LevelBuilderSettings builderSettings;
+        [SerializeField] private Sprite nutInCornerSprite;
+
+        [Header("Sounds")] 
+        [SerializeField] private AudioClip pressSound;
+        [SerializeField] private AudioClip placeSound;
+        [SerializeField] private AudioClip returnSound;
+        [SerializeField] private AudioClip hoverSound;
+
+        private AudioSource audioSource;
 
         [Header("Tile Sprites")]
 
@@ -30,6 +40,8 @@ namespace Rectangle.Level
 
         private LevelBuilder levelBuilder;
 
+        private GameObject starImage;
+
         private Sprite normal;
         private Sprite pressed;
         private Sprite highlighted;
@@ -39,6 +51,8 @@ namespace Rectangle.Level
         {
             gridLayer = LayerMask.GetMask("Grid");
             rend = GetComponent<SpriteRenderer>();
+
+            audioSource = General.GameBehavior.instance.uiAudioSource;
 
             levelBuilder = General.GameBehavior.instance.levelBuilder;
 
@@ -95,8 +109,20 @@ namespace Rectangle.Level
 
                 if (positionCollider != null ? !positionCollider.GetComponent<GridField>().isUsed : false)
                 {
+                    audioSource.PlayOneShot(placeSound);
+
                     gridCollider = positionCollider.GetComponent<GridField>();
                     gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
+
+                    if(gridCollider.star)
+                    {
+                        starImage = new GameObject("Nut");
+
+                        starImage.transform.SetParent(transform);
+                        starImage.transform.localPosition = Vector3.zero;
+                        starImage.transform.localScale = Vector3.one;
+                        starImage.AddComponent<SpriteRenderer>().sprite = nutInCornerSprite;
+                    }
 
                     button.PlaceTile(gridCollider);
                 }
@@ -136,6 +162,14 @@ namespace Rectangle.Level
             {
                 rend.sprite = pressed;
                 rend.sortingOrder = 2;
+
+                audioSource.PlayOneShot(pressSound);
+
+                if(starImage != null)
+                {
+                    Destroy(starImage);
+                    starImage = null;
+                }
 
                 if (transform.localPosition == Vector3.zero)
                 {
@@ -177,6 +211,12 @@ namespace Rectangle.Level
 
                 if (Input.GetMouseButtonDown(1))
                 {
+                    if (starImage != null)
+                    {
+                        Destroy(starImage);
+                        starImage = null;
+                    }
+
                     if (gridCollider != null)
                     {
                         Return();
@@ -213,13 +253,15 @@ namespace Rectangle.Level
             }
         }
 
-        private void Return()
+        public void Return(bool deleteInManger = true)
         {
+            audioSource.PlayOneShot(returnSound);
+
             rend.sortingOrder = 1;
 
             transform.localPosition = Vector3.zero;
             transform.localScale = new Vector3(1 / transform.parent.lossyScale.x, 1 / transform.parent.lossyScale.y, 1);
-            button.ReturnTile();
+            button.ReturnTile(deleteInManger);
 
         }
     }

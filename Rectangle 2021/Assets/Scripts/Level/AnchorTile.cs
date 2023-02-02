@@ -6,22 +6,65 @@ using Rectangle.LevelCreation;
 
 namespace Rectangle.Level
 {
+
+
     public class AnchorTile : MonoBehaviour
     {
+        [Header("Sprites")]
+
+        [SerializeField] private Sprite defaultAnchor;
+        [SerializeField] private Sprite hoverAnchor;
+        [SerializeField] private Sprite highlightAnchor;
+
+        private GameObject infoPanel;
+
         private List<TileGroupData> anchorTiles;
 
         private bool showTiles = true;
+
+        private SpriteRenderer rend;
+
+        private void Awake()
+        {
+            rend = GetComponent<SpriteRenderer>();
+        }
+
+        private void OnEnable()
+        {
+            rend.sprite = defaultAnchor;
+            infoPanel = General.GameBehavior.instance.infoPanel;
+        }
+
         private void OnMouseDown()
         {
             if (showTiles)
             {
+                rend.sprite = highlightAnchor;
                 General.GameBehavior.instance.anchorTilePanel.ShowAnchorTiles(anchorTiles);
+                infoPanel.SetActive(false);
                 showTiles = false;
             }
             else
             {
+                rend.sprite = defaultAnchor;
                 showTiles = true;
                 General.GameBehavior.instance.anchorTilePanel.gameObject.SetActive(false);
+                infoPanel.SetActive(true);
+            }
+        }
+
+        private void OnMouseOver()
+        {if(showTiles)
+            {
+                rend.sprite = hoverAnchor;
+            }
+        }
+
+        private void OnMouseExit()
+        {
+            if(showTiles)
+            {
+                rend.sprite = defaultAnchor;
             }
         }
         public void InitAnchorTiles(List<PlannedTile> tiles)

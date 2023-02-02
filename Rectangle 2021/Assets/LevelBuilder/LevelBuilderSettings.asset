@@ -29,7 +29,8 @@ MonoBehaviour:
   bubbleColor: {r: 1, g: 1, b: 1, a: 1}
   littleColor: {r: 1, g: 1, b: 1, a: 1}
   levelTilePrefab: {fileID: 852341010236262845, guid: c62f07b76baa0734cb79cce40d213818, type: 3}
-  anchorTileSprite: {fileID: 21300000, guid: 365dc6c24a21fc643b64c50f61cd9bde, type: 3}
+  anchorTilePrefab: {fileID: 3360939943037998273, guid: 45eac814397407d4ba9e73a96d580f99, type: 3}
+  anchorTileSprite: {fileID: 21300000, guid: 2c524027f1f83a54b9e2dfaa1bf694e5, type: 3}
   tileTypes:
   - tileType: 2
     modeSprites:

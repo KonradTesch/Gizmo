@@ -22,7 +22,10 @@ namespace Rectangle.Level
         [Header("LevelText")]
         [SerializeField] private GameObject startText;
         [SerializeField] private GameObject endText;
-        [SerializeField] private GameObject anchorTextPrefab;
+
+        [Space()]
+
+        [SerializeField] private GameObject anchorBoxPrefab;
 
         [HideInInspector] public List<LevelTile> placedTiles;
         [HideInInspector] public List<LevelTile> anchorTiles;
@@ -88,10 +91,12 @@ namespace Rectangle.Level
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
+                            newGridCol.GetComponent<GridField>().star = true; ;
+
                             GameObject starSprite = new GameObject("StarSprite");
                             starSprite.transform.SetParent(fieldBackgound.transform);
                             starSprite.transform.localPosition = Vector3.zero;
-                            starSprite.transform.localScale = Vector3.one * 10;
+                            starSprite.transform.localScale = Vector3.one * 4;
 
                             SpriteRenderer starRend = starSprite.AddComponent<SpriteRenderer>();
                             starRend.sprite = builderSettings.starSprite;
@@ -107,23 +112,23 @@ namespace Rectangle.Level
                         {
                             newGridCol.GetComponent<GridField>().isUsed = true;
 
-                            LevelTile anchorTile = Instantiate(builderSettings.levelTilePrefab).GetComponent<LevelTile>();
-                            anchorTile.gameObject.name = "Anchor_Tile";
-                            anchorTile.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
-                            anchorTile.gameObject.layer = LayerMask.NameToLayer("Background");
+                            LevelTile anchor = Instantiate(builderSettings.anchorTilePrefab).GetComponent<LevelTile>();
 
-                            anchorTile.tileType = TileCreator.TileTypes.Anchor;
-                            anchorTile.playerMode = Player.PlayerController.PlayerModes.Rectangle;
+                            anchor.gameObject.name = "Anchor_Tile";
+                            anchor.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
+                            anchor.gameObject.layer = LayerMask.NameToLayer("Background");
 
-                            anchorTile.gameObject.AddComponent<AnchorTile>().InitAnchorTiles(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
+                            anchor.tileType = TileCreator.TileTypes.Anchor;
+                            anchor.playerMode = Player.PlayerController.PlayerModes.Rectangle;
 
-                            anchorTiles.Add(anchorTile);
-
-                            SpriteRenderer tileRend = anchorTile.GetComponent<SpriteRenderer>();
+                            anchor.GetComponent<AnchorTile>().InitAnchorTiles(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
+                            
+                            SpriteRenderer tileRend = anchor.GetComponent<SpriteRenderer>();
                             tileRend.sortingLayerName = "Level";
-                            tileRend.sprite = builderSettings.anchorTileSprite;
 
-                            Instantiate(anchorTextPrefab, anchorTile.transform.position, Quaternion.identity).GetComponentInChildren<UI.AnchorText>().SetTileNumbers(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
+                            anchorTiles.Add(anchor);
+
+                            Instantiate(anchorBoxPrefab, anchor.transform.position, Quaternion.identity);
                         }
 
                     }

@@ -29,6 +29,7 @@ namespace Rectangle.Level
         [Header("LevelTiles")]
 
         public GameObject levelTilePrefab;
+        public GameObject anchorTilePrefab;
         public Sprite anchorTileSprite;
         public TileType[] tileTypes;
 

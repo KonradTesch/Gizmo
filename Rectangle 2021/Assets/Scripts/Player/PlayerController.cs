@@ -82,7 +82,7 @@ namespace Rectangle.Player
 
         private void FixedUpdate()
         {
-            if(playerActive)
+            if(playerActive && activePlayer.gameObject.activeSelf)
             {
                 Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
                 activePlayer.Move(movement);
@@ -112,7 +112,10 @@ namespace Rectangle.Player
                 lastBackground = activeBackground;
             }
 
-            activeBackground = Physics2D.OverlapPoint(activePlayer.transform.position, backgroundLayer).GetComponent<BackgroundMode>();
+            if(Physics2D.OverlapPoint(activePlayer.transform.position, backgroundLayer) != null)
+            {
+                activeBackground = Physics2D.OverlapPoint(activePlayer.transform.position, backgroundLayer).GetComponent<BackgroundMode>();
+            }
 
             if (lastBackground != activeBackground)
             {

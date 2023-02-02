@@ -10,6 +10,7 @@ namespace Rectangle.UI
 {
     public class LevelButtonUI : MonoBehaviour
     {
+        [SerializeField] private Sprite[] buttonBackgrounds;
         [SerializeField] private TextMeshProUGUI levelName;
         [SerializeField] private TextMeshProUGUI bestTime;
         [SerializeField] private GameObject star;
@@ -24,6 +25,8 @@ namespace Rectangle.UI
 
         public void InitLevelButton(bool avaivable, string name, float time, bool starCollected)
         {
+            levelButton.image.sprite = buttonBackgrounds[Random.Range(0, buttonBackgrounds.Length)];
+
             levelButton.interactable = avaivable;
 
             levelName.text = name;
