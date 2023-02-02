@@ -28881,7 +28881,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 109168493}
   background: {fileID: 1694414731}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
-  audioSource: {fileID: 0}
+  uiAudioSource: {fileID: 0}
   buildLevelSound: {fileID: 0}
   resetTileSound: {fileID: 0}
   tileInventory: []
@@ -28974,7 +28974,7 @@ MonoBehaviour:
   background: {fileID: 1694414731}
   startText: {fileID: 1248954987}
   endText: {fileID: 1422954950}
-  anchorTextPrefab: {fileID: 41922099928284676, guid: 2915ec6b9604e1f43b2ae1916f7195ce, type: 3}
+  anchorBoxPrefab: {fileID: 41922099928284676, guid: 2915ec6b9604e1f43b2ae1916f7195ce, type: 3}
   placedTiles: []
   anchorTiles: []
   gridData:
