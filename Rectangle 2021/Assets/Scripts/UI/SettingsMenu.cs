@@ -12,6 +12,12 @@ namespace Rectangle.UI
 
         public Dropdown resolutionDropdown;
 
+        [SerializeField] private Toggle fullscreedToggle;
+        [SerializeField] private Dropdown qualityDropdown;
+        [SerializeField] private Slider masterVolumeSlider;
+        [SerializeField] private Slider musicVolumeSlider;
+        [SerializeField] private Slider sfxVolumeSlider;
+
         Resolution[] resolutions;
         private void Start()
         {
@@ -36,6 +42,72 @@ namespace Rectangle.UI
             resolutionDropdown.AddOptions(resoluttionsStrings);
             resolutionDropdown.value = currentResolutionIndex;
             resolutionDropdown.RefreshShownValue();
+
+            if(PlayerPrefs.HasKey("settings"))
+            {
+                LoadSettings();
+            }
+        }
+
+        public void SaveSettings()
+        {
+            string saveString = "";
+
+            saveString += resolutionDropdown.value + "|";
+            
+            if(fullscreedToggle.isOn)
+            {
+                saveString += "true" + "|";
+            }
+            else
+            {
+                saveString += "false" + "|";
+            }
+
+            saveString += qualityDropdown.value + "|";
+            saveString += masterVolumeSlider.value + "|";
+            saveString += musicVolumeSlider.value + "|";
+            saveString += sfxVolumeSlider.value;
+
+            PlayerPrefs.SetString("settings", saveString);
+        }
+
+        private void LoadSettings()
+        {
+            string saveString = PlayerPrefs.GetString("settings");
+
+            string[] settings = saveString.Split("|");
+
+            resolutionDropdown.value = int.Parse(settings[0]);
+            resolutionDropdown.RefreshShownValue();
+            SetResolution(int.Parse(settings[0]));
+
+            if (settings[1] == "true")
+            {
+                fullscreedToggle.isOn = true;
+                Screen.fullScreen = true;
+            }
+            else
+            {
+                fullscreedToggle.isOn = false;
+                Screen.fullScreen = false;
+
+            }
+
+            qualityDropdown.value = int.Parse(settings[2]);
+            qualityDropdown.RefreshShownValue();
+            SetQuality(int.Parse(settings[2]));
+
+            masterVolumeSlider.value = float.Parse(settings[3]);
+            SetMasterVolume(float.Parse(settings[3]));
+
+            musicVolumeSlider.value = float.Parse(settings[4]);
+            SetMusicVolume(float.Parse(settings[4]));
+
+            sfxVolumeSlider.value = float.Parse(settings[5]);
+            SetSFXVolume(float.Parse(settings[5]));
+
+
         }
 
         public void SetMasterVolume(float volume)

@@ -15,6 +15,7 @@ namespace Rectangle.Level
         public LevelTileData closedBorderTile;
         public LevelTileData openBorderTile;
         public TileBase borderTile;
+        public TileBase platformTile;
 
         [Header("Level Backgrounds")]
 
