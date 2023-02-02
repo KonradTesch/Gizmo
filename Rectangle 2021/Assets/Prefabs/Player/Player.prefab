@@ -5194,9 +5194,6 @@ GameObject:
   - component: {fileID: 3683547977414959956}
   - component: {fileID: 3683547977414959947}
   - component: {fileID: 1309069174104763556}
-  - component: {fileID: 9059940166049582334}
-  - component: {fileID: 4884894741995407784}
-  - component: {fileID: 5536529013050139962}
   - component: {fileID: 4844847874358873124}
   m_Layer: 0
   m_Name: Rectangle
@@ -5247,7 +5244,13 @@ MonoBehaviour:
     m_Bits: 512
   moveSound: {fileID: 8300000, guid: d04691d39f1b6d741a1905b99edc7a56, type: 3}
   jumpSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 81e310fdc95b5ff4290b65420c7cad05, type: 3}
+  - {fileID: 8300000, guid: a30372f017051fb4bb8034e0b253eb28, type: 3}
+  - {fileID: 8300000, guid: a0d94e8da0e31764585379444598f030, type: 3}
+  - {fileID: 8300000, guid: ec5bd83072a087a47a9af1a5adb1f8bf, type: 3}
+  - {fileID: 8300000, guid: 9893227b8d2ee6f4f920e4084d3575af, type: 3}
+  - {fileID: 8300000, guid: b6d96a1da9ab90d43ae191aef882a43b, type: 3}
+  - {fileID: 8300000, guid: 2d58978d71dbe4e42b42d96c3d24839e, type: 3}
   landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
   headAnimator: {fileID: 0}
   doubleJumpSound: {fileID: 8300000, guid: f013b7d1d74fcd4499e890a652bc523d, type: 3}
@@ -5370,48 +5373,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &9059940166049582334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547977414959945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcbdf5b2c7c3c94b8c40cfcdf849dfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipOne: {fileID: 8300000, guid: e8396c358b95ba145acaed4b9d7ded0c, type: 3}
---- !u!114 &4884894741995407784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547977414959945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda9b962963db5f4e94173ffbd5c8a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipTwo: {fileID: 8300000, guid: 3ed7795a10de04645986a4a77e6ef296, type: 3}
---- !u!114 &5536529013050139962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547977414959945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813d2532274351e45bee5ec1d99fb8a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipThree: {fileID: 0}
 --- !u!82 &4844847874358873124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5521,7 +5482,6 @@ GameObject:
   - component: {fileID: 3683547978436954696}
   - component: {fileID: 3683547978436954703}
   - component: {fileID: 3683547978436954702}
-  - component: {fileID: 3529398859784957533}
   - component: {fileID: 1988467678648267043}
   m_Layer: 0
   m_Name: Little
@@ -5674,20 +5634,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &3529398859784957533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547978436954700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcbdf5b2c7c3c94b8c40cfcdf849dfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipOne: {fileID: 0}
 --- !u!82 &1988467678648267043
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5797,9 +5743,6 @@ GameObject:
   - component: {fileID: 3683547979103905856}
   - component: {fileID: 3683547979103905863}
   - component: {fileID: 671401788}
-  - component: {fileID: 9069911152616677859}
-  - component: {fileID: 7476855766736539297}
-  - component: {fileID: 3770218652016840033}
   - component: {fileID: 4306860645013972169}
   m_Layer: 0
   m_Name: Spikey
@@ -5946,48 +5889,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.002407074}
   serializedVersion: 2
   m_Radius: 0.40760803
---- !u!114 &9069911152616677859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547979103905860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcbdf5b2c7c3c94b8c40cfcdf849dfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipOne: {fileID: 0}
---- !u!114 &7476855766736539297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547979103905860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda9b962963db5f4e94173ffbd5c8a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipTwo: {fileID: 0}
---- !u!114 &3770218652016840033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547979103905860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813d2532274351e45bee5ec1d99fb8a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipThree: {fileID: 0}
 --- !u!82 &4306860645013972169
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6098,9 +5999,6 @@ GameObject:
   - component: {fileID: 3683547979325627245}
   - component: {fileID: 3683547979325627244}
   - component: {fileID: 941556502}
-  - component: {fileID: 828550212348637299}
-  - component: {fileID: 8913491133773239579}
-  - component: {fileID: 5637792859695883266}
   - component: {fileID: 6080472376686647584}
   m_Layer: 0
   m_Name: Bubble
@@ -6149,7 +6047,7 @@ MonoBehaviour:
   rampLayer:
     serializedVersion: 2
     m_Bits: 512
-  moveSound: {fileID: 8300000, guid: b097af7169422db4a83e3a7929d29c36, type: 3}
+  moveSound: {fileID: 8300000, guid: d04691d39f1b6d741a1905b99edc7a56, type: 3}
   jumpSounds:
   - {fileID: 0}
   landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
@@ -6267,48 +6165,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &828550212348637299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547979325627234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcbdf5b2c7c3c94b8c40cfcdf849dfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipOne: {fileID: 0}
---- !u!114 &8913491133773239579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547979325627234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda9b962963db5f4e94173ffbd5c8a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipTwo: {fileID: 0}
---- !u!114 &5637792859695883266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683547979325627234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813d2532274351e45bee5ec1d99fb8a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 4407268296830399269}
-  clipThree: {fileID: 0}
 --- !u!82 &6080472376686647584
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6447,7 +6303,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3218692303520583889, guid: ffc491559f62705459aecaa76d1f7af9, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1997a9629ed135544b7cc492d33547cd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d3b48164e28b98641a55bb97fde51004, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.629
   m_Pitch: 1
