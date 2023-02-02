@@ -26,7 +26,7 @@ namespace Rectangle.Player
                     audioSource.clip = null;
                 }
 
-                audioSource.PlayOneShot(jumpSound);
+                audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
 
                 CreateDust();
 

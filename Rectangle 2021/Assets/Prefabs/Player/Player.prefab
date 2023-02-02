@@ -5246,7 +5246,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   moveSound: {fileID: 8300000, guid: d04691d39f1b6d741a1905b99edc7a56, type: 3}
-  jumpSound: {fileID: 8300000, guid: 81e310fdc95b5ff4290b65420c7cad05, type: 3}
+  jumpSounds:
+  - {fileID: 0}
   landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
   headAnimator: {fileID: 0}
   doubleJumpSound: {fileID: 8300000, guid: f013b7d1d74fcd4499e890a652bc523d, type: 3}
@@ -5570,7 +5571,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   moveSound: {fileID: 0}
-  jumpSound: {fileID: 0}
+  jumpSounds:
+  - {fileID: 0}
   landingSound: {fileID: 0}
   headAnimator: {fileID: 0}
 --- !u!212 &3683547978436954696
@@ -5847,7 +5849,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   moveSound: {fileID: 8300000, guid: d04691d39f1b6d741a1905b99edc7a56, type: 3}
-  jumpSound: {fileID: 8300000, guid: 81e310fdc95b5ff4290b65420c7cad05, type: 3}
+  jumpSounds:
+  - {fileID: 0}
   landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
   headAnimator: {fileID: 0}
   climbSpeed: 450
@@ -6147,7 +6150,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   moveSound: {fileID: 8300000, guid: b097af7169422db4a83e3a7929d29c36, type: 3}
-  jumpSound: {fileID: 8300000, guid: 81e310fdc95b5ff4290b65420c7cad05, type: 3}
+  jumpSounds:
+  - {fileID: 0}
   landingSound: {fileID: 8300000, guid: 7827e7801509a364199b7f205df07a23, type: 3}
   headAnimator: {fileID: 0}
   lowGravityScale: 0.3
