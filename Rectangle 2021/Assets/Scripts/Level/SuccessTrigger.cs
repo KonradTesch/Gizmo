@@ -22,6 +22,10 @@ namespace Rectangle.Level
             if (collision.CompareTag("Player"))
             {
                 StartCoroutine(nameof(StopPlayer));
+                GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.winSound);
+
+                GameBehavior.win();
+
                 successPanel.SetActive(true);
             }
 
@@ -33,7 +37,7 @@ namespace Rectangle.Level
         private IEnumerator StopPlayer()
         {
             yield return new WaitForSeconds(0.25f);
-            General.GameBehavior.instance.player.playerActive = false;
+            GameBehavior.instance.player.playerActive = false;
         }
     }
 }

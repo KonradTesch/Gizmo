@@ -77,11 +77,14 @@ namespace Rectangle.General
         [Tooltip("The settings file for level building.")]
         public LevelBuilderSettings builderSettings;
 
-        [Header("Sounds)")]
+        [Header("Sounds")]
         public AudioSource uiAudioSource;
         [SerializeField] private AudioClip buildLevelSound;
         [SerializeField] private AudioClip resetTileSound;
- 
+        public AudioClip deathSound;
+        public AudioClip winSound;
+        public AudioClip nutCatchSound;
+
         [HideInInspector] public List<TileGroupData> tileInventory;
         [HideInInspector] public List<LevelTile> placedTiles = new();
         [HideInInspector] public int usedTilesNumber;
@@ -96,6 +99,13 @@ namespace Rectangle.General
         private bool buildingMode = true;
 
         [HideInInspector] public GameObject gridBackground;
+
+        public delegate void MyDelegate();
+        public static MyDelegate death;
+        public static MyDelegate win;
+        public static MyDelegate star;
+        public static MyDelegate badTime;
+
 
         void Awake()
         {
@@ -235,21 +245,6 @@ namespace Rectangle.General
 
         }
 
-        public void CanncelBuildingMode()
-        {
-            if(buildingMode)
-            {
-                buildingUI.SetActive(false);
-                infoPanel.SetActive(false);
-                camController.CameraTransition(Physics2D.OverlapPoint(player.activePlayer.transform.position, builderSettings.gridLayer).GetComponent<BackgroundMode>().transform.position);
-                camController.SetLevelCamera();
-                tilePanel.gameObject.SetActive(false);
-                buildingMode = false;
-                player.playerActive = true;
-
-                tilePanel.ResetUsedGrids(null);
-            }
-        }
 
         /// <summary>
         /// Checks if the tiles are placed correctly.

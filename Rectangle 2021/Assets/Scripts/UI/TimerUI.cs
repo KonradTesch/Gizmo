@@ -23,6 +23,9 @@ namespace Rectangle.UI
         /// </summary>
         public static bool timer;
         [HideInInspector]public float time = 0;
+
+        private bool badTime = false;
+
         void Start()
         {
             if (startTimeAtStart)
@@ -44,6 +47,15 @@ namespace Rectangle.UI
 
 
                 timeText.text = currentTime;
+
+                if (General.SaveGameManager.instance.activeLevel != null && General.SaveGameManager.instance.activeLevel.bestTime > 0)
+                {
+                    if(time > General.SaveGameManager.instance.activeLevel.bestTime && !badTime)
+                    {
+                        General.GameBehavior.badTime();
+                        badTime = true;
+                    }
+                }
             }
         }
 

@@ -10,6 +10,9 @@ namespace Rectangle.Level
         private void OnTriggerEnter2D(Collider2D collision)
         {
             SaveGameManager.instance.CollectStar(GameBehavior.instance.levelBuilder.levelData);
+            GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.nutCatchSound);
+
+            GameBehavior.star();
 
             Destroy(this.gameObject);
         }

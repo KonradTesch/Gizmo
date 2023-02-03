@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Rectangle.Player;
+using Rectangle.General;
 
 namespace Rectangle
 {
@@ -11,8 +12,11 @@ namespace Rectangle
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                General.GameBehavior.instance.gameOverPanel.SetActive(true);
+                GameBehavior.instance.gameOverPanel.SetActive(true);
+                GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.deathSound);
                 collision.gameObject.transform.parent.GetComponent<PlayerController>().playerActive = false;
+
+                GameBehavior.death();
             }
         }
     }
