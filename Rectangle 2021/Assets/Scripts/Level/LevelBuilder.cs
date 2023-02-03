@@ -15,6 +15,7 @@ namespace Rectangle.Level
         [Header("Tilemaps")]
         [SerializeField] private Tilemap gridTilemap;
         [SerializeField] private Tilemap borderTilemap;
+        [SerializeField] private Tilemap platformTilemap;
 
         [Header("Background")]
         [SerializeField] private BackgroundController background;
@@ -22,7 +23,10 @@ namespace Rectangle.Level
         [Header("LevelText")]
         [SerializeField] private GameObject startText;
         [SerializeField] private GameObject endText;
-        [SerializeField] private GameObject anchorTextPrefab;
+
+        [Space()]
+
+        [SerializeField] private GameObject anchorBoxPrefab;
 
         [HideInInspector] public List<LevelTile> placedTiles;
         [HideInInspector] public List<LevelTile> anchorTiles;
@@ -88,10 +92,12 @@ namespace Rectangle.Level
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
+                            newGridCol.GetComponent<GridField>().star = true; ;
+
                             GameObject starSprite = new GameObject("StarSprite");
                             starSprite.transform.SetParent(fieldBackgound.transform);
                             starSprite.transform.localPosition = Vector3.zero;
-                            starSprite.transform.localScale = Vector3.one * 10;
+                            starSprite.transform.localScale = Vector3.one * 4;
 
                             SpriteRenderer starRend = starSprite.AddComponent<SpriteRenderer>();
                             starRend.sprite = builderSettings.starSprite;
@@ -107,21 +113,23 @@ namespace Rectangle.Level
                         {
                             newGridCol.GetComponent<GridField>().isUsed = true;
 
-                            LevelTile anchorTile = Instantiate(builderSettings.levelTilePrefab).GetComponent<LevelTile>();
-                            anchorTile.gameObject.name = "Anchor_Tile";
-                            anchorTile.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
-                            anchorTile.gameObject.layer = LayerMask.NameToLayer("Background");
+                            LevelTile anchor = Instantiate(builderSettings.anchorTilePrefab).GetComponent<LevelTile>();
 
-                            anchorTile.tileType = TileCreator.TileTypes.Anchor;
-                            anchorTile.playerMode = Player.PlayerController.PlayerModes.Rectangle;
+                            anchor.gameObject.name = "Anchor_Tile";
+                            anchor.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
+                            anchor.gameObject.layer = LayerMask.NameToLayer("Background");
 
-                            anchorTiles.Add(anchorTile);
+                            anchor.tileType = TileCreator.TileTypes.Anchor;
+                            anchor.playerMode = Player.PlayerController.PlayerModes.Rectangle;
 
-                            SpriteRenderer tileRend = anchorTile.GetComponent<SpriteRenderer>();
+                            anchor.GetComponent<AnchorTile>().InitAnchorTiles(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
+                            
+                            SpriteRenderer tileRend = anchor.GetComponent<SpriteRenderer>();
                             tileRend.sortingLayerName = "Level";
-                            tileRend.sprite = builderSettings.anchorTileSprite;
 
-                            Instantiate(anchorTextPrefab, anchorTile.transform.position, Quaternion.identity).GetComponentInChildren<UI.AnchorText>().SetTileNumbers(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
+                            anchorTiles.Add(anchor);
+
+                            Instantiate(anchorBoxPrefab, anchor.transform.position, Quaternion.identity);
                         }
 
                     }
@@ -298,6 +306,7 @@ namespace Rectangle.Level
             {
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), builderSettings.borderTile);
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + 5), null);
+                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), (position.y * size.y) - 2), new Vector2Int(position.x * size.x + (size.x / 2 + 1), (position.y * size.y) - 2), builderSettings.platformTile);
 
                 return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 2);
 
@@ -306,6 +315,8 @@ namespace Rectangle.Level
             {
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y + (size.y - 6)), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + (size.y - 1)), builderSettings.borderTile);
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y + (size.y - 4)), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + (size.y - 1)), null);
+                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), (position.y * size.y) + (size.y - 2)), new Vector2Int(position.x * size.x + (size.x / 2 + 1), (position.y * size.y) + (size.y - 2)), builderSettings.platformTile);
+
 
                 return new Vector2((position.x + 0.5f) * size.x, (position.y + 1) * size.y - 2)
 ;

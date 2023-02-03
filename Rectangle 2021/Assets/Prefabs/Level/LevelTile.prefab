@@ -80,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 16.786884, y: 9.442623}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -101,6 +101,11 @@ MonoBehaviour:
   tileType: 0
   playerMode: 0
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
+  nutInCornerSprite: {fileID: 21300000, guid: 138a7bca765c00147875df231ac1edba, type: 3}
+  pressSound: {fileID: 8300000, guid: a5f84614c0c4e5f488b95c2f7b9990d0, type: 3}
+  placeSound: {fileID: 8300000, guid: f5313324f9f600149858b7728e82199c, type: 3}
+  returnSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
+  hoverSound: {fileID: 8300000, guid: 49f6fd8398d588a4aa190f9f259e5f5d, type: 3}
   tileSprites:
   - playerMode: 1
     typeSprites:
@@ -233,12 +238,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 8}
-    newSize: {x: 8, y: 8}
+    oldSize: {x: 16.786884, y: 9.442623}
+    newSize: {x: 16.786884, y: 9.442623}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 32, y: 18}
+  m_Size: {x: 16, y: 9}
   m_EdgeRadius: 0

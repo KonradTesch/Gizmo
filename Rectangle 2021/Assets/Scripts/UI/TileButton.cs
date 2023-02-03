@@ -45,14 +45,16 @@ namespace Rectangle.UI
             tileCountText.text = tileCount.ToString() + " x";
         }
 
-        public void ReturnTile()
+        public void ReturnTile(bool deleteInManger = true)
         {
 
             tileCount++;
 
             tileCountText.text = tileCount.ToString() + " x";
-
-            General.GameBehavior.instance.CheckGridCollider();
+            if(deleteInManger)
+            {
+                General.GameBehavior.instance.CheckGridCollider();
+            }
         }
 
         public void PlaceTile(GridField gridField)

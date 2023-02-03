@@ -279,7 +279,7 @@ MonoBehaviour:
       direction: {x: -1, y: 0}
   plannedTiles:
   - coordinates: {x: 0, y: 1}
-    playerMode: 0
+    playerMode: 1
     tileType: 2
   - coordinates: {x: 0, y: 2}
     playerMode: 2
@@ -288,5 +288,5 @@ MonoBehaviour:
     playerMode: 2
     tileType: 5
   - coordinates: {x: 1, y: 0}
-    playerMode: 1
+    playerMode: 3
     tileType: 4

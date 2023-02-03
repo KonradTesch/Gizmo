@@ -31,7 +31,10 @@ namespace Rectangle.General
 
         private void OnApplicationQuit()
         {
-            SaveData();
+            if(saveData.Count > 0)
+            {
+                SaveData();
+            }
         }
 
         public void SaveData()

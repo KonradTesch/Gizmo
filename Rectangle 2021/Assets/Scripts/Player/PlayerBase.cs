@@ -63,7 +63,7 @@ namespace Rectangle.Player
 
         [Header("Sounds")]
         [SerializeField] protected AudioClip moveSound;
-        [SerializeField] protected AudioClip jumpSound;
+        [SerializeField] protected AudioClip[] jumpSounds;
         [SerializeField] protected AudioClip landingSound;
         /// <summary>
         /// Whetser the player is on the ground.
@@ -183,7 +183,7 @@ namespace Rectangle.Player
                     audioSource.clip = null;
                 }
 
-                audioSource.PlayOneShot(jumpSound);
+                audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
 
                 CreateDust();
 

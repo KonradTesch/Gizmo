@@ -61,6 +61,8 @@ namespace Rectangle.Level
 
                 int randomIndex = Random.Range(0, possibleTiles.Count);
 
+                Debug.Log("Build Tile with type: " + tile.tileType.ToString() + " and mod: " + tile.playerMode.ToString());
+
                 BuildTile(Vector2Int.RoundToInt(originPosition), possibleTiles[randomIndex]);
 
             }
@@ -146,7 +148,7 @@ namespace Rectangle.Level
                 newCollectable.tilePosition = tilePosition;
                 newCollectable.tileBuilder = this;
 
-                newCollectable.GetComponent<SpriteRenderer>().sprite = General.GameBehavior.instance.builderSettings.GetTileTypeSprite(tile.tileType);
+                newCollectable.GetComponent<SpriteRenderer>().sprite = General.GameBehavior.instance.builderSettings.GetTileTypeSprite(tile.tileType, tile.playerMode);
 
                 collectables.Add(newCollectable);
             }
@@ -468,6 +470,5 @@ namespace Rectangle.Level
         public PlayerController.PlayerModes playerMode;
         public int tileCount;
         public Sprite tileSprite;
-        public Color tileColor;
     }
 }

@@ -370,7 +370,7 @@ MonoBehaviour:
         playerMode: 1
         tileType: 6
       - coordinates: {x: 3, y: 1}
-        playerMode: 3
+        playerMode: 1
         tileType: 2
       anchorCoordinates: {x: 1, y: 0}
     height: 4

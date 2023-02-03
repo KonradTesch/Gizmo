@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e7d033f4979795d48b40a503c2705927
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - defaultAnchor: {fileID: 21300000, guid: 2c524027f1f83a54b9e2dfaa1bf694e5, type: 3}
+  - hoverAnchor: {fileID: 21300000, guid: 35a2dd877902a50409634e4e77c28430, type: 3}
+  - highlightAnchor: {fileID: 21300000, guid: b23d6a8c6e4800f4f8bd92b04bb438c2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

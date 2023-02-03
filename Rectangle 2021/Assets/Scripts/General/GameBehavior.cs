@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.Audio;
 
 using Rectangle.Player;
 using Rectangle.UI;
@@ -36,23 +38,21 @@ namespace Rectangle.General
         [Tooltip("The UI panel with the tiles.")]
         [SerializeField] private TilePanel tilePanel;
 
+        public AnchorTilePanel anchorTilePanel;
+
         /// <summary>
         /// The UI canvas with the button at the begin of a level.
         /// </summary>
         [Tooltip("The UI canvas with the button at the begin of a level.")]
-        [SerializeField] private GameObject buttonUI;
+        public GameObject infoPanel;
 
         /// <summary>
         /// The button to start the level.
         /// </summary>
         [Tooltip("The button to start the level.")]
-        [SerializeField] private Button buildLevelButton;
+        [SerializeField] private TextMeshProUGUI buildLevelText;
 
-        /// <summary>
-        /// The button to cancel the building mode.
-        /// </summary>
-        [Tooltip("The button to cancel the building mode.")]
-        [SerializeField] private Button cancelBuildingButton;
+        [SerializeField] private GameObject buildingUI;
 
         /// <summary>
         /// The success panel object.
@@ -77,7 +77,12 @@ namespace Rectangle.General
         [Tooltip("The settings file for level building.")]
         public LevelBuilderSettings builderSettings;
 
-        public List<TileGroupData> tileInventory;
+        [Header("Sounds)")]
+        public AudioSource uiAudioSource;
+        [SerializeField] private AudioClip buildLevelSound;
+        [SerializeField] private AudioClip resetTileSound;
+ 
+        [HideInInspector]public List<TileGroupData> tileInventory;
 
         [HideInInspector] public string levelName;
         private TileBuilder tileBuilder;
@@ -113,12 +118,31 @@ namespace Rectangle.General
             levelBuilder.BuildLevel();
             tilePanel.InitTileButtons(tileInventory);
 
-            cancelBuildingButton.interactable = false;
-            buildLevelButton.interactable = false;
+            buildLevelText.gameObject.SetActive(false);
 
             camController.SetBuildingCamera(levelBuilder.gridData);
 
             canStart = false;
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space) && buildingMode)
+            {
+                uiAudioSource.PlayOneShot(buildLevelSound);
+                StartPlayMode();
+            }
+
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                uiAudioSource.PlayOneShot(resetTileSound);
+
+                foreach(LevelTile tile in levelBuilder.placedTiles)
+                {
+                    tile.Return(false);
+                }
+                CheckGridCollider();
+            }
         }
 
         /// <summary>
@@ -129,6 +153,7 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> StartPlayMode()");
             if (canStart)
             {
+                buildingUI.SetActive(false);
                 background.gameObject.SetActive(true);
                 gridBackground.SetActive(false);
 
@@ -141,7 +166,7 @@ namespace Rectangle.General
 
                 //TimerUI.timer = true;
                 player.gameObject.SetActive(true);
-                buttonUI.SetActive(false);
+                infoPanel.SetActive(false);
                 tilePanel.gameObject.SetActive(false);
                 camController.CameraTransition(Physics2D.OverlapPoint(player.activePlayer.transform.position, builderSettings.gridLayer).GetComponent<BackgroundMode>().transform.position);
                 camController.SetLevelCamera();
@@ -161,12 +186,11 @@ namespace Rectangle.General
             Debug.Log("GameBehavior: -> ChangeGameMode()");
             if (!buildingMode)
             {
+                buildingUI.SetActive(true);
                 background.gameObject.SetActive(false);
                 gridBackground.SetActive(true);
 
-                buttonUI.SetActive(true);
-                cancelBuildingButton.interactable = true;
-                buildLevelButton.interactable = false;
+                infoPanel.SetActive(true);
                 camController.SetBuildingCamera(levelBuilder.gridData);
                 tilePanel.InitTileButtons(tileInventory);
                 tilePanel.gameObject.SetActive(true);
@@ -181,7 +205,8 @@ namespace Rectangle.General
         {
             if(buildingMode)
             {
-                buttonUI.SetActive(false);
+                buildingUI.SetActive(false);
+                infoPanel.SetActive(false);
                 camController.CameraTransition(Physics2D.OverlapPoint(player.activePlayer.transform.position, builderSettings.gridLayer).GetComponent<BackgroundMode>().transform.position);
                 camController.SetLevelCamera();
                 tilePanel.gameObject.SetActive(false);
@@ -199,13 +224,13 @@ namespace Rectangle.General
         {
             if (levelBuilder.CheckLevelPath(levelBuilder.WorldPositionToCoordinate(player.activePlayer.transform.position)))
             {
-                buildLevelButton.interactable = true;
+                buildLevelText.gameObject.SetActive(true);
                 canStart = true;
             }
             else
             {
+                buildLevelText.gameObject.SetActive(false);
                 canStart = false;
-                buildLevelButton.interactable = false;
             }
         }
 
@@ -234,10 +259,9 @@ namespace Rectangle.General
                     tileType = newTile.tileType,
                     playerMode = newTile.playerMode,
                     tileCount = 1,
-                    tileSprite = builderSettings.GetTileTypeSprite(newTile.tileType),
+                    tileSprite = builderSettings.GetTileTypeSprite(newTile.tileType, newTile.playerMode),
                 };
 
-                tileGroup.tileColor = builderSettings.GetModeColor(tileGroup.playerMode);
 
                 tileInventory.Add(tileGroup);
             }
@@ -261,8 +285,7 @@ namespace Rectangle.General
                     playerMode = tile.playerMode,
                     tileType = tile.tileType,
                     tileCount = count,
-                    tileColor = builderSettings.GetModeColor(tile.playerMode),
-                    tileSprite = builderSettings.GetTileTypeSprite(tile.tileType)
+                    tileSprite = builderSettings.GetTileTypeSprite(tile.tileType, tile.playerMode)
                 };
                 tileInventory.Add(newTileGroup);
             }
@@ -283,9 +306,8 @@ namespace Rectangle.General
                 tileType = tileType,
                 playerMode = tileBuilder.GetRandomPlayerMode(tileType),
                 tileCount = 0,
-                tileSprite = builderSettings.GetTileTypeSprite(tileType),
+                tileSprite = builderSettings.GetTileTypeSprite(tileType, tileBuilder.GetRandomPlayerMode(tileType)),
             };
-            newTileGroup.tileColor = builderSettings.GetModeColor(newTileGroup.playerMode);
             tileInventory.Add(newTileGroup);
 
             return newTileGroup.playerMode;

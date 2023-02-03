@@ -15,5 +15,7 @@ namespace Rectangle.Level
         public bool isUsed = false;
 
         [HideInInspector] public SpriteRenderer backgroundRend;
+
+        public bool star = false;
     }
 }
