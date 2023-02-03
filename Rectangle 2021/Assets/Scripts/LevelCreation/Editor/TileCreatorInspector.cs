@@ -470,6 +470,7 @@ namespace Rectangle.LevelCreation
 
                 waypointFollower.moveSpeed = platformData.moveSpeed;
                 waypointFollower.waypoints = platformData.waypoints;
+                waypointFollower.movingType = platformData.movingType;
 
                 foreach (ChangeData change in platformData.tileChanges)
                 {

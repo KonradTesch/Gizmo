@@ -12,6 +12,8 @@ namespace Rectangle.LevelCreation
         public LevelGrid gridData;
         public List<PlannedTile> plannedTiles;
 
+        public int shortestWay;
+
         public PlannedTile GetTileByCoordinates(Vector2Int coordinates, AnchorTile anchor)
         {
             if(anchor == null)
