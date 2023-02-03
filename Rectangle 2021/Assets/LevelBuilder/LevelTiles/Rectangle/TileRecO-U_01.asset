@@ -6100,7 +6100,7 @@ MonoBehaviour:
     waypoints:
     - {x: 0, y: 0}
     - {x: 4, y: 0}
-    movingType: 0
+    movingType: 1
     vanishing: 0
     vanishTime: 0
     tileChanges:
@@ -6127,7 +6127,7 @@ MonoBehaviour:
     waypoints:
     - {x: 0, y: 0}
     - {x: 4, y: 0}
-    movingType: 0
+    movingType: 1
     vanishing: 0
     vanishTime: 0
     tileChanges:
