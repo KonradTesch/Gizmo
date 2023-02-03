@@ -367,10 +367,10 @@ MonoBehaviour:
         playerMode: 2
         tileType: 6
       - coordinates: {x: 3, y: 1}
-        playerMode: 3
+        playerMode: 1
         tileType: 4
       - coordinates: {x: 3, y: 2}
-        playerMode: 3
+        playerMode: 1
         tileType: 7
       anchorCoordinates: {x: 2, y: 0}
     height: 5
@@ -386,7 +386,7 @@ MonoBehaviour:
     playerMode: 2
     tileType: 5
   - coordinates: {x: 1, y: 1}
-    playerMode: 2
+    playerMode: 3
     tileType: 3
   - coordinates: {x: 1, y: 0}
     playerMode: 2

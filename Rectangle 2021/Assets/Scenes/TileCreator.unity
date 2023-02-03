@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4.5
-  movingType: 0
+  movingType: 1
   waypoints:
   - {x: 0, y: 0}
   - {x: 0, y: -5}
@@ -1063,7 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  movingType: 0
+  movingType: 1
   waypoints:
   - {x: 0, y: 0}
   - {x: 0, y: 6}
@@ -3774,7 +3774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4.5
-  movingType: 0
+  movingType: 1
   waypoints:
   - {x: 0, y: 0}
   - {x: 0, y: 5}
@@ -4566,7 +4566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  movingType: 0
+  movingType: 1
   waypoints:
   - {x: 0, y: 0}
   - {x: 0, y: -2}
@@ -4804,7 +4804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4.5
-  movingType: 0
+  movingType: 1
   waypoints:
   - {x: 0, y: 0}
   - {x: 0, y: 5}
@@ -14156,7 +14156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  movingType: 0
+  movingType: 1
   waypoints:
   - {x: 0, y: 0}
   - {x: 0, y: -4}
@@ -14303,7 +14303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4.5
-  movingType: 0
+  movingType: 1
   waypoints:
   - {x: 0, y: 0}
   - {x: 0, y: -5}
