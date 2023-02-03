@@ -49,8 +49,14 @@ namespace Rectangle.UI
         private void LoadScene()
         {
             General.SaveGameManager.instance.SetActiveLevel(levelName);
-
-            SceneManager.LoadScene("LevelScene");
+            if(levelName == "Tutorial")
+            {
+                SceneManager.LoadScene("TutorialScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("LevelScene");
+            }
         }
     }
 }

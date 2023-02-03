@@ -10,6 +10,10 @@ namespace Rectangle.General
     {
         public static SaveGameManager instance;
 
+        [SerializeField] private string endSceneName;
+
+        [Header("Level")]
+
         public List<LevelSaveData> levelSaveData;
 
         [HideInInspector] public LevelSaveData activeLevel;
@@ -24,6 +28,7 @@ namespace Rectangle.General
             {
                 instance = this;
                 DontDestroyOnLoad(this);
+
                 if(PlayerPrefs.HasKey("LevelSaveData"))
                 {
                     LoadData();
@@ -95,13 +100,23 @@ namespace Rectangle.General
 
         private void LoadData()
         {
-            levelSaveData = new();
 
             string saveString = PlayerPrefs.GetString("LevelSaveData");
 
-            string[] lavelSaves = saveString.Split("|");
+            string[] levelSaves = saveString.Split("|");
 
-            foreach(string levelSave in lavelSaves)
+            string[] testData = levelSaves[0].Split(":");
+
+            if (levelSaves.Length < 10 || testData.Length < 6)
+            {
+
+                PlayerPrefs.DeleteKey("LevelSaveData");
+                return;
+            }
+
+            levelSaveData = new();
+
+            foreach (string levelSave in levelSaves)
             {
                 string[] levelData = levelSave.Split(":");
 
@@ -172,10 +187,33 @@ namespace Rectangle.General
             {
                 if (levelSaveData[i].levelName == activeLevel.levelName)
                 {
-                    activeLevel = levelSaveData[i +1];
+                    if(i + 2 < levelSaveData.Count)
+                    {
+                        activeLevel = levelSaveData[i + 1];
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(endSceneName);
+                    }
                     return;
                 }
             }
+        }
+
+        public void SetlastLevel()
+        {
+            for(int i = 0; i < levelSaveData.Count; i++)
+            {
+                if(i + 1 < levelSaveData.Count && !levelSaveData[i + 1].avaivable)
+                {
+                    activeLevel = levelSaveData[i];
+                    SceneManager.LoadScene("LevelScene");
+                    return;
+                }
+            }
+
+            activeLevel = levelSaveData[levelSaveData.Count - 1];
+            SceneManager.LoadScene("LevelScene");
         }
 
         public void FinishLevel(LevelData level, float time, int usedTileNumber)
@@ -198,6 +236,10 @@ namespace Rectangle.General
                     if (i + 1 < levelSaveData.Count)
                     {
                         levelSaveData[i + 1].avaivable = true;
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(endSceneName);
                     }
 
                     return;
