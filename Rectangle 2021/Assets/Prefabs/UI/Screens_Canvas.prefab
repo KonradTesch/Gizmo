@@ -28,18 +28,18 @@ RectTransform:
   m_GameObject: {fileID: 453060673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 852144606}
   m_Father: {fileID: 5470789994929037747}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -45}
-  m_SizeDelta: {x: 200, y: 90}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 80}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &453060677
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -186,8 +186,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -523,7 +523,7 @@ RectTransform:
   m_GameObject: {fileID: 522791897502813627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1594498534045796090}
@@ -565,8 +565,8 @@ RectTransform:
   m_GameObject: {fileID: 599793609520629752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4287694421815589666}
   m_RootOrder: 0
@@ -574,7 +574,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1138, y: 1110}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7154854723394082016
 CanvasRenderer:
@@ -604,7 +604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d0b99fc0d130454b9adfc6f938b3ec1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9f1d4d5f1cf97b4498854e6a7bd78fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1349,6 +1349,7 @@ GameObject:
   - component: {fileID: 4458257853924500514}
   - component: {fileID: 6894429171894964625}
   - component: {fileID: 9023128194683838008}
+  - component: {fileID: 4940118586094821715}
   m_Layer: 5
   m_Name: BT_Back to Menu
   m_TagString: Untagged
@@ -1471,6 +1472,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4940118586094821715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3376635251829972722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 3376635251829972722}
+  highlightSize: 1.1
 --- !u!1 &3456641371719420395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1498,7 @@ GameObject:
   - component: {fileID: 3092261345137586664}
   - component: {fileID: 4811702875896690272}
   - component: {fileID: 5717886994917342303}
+  - component: {fileID: 4804670983207744214}
   m_Layer: 5
   m_Name: BT_Exit
   m_TagString: Untagged
@@ -1605,6 +1621,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4804670983207744214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456641371719420395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 3456641371719420395}
+  highlightSize: 1.1
 --- !u!1 &3630074399277185175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1647,7 @@ GameObject:
   - component: {fileID: 4153431722787750086}
   - component: {fileID: 571725099821962081}
   - component: {fileID: 6536079972285101562}
+  - component: {fileID: 6067926189197872744}
   m_Layer: 5
   m_Name: BT_Back to Menu
   m_TagString: Untagged
@@ -1739,6 +1770,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6067926189197872744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3630074399277185175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 3630074399277185175}
+  highlightSize: 1.1
 --- !u!1 &4040163240975426740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,6 +1796,7 @@ GameObject:
   - component: {fileID: 682923150293218467}
   - component: {fileID: 4013224992841592207}
   - component: {fileID: 7962254639818282536}
+  - component: {fileID: 5131579874540730232}
   m_Layer: 5
   m_Name: BT_Restart
   m_TagString: Untagged
@@ -1873,6 +1919,20 @@ MonoBehaviour:
           m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5131579874540730232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040163240975426740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 4040163240975426740}
+  highlightSize: 1.1
 --- !u!1 &4229765290166295265
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,6 +2080,7 @@ GameObject:
   - component: {fileID: 850195983536634384}
   - component: {fileID: 6104168010087484847}
   - component: {fileID: 3258332563114604863}
+  - component: {fileID: 1336276426759001575}
   m_Layer: 5
   m_Name: BT_Back to Menu
   m_TagString: Untagged
@@ -2142,6 +2203,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1336276426759001575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750459617697196693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 4750459617697196693}
+  highlightSize: 1.1
 --- !u!1 &4771772874099184532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,6 +2306,7 @@ GameObject:
   - component: {fileID: 1346730763111034336}
   - component: {fileID: 4038592976755120441}
   - component: {fileID: 3289300391676097790}
+  - component: {fileID: 2099588871981711980}
   m_Layer: 5
   m_Name: BT_Restart
   m_TagString: Untagged
@@ -2353,6 +2429,20 @@ MonoBehaviour:
           m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2099588871981711980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113322508098343996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 5113322508098343996}
+  highlightSize: 1.1
 --- !u!1 &5291915663754418008
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,6 +2455,7 @@ GameObject:
   - component: {fileID: 4616668303529012881}
   - component: {fileID: 1248006723181665016}
   - component: {fileID: 7587464101619351480}
+  - component: {fileID: 2310699740084520281}
   m_Layer: 5
   m_Name: BT_Exit
   m_TagString: Untagged
@@ -2487,6 +2578,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2310699740084520281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291915663754418008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 5291915663754418008}
+  highlightSize: 1.1
 --- !u!1 &5470789994069522050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,7 +2733,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5470789994929037745
 MonoBehaviour:
@@ -2845,6 +2950,7 @@ GameObject:
   - component: {fileID: 560207252701684156}
   - component: {fileID: 8134996754661151202}
   - component: {fileID: 4032747297680890190}
+  - component: {fileID: 5146977303037088836}
   m_Layer: 5
   m_Name: BT_Restart
   m_TagString: Untagged
@@ -2967,6 +3073,20 @@ MonoBehaviour:
           m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5146977303037088836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5669707751548533162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 5669707751548533162}
+  highlightSize: 1.1
 --- !u!1 &5730091181879528085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3314,6 +3434,7 @@ GameObject:
   - component: {fileID: 5745892231049364057}
   - component: {fileID: 7877000359376582264}
   - component: {fileID: 2254503136506928658}
+  - component: {fileID: 6913438061103590200}
   m_Layer: 5
   m_Name: BT_Exit
   m_TagString: Untagged
@@ -3436,6 +3557,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6913438061103590200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122078522294028613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 6122078522294028613}
+  highlightSize: 1.1
 --- !u!1 &6389637662943332316
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,7 +3945,7 @@ RectTransform:
   m_GameObject: {fileID: 6581139800945992025}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4287694421815589666}
@@ -3871,6 +4006,7 @@ GameObject:
   - component: {fileID: 138852743414548637}
   - component: {fileID: 4235675249012103614}
   - component: {fileID: 7111094368884508302}
+  - component: {fileID: 8247999666400460540}
   m_Layer: 5
   m_Name: BT_Next level
   m_TagString: Untagged
@@ -3993,6 +4129,20 @@ MonoBehaviour:
           m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8247999666400460540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841460445280468499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 6841460445280468499}
+  highlightSize: 1.1
 --- !u!1 &7133547472388454546
 GameObject:
   m_ObjectHideFlags: 0
@@ -4382,6 +4532,7 @@ GameObject:
   - component: {fileID: 6837482715551803952}
   - component: {fileID: 184942220103008592}
   - component: {fileID: 7486568411212125099}
+  - component: {fileID: 2149962316348396754}
   m_Layer: 5
   m_Name: BT_Checkpoint
   m_TagString: Untagged
@@ -4504,6 +4655,20 @@ MonoBehaviour:
           m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2149962316348396754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7432795874611945031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 7432795874611945031}
+  highlightSize: 1.1
 --- !u!1 &7461518596014104449
 GameObject:
   m_ObjectHideFlags: 0
@@ -5001,6 +5166,7 @@ GameObject:
   - component: {fileID: 132507416838187573}
   - component: {fileID: 8161091832901876841}
   - component: {fileID: 7494673496782314977}
+  - component: {fileID: 4493334041150549120}
   m_Layer: 5
   m_Name: BT_Checkpoint
   m_TagString: Untagged
@@ -5123,3 +5289,17 @@ MonoBehaviour:
           m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4493334041150549120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048365389493321699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbeac667192a274ebe0516ac1a128a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightObject: {fileID: 9048365389493321699}
+  highlightSize: 1.1
