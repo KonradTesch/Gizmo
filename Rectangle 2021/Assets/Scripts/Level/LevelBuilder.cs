@@ -28,7 +28,7 @@ namespace Rectangle.Level
 
         [SerializeField] private GameObject anchorBoxPrefab;
 
-        [HideInInspector] public List<LevelTile> placedTiles;
+        [HideInInspector] public List<LevelTile> pathTiles;
         [HideInInspector] public List<LevelTile> anchorTiles;
 
         [HideInInspector] public LevelGrid gridData;
@@ -194,7 +194,7 @@ namespace Rectangle.Level
         public bool CheckLevelPath(Vector2Int startPosition)
         {
             Debug.Log($"LevelBuilder: ->CheckLevePath({startPosition})");
-            placedTiles.Clear();
+            pathTiles.Clear();
 
             Vector2Int currentDirection = Vector2Int.zero;
             Vector2Int currentPosition = startPosition;
@@ -253,9 +253,9 @@ namespace Rectangle.Level
                 {
                     LevelTile tile = levelData.GetGridSpot(currentPosition).placedTile;
 
-                    if(!placedTiles.Contains(tile))
+                    if(!pathTiles.Contains(tile))
                     {
-                        placedTiles.Add(tile);
+                        pathTiles.Add(tile);
                     }
 
                     currentDirection = GetNextDirection(tile.tileType, currentDirection);

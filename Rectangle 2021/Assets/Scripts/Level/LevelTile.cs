@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rectangle.LevelCreation;
-using Rectangle.Audio;
+using Rectangle.General;
 using Rectangle.Player;
 using Rectangle.UI;
 
@@ -52,9 +52,9 @@ namespace Rectangle.Level
             gridLayer = LayerMask.GetMask("Grid");
             rend = GetComponent<SpriteRenderer>();
 
-            audioSource = General.GameBehavior.instance.uiAudioSource;
+            audioSource = GameBehavior.instance.uiAudioSource;
 
-            levelBuilder = General.GameBehavior.instance.levelBuilder;
+            levelBuilder = GameBehavior.instance.levelBuilder;
 
             InitSprites();
             if(tileType != TileCreator.TileTypes.Anchor)
@@ -109,12 +109,31 @@ namespace Rectangle.Level
 
                 if (positionCollider != null ? !positionCollider.GetComponent<GridField>().isUsed : false)
                 {
+                    //Place Tile on Grid
                     audioSource.PlayOneShot(placeSound);
 
                     gridCollider = positionCollider.GetComponent<GridField>();
                     gridCollider.GetComponent<BackgroundMode>().playerMode = playerMode;
 
-                    if(gridCollider.star)
+                    GameBehavior.instance.placedTiles.Add(this);
+
+                    transform.position = gridCollider.transform.position;
+
+                    for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
+                    {
+                        if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(transform.position))
+                        {
+                            levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                        }
+                    }
+
+                    gridCollider.isUsed = true;
+
+                    GameBehavior.instance.CheckGridCollider();
+
+                    button.PlaceTile(gridCollider);
+
+                    if (gridCollider.star)
                     {
                         starImage = new GameObject("Nut");
 
@@ -124,7 +143,6 @@ namespace Rectangle.Level
                         starImage.AddComponent<SpriteRenderer>().sprite = nutInCornerSprite;
                     }
 
-                    button.PlaceTile(gridCollider);
                 }
                 else
                 {
@@ -134,24 +152,12 @@ namespace Rectangle.Level
                     }
                     else
                     {
+                        GameBehavior.instance.placedTiles.Remove(this);
                         Return();
                         return;
                     }
                 }
 
-                transform.position = gridCollider.transform.position;
-
-                for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
-                {
-                    if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(transform.position))
-                    {
-                        levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
-                    }
-                }
-
-                gridCollider.isUsed = true;
-
-                General.GameBehavior.instance.CheckGridCollider();
             }
 
         }
@@ -173,15 +179,19 @@ namespace Rectangle.Level
 
                 if (transform.localPosition == Vector3.zero)
                 {
+                    //Take Tile from Button
                     button.GetTile();
                 }
 
                 if (gridCollider != null)
                 {
+                    //Take Tile from Grid
                     button.ResetTile(gridCollider);
 
                     gridCollider.isUsed = false;
                     gridCollider.GetComponent<BackgroundMode>().playerMode = PlayerController.PlayerModes.None;
+
+                    GameBehavior.instance.placedTiles.Remove(this);
 
                     for (int i = 0; i < levelBuilder.levelData.gridData.grid.Count; i++)
                     {
@@ -219,6 +229,8 @@ namespace Rectangle.Level
 
                     if (gridCollider != null)
                     {
+                        //Remove and Return tile from Grid
+                        GameBehavior.instance.placedTiles.Remove(this);
                         Return();
 
                         lastGrid = null;
@@ -230,7 +242,7 @@ namespace Rectangle.Level
                         {
                             if (levelBuilder.levelData.gridData.grid[i].coordinates == levelBuilder.WorldPositionToCoordinate(gridCollider.transform.position))
                             {
-                                levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = this;
+                                levelBuilder.levelData.gridData.grid[i].levelSpot.placedTile = null;
                             }
                         }
 
@@ -240,7 +252,7 @@ namespace Rectangle.Level
 
                     }
 
-                    General.GameBehavior.instance.CheckGridCollider();
+                    GameBehavior.instance.CheckGridCollider();
                 }
             }
         }
@@ -253,7 +265,7 @@ namespace Rectangle.Level
             }
         }
 
-        public void Return(bool deleteInManger = true)
+        public void Return()
         {
             audioSource.PlayOneShot(returnSound);
 
@@ -261,7 +273,7 @@ namespace Rectangle.Level
 
             transform.localPosition = Vector3.zero;
             transform.localScale = new Vector3(1 / transform.parent.lossyScale.x, 1 / transform.parent.lossyScale.y, 1);
-            button.ReturnTile(deleteInManger);
+            button.ReturnTile();
 
         }
     }

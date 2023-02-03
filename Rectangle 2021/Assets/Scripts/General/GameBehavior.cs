@@ -82,7 +82,8 @@ namespace Rectangle.General
         [SerializeField] private AudioClip buildLevelSound;
         [SerializeField] private AudioClip resetTileSound;
  
-        [HideInInspector]public List<TileGroupData> tileInventory;
+        [HideInInspector] public List<TileGroupData> tileInventory;
+        [HideInInspector] public List<LevelTile> placedTiles = new();
 
         [HideInInspector] public string levelName;
         private TileBuilder tileBuilder;
@@ -137,10 +138,12 @@ namespace Rectangle.General
             {
                 uiAudioSource.PlayOneShot(resetTileSound);
 
-                foreach(LevelTile tile in levelBuilder.placedTiles)
+                foreach(LevelTile tile in placedTiles)
                 {
-                    tile.Return(false);
+                    tile.Return();
                 }
+
+                placedTiles.Clear();
                 CheckGridCollider();
             }
         }
@@ -157,12 +160,12 @@ namespace Rectangle.General
                 background.gameObject.SetActive(true);
                 gridBackground.SetActive(false);
 
-                foreach (LevelTile tile in levelBuilder.placedTiles)
+                foreach (LevelTile tile in levelBuilder.pathTiles)
                 {
                     TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), -1);
                 }
 
-                tileBuilder.BuildLevel(levelBuilder.placedTiles, levelBuilder.anchorTiles, levelBuilder.levelData);
+                tileBuilder.BuildLevel(levelBuilder.pathTiles, levelBuilder.anchorTiles, levelBuilder.levelData);
 
                 //TimerUI.timer = true;
                 player.gameObject.SetActive(true);
@@ -173,7 +176,7 @@ namespace Rectangle.General
                 buildingMode = false;
                 player.playerActive = true;
 
-                tilePanel.ResetUsedGrids(levelBuilder.placedTiles);
+                tilePanel.ResetUsedGrids(levelBuilder.pathTiles);
             }
             Debug.Log("GameBehavior: <- StartPlayMode()");
         }
