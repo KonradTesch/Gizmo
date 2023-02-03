@@ -14,7 +14,7 @@ namespace Rectangle.Level
 
             GameBehavior.star();
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Rectangle.UI
 
         private List<PlannedTile> anchorTiles;
         private bool isUsed = false;
+        private bool inAnchor = false;
 
         public void SetAnchorTiles(List<PlannedTile> anchorTiles)
         {
@@ -37,6 +38,33 @@ namespace Rectangle.UI
             }
         }
 
+        private void Update()
+        {
+            if(inAnchor && !isUsed)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    isUsed = true;
+                    animator.SetTrigger("close");
+
+                    GameBehavior.instance.player.playerActive = false;
+                    GameBehavior.instance.player.currentCheckpoint = GameBehavior.instance.player.activePlayer.transform.position;
+
+                    foreach (PlannedTile tile in anchorTiles)
+                    {
+                        GameBehavior.instance.TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), 1);
+                    }
+
+                    foreach (SpriteRenderer sprite in anchorTileSprites)
+                    {
+                        sprite.gameObject.SetActive(false);
+                    }
+
+                    GameBehavior.instance.BuildingMode();
+                }
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if(collision.GetComponent<PlayerBase>() != null)
@@ -45,6 +73,7 @@ namespace Rectangle.UI
                 {
                     animator.SetTrigger("open");
                 }
+                inAnchor = true;
 
                 collision.transform.parent.GetComponent<PlayerController>().anchor = true;
             }
@@ -55,34 +84,9 @@ namespace Rectangle.UI
             if (collision.GetComponent<PlayerBase>() != null)
             {
                 animator.SetTrigger("close");
+
+                inAnchor = false;
                 collision.transform.parent.GetComponent<PlayerController>().anchor = false;
-            }
-        }
-
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            if (collision.GetComponent<PlayerBase>() != null)
-            {
-                if(Input.GetKeyDown(KeyCode.E))
-                {
-                    isUsed = true;
-                    animator.SetTrigger("close");
-
-                    GameBehavior.instance.player.playerActive = false;
-                    GameBehavior.instance.player.currentCheckpoint = GameBehavior.instance.player.activePlayer.transform.position;
-
-                    foreach(PlannedTile tile in anchorTiles)
-                    {
-                        GameBehavior.instance.TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), 1);
-                    }
-
-                    foreach(SpriteRenderer sprite in anchorTileSprites)
-                    {
-                        sprite.gameObject.SetActive(false);
-                    }
-
-                    GameBehavior.instance.BuildingMode();
-                }
             }
         }
 

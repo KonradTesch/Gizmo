@@ -13,7 +13,7 @@ namespace Rectangle
             if (collision.gameObject.CompareTag("Player"))
             {
                 GameBehavior.instance.gameOverPanel.SetActive(true);
-                GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.deathSound);
+                //GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.deathSound);
                 collision.gameObject.transform.parent.GetComponent<PlayerController>().playerActive = false;
 
                 GameBehavior.death();

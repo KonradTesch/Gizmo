@@ -16,13 +16,16 @@ namespace Rectangle.Level
 
         public TimerUI timerUI;
 
+        private bool alreadyPlayd = false;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.CompareTag("Player") && !alreadyPlayd)
             {
                 StartCoroutine(nameof(StopPlayer));
                 GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.winSound);
+
+                alreadyPlayd = true;
 
                 GameBehavior.win();
 
