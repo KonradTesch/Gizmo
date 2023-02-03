@@ -5197,7 +5197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scientistAuidioSource: {fileID: 7337971576126134575}
   timeBetweenSounds: {x: 10, y: 30}
-  randomSounds: []
+  randomSounds:
+  - {fileID: 0}
   deathSounds:
   - {fileID: 8300000, guid: 199b059513990d6429baaf77e1932bc9, type: 3}
   - {fileID: 8300000, guid: d11f06507277669469f3c463234b87ac, type: 3}
