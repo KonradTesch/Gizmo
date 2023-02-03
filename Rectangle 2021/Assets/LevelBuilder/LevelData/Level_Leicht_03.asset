@@ -315,15 +315,15 @@ MonoBehaviour:
         tileType: 2
       anchorCoordinates: {x: 1, y: 1}
     - collectableTiles:
-      - coordinates: {x: 2, y: 1}
-        playerMode: 3
-        tileType: 5
       - coordinates: {x: 3, y: 2}
         playerMode: 1
         tileType: 7
       - coordinates: {x: 3, y: 1}
         playerMode: 3
         tileType: 7
+      - coordinates: {x: 3, y: 0}
+        playerMode: 3
+        tileType: 5
       anchorCoordinates: {x: 2, y: 3}
     height: 4
     width: 4

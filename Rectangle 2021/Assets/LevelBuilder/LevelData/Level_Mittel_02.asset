@@ -139,7 +139,7 @@ MonoBehaviour:
         coordinates: {x: 1, y: 0}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
-        anchor: 0
+        anchor: 1
         blocked: 0
         star: 0
     - coordinates: {x: 1, y: 1}
@@ -195,7 +195,7 @@ MonoBehaviour:
         coordinates: {x: 2, y: 0}
         worldPosition: {x: 0, y: 0}
         placedTile: {fileID: 0}
-        anchor: 1
+        anchor: 0
         blocked: 0
         star: 0
     - coordinates: {x: 2, y: 1}
@@ -363,16 +363,16 @@ MonoBehaviour:
         tileType: 4
       anchorCoordinates: {x: 0, y: 4}
     - collectableTiles:
-      - coordinates: {x: 2, y: 1}
+      - coordinates: {x: 1, y: 1}
         playerMode: 2
         tileType: 6
-      - coordinates: {x: 3, y: 1}
+      - coordinates: {x: 2, y: 1}
         playerMode: 1
         tileType: 4
-      - coordinates: {x: 3, y: 2}
+      - coordinates: {x: 2, y: 2}
         playerMode: 1
         tileType: 7
-      anchorCoordinates: {x: 2, y: 0}
+      anchorCoordinates: {x: 1, y: 0}
     height: 5
     width: 4
     start:
