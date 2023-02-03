@@ -1950,7 +1950,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: 28}
+  m_AnchoredPosition: {x: 26, y: -212}
   m_SizeDelta: {x: 315.3992, y: 53.2941}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1299290541
@@ -1973,7 +1973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Professional Mauritian Surferboy
+  m_text: Token Brown Boy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 54330177f1cd673449674f4dfd99fd4f, type: 2}
   m_sharedMaterial: {fileID: -4834079941542768530, guid: 54330177f1cd673449674f4dfd99fd4f, type: 2}
