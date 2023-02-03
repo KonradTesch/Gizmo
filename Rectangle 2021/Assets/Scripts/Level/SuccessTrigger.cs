@@ -27,7 +27,7 @@ namespace Rectangle.Level
 
             timerUI.StopTimer();
 
-            SaveGameManager.instance.FinishLevel(GameBehavior.instance.levelBuilder.levelData, timerUI.time);
+            SaveGameManager.instance.FinishLevel(GameBehavior.instance.levelBuilder.levelData, timerUI.time, GameBehavior.instance.usedTilesNumber);
         }
 
         private IEnumerator StopPlayer()

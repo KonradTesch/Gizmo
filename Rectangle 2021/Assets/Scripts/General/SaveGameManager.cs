@@ -74,6 +74,17 @@ namespace Rectangle.General
                     saveString += "false";
                 }
 
+                saveString += ":";
+
+                if(data.shortestWay)
+                {
+                    saveString += "true";
+                }
+                else
+                {
+                    saveString += "false";
+                }
+
                 saveString += "|";
             }
 
@@ -98,6 +109,7 @@ namespace Rectangle.General
 
                 bool avaivable;
                 bool star;
+                bool shortest;
 
                 if (levelData[2] == "true")
                 {
@@ -117,13 +129,24 @@ namespace Rectangle.General
                     star = false;
                 }
 
+                if (levelData[5] == "true")
+                {
+                    shortest = true;
+                }
+                else
+                {
+                    shortest = false;
+                }
+
+
                 LevelSaveData data = new LevelSaveData()
                 {
                     levelName = levelData[0],
                     levelData = level,
                     avaivable = avaivable,
                     bestTime = float.Parse(levelData[3]),
-                    star = star
+                    star = star,
+                    shortestWay = shortest
                 };
 
                 this.levelSaveData.Add(data);
@@ -155,7 +178,7 @@ namespace Rectangle.General
             }
         }
 
-        public void FinishLevel(LevelData level, float time)
+        public void FinishLevel(LevelData level, float time, int usedTileNumber)
         { 
             
             for(int i = 0; i < levelSaveData.Count; i++)
@@ -167,10 +190,16 @@ namespace Rectangle.General
                         levelSaveData[i].bestTime = time;
                     }
 
+                    if (usedTileNumber <= level.shortestWay)
+                    {
+                        levelSaveData[i].shortestWay = true;
+                    }
+
                     if (i + 1 < levelSaveData.Count)
                     {
                         levelSaveData[i + 1].avaivable = true;
                     }
+
                     return;
                 }
             }
@@ -197,5 +226,6 @@ namespace Rectangle.General
         public bool avaivable;
         public float bestTime;
         public bool star;
+        public bool shortestWay;
     }
 }

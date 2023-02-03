@@ -27916,6 +27916,7 @@ GameObject:
   - component: {fileID: 1837774593}
   - component: {fileID: 1837774595}
   - component: {fileID: 1837774594}
+  - component: {fileID: 1837774596}
   m_Layer: 5
   m_Name: InfoPanel
   m_TagString: Untagged
@@ -27989,6 +27990,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837774592}
   m_CullTransparentMesh: 1
+--- !u!114 &1837774596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837774592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e944a87443d6de64ca9fe80b15f237d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emptyCheckbox: {fileID: 21300000, guid: e4a2a0c08df1e6542a0391871d9167a6, type: 3}
+  fullCheckpox: {fileID: 21300000, guid: 34d503a470c854d469e393fa4dcc4d6f, type: 3}
+  levelCompleteCkeckbox: {fileID: 1162588773}
+  shortestWayCheckbox: {fileID: 2002117426}
+  starText: {fileID: 1870564774}
+  bestTimeText: {fileID: 984632364}
 --- !u!1001 &1860370280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28905,8 +28924,8 @@ MonoBehaviour:
   resetTileSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
   tileInventory: []
   placedTiles: []
+  usedTilesNumber: 0
   anchorTiles: []
-  levelName: 
   levelBuilder: {fileID: 0}
   gridBackground: {fileID: 0}
 --- !u!4 &2001858575
@@ -29027,6 +29046,7 @@ MonoBehaviour:
     avaivable: 0
     bestTime: 0
     star: 0
+    shortestWay: 0
 --- !u!1 &2002117424
 GameObject:
   m_ObjectHideFlags: 0

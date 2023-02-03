@@ -84,6 +84,7 @@ namespace Rectangle.General
  
         [HideInInspector] public List<TileGroupData> tileInventory;
         [HideInInspector] public List<LevelTile> placedTiles = new();
+        [HideInInspector] public int usedTilesNumber;
         [HideInInspector] public List<Level.AnchorTile> anchorTiles = new();
 
         private TileBuilder tileBuilder;
@@ -163,6 +164,8 @@ namespace Rectangle.General
                 buildingUI.SetActive(false);
                 background.gameObject.SetActive(true);
                 gridBackground.SetActive(false);
+
+                usedTilesNumber += levelBuilder.pathTiles.Count;
 
                 foreach (LevelTile tile in levelBuilder.pathTiles)
                 {
