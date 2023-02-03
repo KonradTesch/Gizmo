@@ -1439,7 +1439,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3d4aa568284db4b9f4c3ed1209e462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endSceneName: Ende
   levelSaveData:
+  - levelName: Tutorial
+    levelData: {fileID: 11400000, guid: 28a7230c33a305444923e22972578bb2, type: 2}
+    avaivable: 1
+    bestTime: 0
+    star: 0
+    shortestWay: 0
   - levelName: Level 1
     levelData: {fileID: 11400000, guid: 4fd9b73d0e9cdb34290778befd815e0f, type: 2}
     avaivable: 1
@@ -5572,10 +5579,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4872040191048942035}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 1857281948}
+        m_TargetAssemblyTypeName: Rectangle.General.SaveGameManager, Assembly-CSharp
+        m_MethodName: SetlastLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
