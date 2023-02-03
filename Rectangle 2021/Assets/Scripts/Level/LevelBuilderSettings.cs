@@ -33,6 +33,8 @@ namespace Rectangle.Level
         public GameObject anchorTilePrefab;
         public Sprite anchorTileSprite;
         public TileType[] tileTypes;
+        public Sprite startLevelSprite;
+        public Sprite endLevelSprite;
 
         [Header("Star")]
 

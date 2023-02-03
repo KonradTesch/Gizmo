@@ -33,6 +33,9 @@ namespace Rectangle.Level
 
         [HideInInspector] public LevelGrid gridData;
 
+        [HideInInspector] public GameObject startSprite;
+        [HideInInspector] public GameObject endSprite;
+
         public void BuildLevel()
         {
             DestroyImmediate(GameObject.Find("GridColliders"));
@@ -163,6 +166,14 @@ namespace Rectangle.Level
             startCollider.AddComponent<BackgroundMode>().playerMode = Player.PlayerController.PlayerModes.Rectangle;
             startCollider.AddComponent<GridField>().isUsed = true;
 
+             startSprite = new GameObject("StartSprite");
+            startSprite.transform.SetParent(startCollider.transform);
+            startSprite.transform.localPosition = Vector2.zero + (-(Vector2)gridData.start.direction * 1.8f);
+            startSprite.transform.localRotation = Quaternion.LookRotation(Vector3.forward, new Vector3(gridData.start.direction.x, gridData.start.direction.y, 0));
+            startSprite.AddComponent<SpriteRenderer>().sprite = builderSettings.startLevelSprite;
+            startSprite.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+
+
             //Setup end box
             Vector2 endPos = DrawStartOrEnd(gridData.end.coordinates, gridData.end.direction);
 
@@ -179,6 +190,13 @@ namespace Rectangle.Level
             SuccessTrigger success = endCollider.AddComponent<SuccessTrigger>();
             success.successPanel = General.GameBehavior.instance.sucessPanel;
             success.timerUI = GameObject.FindObjectOfType<UI.TimerUI>().GetComponent<UI.TimerUI>();
+
+            endSprite = new GameObject("EndSprite");
+            endSprite.transform.SetParent(endCollider.transform);
+            endSprite.transform.localPosition = Vector2.zero + (-(Vector2)gridData.end.direction * 3.3f);
+            endSprite.transform.localRotation = Quaternion.LookRotation(Vector3.forward, new Vector3(gridData.end.direction.x, gridData.end.direction.y, 0));
+            endSprite.AddComponent<SpriteRenderer>().sprite = builderSettings.endLevelSprite;
+            endSprite.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
 
             gridTilemap.RefreshAllTiles();
             borderTilemap.RefreshAllTiles();
