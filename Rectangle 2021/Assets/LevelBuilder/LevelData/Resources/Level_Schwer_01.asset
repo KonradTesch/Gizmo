@@ -277,7 +277,7 @@ MonoBehaviour:
         placedTile: {fileID: 0}
         anchor: 0
         blocked: 0
-        star: 0
+        star: 1
     - coordinates: {x: 3, y: 4}
       levelSpot:
         coordinates: {x: 3, y: 4}
@@ -425,6 +425,9 @@ MonoBehaviour:
         tileType: 7
       anchorCoordinates: {x: 0, y: 4}
     - collectableTiles:
+      - coordinates: {x: 4, y: 2}
+        playerMode: 2
+        tileType: 6
       - coordinates: {x: 2, y: 0}
         playerMode: 2
         tileType: 5
@@ -437,9 +440,6 @@ MonoBehaviour:
       - coordinates: {x: 4, y: 0}
         playerMode: 3
         tileType: 3
-      - coordinates: {x: 4, y: 2}
-        playerMode: 2
-        tileType: 6
       anchorCoordinates: {x: 2, y: 1}
     height: 5
     width: 5
@@ -465,3 +465,7 @@ MonoBehaviour:
   - coordinates: {x: 1, y: 4}
     playerMode: 2
     tileType: 2
+  - coordinates: {x: 2, y: 4}
+    playerMode: 3
+    tileType: 4
+  shortestWay: 8

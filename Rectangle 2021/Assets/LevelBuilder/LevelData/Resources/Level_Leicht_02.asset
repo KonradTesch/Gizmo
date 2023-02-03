@@ -256,18 +256,18 @@ MonoBehaviour:
         star: 0
     anchorTiles:
     - collectableTiles:
-      - coordinates: {x: 0, y: 3}
-        playerMode: 1
-        tileType: 6
-      - coordinates: {x: 1, y: 3}
-        playerMode: 2
-        tileType: 2
-      - coordinates: {x: 2, y: 3}
-        playerMode: 2
-        tileType: 3
       - coordinates: {x: 2, y: 2}
         playerMode: 2
         tileType: 5
+      - coordinates: {x: 2, y: 3}
+        playerMode: 2
+        tileType: 3
+      - coordinates: {x: 1, y: 3}
+        playerMode: 2
+        tileType: 2
+      - coordinates: {x: 0, y: 3}
+        playerMode: 1
+        tileType: 6
       anchorCoordinates: {x: 1, y: 1}
     height: 4
     width: 3
@@ -285,8 +285,9 @@ MonoBehaviour:
     playerMode: 1
     tileType: 4
   - coordinates: {x: 0, y: 1}
-    playerMode: 3
-    tileType: 7
-  - coordinates: {x: 0, y: 2}
     playerMode: 2
     tileType: 5
+  - coordinates: {x: 0, y: 2}
+    playerMode: 3
+    tileType: 7
+  shortestWay: 4
