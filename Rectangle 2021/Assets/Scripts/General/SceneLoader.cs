@@ -11,12 +11,16 @@ namespace Rectangle.General
     public class SceneLoader : MonoBehaviour
     {
         /// <summary>
-        /// Loads the scene at with the next index.
+        /// reloads the scene with the next level
         /// </summary>
-        public void LoadNextScene()
+        public void LoadNextLevel()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Time.timeScale = 1;
+            if(SaveGameManager.instance.levelSaveData != null)
+            {
+                SaveGameManager.instance.SetNextLevel();
+                ReloadScene();
+            }
+
         }
 
         /// <summary>

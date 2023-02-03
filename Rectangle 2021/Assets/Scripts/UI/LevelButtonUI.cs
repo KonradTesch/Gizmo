@@ -11,10 +11,11 @@ namespace Rectangle.UI
     public class LevelButtonUI : MonoBehaviour
     {
         [SerializeField] private Sprite[] buttonBackgrounds;
-        [SerializeField] private TextMeshProUGUI levelName;
-        [SerializeField] private TextMeshProUGUI bestTime;
-        [SerializeField] private GameObject star;
+        [SerializeField] private TextMeshProUGUI levelNameUI;
+        [SerializeField] private TextMeshProUGUI bestTimeUI;
+        [SerializeField] private GameObject uiStar;
 
+        private string levelName;
         private Button levelButton;
 
         private void Awake()
@@ -29,24 +30,27 @@ namespace Rectangle.UI
 
             levelButton.interactable = avaivable;
 
-            levelName.text = name;
+            levelName = name;
+            levelNameUI.text = name;
 
             int minutes = Mathf.FloorToInt(time / 60);
             int seconds = Mathf.FloorToInt(time % 60);
 
             string timeString = string.Format("{0:00}:{1:00}",minutes, seconds);
 
-            bestTime.text = timeString;
+            bestTimeUI.text = timeString;
 
             if(starCollected)
             {
-                star.SetActive(true);
+                uiStar.SetActive(true);
             }
         }
 
         private void LoadScene()
         {
-            SceneManager.LoadScene(levelName.text);
+            General.SaveGameManager.instance.SetActiveLevel(levelName);
+
+            SceneManager.LoadScene("LevelScene");
         }
     }
 }

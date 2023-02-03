@@ -9,7 +9,7 @@ namespace Rectangle.Level
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            SaveGameManager.instance.CollectStar(GameBehavior.instance.levelName);
+            SaveGameManager.instance.CollectStar(GameBehavior.instance.levelBuilder.levelData);
 
             Destroy(this.gameObject);
         }

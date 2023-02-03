@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Rectangle.LevelCreation;
 
 namespace Rectangle.General
 {
@@ -9,7 +10,9 @@ namespace Rectangle.General
     {
         public static SaveGameManager instance;
 
-        public List<LevelSaveData> saveData;
+        public List<LevelSaveData> levelSaveData;
+
+        [HideInInspector] public LevelSaveData activeLevel;
 
         private void Awake()
         {
@@ -21,17 +24,16 @@ namespace Rectangle.General
             {
                 instance = this;
                 DontDestroyOnLoad(this);
-            }
-
-            if(PlayerPrefs.HasKey("LevelSaveData"))
-            {
-                LoadData();
+                if(PlayerPrefs.HasKey("LevelSaveData"))
+                {
+                    LoadData();
+                }
             }
         }
 
         private void OnApplicationQuit()
         {
-            if(saveData.Count > 0)
+            if(levelSaveData.Count > 0)
             {
                 SaveData();
             }
@@ -41,10 +43,12 @@ namespace Rectangle.General
         {
             string saveString = "";
 
-            foreach(LevelSaveData data in saveData)
+            foreach(LevelSaveData data in levelSaveData)
             {
 
-                saveString += data.sceneName + ":";
+                saveString += data.levelName + ":";
+
+                saveString += data.levelData.name + ":";
 
                 if(data.avaivable)
                 {
@@ -80,7 +84,7 @@ namespace Rectangle.General
 
         private void LoadData()
         {
-            saveData = new();
+            levelSaveData = new();
 
             string saveString = PlayerPrefs.GetString("LevelSaveData");
 
@@ -90,10 +94,12 @@ namespace Rectangle.General
             {
                 string[] levelData = levelSave.Split(":");
 
+                LevelData level = Resources.Load<LevelData>(levelData[1]);
+
                 bool avaivable;
                 bool star;
 
-                if (levelData[1] == "true")
+                if (levelData[2] == "true")
                 {
                     avaivable = true;
                 }
@@ -102,7 +108,7 @@ namespace Rectangle.General
                     avaivable = false;
                 }
 
-                if (levelData[3] == "true")
+                if (levelData[4] == "true")
                 {
                     star = true;
                 }
@@ -113,42 +119,68 @@ namespace Rectangle.General
 
                 LevelSaveData data = new LevelSaveData()
                 {
-                    sceneName= levelData[0],
+                    levelName = levelData[0],
+                    levelData = level,
                     avaivable = avaivable,
-                    bestTime = float.Parse(levelData[2]),
+                    bestTime = float.Parse(levelData[3]),
                     star = star
                 };
 
-                saveData.Add(data);
+                this.levelSaveData.Add(data);
             }
         }
 
-        public void FinishLevel(string name, float time)
+        public void SetActiveLevel(string levelName)
+        {
+            foreach(LevelSaveData level in levelSaveData)
+            {
+                if(level.levelName == levelName)
+                {
+                    activeLevel = level;
+                    return;
+                }
+            }
+        }
+
+        public void SetNextLevel()
+        {
+            SaveData();
+            for (int i = 0; i < levelSaveData.Count; i++)
+            {
+                if (levelSaveData[i].levelName == activeLevel.levelName)
+                {
+                    activeLevel = levelSaveData[i +1];
+                    return;
+                }
+            }
+        }
+
+        public void FinishLevel(LevelData level, float time)
         { 
             
-            for(int i = 0; i < saveData.Count; i++)
+            for(int i = 0; i < levelSaveData.Count; i++)
             {
-                if (saveData[i].sceneName == name)
+                if (levelSaveData[i].levelData == level)
                 {
-                    if (saveData[i].bestTime < time)
+                    if (levelSaveData[i].bestTime < time)
                     {
-                        saveData[i].bestTime = time;
+                        levelSaveData[i].bestTime = time;
                     }
 
-                    if (i + 1 < saveData.Count)
+                    if (i + 1 < levelSaveData.Count)
                     {
-                        saveData[i + 1].avaivable = true;
+                        levelSaveData[i + 1].avaivable = true;
                     }
                     return;
                 }
             }
         }
 
-        public void CollectStar(string name)
+        public void CollectStar(LevelData level)
         {
-            foreach (LevelSaveData levelData in saveData)
+            foreach (LevelSaveData levelData in levelSaveData)
             {
-                if(levelData.sceneName == name)
+                if(levelData.levelData == level)
                 {
                     levelData.star = true;
                     return;
@@ -160,7 +192,8 @@ namespace Rectangle.General
     [System.Serializable]
     public class LevelSaveData
     {
-        public string sceneName;
+        public string levelName;
+        public LevelCreation.LevelData levelData;
         public bool avaivable;
         public float bestTime;
         public bool star;

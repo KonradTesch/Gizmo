@@ -11,11 +11,11 @@ namespace Rectangle.UI
 
         void Start()
         {
-            foreach(LevelSaveData data in SaveGameManager.instance.saveData)
+            foreach(LevelSaveData level in SaveGameManager.instance.levelSaveData)
             {
                 LevelButtonUI levelButton = Instantiate(levelButtonPrefab, transform).GetComponent<LevelButtonUI>();
 
-                levelButton.InitLevelButton(data.avaivable, data.sceneName, data.bestTime, data.star);
+                levelButton.InitLevelButton(level.avaivable, level.levelName, level.bestTime, level.star);
             }
         }
     }

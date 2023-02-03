@@ -488,9 +488,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 329a2306860e4d8418f5a8adf4287676, type: 3}
   - {fileID: 21300000, guid: 4ee48028064414143897a8987a81abad, type: 3}
   - {fileID: 21300000, guid: 7c873301be42c6d419ee80fdf8fd7428, type: 3}
-  levelName: {fileID: 3790875155686324287}
-  bestTime: {fileID: 3790875156087285268}
-  star: {fileID: 2612570393228948823}
+  levelNameUI: {fileID: 3790875155686324287}
+  bestTimeUI: {fileID: 3790875156087285268}
+  uiStar: {fileID: 2612570393228948823}
 --- !u!1 &3790875156777138649
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,7 +86,6 @@ namespace Rectangle.General
         [HideInInspector] public List<LevelTile> placedTiles = new();
         [HideInInspector] public List<Level.AnchorTile> anchorTiles = new();
 
-        [HideInInspector] public string levelName;
         private TileBuilder tileBuilder;
         [HideInInspector] public LevelBuilder levelBuilder;
 
@@ -109,13 +108,17 @@ namespace Rectangle.General
                 return;
             }
 
-            levelName = SceneManager.GetActiveScene().name;
 
             player.playerActive = false;
 
             tileBuilder = GetComponent<TileBuilder>();
             levelBuilder = GetComponent<LevelBuilder>();
             camController = Camera.main.GetComponent<CameraController>();
+
+            if (SaveGameManager.instance != null && SaveGameManager.instance.activeLevel != null)
+            {
+                levelBuilder.levelData = SaveGameManager.instance.activeLevel.levelData;
+            }
 
             levelBuilder.BuildLevel();
             tilePanel.InitTileButtons(tileInventory);
