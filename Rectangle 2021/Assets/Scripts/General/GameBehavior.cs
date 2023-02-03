@@ -84,6 +84,7 @@ namespace Rectangle.General
  
         [HideInInspector] public List<TileGroupData> tileInventory;
         [HideInInspector] public List<LevelTile> placedTiles = new();
+        [HideInInspector] public List<Level.AnchorTile> anchorTiles = new();
 
         [HideInInspector] public string levelName;
         private TileBuilder tileBuilder;
@@ -165,6 +166,11 @@ namespace Rectangle.General
                     TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), -1);
                 }
 
+                foreach(Level.AnchorTile anchor in anchorTiles)
+                {
+                    anchor.gameObject.SetActive(false);
+                }
+
                 tileBuilder.BuildLevel(levelBuilder.pathTiles, levelBuilder.anchorTiles, levelBuilder.levelData);
 
                 //TimerUI.timer = true;
@@ -191,6 +197,7 @@ namespace Rectangle.General
             {
                 buildingUI.SetActive(true);
                 background.gameObject.SetActive(false);
+                anchorTilePanel.gameObject.SetActive(false);
                 gridBackground.SetActive(true);
 
                 infoPanel.SetActive(true);
@@ -198,6 +205,24 @@ namespace Rectangle.General
                 tilePanel.InitTileButtons(tileInventory);
                 tilePanel.gameObject.SetActive(true);
                 buildingMode = true;
+
+                float shortestDistance = Vector2.Distance(player.activePlayer.transform.position, anchorTiles[0].transform.position);
+                Level.AnchorTile activeAnchor = null;
+                foreach(Level.AnchorTile anchor in anchorTiles)
+                {
+                    if(Vector3.Distance(player.activePlayer.transform.position, anchor.transform.position) <= shortestDistance)
+                    {
+                        shortestDistance = Vector3.Distance(player.activePlayer.transform.position, anchor.transform.position);
+                        activeAnchor = anchor;
+                    }
+
+                    if(!anchor.used)
+                    {
+                        anchor.gameObject.SetActive(true);
+                        anchor.SetDefaultSprite();
+                    }
+                }
+                activeAnchor.SetHighlightSprite();
 
             }
             Debug.Log("GameBehavior: <- ChangeGameMode()");

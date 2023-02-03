@@ -28885,6 +28885,8 @@ MonoBehaviour:
   buildLevelSound: {fileID: 8300000, guid: 15168f3509add0240abeedbf5c36e1a2, type: 3}
   resetTileSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
   tileInventory: []
+  placedTiles: []
+  anchorTiles: []
   levelName: 
   levelBuilder: {fileID: 0}
   gridBackground: {fileID: 0}
@@ -28967,7 +28969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c5d77808b76c41ae6118182c28f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: 1a56ce96cf12b6947a123563b4c77cd8, type: 2}
+  levelData: {fileID: 11400000, guid: 25786bba1e36fe2438c14a4e2ac60215, type: 2}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   gridTilemap: {fileID: 1521520081}
   borderTilemap: {fileID: 298339190}
@@ -28976,7 +28978,7 @@ MonoBehaviour:
   startText: {fileID: 1248954987}
   endText: {fileID: 1422954950}
   anchorBoxPrefab: {fileID: 41922099928284676, guid: 2915ec6b9604e1f43b2ae1916f7195ce, type: 3}
-  placedTiles: []
+  pathTiles: []
   anchorTiles: []
   gridData:
     grid: []
@@ -29137,6 +29139,14 @@ PrefabInstance:
     - target: {fileID: 5740847854816722687, guid: 2808212457246624cae831fbb69b99f3, type: 3}
       propertyPath: m_Name
       value: BuildingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740847854816722687, guid: 2808212457246624cae831fbb69b99f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897638974113496950, guid: 2808212457246624cae831fbb69b99f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2808212457246624cae831fbb69b99f3, type: 3}

@@ -117,7 +117,7 @@ namespace Rectangle.Level
 
                             LevelTile anchor = Instantiate(builderSettings.anchorTilePrefab).GetComponent<LevelTile>();
 
-                            anchor.gameObject.name = "Anchor_Tile";
+                            anchor.gameObject.name = "Anchor_Tile(" + x + "/" + y + ")";
                             anchor.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
                             anchor.gameObject.layer = LayerMask.NameToLayer("Background");
 
@@ -309,7 +309,7 @@ namespace Rectangle.Level
             {
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), builderSettings.borderTile);
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + 5), null);
-                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), (position.y * size.y) - 2), new Vector2Int(position.x * size.x + (size.x / 2 + 1), (position.y * size.y) - 2), builderSettings.platformTile);
+                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y), builderSettings.platformTile);
 
                 return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 2);
 

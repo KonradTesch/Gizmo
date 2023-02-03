@@ -8,6 +8,7 @@ namespace Rectangle.UI
     public class AnchorTilePanel : MonoBehaviour
     {
         [SerializeField] private TileButton tileReference;
+        [SerializeField] private GameObject panelUI;
 
         public void ShowAnchorTiles(List<TileGroupData> tileGroups)
         {
@@ -17,7 +18,7 @@ namespace Rectangle.UI
 
             foreach (Transform child in transform)
             {
-                if (child.gameObject != tileReference.gameObject)
+                if (child.gameObject != tileReference.gameObject && child.gameObject != panelUI)
                     Destroy(child.gameObject);
             }
 
