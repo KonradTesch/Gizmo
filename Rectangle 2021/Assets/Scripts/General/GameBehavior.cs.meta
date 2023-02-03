@@ -3,7 +3,25 @@ guid: a2d0e7fe6edd1b748910213ea1ae5643
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - tilePanel: {instanceID: 0}
+  - anchorTilePanel: {instanceID: 0}
+  - infoPanel: {instanceID: 0}
+  - buildLevelText: {instanceID: 0}
+  - buildingUI: {instanceID: 0}
+  - sucessPanel: {instanceID: 0}
+  - gameOverPanel: {instanceID: 0}
+  - background: {instanceID: 0}
+  - builderSettings: {instanceID: 0}
+  - uiAudioSource: {instanceID: 0}
+  - buildLevelSound: {fileID: 8300000, guid: 15168f3509add0240abeedbf5c36e1a2, type: 3}
+  - resetTileSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
+  - deathSound: {fileID: 8300000, guid: 69259698e6741c9479259e4e1f566f4b, type: 3}
+  - winSound: {fileID: 8300000, guid: 70ad37ddef9948447a7c3a2759b2334d, type: 3}
+  - nutCatchSound: {fileID: 8300000, guid: f9656d85534ffe141b7198d4de70132a, type: 3}
+  - levelBuilder: {instanceID: 0}
+  - gridBackground: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
