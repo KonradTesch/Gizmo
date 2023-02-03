@@ -240,6 +240,8 @@ namespace Rectangle.General
                     else
                     {
                         SceneManager.LoadScene(endSceneName);
+                        Destroy(GameBehavior.instance);
+                        Destroy(this);
                     }
 
                     return;
