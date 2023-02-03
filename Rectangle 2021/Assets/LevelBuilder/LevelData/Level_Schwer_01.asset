@@ -465,3 +465,7 @@ MonoBehaviour:
   - coordinates: {x: 1, y: 4}
     playerMode: 2
     tileType: 2
+  - coordinates: {x: 2, y: 4}
+    playerMode: 3
+    tileType: 4
+  shortestWay: 8

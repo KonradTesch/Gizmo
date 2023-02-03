@@ -287,3 +287,4 @@ MonoBehaviour:
   - coordinates: {x: 1, y: 0}
     playerMode: 3
     tileType: 4
+  shortestWay: 5

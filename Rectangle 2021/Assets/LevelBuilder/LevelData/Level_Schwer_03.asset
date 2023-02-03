@@ -460,3 +460,4 @@ MonoBehaviour:
   - coordinates: {x: 4, y: 4}
     playerMode: 1
     tileType: 2
+  shortestWay: 8
