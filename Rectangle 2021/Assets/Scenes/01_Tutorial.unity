@@ -196,7 +196,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -699655507
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -678,7 +678,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &157879474
@@ -713,6 +713,7 @@ Transform:
   - {fileID: 1628222965}
   - {fileID: 1166576360}
   - {fileID: 1165894370}
+  - {fileID: 728663643}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24810,7 +24811,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &723852010
@@ -24982,9 +24983,137 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &728663642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 728663643}
+  - component: {fileID: 728663644}
+  m_Layer: 0
+  m_Name: UI Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &728663643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728663642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 157879475}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &728663644
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728663642}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8248532909175631201, guid: ffc491559f62705459aecaa76d1f7af9, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &750495367
 GameObject:
   m_ObjectHideFlags: 0
@@ -25426,7 +25555,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &822767793
@@ -25538,7 +25667,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -699655507
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -25755,7 +25884,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1111432781
@@ -25968,7 +26097,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1165894370 stripped
@@ -26381,6 +26510,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camOffset: {x: 0, y: 0, z: -10}
+  buildingScreens: {fileID: 0}
+  buildingScreenOffset: {x: 0, y: 0, z: 0}
+  resolutionOffset: {x: 0, y: 0}
   transitionTime: 0.5
 --- !u!1 &1422954950
 GameObject:
@@ -26531,7 +26663,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1422954955
@@ -26858,7 +26990,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1521520078
@@ -31989,7 +32121,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2011800873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1567240323
@@ -32188,7 +32320,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -699655507
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -32347,7 +32479,6 @@ MonoBehaviour:
   tileCountText: {fileID: 772686419}
   tilePrefab: {fileID: 852341010236262845, guid: c62f07b76baa0734cb79cce40d213818, type: 3}
   tileSprite: {fileID: 0}
-  tileColor: {r: 0, g: 0, b: 0, a: 0}
   tileCount: 0
   tileType: 0
   playerMode: 0
@@ -32913,7 +33044,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -699655507
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -32997,14 +33128,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 94041364}
   tilePanel: {fileID: 750495368}
-  buttonUI: {fileID: 1628222964}
-  buildLevelButton: {fileID: 277051589}
-  cancelBuildingButton: {fileID: 1244814870}
+  anchorTilePanel: {fileID: 0}
+  infoPanel: {fileID: 0}
+  buildLevelText: {fileID: 0}
+  buildingUI: {fileID: 0}
   sucessPanel: {fileID: 1528619786}
   gameOverPanel: {fileID: 0}
+  background: {fileID: 0}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
+  uiAudioSource: {fileID: 728663644}
+  buildLevelSound: {fileID: 8300000, guid: 15168f3509add0240abeedbf5c36e1a2, type: 3}
+  resetTileSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
+  deathSound: {fileID: 8300000, guid: 69259698e6741c9479259e4e1f566f4b, type: 3}
+  winSound: {fileID: 8300000, guid: 70ad37ddef9948447a7c3a2759b2334d, type: 3}
+  nutCatchSound: {fileID: 8300000, guid: f9656d85534ffe141b7198d4de70132a, type: 3}
   tileInventory: []
+  placedTiles: []
+  usedTilesNumber: 0
+  anchorTiles: []
   levelBuilder: {fileID: 0}
+  gridBackground: {fileID: 0}
 --- !u!4 &2001858575
 Transform:
   m_ObjectHideFlags: 0
@@ -33076,6 +33219,7 @@ MonoBehaviour:
   collectableTilePrefab: {fileID: 0}
   movingPlatformPrefab: {fileID: 0}
   backgroundTilemap: {fileID: 0}
+  borderTilemap: {fileID: 0}
   groundTilemap: {fileID: 0}
   rampTilemap: {fileID: 0}
   onewayPlatformTilemap: {fileID: 0}
@@ -33092,15 +33236,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c5d77808b76c41ae6118182c28f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLayouts: []
+  levelData: {fileID: 0}
   builderSettings: {fileID: 0}
   gridTilemap: {fileID: 0}
   borderTilemap: {fileID: 0}
+  platformTilemap: {fileID: 0}
+  background: {fileID: 0}
   startText: {fileID: 0}
   endText: {fileID: 0}
-  anchorTextPrefab: {fileID: 0}
-  placedTiles: []
+  anchorBoxPrefab: {fileID: 0}
+  pathTiles: []
   anchorTiles: []
+  gridData:
+    grid: []
+    anchorTiles: []
+    height: 0
+    width: 0
+    start:
+      coordinates: {x: 0, y: 0}
+      direction: {x: 0, y: 0}
+    end:
+      coordinates: {x: 0, y: 0}
+      direction: {x: 0, y: 0}
 --- !u!1001 &4564017793431121653
 PrefabInstance:
   m_ObjectHideFlags: 0

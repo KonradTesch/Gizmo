@@ -18,7 +18,14 @@ namespace Rectangle.General
             if(SaveGameManager.instance.levelSaveData != null)
             {
                 SaveGameManager.instance.SetNextLevel();
-                ReloadScene();
+                if(SceneManager.GetActiveScene().name == "TutorialScene")
+                {
+                    SceneManager.LoadScene("LevelScene");
+                }
+                else
+                {
+                    ReloadScene();
+                }
             }
 
         }
