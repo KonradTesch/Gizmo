@@ -28,7 +28,7 @@ namespace Rectangle.Level
 
         [SerializeField] private GameObject anchorBoxPrefab;
 
-        [HideInInspector] public List<LevelTile> placedTiles;
+        [HideInInspector] public List<LevelTile> pathTiles;
         [HideInInspector] public List<LevelTile> anchorTiles;
 
         [HideInInspector] public LevelGrid gridData;
@@ -92,6 +92,7 @@ namespace Rectangle.Level
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
+                            //Setup star
                             newGridCol.GetComponent<GridField>().star = true; ;
 
                             GameObject starSprite = new GameObject("StarSprite");
@@ -111,11 +112,12 @@ namespace Rectangle.Level
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).anchor)
                         {
+                            //Seeuzp anchor
                             newGridCol.GetComponent<GridField>().isUsed = true;
 
                             LevelTile anchor = Instantiate(builderSettings.anchorTilePrefab).GetComponent<LevelTile>();
 
-                            anchor.gameObject.name = "Anchor_Tile";
+                            anchor.gameObject.name = "Anchor_Tile(" + x + "/" + y + ")";
                             anchor.transform.position = new Vector2(x + 0.5f, y + 0.5f) * builderSettings.tileSize * gridTilemap.transform.lossyScale;
                             anchor.gameObject.layer = LayerMask.NameToLayer("Background");
 
@@ -129,7 +131,8 @@ namespace Rectangle.Level
 
                             anchorTiles.Add(anchor);
 
-                            Instantiate(anchorBoxPrefab, anchor.transform.position, Quaternion.identity);
+                            //Setup anchor box
+                            Instantiate(anchorBoxPrefab, anchor.transform.position, Quaternion.identity).GetComponentInChildren<UI.AnchorBox>().SetAnchorTiles(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
                         }
 
                     }
@@ -191,7 +194,7 @@ namespace Rectangle.Level
         public bool CheckLevelPath(Vector2Int startPosition)
         {
             Debug.Log($"LevelBuilder: ->CheckLevePath({startPosition})");
-            placedTiles.Clear();
+            pathTiles.Clear();
 
             Vector2Int currentDirection = Vector2Int.zero;
             Vector2Int currentPosition = startPosition;
@@ -250,9 +253,9 @@ namespace Rectangle.Level
                 {
                     LevelTile tile = levelData.GetGridSpot(currentPosition).placedTile;
 
-                    if(!placedTiles.Contains(tile))
+                    if(!pathTiles.Contains(tile))
                     {
-                        placedTiles.Add(tile);
+                        pathTiles.Add(tile);
                     }
 
                     currentDirection = GetNextDirection(tile.tileType, currentDirection);
@@ -306,7 +309,7 @@ namespace Rectangle.Level
             {
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + 7), builderSettings.borderTile);
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + 5), null);
-                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), (position.y * size.y) - 2), new Vector2Int(position.x * size.x + (size.x / 2 + 1), (position.y * size.y) - 2), builderSettings.platformTile);
+                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y), builderSettings.platformTile);
 
                 return new Vector2((position.x + 0.5f) * size.x, position.y * size.y + 2);
 

@@ -82,7 +82,9 @@ namespace Rectangle.General
         [SerializeField] private AudioClip buildLevelSound;
         [SerializeField] private AudioClip resetTileSound;
  
-        [HideInInspector]public List<TileGroupData> tileInventory;
+        [HideInInspector] public List<TileGroupData> tileInventory;
+        [HideInInspector] public List<LevelTile> placedTiles = new();
+        [HideInInspector] public List<Level.AnchorTile> anchorTiles = new();
 
         [HideInInspector] public string levelName;
         private TileBuilder tileBuilder;
@@ -137,10 +139,12 @@ namespace Rectangle.General
             {
                 uiAudioSource.PlayOneShot(resetTileSound);
 
-                foreach(LevelTile tile in levelBuilder.placedTiles)
+                foreach(LevelTile tile in placedTiles)
                 {
-                    tile.Return(false);
+                    tile.Return();
                 }
+
+                placedTiles.Clear();
                 CheckGridCollider();
             }
         }
@@ -157,12 +161,17 @@ namespace Rectangle.General
                 background.gameObject.SetActive(true);
                 gridBackground.SetActive(false);
 
-                foreach (LevelTile tile in levelBuilder.placedTiles)
+                foreach (LevelTile tile in levelBuilder.pathTiles)
                 {
                     TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), -1);
                 }
 
-                tileBuilder.BuildLevel(levelBuilder.placedTiles, levelBuilder.anchorTiles, levelBuilder.levelData);
+                foreach(Level.AnchorTile anchor in anchorTiles)
+                {
+                    anchor.gameObject.SetActive(false);
+                }
+
+                tileBuilder.BuildLevel(levelBuilder.pathTiles, levelBuilder.anchorTiles, levelBuilder.levelData);
 
                 //TimerUI.timer = true;
                 player.gameObject.SetActive(true);
@@ -173,7 +182,7 @@ namespace Rectangle.General
                 buildingMode = false;
                 player.playerActive = true;
 
-                tilePanel.ResetUsedGrids(levelBuilder.placedTiles);
+                tilePanel.ResetUsedGrids(levelBuilder.pathTiles);
             }
             Debug.Log("GameBehavior: <- StartPlayMode()");
         }
@@ -188,6 +197,7 @@ namespace Rectangle.General
             {
                 buildingUI.SetActive(true);
                 background.gameObject.SetActive(false);
+                anchorTilePanel.gameObject.SetActive(false);
                 gridBackground.SetActive(true);
 
                 infoPanel.SetActive(true);
@@ -195,6 +205,24 @@ namespace Rectangle.General
                 tilePanel.InitTileButtons(tileInventory);
                 tilePanel.gameObject.SetActive(true);
                 buildingMode = true;
+
+                float shortestDistance = Vector2.Distance(player.activePlayer.transform.position, anchorTiles[0].transform.position);
+                Level.AnchorTile activeAnchor = null;
+                foreach(Level.AnchorTile anchor in anchorTiles)
+                {
+                    if(Vector3.Distance(player.activePlayer.transform.position, anchor.transform.position) <= shortestDistance)
+                    {
+                        shortestDistance = Vector3.Distance(player.activePlayer.transform.position, anchor.transform.position);
+                        activeAnchor = anchor;
+                    }
+
+                    if(!anchor.used)
+                    {
+                        anchor.gameObject.SetActive(true);
+                        anchor.SetDefaultSprite();
+                    }
+                }
+                activeAnchor.SetHighlightSprite();
 
             }
             Debug.Log("GameBehavior: <- ChangeGameMode()");

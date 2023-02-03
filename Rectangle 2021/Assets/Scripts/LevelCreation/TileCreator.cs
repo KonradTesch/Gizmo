@@ -24,10 +24,6 @@ namespace Rectangle.LevelCreation
         public LevelBuilderSettings builderSettings;
 
         [Space()]
-        public bool hasCollactables;
-        public Transform collectableParent;
-
-        [Space()]
         public bool hasStar;
         public Transform starTransform;
 

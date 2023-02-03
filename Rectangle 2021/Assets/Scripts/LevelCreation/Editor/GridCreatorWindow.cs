@@ -22,6 +22,8 @@ namespace Rectangle.LevelCreation
         private int gridWidth;
         private int gridHeight;
 
+        private int shortestWay;
+
         private Color blue = new(0.439f, 0.427f, 0.937f);
         private Color green = new(0.314f, 0.745f, 0.302f);
         private Color yellow = new(0.972f, 0.702f, 0.227f);
@@ -99,6 +101,7 @@ namespace Rectangle.LevelCreation
                 {
                     gridWidth = levelData.gridData.width;
                     gridHeight = levelData.gridData.height;
+                    shortestWay = levelData.shortestWay;
                 }
 
                 if (GUI.Button(new Rect(10, 30, 80, 20), "Create new"))
@@ -191,6 +194,10 @@ namespace Rectangle.LevelCreation
             {
                 ClearGrid();
             }
+
+
+            GUI.Label(new Rect(540, 30, 80, 20), "shortest Way:");
+            shortestWay = EditorGUI.IntField(new Rect(630, 30, 40, 20), shortestWay);
 
             GUILayout.EndArea();
 
@@ -736,6 +743,8 @@ namespace Rectangle.LevelCreation
 
         private void SaveData()
         {
+            levelData.shortestWay = shortestWay;
+
             EditorUtility.SetDirty(levelData);
 
             AssetDatabase.SaveAssetIfDirty(levelData);
@@ -789,6 +798,7 @@ namespace Rectangle.LevelCreation
             levelData.gridData.grid = new();
             levelData.plannedTiles = new();
             levelData.gridData.anchorTiles = new();
+            levelData.shortestWay = 0;
         }
 
         private void BlockTile(object coordinates)

@@ -18,9 +18,6 @@ namespace Rectangle.LevelCreation
         public List<MovingObjectData> movingObjects;
 
         [Space()]
-        public Vector2[] collectablePositions;
-
-        [Space()]
         public bool hasStar = false;
         public Vector3 starPosition;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Rectangle.LevelCreation;
+using Rectangle.General;
 
 namespace Rectangle.Level
 {
@@ -14,6 +15,7 @@ namespace Rectangle.Level
 
         [SerializeField] private Sprite defaultAnchor;
         [SerializeField] private Sprite hoverAnchor;
+        [SerializeField] private Sprite pressedAnchor;
         [SerializeField] private Sprite highlightAnchor;
 
         private GameObject infoPanel;
@@ -21,6 +23,7 @@ namespace Rectangle.Level
         private List<TileGroupData> anchorTiles;
 
         private bool showTiles = true;
+        [HideInInspector] public bool used = false;
 
         private SpriteRenderer rend;
 
@@ -29,32 +32,60 @@ namespace Rectangle.Level
             rend = GetComponent<SpriteRenderer>();
         }
 
-        private void OnEnable()
+        private void Start()
         {
             rend.sprite = defaultAnchor;
-            infoPanel = General.GameBehavior.instance.infoPanel;
+            infoPanel = GameBehavior.instance.infoPanel;
+            GameBehavior.instance.anchorTiles.Add(this);
         }
 
         private void OnMouseDown()
         {
-            if (showTiles)
+            if(!used)
             {
-                rend.sprite = highlightAnchor;
-                General.GameBehavior.instance.anchorTilePanel.ShowAnchorTiles(anchorTiles);
-                infoPanel.SetActive(false);
-                showTiles = false;
-            }
-            else
-            {
-                rend.sprite = defaultAnchor;
-                showTiles = true;
-                General.GameBehavior.instance.anchorTilePanel.gameObject.SetActive(false);
-                infoPanel.SetActive(true);
+                if (showTiles)
+                {
+                    rend.sprite = pressedAnchor;
+                    GameBehavior.instance.anchorTilePanel.ShowAnchorTiles(anchorTiles);
+
+                    for (int i = 0; i < GameBehavior.instance.anchorTiles.Count; i++)
+                    {
+                        if (GameBehavior.instance.anchorTiles[i] != this)
+                        {
+                            GameBehavior.instance.anchorTiles[i].SetDefaultSprite(); ;
+                        }
+                    }
+
+                    infoPanel.SetActive(false);
+                    showTiles = false;
+                }
+                else
+                {
+                    rend.sprite = defaultAnchor;
+                    showTiles = true;
+                    General.GameBehavior.instance.anchorTilePanel.gameObject.SetActive(false);
+                    infoPanel.SetActive(true);
+                }
             }
         }
 
+        public void SetDefaultSprite()
+        {
+            if(!used)
+            {
+                rend.sprite = defaultAnchor;
+                showTiles = true;
+            }
+        }
+
+        public void SetHighlightSprite()
+        {
+            rend.sprite = highlightAnchor;
+            used = true;
+        }
+
         private void OnMouseOver()
-        {if(showTiles)
+        {if(showTiles && !used)
             {
                 rend.sprite = hoverAnchor;
             }
@@ -62,7 +93,7 @@ namespace Rectangle.Level
 
         private void OnMouseExit()
         {
-            if(showTiles)
+            if(showTiles && !used)
             {
                 rend.sprite = defaultAnchor;
             }

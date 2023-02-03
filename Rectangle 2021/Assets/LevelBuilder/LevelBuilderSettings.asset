@@ -17,6 +17,7 @@ MonoBehaviour:
   closedBorderTile: {fileID: 11400000, guid: 1a463e5f1de665345b62dada1599ce5c, type: 2}
   openBorderTile: {fileID: 11400000, guid: 04e8e986db5bca344b91ae89a3e10d58, type: 2}
   borderTile: {fileID: 11400000, guid: 79f6aa3d994b8c3448f34e8fa98f3140, type: 2}
+  platformTile: {fileID: 11400000, guid: 89623803323a91741b75bb7e51b99595, type: 2}
   gridLayer:
     serializedVersion: 2
     m_Bits: 128
