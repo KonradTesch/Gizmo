@@ -29203,9 +29203,9 @@ MonoBehaviour:
   uiAudioSource: {fileID: 961032123}
   buildLevelSound: {fileID: 8300000, guid: 15168f3509add0240abeedbf5c36e1a2, type: 3}
   resetTileSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
-  deathSound: {fileID: 0}
-  winSound: {fileID: 0}
-  nutCatchSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 69259698e6741c9479259e4e1f566f4b, type: 3}
+  winSound: {fileID: 8300000, guid: 70ad37ddef9948447a7c3a2759b2334d, type: 3}
+  nutCatchSound: {fileID: 8300000, guid: f9656d85534ffe141b7198d4de70132a, type: 3}
   tileInventory: []
   placedTiles: []
   usedTilesNumber: 0
@@ -29324,6 +29324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3d4aa568284db4b9f4c3ed1209e462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endSceneName: 
   levelSaveData: []
   activeLevel:
     levelName: 
