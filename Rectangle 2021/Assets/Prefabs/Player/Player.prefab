@@ -5057,6 +5057,7 @@ GameObject:
   - component: {fileID: 3683547977390433020}
   - component: {fileID: 3683547977390433021}
   - component: {fileID: 1265299147388319907}
+  - component: {fileID: 3910902901595671239}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5114,6 +5115,7 @@ MonoBehaviour:
   activePlayer: {fileID: 0}
   playerActive: 1
   anchor: 0
+  currentCheckpoint: {x: 0, y: 0}
 --- !u!114 &1265299147388319907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5180,6 +5182,30 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3910902901595671239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3683547977390433008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f3dc06c9094f14aab9e95624413910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scientistAuidioSource: {fileID: 0}
+  timeBetweenSounds: {x: 10, y: 30}
+  randomSounds:
+  - {fileID: 0}
+  deathSounds:
+  - {fileID: 0}
+  winSounds:
+  - {fileID: 0}
+  nutSounds:
+  - {fileID: 0}
+  behindBestTimeSounds:
+  - {fileID: 0}
 --- !u!1 &3683547977414959945
 GameObject:
   m_ObjectHideFlags: 0
