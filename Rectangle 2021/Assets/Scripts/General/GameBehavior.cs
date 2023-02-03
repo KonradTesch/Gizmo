@@ -177,6 +177,9 @@ namespace Rectangle.General
 
                 usedTilesNumber += levelBuilder.pathTiles.Count;
 
+                levelBuilder.startSprite.SetActive(false);
+                levelBuilder.endSprite.SetActive(false);
+
                 foreach (LevelTile tile in levelBuilder.pathTiles)
                 {
                     TileInventoryChange(new InventoryTile(tile.playerMode, tile.tileType), -1);
@@ -221,6 +224,9 @@ namespace Rectangle.General
                 tilePanel.InitTileButtons(tileInventory);
                 tilePanel.gameObject.SetActive(true);
                 buildingMode = true;
+
+                levelBuilder.startSprite.SetActive(true);
+                levelBuilder.endSprite.SetActive(true);
 
                 float shortestDistance = Vector2.Distance(player.activePlayer.transform.position, anchorTiles[0].transform.position);
                 Level.AnchorTile activeAnchor = null;
