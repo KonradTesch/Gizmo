@@ -112,17 +112,23 @@ namespace Rectangle.UI
 
         public void SetMasterVolume(float volume)
         {
-            audioMixer.SetFloat("MasterVolume", volume);
+            float actualVolume = Mathf.Log10(volume) * 20;
+
+            audioMixer.SetFloat("MasterVolume", actualVolume);
         }
         public void SetMusicVolume(float volume)
         {
-            audioMixer.SetFloat("MusicVolume", volume);
+            float actualVolume = Mathf.Log10(volume) * 20;
+
+            audioMixer.SetFloat("MusicVolume", actualVolume);
         }
 
         public void SetSFXVolume(float volume)
         {
-            audioMixer.SetFloat("SFXVolume", volume);
-            audioMixer.SetFloat("UIVolume", volume);
+            float actualVolume = Mathf.Log10(volume) * 20;
+
+            audioMixer.SetFloat("SFXVolume", actualVolume);
+            audioMixer.SetFloat("UIVolume", actualVolume);
         }
 
         public void SetQuality(int qualityIndex)

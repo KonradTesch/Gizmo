@@ -105,7 +105,6 @@ namespace Rectangle.Player
             {
                 if(!audioSource.isPlaying)
                 {
-                    Debug.Log("Start playing climbing");
                     audioSource.clip = climbSound;
                     audioSource.loop = true;
                     audioSource.Play();
@@ -123,7 +122,6 @@ namespace Rectangle.Player
             }
             else if(audioSource.clip == climbSound)
             {
-                Debug.Log("Stop playing climbing");
                 audioSource.clip = null;
                 audioSource.Stop();
             }

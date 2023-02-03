@@ -61,6 +61,8 @@ namespace Rectangle.Level
 
                 int randomIndex = Random.Range(0, possibleTiles.Count);
 
+                Debug.Log("Build Tile with type: " + tile.tileType.ToString() + " and mod: " + tile.playerMode.ToString());
+
                 BuildTile(Vector2Int.RoundToInt(originPosition), possibleTiles[randomIndex]);
 
             }

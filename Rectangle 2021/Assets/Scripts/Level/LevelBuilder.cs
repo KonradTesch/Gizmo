@@ -315,7 +315,7 @@ namespace Rectangle.Level
             {
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 4), position.y * size.y + (size.y - 6)), new Vector2Int(position.x * size.x + (size.x / 2 + 3), position.y * size.y + (size.y - 1)), builderSettings.borderTile);
                 DrawBox(borderTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), position.y * size.y + (size.y - 4)), new Vector2Int(position.x * size.x + (size.x / 2 + 1), position.y * size.y + (size.y - 1)), null);
-                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), (position.y * size.y) + 2), new Vector2Int(position.x * size.x + (size.x / 2 + 1), (position.y * size.y) + 2), builderSettings.platformTile);
+                DrawBox(platformTilemap, new Vector2Int(position.x * size.x + (size.x / 2 - 2), (position.y * size.y) + (size.y - 2)), new Vector2Int(position.x * size.x + (size.x / 2 + 1), (position.y * size.y) + (size.y - 2)), builderSettings.platformTile);
 
 
                 return new Vector2((position.x + 0.5f) * size.x, (position.y + 1) * size.y - 2)

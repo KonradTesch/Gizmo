@@ -412,7 +412,7 @@ MonoBehaviour:
         playerMode: 2
         tileType: 6
       - coordinates: {x: 2, y: 1}
-        playerMode: 2
+        playerMode: 1
         tileType: 4
       anchorCoordinates: {x: 0, y: 3}
     - collectableTiles:
@@ -449,7 +449,7 @@ MonoBehaviour:
       direction: {x: -1, y: 0}
   plannedTiles:
   - coordinates: {x: 1, y: 4}
-    playerMode: 2
+    playerMode: 1
     tileType: 4
   - coordinates: {x: 0, y: 4}
     playerMode: 1

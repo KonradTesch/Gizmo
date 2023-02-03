@@ -395,7 +395,7 @@ MonoBehaviour:
     playerMode: 3
     tileType: 7
   - coordinates: {x: 0, y: 2}
-    playerMode: 2
+    playerMode: 3
     tileType: 7
   - coordinates: {x: 0, y: 3}
     playerMode: 3
