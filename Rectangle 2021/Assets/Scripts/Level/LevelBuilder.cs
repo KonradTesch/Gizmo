@@ -92,6 +92,7 @@ namespace Rectangle.Level
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
                         {
+                            //Setup star
                             newGridCol.GetComponent<GridField>().star = true; ;
 
                             GameObject starSprite = new GameObject("StarSprite");
@@ -111,6 +112,7 @@ namespace Rectangle.Level
 
                         if (levelData.GetGridSpot(new Vector2Int(x, y)).anchor)
                         {
+                            //Seeuzp anchor
                             newGridCol.GetComponent<GridField>().isUsed = true;
 
                             LevelTile anchor = Instantiate(builderSettings.anchorTilePrefab).GetComponent<LevelTile>();
@@ -129,7 +131,8 @@ namespace Rectangle.Level
 
                             anchorTiles.Add(anchor);
 
-                            Instantiate(anchorBoxPrefab, anchor.transform.position, Quaternion.identity);
+                            //Setup anchor box
+                            Instantiate(anchorBoxPrefab, anchor.transform.position, Quaternion.identity).GetComponentInChildren<UI.AnchorBox>().SetAnchorTiles(levelData.GetAnchorByCoordinates(new Vector2Int(x, y)).collectableTiles);
                         }
 
                     }

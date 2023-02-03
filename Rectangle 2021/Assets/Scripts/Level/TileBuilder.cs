@@ -25,7 +25,6 @@ namespace Rectangle.Level
         [SerializeField] private Tilemap onewayPlatformTilemap;
         [SerializeField] private Tilemap spikesTilemap;
 
-        [HideInInspector] public Dictionary<Vector2, List<InventoryTile>> collectedTiles = new();
 
         private Dictionary<TileCreator.TileTypes, List<LevelTileData>> modeTiles;
 
@@ -81,16 +80,6 @@ namespace Rectangle.Level
 
                 CloseAnkerTile(anchorTile);
                 BuildTile(Vector2Int.RoundToInt(originPosition), randomAnchorTile);
-
-                Vector2Int coordinate = GameBehavior.instance.levelBuilder.WorldPositionToCoordinate(anchorTile.transform.position);
-
-                if (levelData.GetAnchorByCoordinates(coordinate).collectableTiles.Count > 0)
-                {
-                    Vector2 corner = (Vector2)anchorTile.transform.position - ((Vector2)GameBehavior.instance.builderSettings.tileSize / 2);
-
-                    PlaceCollectableTiles(levelData.GetAnchorByCoordinates(coordinate).collectableTiles, randomAnchorTile.collectablePositions, corner);
-                    anchorTile.collectableTiles = null;
-                }
             }
         }
 
@@ -101,59 +90,6 @@ namespace Rectangle.Level
             return modeTiles[tileType][randomIndex].playerMode;
         }
 
-        private void PlaceCollectableTiles( List<PlannedTile> collectableTiles, Vector2[] positions, Vector2 tilePosition)
-        {
-            List<CollectableTile> collectables = new();
-            int i;
-            foreach (PlannedTile tile in collectableTiles)
-            {
-                bool alreadyAdded = false;
-
-                if (collectedTiles.ContainsKey(tilePosition))
-                {
-                    bool alreadyCollected = false;
-                    for(int n = 0; n < collectedTiles[tilePosition].Count; n++)
-                    {
-                        if (collectedTiles[tilePosition][n].tileType == tile.tileType && collectedTiles[tilePosition][n].playerMode == tile.playerMode)
-                        {
-                            alreadyCollected = true;
-                        }
-                    }
-                    if(alreadyCollected)
-                    {
-                        continue;
-                    }
-                }
-
-                    for (i = 0; i < collectables.Count; i++)
-                {
-                    if (collectables[i].playerMode == tile.playerMode && collectables[i].tileType == tile.tileType)
-                    {
-                        alreadyAdded = true;
-                        collectables[i].count++;
-                        break;
-                    }
-                }
-
-                if(alreadyAdded)
-                {
-                    continue;
-                }
-
-                CollectableTile newCollectable = Instantiate(collectableTilePrefab).GetComponent<CollectableTile>();
-                newCollectable.transform.position = tilePosition + positions[i];
-                newCollectable.tileType = tile.tileType;
-                newCollectable.count = 1;
-                newCollectable.playerMode = tile.playerMode;
-                newCollectable.tilePosition = tilePosition;
-                newCollectable.tileBuilder = this;
-
-                newCollectable.GetComponent<SpriteRenderer>().sprite = General.GameBehavior.instance.builderSettings.GetTileTypeSprite(tile.tileType, tile.playerMode);
-
-                collectables.Add(newCollectable);
-            }
-
-        }
 
         private void InitModeTiles()
         {

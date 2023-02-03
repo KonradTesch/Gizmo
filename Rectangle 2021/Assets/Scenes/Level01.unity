@@ -9902,7 +9902,7 @@ RectTransform:
   m_Children:
   - {fileID: 880971020}
   m_Father: {fileID: 1476424031}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10639,7 +10639,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1976191857}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11384,7 +11384,7 @@ RectTransform:
   m_Children:
   - {fileID: 452567799}
   m_Father: {fileID: 911777916}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11536,7 +11536,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1801881237}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -11987,7 +11987,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1699404595}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28967,10 +28967,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c5d77808b76c41ae6118182c28f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: 5fe06f7cec0f2f44eac3c8fb70abb988, type: 2}
+  levelData: {fileID: 11400000, guid: 1a56ce96cf12b6947a123563b4c77cd8, type: 2}
   builderSettings: {fileID: 11400000, guid: d5599aa3514ea474b99237d6a4791e6e, type: 2}
   gridTilemap: {fileID: 1521520081}
   borderTilemap: {fileID: 298339190}
+  platformTilemap: {fileID: 822767798}
   background: {fileID: 1694414731}
   startText: {fileID: 1248954987}
   endText: {fileID: 1422954950}
@@ -29032,7 +29033,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1581455267}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -29089,46 +29090,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5740847854567647491, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -8.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854567647492, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854567647493, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_fontColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854567647493, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854567647493, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854567647493, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854610845151, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.a
-      value: 0.4745098
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854610845151, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854610845151, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847854610845151, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5740847854816722684, guid: 2808212457246624cae831fbb69b99f3, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -29176,38 +29137,6 @@ PrefabInstance:
     - target: {fileID: 5740847854816722687, guid: 2808212457246624cae831fbb69b99f3, type: 3}
       propertyPath: m_Name
       value: BuildingScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847855110787390, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847855690991414, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.a
-      value: 0.4745098
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847855690991414, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847855690991414, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847855690991414, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847855725740595, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740847855725740606, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5897638974113496950, guid: 2808212457246624cae831fbb69b99f3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2808212457246624cae831fbb69b99f3, type: 3}
