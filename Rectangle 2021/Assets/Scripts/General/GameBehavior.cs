@@ -78,33 +78,88 @@ namespace Rectangle.General
         public LevelBuilderSettings builderSettings;
 
         [Header("Sounds")]
+
+        /// <summary>
+        /// The audio source for UI sounds.
+        /// </summary>
+        [Tooltip("The audio source for UI sounds.")]
         public AudioSource uiAudioSource;
+
+        /// <summary>
+        /// The audio clip when building a level (at the start of a level).
+        /// </summary>
+        [Tooltip("The audio clip when building a level (at the start of a level).")]
         [SerializeField] private AudioClip buildLevelSound;
+
+        /// <summary>
+        /// The audio clip, when resetting a level tile.
+        /// </summary>
+        [Tooltip("The audio clip, when resetting a level tile.")]
         [SerializeField] private AudioClip resetTileSound;
-        public AudioClip deathSound;
+
+
+        /// <summary>
+        /// The sound clip when you successfully complete a level.
+        /// </summary>
+        [Tooltip("The sound clip when you successfully complete a level.")]
         public AudioClip winSound;
+
+        /// <summary>
+        /// The sound clip, when you collecting a nut.
+        /// </summary>
+        [Tooltip("The sound clip, when you collecting a nut.")]
         public AudioClip nutCatchSound;
 
+        /// <summary>
+        /// The level tiles taht can used by the player.
+        /// </summary>
         [HideInInspector] public List<TileGroupData> tileInventory;
+        /// <summary>
+        /// The level tiles, that already been placed by th player.
+        /// </summary>
         [HideInInspector] public List<LevelTile> placedTiles = new();
+        /// <summary>
+        /// The number of placed tiles.
+        /// </summary>
         [HideInInspector] public int usedTilesNumber;
+        /// <summary>
+        /// The anchor tiles of the curent level.
+        /// </summary>
         [HideInInspector] public List<Level.AnchorTile> anchorTiles = new();
 
+        /// <summary>
+        /// the class that building the level tiles.
+        /// </summary>
         private TileBuilder tileBuilder;
+        /// <summary>
+        /// the class that set up the level.
+        /// </summary>
         [HideInInspector] public LevelBuilder levelBuilder;
 
+        /// <summary>
+        /// The camera controller.
+        /// </summary>
         private CameraController camController;
+        /// <summary>
+        /// Whether the player has placed the level tiles correctly.
+        /// </summary>
         private bool canStart;
 
+        /// <summary>
+        /// Whtrer the player is building the level or playing it.
+        /// </summary>
         private bool buildingMode = true;
 
+        /// <summary>
+        /// The game object for the level tile grid.
+        /// </summary>
         [HideInInspector] public GameObject gridBackground;
 
         public delegate void MyDelegate();
-        public static MyDelegate death;
-        public static MyDelegate win;
-        public static MyDelegate star;
-        public static MyDelegate badTime;
+        public static MyDelegate onPlayerDeath;
+        public static MyDelegate onPlayerWin;
+        public static MyDelegate onCollectItem;
+        public static MyDelegate onBadTime;
 
 
         void Awake()
@@ -126,9 +181,9 @@ namespace Rectangle.General
             levelBuilder = GetComponent<LevelBuilder>();
             camController = Camera.main.GetComponent<CameraController>();
 
-            if (SaveGameManager.instance != null && SaveGameManager.instance.activeLevel != null)
+            if (SaveGameManager.Singleton != null && SaveGameManager.Singleton.activeLevel != null)
             {
-                levelBuilder.levelData = SaveGameManager.instance.activeLevel.levelData;
+                levelBuilder.levelData = SaveGameManager.Singleton.activeLevel.levelData;
             }
 
             levelBuilder.BuildLevel();
@@ -269,6 +324,10 @@ namespace Rectangle.General
             }
         }
 
+        /// <summary>
+        /// Sets up the level tile inventory.
+        /// </summary>
+        /// <param name="inventoryTiles"></param>
         public void InitLevelTiles(List<PlannedTile> inventoryTiles)
         {
             foreach (PlannedTile newTile in inventoryTiles)
@@ -302,6 +361,9 @@ namespace Rectangle.General
             }
         }
 
+        /// <summary>
+        /// Updates the inventiory on a change
+        /// </summary>
         public void TileInventoryChange(InventoryTile tile, int count)
         {
             foreach(TileGroupData tileGroup in tileInventory)
@@ -326,6 +388,9 @@ namespace Rectangle.General
             }
         }
 
+        /// <summary>
+        /// Checks if a tile type is already added to the inventory.
+        /// </summary>
         public PlayerController.PlayerModes CheckTileInventoryModes(TileCreator.TileTypes tileType)
         {
             foreach (TileGroupData tileGroup in tileInventory)
@@ -346,12 +411,12 @@ namespace Rectangle.General
             tileInventory.Add(newTileGroup);
 
             return newTileGroup.playerMode;
-
-
-
         }
     }
 
+    /// <summary>
+    /// The data of a single tile in the inventory.
+    /// </summary>
     public class InventoryTile
     {
         public int count;

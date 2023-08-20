@@ -5,6 +5,9 @@ using UnityEditor;
 
 namespace Rectangle.General
 {
+    /// <summary>
+    /// Custom Inspector to save the game data manually.
+    /// </summary>
     [CustomEditor(typeof(SaveGameManager))]
     public class SaveGameManagerInspector : Editor
     {

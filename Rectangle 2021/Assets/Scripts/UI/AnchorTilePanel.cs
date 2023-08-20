@@ -5,11 +5,26 @@ using Rectangle.Level;
 
 namespace Rectangle.UI
 {
+    /// <summary>
+    /// The UI element that displays the level tile inside a anchor tile during building mode.
+    /// </summary>
     public class AnchorTilePanel : MonoBehaviour
     {
+        /// <summary>
+        /// The example UI elementb for the displayed level tile.
+        /// </summary>
+        [Tooltip("The example UI elementb for the displayed level tile.")]
         [SerializeField] private TileButton tileReference;
+
+        /// <summary>
+        /// The UI panel.
+        /// </summary>
+        [Tooltip("The UI panel.")]
         [SerializeField] private GameObject panelUI;
 
+        /// <summary>
+        /// Displayes the levvel tiles that are stored inside an anchor tile.
+        /// </summary>
         public void ShowAnchorTiles(List<TileGroupData> tileGroups)
         {
             gameObject.SetActive(true);

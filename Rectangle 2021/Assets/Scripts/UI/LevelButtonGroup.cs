@@ -7,11 +7,14 @@ namespace Rectangle.UI
 {
     public class LevelButtonGroup : MonoBehaviour
     {
+        /// <summary>
+        /// The prefab of a level tile button.
+        /// </summary>
         [SerializeField] private GameObject levelButtonPrefab; 
 
         void Start()
         {
-            foreach(LevelSaveData level in SaveGameManager.instance.levelSaveData)
+            foreach(LevelSaveData level in SaveGameManager.Singleton.saveData.levelSaveData)
             {
                 LevelButtonUI levelButton = Instantiate(levelButtonPrefab, transform).GetComponent<LevelButtonUI>();
 

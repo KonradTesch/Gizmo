@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7574237473392777721}
   - component: {fileID: 960961555920673289}
   m_Layer: 0
-  m_Name: Star
+  m_Name: CollectableNut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

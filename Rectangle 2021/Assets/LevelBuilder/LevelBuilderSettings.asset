@@ -25,10 +25,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   backgroundImage: {fileID: 21300000, guid: 2f19566887c381a458df68ef3dcb4fd9, type: 3}
-  rectangleColor: {r: 1, g: 1, b: 1, a: 1}
-  spikeyColor: {r: 1, g: 1, b: 1, a: 1}
-  bubbleColor: {r: 1, g: 1, b: 1, a: 1}
-  littleColor: {r: 1, g: 1, b: 1, a: 1}
   levelTilePrefab: {fileID: 852341010236262845, guid: c62f07b76baa0734cb79cce40d213818, type: 3}
   anchorTilePrefab: {fileID: 3360939943037998273, guid: 45eac814397407d4ba9e73a96d580f99, type: 3}
   anchorTileSprite: {fileID: 21300000, guid: 2c524027f1f83a54b9e2dfaa1bf694e5, type: 3}
@@ -83,5 +79,5 @@ MonoBehaviour:
       tileSprite: {fileID: 21300000, guid: e6a5b01e5c9a7b94086bd0381f7a070d, type: 3}
   startLevelSprite: {fileID: 21300000, guid: 8aa87dd56e4561d428254f75228b7304, type: 3}
   endLevelSprite: {fileID: 21300000, guid: 7987d7bdb8b7576468a29142b9194d68, type: 3}
-  starPrefab: {fileID: 3031384222072285329, guid: 4de7d0dfcee78154fae23ad4393196ec, type: 3}
-  starSprite: {fileID: 21300000, guid: 2a19f2725fcee7742bfadf471c7b08d0, type: 3}
+  collectablePrefab: {fileID: 3031384222072285329, guid: 4de7d0dfcee78154fae23ad4393196ec, type: 3}
+  nutSprite: {fileID: 21300000, guid: 2a19f2725fcee7742bfadf471c7b08d0, type: 3}

@@ -1649,13 +1649,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1840,13 +1840,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2031,13 +2031,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2222,13 +2222,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2548,13 +2548,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2816,13 +2816,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -3007,13 +3007,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -3110,7 +3110,6 @@ GameObject:
   - component: {fileID: 5470789994929037746}
   - component: {fileID: 1165894371}
   - component: {fileID: 4668161302198240108}
-  - component: {fileID: 4320689273350291015}
   m_Layer: 0
   m_Name: Screens_Canvas
   m_TagString: Untagged
@@ -3232,20 +3231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2fd254c55aa8c488025ec6ba3dbc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4320689273350291015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5470789994929037748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da89605f5e1507340889d92777ffa7ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverSource: {fileID: 8787303824962308275}
-  hoverClip: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+  tutorialSceneName: 01_TutorialScene
+  levelSceneName: 02_LevelScene
 --- !u!1 &5470789995416970630
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,13 +3547,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -4086,13 +4073,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -4700,13 +4687,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -5268,13 +5255,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -5944,13 +5931,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4320689273350291015}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 8787303824962308275}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 

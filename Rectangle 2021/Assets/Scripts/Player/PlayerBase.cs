@@ -32,6 +32,10 @@ namespace Rectangle.Player
         [Tooltip("The jump force.")]
         [SerializeField] protected float jumpForce = 45;
 
+        /// <summary>
+        /// The time in seconds that the player can jump after leaving the ground.
+        /// </summary>
+        [Tooltip("The time in seconds that the player can jump after leaving the ground.")]
         [SerializeField] protected float coyoteTime = 0.2f;
 
         /// <summary>
@@ -62,9 +66,25 @@ namespace Rectangle.Player
         [SerializeField] private LayerMask rampLayer;
 
         [Header("Sounds")]
+
+        /// <summary>
+        /// The looping audio clip for moving.
+        /// </summary>
+        [Tooltip("The looping audio clip for moving.")]
         [SerializeField] protected AudioClip moveSound;
+
+        /// <summary>
+        /// The audio clips for jumping.
+        /// </summary>
+        [Tooltip("The audio clips for jumping.")]
         [SerializeField] protected AudioClip[] jumpSounds;
+
+        /// <summary>
+        /// The audio clips for the landing.
+        /// </summary>
+        [Tooltip("The audio clips for the landing.")]
         [SerializeField] protected AudioClip landingSound;
+
         /// <summary>
         /// Whetser the player is on the ground.
         /// </summary>
@@ -240,19 +260,25 @@ namespace Rectangle.Player
             }
         }
 
+        /// <summary>
+        /// Start the particle system when jumping.
+        /// </summary>
         protected void CreateDust()
         {
             dustParticle.Play();
         }
 
+        /// <summary>
+        /// Turns off the collider to fall through a oneway platform.
+        /// </summary>
+        /// <returns></returns>
         protected IEnumerator FallThroughPlatform()
         {
-            Collider2D platformCol = platformCollider;
-
-            Physics2D.IgnoreCollision(col, platformCol);
+            Collider2D plafformCol = platformCollider;
+            Physics2D.IgnoreCollision(col, plafformCol);
 
             yield return new WaitForSeconds(0.25f);
-            Physics2D.IgnoreCollision(col, platformCol, false);
+             Physics2D.IgnoreCollision(col, plafformCol, false);
             
         }
 

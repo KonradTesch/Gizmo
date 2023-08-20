@@ -17,11 +17,23 @@ namespace Rectangle.Player
         [Tooltip("The gravity scale when the player floats.")]
         [SerializeField] private float lowGravityScale = 0.2f;
 
+        /// <summary>
+        /// The speed of the rotation.
+        /// </summary>
+        [Tooltip("The speed of the rotation")]
         [SerializeField] private float rotationSpeed;
 
         [Space()]
-
+        /// <summary>
+        /// The audio clip when the player open the wings.
+        /// </summary>
+        [Tooltip("The audio clip for the floating sound.")]
         [SerializeField] private AudioClip openWingsSound;
+
+        /// <summary>
+        /// The audio clip for the floating sound.
+        /// </summary>
+        [Tooltip("The audio clip for the floating sound.")]
         [SerializeField] private AudioClip floatSound;
  
         private bool falling;
@@ -57,8 +69,6 @@ namespace Rectangle.Player
                 }
                 else if (audioSource.clip == floatSound)
                 {
-                    audioSource.clip = null;
-                    audioSource.Stop();
                 }
 
                 animator.SetBool("float", true);
@@ -68,6 +78,13 @@ namespace Rectangle.Player
                 {
                     rigidBody.gravityScale = normalGravity;
                     animator.SetBool("float", false);
+
+                    if(audioSource.clip == floatSound)
+                    {
+                        audioSource.clip = null;
+                        audioSource.Stop();
+                    }
+
                     floating = false;
                 }
             }
@@ -92,7 +109,6 @@ namespace Rectangle.Player
         /// <summary>
         /// Checks wheter the bubble player is falling.
         /// </summary>
-        /// <returns></returns>
         private bool CheckFalling()
         {
             if (lastYPosition > transform.position.y && !grounded && currentCoyoteTime < 0)
@@ -105,6 +121,9 @@ namespace Rectangle.Player
             return false;
         }
 
+        /// <summary>
+        /// Checks the jump input to start or cancel floating.
+        /// </summary>
         public override void Jump()
         {
             base.Jump();
@@ -118,6 +137,13 @@ namespace Rectangle.Player
             {
                 rigidBody.gravityScale = normalGravity;
                 animator.SetBool("float", false);
+
+                if (audioSource.clip == floatSound)
+                {
+                    audioSource.clip = null;
+                    audioSource.Stop();
+                }
+
                 floating = false;
             }
         }

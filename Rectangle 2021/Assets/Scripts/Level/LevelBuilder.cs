@@ -9,23 +9,67 @@ namespace Rectangle.Level
     public class LevelBuilder : MonoBehaviour
     {
         [Header("Builder Data")]
+
+        /// <summary>
+        /// The level data of the current level.
+        /// </summary>
+        [Tooltip("The level data of the current level.")]
         public LevelData levelData;
+
+        /// <summary>
+        /// The building settings.
+        /// </summary>
+        [Tooltip("The building settings.")]
         [SerializeField] private LevelBuilderSettings builderSettings;
 
         [Header("Tilemaps")]
+
+        /// <summary>
+        /// The tilemap for the grid.
+        /// </summary>
+        [Tooltip("The tilemap for the grid.")]
         [SerializeField] private Tilemap gridTilemap;
+
+        /// <summary>
+        /// The tilemap for the border.
+        /// </summary>
+        [Tooltip("The tilemap for the border.")]
         [SerializeField] private Tilemap borderTilemap;
+
+        /// <summary>
+        /// The tilemap for the platforms.
+        /// </summary>
+        [Tooltip("The tilemap for the platforms.")]
         [SerializeField] private Tilemap platformTilemap;
 
         [Header("Background")]
+
+        /// <summary>
+        /// The background controller script.
+        /// </summary>
+        [Tooltip("The background controller script.")]
         [SerializeField] private BackgroundController background;
 
         [Header("LevelText")]
+
+        /// <summary>
+        /// The text object for the level start.
+        /// </summary>
+        [Tooltip("he text object for the level start.")]
         [SerializeField] private GameObject startText;
+
+        /// <summary>
+        /// The text object for the level finish.
+        /// </summary>
+        [Tooltip("he text object for the level finish.")]
         [SerializeField] private GameObject endText;
 
         [Space()]
 
+        /// <summary>
+        /// The prefab for the tile box inside the anchors.
+        /// </summary>
+        [Tooltip("The prefab for the tile box inside the anchors.")]
         [SerializeField] private GameObject anchorBoxPrefab;
 
         [HideInInspector] public List<LevelTile> pathTiles;
@@ -36,6 +80,9 @@ namespace Rectangle.Level
         [HideInInspector] public GameObject startSprite;
         [HideInInspector] public GameObject endSprite;
 
+        /// <summary>
+        /// Builds the main level.
+        /// </summary>
         public void BuildLevel()
         {
             DestroyImmediate(GameObject.Find("GridColliders"));
@@ -93,10 +140,10 @@ namespace Rectangle.Level
                         backgroundRend.sprite = builderSettings.backgroundImage;
                         backgroundRend.sortingOrder = -1;
 
-                        if (levelData.GetGridSpot(new Vector2Int(x, y)).star)
+                        if (levelData.GetGridSpot(new Vector2Int(x, y)).collectable)
                         {
                             //Setup star
-                            newGridCol.GetComponent<GridField>().star = true; ;
+                            newGridCol.GetComponent<GridField>().collectableItem = true; ;
 
                             GameObject starSprite = new GameObject("StarSprite");
                             starSprite.transform.SetParent(fieldBackgound.transform);
@@ -104,11 +151,11 @@ namespace Rectangle.Level
                             starSprite.transform.localScale = Vector3.one * 4;
 
                             SpriteRenderer starRend = starSprite.AddComponent<SpriteRenderer>();
-                            starRend.sprite = builderSettings.starSprite;
+                            starRend.sprite = builderSettings.nutSprite;
                             starRend.sortingLayerName = "Background";
                             starRend.sortingOrder = 0;
 
-                            newGridCol.GetComponent<BackgroundMode>().hasStar = true;
+                            newGridCol.GetComponent<BackgroundMode>().hasNut = true;
                         }
 
                         newGridCol.GetComponent<GridField>().backgroundRend = backgroundRend;
@@ -209,6 +256,9 @@ namespace Rectangle.Level
             DestroyImmediate(gridCollider);
         }
 
+        /// <summary>
+        /// Checks if the placed level tiles lead to the finish or an anchor.
+        /// </summary>
         public bool CheckLevelPath(Vector2Int startPosition)
         {
             Debug.Log($"LevelBuilder: ->CheckLevePath({startPosition})");
@@ -292,6 +342,9 @@ namespace Rectangle.Level
             return true;
         }
 
+        /// <summary>
+        /// Draws the border around the level.
+        /// </summary>
         private void DrawBorder(LevelGrid gridData)
         {
             //top border
@@ -304,6 +357,9 @@ namespace Rectangle.Level
             DrawBox(borderTilemap, new Vector2Int(-1, -2), new Vector2Int(-2, builderSettings.tileSize.y * gridData.height - 1), builderSettings.borderTile);
         }
 
+        /// <summary>
+        /// Draws the start or finish box.
+        /// </summary>
         private Vector2 DrawStartOrEnd(Vector2Int position, Vector2Int direction)
         {
 
@@ -347,6 +403,11 @@ namespace Rectangle.Level
 
         }
 
+        /// <summary>
+        /// Draws an filled box of tilemap tiles.
+        /// </summary>
+        /// <param name="pos1"> one corner of the box</param>
+        /// <param name="pos2"> the opposit corner of the box</param>
         public void DrawBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, TileBase tile)
         {
             Vector2 diff = pos2 - pos1;
@@ -375,7 +436,9 @@ namespace Rectangle.Level
             }
         }
 
-
+        /// <summary>
+        /// Gets the output dirction of the next tile on thge level path.
+        /// </summary>
         private Vector2Int GetNextDirection(TileCreator.TileTypes tileType, Vector2Int input)
         {
             switch(tileType)
@@ -446,11 +509,17 @@ namespace Rectangle.Level
             return Vector2Int.zero;
         }
 
+        /// <summary>
+        /// Calculates the world position of an tile position on the grid, based on the grid coordinates.
+        /// </summary>
         public Vector2 CoordinateToWorldPosition(Vector2Int coordinate)
         {
             return ((Vector2)coordinate + new Vector2(0.5f, 0.5f)) * builderSettings.tileSize * gridTilemap.transform.lossyScale.x;
         }
 
+        /// <summary>
+        /// Calculates the grid coordinates, based on the world position.
+        /// </summary>
         public Vector2Int WorldPositionToCoordinate(Vector2 position)
         {
             return Vector2Int.FloorToInt(position / builderSettings.tileSize / gridTilemap.transform.lossyScale.x);

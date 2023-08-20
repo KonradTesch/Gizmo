@@ -8,14 +8,46 @@ namespace Rectangle.UI
 {
     public class SettingsMenu : MonoBehaviour
     {
+        /// <summary>
+        /// The audiop mixer.
+        /// </summary>
+        [Tooltip("The audiop mixer.")]
         public AudioMixer audioMixer;
 
+        /// <summary>
+        /// The dropdown menu for the screen resolution setting.
+        /// </summary>
+        [Tooltip("The dropdown menu for the screen resolution setting.")]
         public Dropdown resolutionDropdown;
 
+        /// <summary>
+        /// The toggle to switch betwenn fullscreen and windowedd mode.
+        /// </summary>
+        [Tooltip("The toggle to switch betwenn fullscreen and windowedd mode.")]
         [SerializeField] private Toggle fullscreedToggle;
+
+        /// <summary>
+        /// The dropdown menu for the graphic quality.
+        /// </summary>
+        [Tooltip("The dropdown menu for the graphic quality.")]
         [SerializeField] private Dropdown qualityDropdown;
+
+        /// <summary>
+        /// The slider for the master volume.
+        /// </summary>
+        [Tooltip("The slider for the master volume.")]
         [SerializeField] private Slider masterVolumeSlider;
+
+        /// <summary>
+        /// The slider for the music volume.
+        /// </summary>
+        [Tooltip("The slider for the music volume.")]
         [SerializeField] private Slider musicVolumeSlider;
+
+        /// <summary>
+        /// The slider for the sfx volume.
+        /// </summary>
+        [Tooltip("The slider for the sfx volume.")]
         [SerializeField] private Slider sfxVolumeSlider;
 
         Resolution[] resolutions;
@@ -49,6 +81,9 @@ namespace Rectangle.UI
             }
         }
 
+        /// <summary>
+        /// Saves the setting ito the PlayerPrefs.
+        /// </summary>
         public void SaveSettings()
         {
             string saveString = "";
@@ -72,6 +107,9 @@ namespace Rectangle.UI
             PlayerPrefs.SetString("settings", saveString);
         }
 
+        /// <summary>
+        /// Loads the settings from the PlayerPrefs.
+        /// </summary>
         private void LoadSettings()
         {
             string saveString = PlayerPrefs.GetString("settings");
@@ -110,12 +148,19 @@ namespace Rectangle.UI
 
         }
 
+        /// <summary>
+        /// Changes the master volume.
+        /// </summary>
         public void SetMasterVolume(float volume)
         {
             float actualVolume = Mathf.Log10(volume) * 20;
 
             audioMixer.SetFloat("MasterVolume", actualVolume);
         }
+
+        /// <summary>
+        /// Changes the music volume.
+        /// </summary>
         public void SetMusicVolume(float volume)
         {
             float actualVolume = Mathf.Log10(volume) * 20;
@@ -123,6 +168,9 @@ namespace Rectangle.UI
             audioMixer.SetFloat("MusicVolume", actualVolume);
         }
 
+        /// <summary>
+        /// Changes the sfx volume.
+        /// </summary>
         public void SetSFXVolume(float volume)
         {
             float actualVolume = Mathf.Log10(volume) * 20;
@@ -131,16 +179,26 @@ namespace Rectangle.UI
             audioMixer.SetFloat("UIVolume", actualVolume);
         }
 
+        /// <summary>
+        /// Changes the graphic quality.
+        /// </summary>
         public void SetQuality(int qualityIndex)
         {
             QualitySettings.SetQualityLevel(qualityIndex);
         }
 
+        /// <summary>
+        /// Changes between fullscreen and windoiwed mode.
+        /// </summary>
         public void SetFullscreen(bool fullscreen)
         {
             Screen.fullScreen = fullscreen;
         }
 
+        /// <summary>
+        /// Sets the screen resolution
+        /// </summary>
+        /// <param name="resolutionIndex"></param>
         public void SetResolution(int resolutionIndex)
         {
             Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, Screen.fullScreen);

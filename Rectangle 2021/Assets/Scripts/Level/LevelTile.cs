@@ -8,43 +8,87 @@ using Rectangle.UI;
 
 namespace Rectangle.Level
 {
+    /// <summary>
+    /// Th UI level tile scripts that controlls the behavior during building mode.
+    /// </summary>
     public class LevelTile : MonoBehaviour
     {
+
+        /// <summary>
+        /// The type of the level tile. 
+        /// </summary>
+        [Tooltip("The type of the level tile. ")]
         public TileCreator.TileTypes tileType;
+
+        /// <summary>
+        /// The player mode of the level tile.
+        /// </summary>
+        [Tooltip("")]
         public PlayerController.PlayerModes playerMode;
+
+        /// <summary>
+        /// The builder settings.
+        /// </summary>
+        [Tooltip("The builder settings.")]
         [SerializeField] private LevelBuilderSettings builderSettings;
+
+        /// <summary>
+        /// The image when a collectable item is placed in the level tile.
+        /// </summary>
+        [Tooltip("The image when a collectable item is placed in the level tile.")]
         [SerializeField] private Sprite nutInCornerSprite;
 
-        [Header("Sounds")] 
+        [Header("Sounds")]
+
+        /// <summary>
+        /// The audio clip when the tile is pressed.
+        /// </summary>
+        [Tooltip("The audio clip when the tile is pressed.")]
         [SerializeField] private AudioClip pressSound;
+
+        /// <summary>
+        /// The audio clip when the tile is placed.
+        /// </summary>
+        [Tooltip("The audio clip when the tile is placed.")]
         [SerializeField] private AudioClip placeSound;
+
+        /// <summary>
+        /// The audio clip when the tile returns.
+        /// </summary>
+        [Tooltip("The audio clip when the tile returns.")]
         [SerializeField] private AudioClip returnSound;
+
+        /// <summary>
+        /// The audio clip when the mouse hovers over the tile.
+        /// </summary>
+        [Tooltip("The audio clip when the mouse hovers over the tile.")]
         [SerializeField] private AudioClip hoverSound;
 
-        private AudioSource audioSource;
 
         [Header("Tile Sprites")]
 
+        /// <summary>
+        /// A list of sprites for the level tile.
+        /// </summary>
+        [Tooltip("The audio clip when the mouse hovers over the tile.")]
         public List<TileSprites> tileSprites;
 
-        [HideInInspector] public TileButton button;
-
-        [HideInInspector] public List<TileCreator.TileTypes> collectableTiles;
-
+        private AudioSource audioSource;
         private SpriteRenderer rend;
+        private LevelBuilder levelBuilder;
+
+        [HideInInspector] public TileButton button;
+        [HideInInspector] public List<TileCreator.TileTypes> collectableTiles;
 
         private LayerMask gridLayer;
 
         [HideInInspector]public GridField gridCollider;
         private GridField lastGrid;
 
-        private LevelBuilder levelBuilder;
-
-        private GameObject starImage;
+        private GameObject collectableImage;
 
         private Sprite normal;
         private Sprite pressed;
-        private Sprite highlighted;
         private Sprite hover;
 
         private void Start()
@@ -63,27 +107,27 @@ namespace Rectangle.Level
             }
         }
 
+        /// <summary>
+        /// Sets the right sprites for thios tile from the list.
+        /// </summary>
         private void InitSprites()
         {
             for(int i = 0; i < tileSprites.Count; i++)
             {
                 if (tileSprites[i].playerMode == playerMode)
                 {
-
                     for(int n = 0; n < tileSprites[i].typeSprites.Length; n++)
                     {
                         if (tileSprites[i].typeSprites[n].tileType == tileType)
                         {
                             normal = tileSprites[i].typeSprites[n].normal;
                             pressed = tileSprites[i].typeSprites[n].pressed;
-                            highlighted = tileSprites[i].typeSprites[n].highlighted;
                             hover = tileSprites[i].typeSprites[n].hover;
                         }
                     }
 
                 }
             }
-
             rend.sprite = normal;
         }
 
@@ -133,14 +177,15 @@ namespace Rectangle.Level
 
                     button.PlaceTile(gridCollider);
 
-                    if (gridCollider.star)
+                    if (gridCollider.collectableItem)
                     {
-                        starImage = new GameObject("Nut");
+                        //Places the nut image as a child on the tile.
+                        collectableImage = new GameObject("Nut");
 
-                        starImage.transform.SetParent(transform);
-                        starImage.transform.localPosition = Vector3.zero;
-                        starImage.transform.localScale = Vector3.one;
-                        starImage.AddComponent<SpriteRenderer>().sprite = nutInCornerSprite;
+                        collectableImage.transform.SetParent(transform);
+                        collectableImage.transform.localPosition = Vector3.zero;
+                        collectableImage.transform.localScale = Vector3.one;
+                        collectableImage.AddComponent<SpriteRenderer>().sprite = nutInCornerSprite;
                     }
 
                 }
@@ -148,10 +193,12 @@ namespace Rectangle.Level
                 {
                     if (lastGrid != null)
                     {
+                        //returns tile to his last position on the grid
                         gridCollider = lastGrid;
                     }
                     else
                     {
+                        //Retturns the tile to the inventory
                         GameBehavior.instance.placedTiles.Remove(this);
                         Return();
                         return;
@@ -171,10 +218,10 @@ namespace Rectangle.Level
 
                 audioSource.PlayOneShot(pressSound);
 
-                if(starImage != null)
+                if(collectableImage != null)
                 {
-                    Destroy(starImage);
-                    starImage = null;
+                    Destroy(collectableImage);
+                    collectableImage = null;
                 }
 
                 if (transform.localPosition == Vector3.zero)
@@ -221,16 +268,16 @@ namespace Rectangle.Level
 
                 if (Input.GetMouseButtonDown(1))
                 {
-                    if (starImage != null)
+                    if (collectableImage != null)
                     {
-                        Destroy(starImage);
-                        starImage = null;
+                        Destroy(collectableImage);
+                        collectableImage = null;
                     }
 
                     if (gridCollider != null)
                     {
-                        //Remove and Return tile from Grid
-                        GameBehavior.instance.placedTiles.Remove(this);
+                        //Remove tile from Grid and return it to the inventory
+                         GameBehavior.instance.placedTiles.Remove(this);
                         Return();
 
                         lastGrid = null;
@@ -265,6 +312,9 @@ namespace Rectangle.Level
             }
         }
 
+        /// <summary>
+        /// Returns the tile to the inventory
+        /// </summary>
         public void Return()
         {
             audioSource.PlayOneShot(returnSound);
@@ -281,19 +331,39 @@ namespace Rectangle.Level
     [System.Serializable]
     public class TileSprites
     {
+        /// <summary>
+        /// The player mode for which the sprites are meant.
+        /// </summary>
         public PlayerController.PlayerModes playerMode;
+        /// <summary>
+        /// The collection of sprites
+        /// </summary>
         public TileTypeSprites[] typeSprites;
-
     }
 
     [System.Serializable]
     public class TileTypeSprites
     {
+        /// <summary>
+        /// The tile type for which the sprites are meant.
+        /// </summary>
         public TileCreator.TileTypes tileType;
         [Header("Sprites")]
+        /// <summary>
+        /// The sprite for the normal state.
+        /// </summary>
         public Sprite normal;
+        /// <summary>
+        /// The sprite for the pressed state.
+        /// </summary>
         public Sprite pressed;
+        /// <summary>
+        /// The sprite for the highlited state.
+        /// </summary>
         public Sprite highlighted;
+        /// <summary>
+        /// The sprite for the hovered state.
+        /// </summary>
         public Sprite hover;
 
     }

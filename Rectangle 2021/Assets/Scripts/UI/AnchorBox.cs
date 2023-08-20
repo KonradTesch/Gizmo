@@ -8,10 +8,22 @@ using Rectangle.Player;
 
 namespace Rectangle.UI
 {
+    /// <summary>
+    /// The dilsplay inside an anchor that shows the level tiles, that are stored inside the anchor.
+    /// </summary>
     public class AnchorBox : MonoBehaviour
     {
+
+        /// <summary>
+        /// The list of UI elements for the tiles.
+        /// </summary>
+        [Tooltip("The list of UI elements for the tiles.")]
         public List<SpriteRenderer> anchorTileSprites;
 
+        /// <summary>
+        /// The animator for the open-box-animation.
+        /// </summary>
+        [Tooltip("The animator for the open-box-animation.")]
         public Animator animator;
 
 
@@ -19,6 +31,9 @@ namespace Rectangle.UI
         private bool isUsed = false;
         private bool inAnchor = false;
 
+        /// <summary>
+        /// Cretaes the displyed anchors inside the anchor box.
+        /// </summary>
         public void SetAnchorTiles(List<PlannedTile> anchorTiles)
         {
             this.anchorTiles = anchorTiles;

@@ -4,28 +4,38 @@ using UnityEngine;
 
 namespace Rectangle.Audio
 {
+    /// <summary>
+    /// Plays a random audio clip.
+    /// </summary>
     public class PlayRandomAudioOnEvent : MonoBehaviour
     {
-        public AudioClip[] audioClipList;
-        public AudioSource audioSource;
-        // Start is called before the first frame update
+        /// <summary>
+        /// The list with possible audio clips.
+        /// </summary>
+        [Tooltip("The list with possible audio clips.")]
+        [SerializeField] private AudioClip[] audioClipList;
+
+        /// <summary>
+        /// The audio source.
+        /// </summary>
+        [Tooltip("The audio source.")]
+        [SerializeField] private AudioSource audioSource;
 
         public void Awake()
         {
-            audioSource = GetComponent<AudioSource>();
+            if(audioSource == null)
+            {
+                audioSource = GetComponent<AudioSource>();
+            }
         }
 
+        /// <summary>
+        /// Plays a random audio Clip from the list (Triggered by an Unity Event)
+        /// </summary>
         public void PlayRandomAudio()
         {
-            AudioClip clip = RandomClip();
+            AudioClip clip = audioClipList[Random.Range(0, audioClipList.Length)];
             audioSource.PlayOneShot(clip);
-        }
-
-
-        private AudioClip RandomClip()
-        {
-            //audioSource.pitch = 3;
-            return audioClipList[Random.Range(0, audioClipList.Length)];
         }
     }
 }

@@ -9,6 +9,10 @@ namespace Rectangle.Player
     /// </summary>
     public class PlayerRectangle : PlayerBase
     {
+        /// <summary>
+        /// The audio clip for the double jump.
+        /// </summary>
+        [Tooltip("The audio clip for the double jump.")]
         [SerializeField] private AudioClip doubleJumpSound;
 
         private bool canDoubleJump;
@@ -58,6 +62,9 @@ namespace Rectangle.Player
             }
         }
 
+        /// <summary>
+        /// The position check for the double jump and to keep the right rotation.
+        /// </summary>
         protected override void PositionCheck()
         {
             base.PositionCheck();

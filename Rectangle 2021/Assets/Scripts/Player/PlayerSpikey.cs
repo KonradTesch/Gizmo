@@ -17,10 +17,18 @@ namespace Rectangle.Player
         [Tooltip("The speed of the climbing player.")]
         [SerializeField] private float climbSpeed = 20f;
 
+        /// <summary>
+        /// The spped of the rotation.
+        /// </summary>
+        [Tooltip("The spped of the rotation.")]
         [SerializeField] private float rotationSpeed;
 
         [Space()]
 
+        /// <summary>
+        /// The looped audio clip for the climb sound.
+        /// </summary>
+        [Tooltip("The looped audio clip for the climb sound.")]
         [SerializeField] private AudioClip climbSound;
 
 
@@ -141,6 +149,9 @@ namespace Rectangle.Player
             }
         }
 
+        /// <summary>
+        /// The jump when the player climbs on a wall.
+        /// </summary>
         public override void Jump()
         {
             base.Jump();

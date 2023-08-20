@@ -10,9 +10,28 @@ namespace Rectangle.UI
 {
     public class LevelButtonUI : MonoBehaviour
     {
+        /// <summary>
+        /// The grayed backgrounds of the tile buttons.
+        /// </summary>
+        [Tooltip("The grayed backgrounds of the tile buttons.")]
         [SerializeField] private Sprite[] buttonBackgrounds;
+
+        /// <summary>
+        /// The text object for the level name.
+        /// </summary>
+        [Tooltip("The text object for the level name.")]
         [SerializeField] private TextMeshProUGUI levelNameUI;
+
+        /// <summary>
+        /// The text object for the best time.
+        /// </summary>
+        [Tooltip("The text object for the best time.")]
         [SerializeField] private TextMeshProUGUI bestTimeUI;
+
+        /// <summary>
+        /// The UI object for the collectbale item.
+        /// </summary>
+        [Tooltip("The UI object for the collectbale item.")]
         [SerializeField] private GameObject uiStar;
 
         private string levelName;
@@ -24,6 +43,9 @@ namespace Rectangle.UI
             levelButton.onClick.AddListener(LoadScene);
         }
 
+        /// <summary>
+        /// Initiates the level tile buttons.
+        /// </summary>
         public void InitLevelButton(bool avaivable, string name, float time, bool starCollected)
         {
             levelButton.image.sprite = buttonBackgrounds[Random.Range(0, buttonBackgrounds.Length)];
@@ -46,9 +68,12 @@ namespace Rectangle.UI
             }
         }
 
+        /// <summary>
+        /// Reloads the level scene with the new active level(Or loads the tutorial scene).
+        /// </summary>
         private void LoadScene()
         {
-            General.SaveGameManager.instance.SetActiveLevel(levelName);
+            General.SaveGameManager.Singleton.SetActiveLevel(levelName);
             if(levelName == "Tutorial")
             {
                 SceneManager.LoadScene("TutorialScene");

@@ -28,9 +28,12 @@ namespace Rectangle.Player
         /// The layer for the background colliders.
         /// </summary>
         [Tooltip("The layer for the background colliders.")]
-
         [SerializeField] private LayerMask backgroundLayer;
 
+        /// <summary>
+        /// The animator for the face of the robot.
+        /// </summary>
+        [Tooltip("The animator for the face of the robot.")]
         [SerializeField] private Animator headAnimator;
 
         /// <summary>
@@ -104,6 +107,9 @@ namespace Rectangle.Player
             }
         }
 
+        /// <summary>
+        /// Checks the current background to get the right play mode.
+        /// </summary>
         private void CheckBackground()
         {
             BackgroundMode lastBackground = null;
@@ -155,6 +161,9 @@ namespace Rectangle.Player
 
         }
 
+        /// <summary>
+        /// Gets the jump input.
+        /// </summary>
         public void Jump(InputAction.CallbackContext context)
         {
             if(context.performed && playerActive)
@@ -163,6 +172,9 @@ namespace Rectangle.Player
             }
         }
 
+        /// <summary>
+        /// Respawns the player at the last checkpoint.
+        /// </summary>
         public void PlayerRespawn()
         {
             activePlayer.transform.position = currentCheckpoint;

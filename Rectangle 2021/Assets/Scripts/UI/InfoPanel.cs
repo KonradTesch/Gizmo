@@ -10,35 +10,65 @@ namespace Rectangle
     public class InfoPanel : MonoBehaviour
     {
         [Header("Checkbox")]
+
+        /// <summary>
+        /// The sprite of the empty checkbox.
+        /// </summary>
+        [Tooltip("The sprite of the empty checkbox.")]
         [SerializeField] private Sprite emptyCheckbox;
+
+        /// <summary>
+        /// The sprite of the checked checkbox.
+        /// </summary>
+        [Tooltip("The sprite of the checked checkbox.")]
         [SerializeField] private Sprite fullCheckpox;
 
         [Header("Level Info")]
+
+        /// <summary>
+        /// The UI element of the checkbox, that shows, that the has been completed before.
+        /// </summary>
+        [Tooltip("The UI element of the checkbox, that shows, that the has been completed before.")]
         [SerializeField] private Image levelCompleteCkeckbox;
+
+        /// <summary>
+        /// The UI element of the checkbox, that shows, that the level has  been completed with the shortest amount of tiles.
+        /// </summary>
+        [Tooltip("The UI element of the checkbox, that shows, that the level has  been completed with the shortest amount of tiles.")]
         [SerializeField] private Image shortestWayCheckbox;
+
+        /// <summary>
+        /// The text object that shows the amount of colllected items.
+        /// </summary>
+        [Tooltip("The text object that shows the amount of colllected items.")]
         [SerializeField] private TextMeshProUGUI starText;
+
+        /// <summary>
+        /// The text object that shows the best time.
+        /// </summary>
+        [Tooltip("The text object that shows the best time.")]
         [SerializeField] private TextMeshProUGUI bestTimeText;
 
         void Start()
         {
-            if(SaveGameManager.instance.activeLevel != null)
+            if(SaveGameManager.Singleton.activeLevel != null)
             {
-                LevelSaveData level = SaveGameManager.instance.activeLevel;
+                LevelSaveData level = SaveGameManager.Singleton.activeLevel;
 
-                for(int i = 0; i < SaveGameManager.instance.levelSaveData.Count; i++)
+                for(int i = 0; i < SaveGameManager.Singleton.saveData.levelSaveData.Count; i++)
                 {
-                    if (SaveGameManager.instance.levelSaveData[i].levelName == level.levelName && SaveGameManager.instance.levelSaveData.Count >= i + 2)
+                    if (SaveGameManager.Singleton.saveData.levelSaveData[i].levelName == level.levelName && SaveGameManager.Singleton.saveData.levelSaveData.Count >= i + 2)
                     {
-                        if (SaveGameManager.instance.levelSaveData[i + 1].avaivable)
+                        if (SaveGameManager.Singleton.saveData.levelSaveData[i + 1].avaivable)
                         {
                             levelCompleteCkeckbox.sprite = fullCheckpox;
                         }
                         else
                         {
-                            levelCompleteCkeckbox.sprite = fullCheckpox;
+                            levelCompleteCkeckbox.sprite = emptyCheckbox;
                         }
+                        break;
                     }
-                    break;
                 }
 
                 if(level.shortestWay)

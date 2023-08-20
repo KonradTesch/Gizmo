@@ -12,9 +12,22 @@ namespace Rectangle.General
         [Tooltip("The offset position of the camera.")]
         [SerializeField] private Vector3 camOffset;
 
+        /// <summary>
+        /// The building screens object.
+        /// </summary>
+        [Tooltip("The building screens object.")]
         [SerializeField] private UI.BuildingScreens buildingScreens;
 
+        /// <summary>
+        /// The offset of the building screen.
+        /// </summary>
+        [Tooltip("The offset of the building screen.")]
         public Vector3 buildingScreenOffset;
+
+        /// <summary>
+        /// The offset of the resolution.
+        /// </summary>
+        [Tooltip("The offset of the resolution.")]
         public Vector2 resolutionOffset;
 
         [Header("Camera Transition")]

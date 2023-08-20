@@ -48,11 +48,11 @@ namespace Rectangle.UI
 
                 timeText.text = currentTime;
 
-                if (General.SaveGameManager.instance.activeLevel != null && General.SaveGameManager.instance.activeLevel.bestTime > 0)
+                if (General.SaveGameManager.Singleton.activeLevel != null && General.SaveGameManager.Singleton.activeLevel.bestTime > 0)
                 {
-                    if(time > General.SaveGameManager.instance.activeLevel.bestTime && !badTime)
+                    if(time > General.SaveGameManager.Singleton.activeLevel.bestTime && !badTime)
                     {
-                        General.GameBehavior.badTime();
+                        General.GameBehavior.onBadTime();
                         badTime = true;
                     }
                 }

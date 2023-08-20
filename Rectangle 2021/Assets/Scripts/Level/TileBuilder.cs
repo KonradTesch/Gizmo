@@ -8,16 +8,43 @@ using Rectangle.General;
 
 namespace Rectangle.Level
 {
+    /// <summary>
+    /// The builder class for the level tiles
+    /// </summary>
     public class TileBuilder : MonoBehaviour
     {
+        /// <summary>
+        /// An array wuith the avaivable level tiles.
+        /// </summary>
+        [Tooltip("An array wuith the avaivable level tiles.")]
         [SerializeField] private LevelTileData[] levelTiles;
+
+        /// <summary>
+        /// An array with the avaivable anchor tiles.
+        /// </summary>
+        [Tooltip("An array with the avaivable anchor tiles.")]
         [SerializeField] private LevelTileData[] anchorTiles;
+
+        /// <summary>
+        /// The layer for the lecel grid.
+        /// </summary>
+        [Tooltip("The layer for the lecel grid.")]
         [SerializeField] private LayerMask gridLayer;
+
+        /// <summary>
+        /// The Prefab of the collectable item (nut).
+        /// </summary>
+        [Tooltip("The Prefab of the collectable item (nut).")]
         [SerializeField] private GameObject collectableTilePrefab;
+
+        /// <summary>
+        /// The prefab of an moving platform.
+        /// </summary>
+        [Tooltip("The prefab of an moving platform.")]
         [SerializeField] private GameObject movingPlatformPrefab;
 
         [Header("Tilemaps")]
-
+        //The different layers of tilemaps
         [SerializeField] private Tilemap backgroundTilemap;
         [SerializeField] private Tilemap borderTilemap;
         [SerializeField] private Tilemap groundTilemap;
@@ -42,6 +69,9 @@ namespace Rectangle.Level
             builderSettings = GameBehavior.instance.builderSettings;
         }
 
+        /// <summary>
+        /// Builds the placed tiles and anchor tiles on the tilemaps.
+        /// </summary>
         public void BuildLevel(List<LevelTile> placedTiles, List<LevelTile> anchorLevelTiles, LevelData levelData)
         {
             foreach (LevelTile tile in placedTiles)
@@ -60,7 +90,7 @@ namespace Rectangle.Level
 
                 int randomIndex = Random.Range(0, possibleTiles.Count);
 
-                Debug.Log("Build Tile with type: " + tile.tileType.ToString() + " and mod: " + tile.playerMode.ToString());
+                Debug.Log("Build Tile with type: " + tile.tileType.ToString() + " and mode: " + tile.playerMode.ToString());
 
                 BuildTile(Vector2Int.RoundToInt(originPosition), possibleTiles[randomIndex]);
 
@@ -83,14 +113,18 @@ namespace Rectangle.Level
             }
         }
 
+        /// <summary>
+        /// Gets a random play mode out of possible play modes for the given type.
+        /// </summary>
         public PlayerController.PlayerModes GetRandomPlayerMode(TileCreator.TileTypes tileType)
         {
             int randomIndex = Random.Range(0, modeTiles[tileType].Count);
-            Debug.Log($"GetRandomPlayerMode({tileType.ToString()})");
             return modeTiles[tileType][randomIndex].playerMode;
         }
 
-
+        /// <summary>
+        /// Sets up the sorted mode tiles dictionary.
+        /// </summary>
         private void InitModeTiles()
         {
             modeTiles = new()
@@ -134,6 +168,9 @@ namespace Rectangle.Level
             }
         }
 
+        /// <summary>
+        /// Builds a single level tile on the tilemaps.
+        /// </summary>
         private void BuildTile(Vector2Int originPosition, LevelTileData tile)
         {
             foreach (ChangeData change in tile.backgroundTileChanges)
@@ -238,15 +275,18 @@ namespace Rectangle.Level
                 platformTilemap.RefreshAllTiles();
             }
 
-            if (GameBehavior.instance.levelBuilder.levelData.GetGridSpot(GameBehavior.instance.levelBuilder.WorldPositionToCoordinate((Vector2)originPosition)).star)
+            if (GameBehavior.instance.levelBuilder.levelData.GetGridSpot(GameBehavior.instance.levelBuilder.WorldPositionToCoordinate((Vector2)originPosition)).collectable)
             {
-                GameObject star = Instantiate(builderSettings.starPrefab);
+                GameObject star = Instantiate(builderSettings.collectablePrefab);
 
                 star.transform.position = (Vector2)originPosition + (Vector2)tile.starPosition;
             }
 
         }
 
+        /// <summary>
+        /// Closes the unused exits of an anchor tile.
+        /// </summary>
         private void CloseAnkerTile(LevelTile anchorTile)
         {
             LevelBuilder levelBuilder = GameBehavior.instance.levelBuilder;
@@ -322,6 +362,9 @@ namespace Rectangle.Level
             borderTilemap.RefreshAllTiles();
         }
 
+        /// <summary>
+        /// Replaces a box on a tilemap with the given level tile.
+        /// </summary>
         public void ReplaceBox(Tilemap tilemap, Vector2Int pos1, Vector2Int pos2, LevelTileData replaceTile)
         {
             Vector2 diff = pos2 - pos1;

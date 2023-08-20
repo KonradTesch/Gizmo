@@ -14,8 +14,14 @@ namespace Rectangle.Level
         /// </summary>
         public bool isUsed = false;
 
+        /// <summary>
+        /// The sprite renderer of the grid field.
+        /// </summary>
         [HideInInspector] public SpriteRenderer backgroundRend;
 
-        public bool star = false;
+        /// <summary>
+        /// Whether there is an collectable item on this grid field.
+        /// </summary>
+        public bool collectableItem = false;
     }
 }

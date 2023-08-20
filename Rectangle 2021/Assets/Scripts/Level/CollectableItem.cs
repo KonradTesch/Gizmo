@@ -5,14 +5,17 @@ using Rectangle.General;
 
 namespace Rectangle.Level
 {
-    public class Star : MonoBehaviour
+    /// <summary>
+    /// The script af an collectable item (nut).
+    /// </summary>
+    public class CollectableItem : MonoBehaviour
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            SaveGameManager.instance.CollectStar(GameBehavior.instance.levelBuilder.levelData);
+            SaveGameManager.Singleton.CollectItem(GameBehavior.instance.levelBuilder.levelData);
             GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.nutCatchSound);
 
-            GameBehavior.star();
+            GameBehavior.onCollectItem();
 
             Destroy(gameObject);
         }

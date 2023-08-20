@@ -9,9 +9,17 @@ namespace Rectangle.UI
 {
     public class ButtonHighlight : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
     {
+        /// <summary>
+        /// The button object that should be highlighted.
+        /// </summary>
+        [Tooltip("The button object that should be highlighted.")]
         [SerializeField] private GameObject highlightObject;
-        [SerializeField] private float highlightSize;
 
+        /// <summary>
+        /// The size of the object, when highlighted.
+        /// </summary>
+        [Tooltip("The size of the object, when highlighted.")]
+        [SerializeField] private float highlightSize;
 
         public void OnPointerEnter(PointerEventData eventData)
         {

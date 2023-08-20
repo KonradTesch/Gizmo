@@ -6,6 +6,9 @@ using Rectangle.General;
 
 namespace Rectangle
 {
+    /// <summary>
+    /// The spikes script, that kills the player
+    /// </summary>
     public class Spikes : MonoBehaviour
     {
         private void OnCollisionEnter2D(Collision2D collision)
@@ -13,10 +16,10 @@ namespace Rectangle
             if (collision.gameObject.CompareTag("Player"))
             {
                 GameBehavior.instance.gameOverPanel.SetActive(true);
-                //GameBehavior.instance.uiAudioSource.PlayOneShot(GameBehavior.instance.deathSound);
+
                 collision.gameObject.transform.parent.GetComponent<PlayerController>().playerActive = false;
 
-                GameBehavior.death();
+                GameBehavior.onPlayerDeath();
             }
         }
     }

@@ -7,15 +7,32 @@ using Rectangle.General;
 
 namespace Rectangle.Level
 {
-
-
     public class AnchorTile : MonoBehaviour
     {
         [Header("Sprites")]
 
+        /// <summary>
+        /// The sprite for the default state.
+        /// </summary>
+        [Tooltip("The sprite for the default state.")]
         [SerializeField] private Sprite defaultAnchor;
+
+        /// <summary>
+        /// The sprite for the hovered state.
+        /// </summary>
+        [Tooltip("The sprite for the hovered state.")]
         [SerializeField] private Sprite hoverAnchor;
+
+        /// <summary>
+        /// The sprite for the pressed state.
+        /// </summary>
+        [Tooltip("The sprite for the pressed state.")]
         [SerializeField] private Sprite pressedAnchor;
+
+        /// <summary>
+        /// The sprite for the highlited state.
+        /// </summary>
+        [Tooltip("The sprite for the highlited state.")]
         [SerializeField] private Sprite highlightAnchor;
 
         private GameObject infoPanel;
@@ -48,6 +65,7 @@ namespace Rectangle.Level
                     rend.sprite = pressedAnchor;
                     GameBehavior.instance.anchorTilePanel.ShowAnchorTiles(anchorTiles);
 
+                    //Resets the other anchors if there are highlighted.
                     for (int i = 0; i < GameBehavior.instance.anchorTiles.Count; i++)
                     {
                         if (GameBehavior.instance.anchorTiles[i] != this)
@@ -69,6 +87,9 @@ namespace Rectangle.Level
             }
         }
 
+        /// <summary>
+        /// Sets the sprite to the default state.
+        /// </summary>
         public void SetDefaultSprite()
         {
             if(!used)
@@ -78,6 +99,9 @@ namespace Rectangle.Level
             }
         }
 
+        /// <summary>
+        /// Sets the sprite to the highlited state.
+        /// </summary>
         public void SetHighlightSprite()
         {
             rend.sprite = highlightAnchor;
@@ -98,6 +122,10 @@ namespace Rectangle.Level
                 rend.sprite = defaultAnchor;
             }
         }
+        /// <summary>
+        /// Set up the level tile list of tiles, that stor4ed in the anchor.
+        /// </summary>
+        /// <param name="tiles"></param>
         public void InitAnchorTiles(List<PlannedTile> tiles)
         {
             anchorTiles = new();
@@ -107,6 +135,11 @@ namespace Rectangle.Level
             }
         }
 
+        /// <summary>
+        /// Adds an level tile to the list of stored level tiles.
+        /// </summary>
+        /// <param name="playerMode"></param>
+        /// <param name="tileType"></param>
         private void AddToAnchorTiles(Player.PlayerController.PlayerModes playerMode, TileCreator.TileTypes tileType)
         {
             for (int i = 0; i < anchorTiles.Count; i++)
@@ -128,7 +161,5 @@ namespace Rectangle.Level
 
             anchorTiles.Add(newTileGroup);
         }
-
-
     }
 }

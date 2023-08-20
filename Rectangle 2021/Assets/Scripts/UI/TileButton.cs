@@ -10,7 +10,17 @@ namespace Rectangle.UI
 {
     public class TileButton : MonoBehaviour
     {
+
+        /// <summary>
+        /// The text object that shows the amout of level tiles.
+        /// </summary>
+        [Tooltip("The text object that shows the amout of level tiles.")]
         [SerializeField] private TextMeshPro tileCountText;
+
+        /// <summary>
+        /// A prefab of an level tile.
+        /// </summary>
+        [Tooltip("A prefab of an level tile.")]
         [SerializeField] private GameObject tilePrefab;
 
         [HideInInspector] public Sprite tileSprite;
@@ -38,6 +48,9 @@ namespace Rectangle.UI
             }
         }
 
+        /// <summary>
+        /// Decreases the amount of left tiles, when the player takes a tile.
+        /// </summary>
         public void GetTile()
         {
             tileCount--;
@@ -45,6 +58,9 @@ namespace Rectangle.UI
             tileCountText.text = tileCount.ToString() + " x";
         }
 
+        /// <summary>
+        /// Increases the amount of left tiles, when the player returns a tile.
+        /// </summary>
         public void ReturnTile()
         {
 
@@ -54,11 +70,18 @@ namespace Rectangle.UI
             General.GameBehavior.instance.CheckGridCollider();
         }
 
+        /// <summary>
+        /// Adds the grid field data to the list of used Fileds when a tile from this button is placed.
+        /// </summary>
+        /// <param name="gridField"></param>
         public void PlaceTile(GridField gridField)
         {
             transform.parent.GetComponent<TilePanel>().usedGridFields.Add(gridField);
         }
 
+        /// <summary>
+        /// Removes the grid filed data from the used filds when a tile returns
+        /// </summary>
         public void ResetTile(GridField gridField)
         {
             transform.parent.GetComponent<TilePanel>().usedGridFields.Remove(gridField);

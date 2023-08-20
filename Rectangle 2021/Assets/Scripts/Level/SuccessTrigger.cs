@@ -14,6 +14,10 @@ namespace Rectangle.Level
         [Tooltip("The canvas Object of the success canvas.")]
         public GameObject successPanel;
 
+        /// <summary>
+        /// The script of thu UI timer.
+        /// </summary>
+        [Tooltip("The script of thu UI timer.")]
         public TimerUI timerUI;
 
         private bool alreadyPlayd = false;
@@ -27,19 +31,23 @@ namespace Rectangle.Level
 
                 alreadyPlayd = true;
 
-                GameBehavior.win();
+                GameBehavior.onPlayerWin();
 
                 successPanel.SetActive(true);
             }
 
             timerUI.StopTimer();
 
-            SaveGameManager.instance.FinishLevel(GameBehavior.instance.levelBuilder.levelData, timerUI.time, GameBehavior.instance.usedTilesNumber);
+            SaveGameManager.Singleton.FinishLevel(GameBehavior.instance.levelBuilder.levelData, timerUI.time, GameBehavior.instance.usedTilesNumber);
         }
 
+        /// <summary>
+        /// Stopt the player after finishing the level.
+        /// </summary>
         private IEnumerator StopPlayer()
         {
-            yield return new WaitForSeconds(0.25f);
+            // a small delay, that the player can see that he reached the finish.
+            yield return new WaitForSeconds(0.5f);
             GameBehavior.instance.player.playerActive = false;
         }
     }

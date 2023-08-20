@@ -12,10 +12,9 @@ namespace Rectangle.LevelCreation
     {
         private LevelTileData tileData;
 
-
-        bool canDrawTile = false;
-        bool fileExists = false;
-        bool clearTilemap = false;
+        private bool canDrawTile = false;
+        private bool fileExists = false;
+        private bool clearTilemap = false;
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
@@ -190,6 +189,9 @@ namespace Rectangle.LevelCreation
             }
         }
 
+        /// <summary>
+        /// Saves the tile information.
+        /// </summary>
         private void SaveTile(TileCreator builder)
         {
             if (!AssetDatabase.IsValidFolder("Assets/LevelTiles"))
@@ -337,10 +339,10 @@ namespace Rectangle.LevelCreation
                 tile.respawnPosition = builder.respawnPosition.localPosition;
             }
 
-            if(builder.hasStar && builder.starTransform != null)
+            if(builder.hasCollectable && builder.collectableTransform != null)
             {
                 tile.hasStar = true;
-                tile.starPosition = builder.starTransform.localPosition;
+                tile.starPosition = builder.collectableTransform.localPosition;
             }
 
             tile.tileSize = builder.tileSize;
@@ -359,6 +361,9 @@ namespace Rectangle.LevelCreation
             Debug.Log($"New TileData saved at '{builder.saveFolderPath}/{tile.playerMode}/{builder.tileName}.asset'.");
         }
 
+        /// <summary>
+        /// Creates the given tiles on the tilemap.
+        /// </summary>
         private void DrawTile(TileCreator builder, LevelTileData tile)
         {
             builder.tileSize = tile.tileSize;
@@ -492,14 +497,17 @@ namespace Rectangle.LevelCreation
                 builder.respawnPosition.localPosition = tile.respawnPosition;
             }
 
-            builder.hasStar = tile.hasStar;
-            if (tile.hasStar && builder.starTransform != null)
+            builder.hasCollectable = tile.hasStar;
+            if (tile.hasStar && builder.collectableTransform != null)
             {
-                builder.starTransform.localPosition = tile.starPosition;
+                builder.collectableTransform.localPosition = tile.starPosition;
             }
 
         }
 
+        /// <summary>
+        /// Creates a moving platform an adds it to the tile
+        /// </summary>
         private Tilemap CreateMovingPlatform(TileCreator builder)
         {
             int platformIndex;
@@ -530,6 +538,9 @@ namespace Rectangle.LevelCreation
             return platformTilemap.GetComponent<Tilemap>();
         }
 
+        /// <summary>
+        /// Clears all tilemaps
+        /// </summary>
         private void ClearTilemap(TileCreator builder)
         {
             builder.backgroundTilemap.ClearAllTiles();
@@ -550,6 +561,10 @@ namespace Rectangle.LevelCreation
             builder.spikesTilemap.ClearAllTiles();
             builder.spikesTilemap.RefreshAllTiles();
         }
+
+        /// <summary>
+        /// Starts the playmode and configurate the scene to test the current tile.
+        /// </summary>
         private void StartTest(TileCreator builder)
         {
             EditorApplication.EnterPlaymode();
@@ -562,9 +577,6 @@ namespace Rectangle.LevelCreation
             SpriteRenderer backgroundSprite = GameObject.Find("Background").GetComponent<SpriteRenderer>();
 
             backgroundSprite.GetComponent<BackgroundMode>().playerMode = builder.playerMode;
-
-            backgroundSprite.color = builder.builderSettings.GetModeColor(builder.playerMode);
-
         }
     }
 }

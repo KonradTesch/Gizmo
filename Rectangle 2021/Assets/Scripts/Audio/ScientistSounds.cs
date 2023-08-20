@@ -2,29 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Rectangle.General;
+using System.Xml.Serialization;
 
 namespace Rectangle.Audio
 {
     public class ScientistSounds : MonoBehaviour
     {
         [SerializeField] private AudioSource scientistAuidioSource;
+
+        //The arrays for various sound comments of the scintist
         [SerializeField] private AudioClip[] deathSounds = new AudioClip[1];
         [SerializeField] private AudioClip[] winSounds = new AudioClip[1];
         [SerializeField] private AudioClip[] nutSounds = new AudioClip[1];
         [SerializeField] private AudioClip[] behindBestTimeSounds = new AudioClip[1];
 
 
-        private float timer;
-        private float nextRandomTime;
-
-        private void Start()
+        private void OnEnable()
         {
-            GameBehavior.death = PlayDeathSound;
-            GameBehavior.win = PlayWinSound;
-            GameBehavior.star = PlayNutSound;
-            GameBehavior.badTime = PlayBadTimeSound;
+            GameBehavior.onPlayerDeath += PlayDeathSound;
+            GameBehavior.onPlayerWin += PlayWinSound;
+            GameBehavior.onCollectItem += PlayNutSound;
+            GameBehavior.onBadTime += PlayBadTimeSound;
         }
 
+        private void OnDisable()
+        {
+            GameBehavior.onPlayerDeath -= PlayDeathSound;
+            GameBehavior.onPlayerWin -= PlayWinSound;
+            GameBehavior.onCollectItem -= PlayNutSound;
+            GameBehavior.onBadTime -= PlayBadTimeSound;
+        }
 
         private void PlayDeathSound()
         {

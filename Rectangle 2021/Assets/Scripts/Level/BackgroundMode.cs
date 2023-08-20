@@ -17,6 +17,9 @@ namespace Rectangle.Level
         [Tooltip("The mode of this background shape.")]
         public PlayerController.PlayerModes playerMode;
 
-        public bool hasStar = false;
+        /// <summary>
+        /// Whether the tile on this background has an nut.
+        /// </summary>
+        public bool hasNut = false;
     }
 }

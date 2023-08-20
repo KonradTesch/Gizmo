@@ -5,11 +5,27 @@ using Rectangle.Level;
 
 namespace Rectangle.UI
 {
+    /// <summary>
+    /// The tile inventory panel
+    /// </summary>
     public class TilePanel : MonoBehaviour
     {
+        /// <summary>
+        /// The example object for a tile button.
+        /// </summary>
+        [Tooltip("The example object for a tile button.")]
         [SerializeField] private GameObject tileButtonReference;
 
+        /// <summary>
+        /// The list of used grid fields.
+        /// </summary>
+        [Tooltip("The list of used grid fields.")]
         [SerializeField] public List<GridField> usedGridFields;
+
+        /// <summary>
+        /// Creates and positioning the tile bottons.
+        /// </summary>
+        /// <param name="tileGroups"></param>
         public void InitTileButtons(List<TileGroupData> tileGroups)
         {
             SpriteRenderer rend = GetComponent<SpriteRenderer>();
@@ -48,6 +64,10 @@ namespace Rectangle.UI
 
         }
 
+        /// <summary>
+        /// Resets all placed tiles.
+        /// </summary>
+        /// <param name="placedTiles"></param>
         public void ResetUsedGrids(List<LevelTile> placedTiles)
         {
             if(placedTiles != null)

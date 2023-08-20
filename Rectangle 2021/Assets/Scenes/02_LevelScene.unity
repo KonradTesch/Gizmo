@@ -12215,6 +12215,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3910902901595671239, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96603931c961d0c488035f0cde3561eb, type: 3}
 --- !u!1 &1422954950
@@ -28464,7 +28468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -209.24396, y: -400.34534}
+  m_AnchoredPosition: {x: -209.24414, y: -400.3452}
   m_SizeDelta: {x: -616.8463, y: -897.4509}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1877322717
@@ -28744,11 +28748,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scientistAuidioSource: {fileID: 1969942972}
   deathSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 199b059513990d6429baaf77e1932bc9, type: 3}
+  - {fileID: 8300000, guid: d11f06507277669469f3c463234b87ac, type: 3}
+  - {fileID: 8300000, guid: 23d4d6bd3ce9c25409fe4b45c92f0471, type: 3}
+  - {fileID: 8300000, guid: 42c4e64de762ea346879a028277d3a6d, type: 3}
+  - {fileID: 8300000, guid: 217e939e46ac435479be31792f8743cb, type: 3}
+  - {fileID: 8300000, guid: 0902a6865a525e44f8ae0d957a6bdef5, type: 3}
   winSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 16db409232abef7428f4968c1c845832, type: 3}
+  - {fileID: 8300000, guid: 296f34b31ba78cd4b8414216cc5ccefc, type: 3}
+  - {fileID: 8300000, guid: c4cee260914f7914b9c03b213479b83f, type: 3}
+  - {fileID: 8300000, guid: 3dac2880d02a9be41a9087de932c69a3, type: 3}
   nutSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 9cd670a3a3da35146b5954aa671e4fee, type: 3}
+  - {fileID: 8300000, guid: 5c216317746a60f48955388ee456cdda, type: 3}
+  - {fileID: 8300000, guid: ae01233c2121ba3479d9744e0bca0b3a, type: 3}
+  - {fileID: 8300000, guid: 6cb970372e9797f46ab4f226841ada91, type: 3}
   behindBestTimeSounds:
   - {fileID: 0}
 --- !u!4 &1969942974
@@ -29109,7 +29124,6 @@ MonoBehaviour:
   uiAudioSource: {fileID: 961032123}
   buildLevelSound: {fileID: 8300000, guid: 15168f3509add0240abeedbf5c36e1a2, type: 3}
   resetTileSound: {fileID: 8300000, guid: 055f5793d895ead4ca1bc0fb998d92f5, type: 3}
-  deathSound: {fileID: 8300000, guid: 69259698e6741c9479259e4e1f566f4b, type: 3}
   winSound: {fileID: 8300000, guid: 70ad37ddef9948447a7c3a2759b2334d, type: 3}
   nutCatchSound: {fileID: 8300000, guid: f9656d85534ffe141b7198d4de70132a, type: 3}
   tileInventory: []
@@ -29146,6 +29160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2fd254c55aa8c488025ec6ba3dbc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialSceneName: 01_TutorialScene
+  levelSceneName: 02_LevelScene
 --- !u!114 &2001858577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29232,7 +29248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3d4aa568284db4b9f4c3ed1209e462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endSceneName: 
+  tutorialSceneName: 
+  levelSceneName: 
+  endSceneName: 03_EndScene
   levelSaveData: []
   activeLevel:
     levelName: 

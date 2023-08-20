@@ -85,6 +85,9 @@ namespace Rectangle.LevelCreation
                 offset.y = -gridHeight * 100 * zoom;
         }
 
+        /// <summary>
+        /// Draws the upper menu bar
+        /// </summary>
         private void DrawMenuBar()
         {
             menuBar = new Rect(0, 0, position.width, menuBarHeight);
@@ -206,6 +209,9 @@ namespace Rectangle.LevelCreation
 
         }
 
+        /// <summary>
+        /// Draws the left side bar.
+        /// </summary>
         private void DrawSideBar()
         {
             sideBar = new Rect(0, menuBarHeight, sideBarWidth, position.height - menuBarHeight);
@@ -334,6 +340,9 @@ namespace Rectangle.LevelCreation
 
         }
 
+        /// <summary>
+        /// Draws the main window with the tiles.
+        /// </summary>
         private void DrawMainWinow()
         {
             mainPanel = new Rect(sideBarWidth, menuBarHeight, position.width - sideBarWidth, position.height - menuBarHeight);
@@ -354,6 +363,9 @@ namespace Rectangle.LevelCreation
             GUILayout.EndArea();
         }
 
+        /// <summary>
+        /// Drwas thle lines for the grid.
+        /// </summary>
         private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
         {
             int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
@@ -378,6 +390,9 @@ namespace Rectangle.LevelCreation
             Handles.EndGUI();
         }
 
+        /// <summary>
+        /// Manages the mouse input.
+        /// </summary>
         private void ProcessEvents(Event e)
         {
             drag = Vector2.zero;
@@ -421,6 +436,9 @@ namespace Rectangle.LevelCreation
             }
         }
 
+        /// <summary>
+        /// Draws the tiles.
+        /// </summary>
         private void DrawTiles()
         {
 
@@ -515,7 +533,7 @@ namespace Rectangle.LevelCreation
 
                 }
 
-                if (gridSpot.levelSpot.star)
+                if (gridSpot.levelSpot.collectable)
                 {
                     star = true;
                     GUI.contentColor = Color.white;
@@ -630,6 +648,9 @@ namespace Rectangle.LevelCreation
             }
         }
 
+        /// <summary>
+        /// Creates the context menu.
+        /// </summary>
         private void ContextMenu(GridSpot gridSpot)
         {
             GenericMenu tileMenu = new GenericMenu();
@@ -649,13 +670,13 @@ namespace Rectangle.LevelCreation
                     tileMenu.AddItem(new GUIContent("Set AnchorTile"), false, SetAnchor, gridSpot.coordinates);
                 }
 
-                if (gridSpot.levelSpot.star)
+                if (gridSpot.levelSpot.collectable)
                 {
                     tileMenu.AddItem(new GUIContent("Clear Star"), false, ClearStar, gridSpot.coordinates);
                 }
                 else
                 {
-                    tileMenu.AddItem(new GUIContent("Set Star"), false, SetStar, gridSpot.coordinates);
+                    tileMenu.AddItem(new GUIContent("Set Star"), false, SetCollectable, gridSpot.coordinates);
                 }
 
                 if (gridSpot.levelSpot.blocked)
@@ -680,6 +701,9 @@ namespace Rectangle.LevelCreation
             tileMenu.ShowAsContext();
         }
 
+        /// <summary>
+        /// Fills the LevelData with empty variables.
+        /// </summary>
         private void InitLevelData()
         {
             if (levelData != null)
@@ -717,6 +741,9 @@ namespace Rectangle.LevelCreation
             }
         }
 
+        /// <summary>
+        /// Creates a new Level Data and saves it.
+        /// </summary>
         private void CreateLevelData()
         {
             if (!Directory.Exists(path))
@@ -741,6 +768,9 @@ namespace Rectangle.LevelCreation
             Debug.Log("RectangleBuilder: Created '" + newLevelName + ".asset' at '" + path + "'");
         }
 
+        /// <summary>
+        /// Saves the LevelData.
+        /// </summary>
         private void SaveData()
         {
             levelData.shortestWay = shortestWay;
@@ -749,6 +779,10 @@ namespace Rectangle.LevelCreation
 
             AssetDatabase.SaveAssetIfDirty(levelData);
         }
+
+        /// <summary>
+        /// Craetes a new tile grid.
+        /// </summary>
         private void CreateGrid()
         {
             List<GridSpot> newGrid = new();
@@ -774,6 +808,9 @@ namespace Rectangle.LevelCreation
             levelData.gridData.height = gridHeight;
         }
 
+        /// <summary>
+        /// Sets the player mode based on the selected color.
+        /// </summary>
         private void SetMode(object color)
         {
             currentColor = (Color)color;
@@ -792,6 +829,9 @@ namespace Rectangle.LevelCreation
 
         }
 
+        /// <summary>
+        /// Clears the currently displayed LevelData.
+        /// </summary>
         private void ClearGrid()
         {
             levelData.gridData = new LevelGrid();
@@ -801,6 +841,9 @@ namespace Rectangle.LevelCreation
             levelData.shortestWay = 0;
         }
 
+        /// <summary>
+        /// Blocks the tile at the given coordiantes.
+        /// </summary>
         private void BlockTile(object coordinates)
         {
             foreach(AnchorTile anchor in levelData.gridData.anchorTiles)
@@ -818,9 +861,12 @@ namespace Rectangle.LevelCreation
 
             levelData.GetGridSpot((Vector2Int)coordinates).blocked = true;
             levelData.GetGridSpot((Vector2Int)coordinates).anchor = false;
-            levelData.GetGridSpot((Vector2Int)coordinates).star = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).collectable = false;
         }
 
+        /// <summary>
+        /// Unblocks the tile at the given coordinates.
+        /// </summary>
         private void UnblockTile(object coordinates)
         {
             if(levelData.gridData.start.coordinates == (Vector2Int)coordinates)
@@ -837,6 +883,9 @@ namespace Rectangle.LevelCreation
             levelData.GetGridSpot((Vector2Int)coordinates).blocked = false;
         }
 
+        /// <summary>
+        /// Sets the tile at the given coordinates to an anchor.
+        /// </summary>
         private void SetAnchor(object coordinates)
         {
             foreach (AnchorTile anchor in levelData.gridData.anchorTiles)
@@ -847,7 +896,7 @@ namespace Rectangle.LevelCreation
                 }
             }
             levelData.GetGridSpot((Vector2Int)coordinates).blocked = false;
-            levelData.GetGridSpot((Vector2Int)coordinates).star = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).collectable = false;
             levelData.GetGridSpot((Vector2Int)coordinates).anchor = true;
 
             if(levelData.gridData.anchorTiles == null)
@@ -857,6 +906,9 @@ namespace Rectangle.LevelCreation
             levelData.gridData.anchorTiles.Add(new AnchorTile() {anchorCoordinates = (Vector2Int)coordinates});
         }
 
+        /// <summary>
+        /// Removes the tile at the given coordinates.
+        /// </summary>
         private void RemoveTile(object coordinates)
         {
             if(levelData.GetTileByCoordinates((Vector2Int)coordinates, currentAnchor) != null)
@@ -865,24 +917,37 @@ namespace Rectangle.LevelCreation
             }
         }
 
-
+        /// <summary>
+        /// Removes tha snchor at the given coordinates.
+        /// </summary>
         private void ClearAnchor(object coordinates)
         {
             levelData.GetGridSpot((Vector2Int)coordinates).anchor = false;
             levelData.gridData.anchorTiles.Remove(levelData.GetAnchorByCoordinates((Vector2Int)coordinates));
         }
 
-        private void SetStar(object coordinates)
+        /// <summary>
+        /// Places a collectable item at the given coordinates.
+        /// </summary>
+        private void SetCollectable(object coordinates)
         {
             levelData.GetGridSpot((Vector2Int)coordinates).blocked = false;
             levelData.GetGridSpot((Vector2Int)coordinates).anchor = false;
-            levelData.GetGridSpot((Vector2Int)coordinates).star = true;
-        }
-        private void ClearStar(object coordinate)
-        {
-            levelData.GetGridSpot((Vector2Int)coordinate).star = false;
+            levelData.GetGridSpot((Vector2Int)coordinates).collectable = true;
         }
 
+        /// <summary>
+        /// Removes the collectable at the given coordinates.
+        /// </summary>
+        /// <param name="coordinate"></param>
+        private void ClearStar(object coordinate)
+        {
+            levelData.GetGridSpot((Vector2Int)coordinate).collectable = false;
+        }
+
+        /// <summary>
+        /// Returns the colro for an anchor.
+        /// </summary>
         private Color GetAnchorColor(Vector2Int coordinates)
         {
             Color anchorColor = Color.gray;
@@ -898,18 +963,27 @@ namespace Rectangle.LevelCreation
             return anchorColor;
         }
 
+        /// <summary>
+        /// Sets the start tile at the given coordinates.
+        /// </summary>
         private void SetStart(object coordinates)
         {
             levelData.gridData.start.coordinates = (Vector2Int)coordinates;
             levelData.gridData.start.direction = FindFreeDirection((Vector2Int)coordinates);
         }
 
+        /// <summary>
+        /// Sets the finish tile at the given coordinates.
+        /// </summary>
         private void SetEnd(object coordinates)
         {
             levelData.gridData.end.coordinates = (Vector2Int)coordinates;
             levelData.gridData.end.direction = FindFreeDirection((Vector2Int)coordinates);
         }
 
+        /// <summary>
+        /// Finds a free direction for the start or finish tile.
+        /// </summary>
         private Vector2Int FindFreeDirection(Vector2Int coordinates)
         {
             if(levelData.GetGridSpot(coordinates + Vector2Int.right) != null && !levelData.GetGridSpot(coordinates + Vector2Int.right).blocked)
@@ -932,6 +1006,9 @@ namespace Rectangle.LevelCreation
             return Vector2Int.right;
         }
 
+        /// <summary>
+        /// Returns the fitting texture for the arrow for the start or finish tile.
+        /// </summary>
         private Texture GetDirectionTexture(Vector2Int direction)
         {
             if(direction == Vector2Int.right)
@@ -956,6 +1033,9 @@ namespace Rectangle.LevelCreation
 
         }
 
+        /// <summary>
+        /// Roitates the direction of the start or finish tile.
+        /// </summary>
         private Vector2Int RotateDirection(Vector2Int direction)
         {
             if (direction == Vector2Int.right)
@@ -976,8 +1056,6 @@ namespace Rectangle.LevelCreation
             }
 
             return Vector2Int.right;
-
         }
-
     }
 }

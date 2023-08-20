@@ -6,10 +6,18 @@ namespace Rectangle.Level
 {
     public class BackgroundController : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer lastLayer;
 
         [Header("Parallax Effect")]
+        /// <summary>
+        /// The factor for the speed differnece of the backround layers.
+        /// </summary>
+        [Tooltip("")]
         [SerializeField] private float parallaxMultiplier;
+
+        /// <summary>
+        /// The layers of the background.
+        /// </summary>
+        [Tooltip("The layers of the background.")]
         [SerializeField] private GameObject[] parallaxLayers;
 
         private Camera mainCam;
@@ -24,6 +32,9 @@ namespace Rectangle.Level
             ParallaxScrolling();
         }
 
+        /// <summary>
+        /// Moves the backround layers with a parallax effect.
+        /// </summary>
         private void ParallaxScrolling()
         {
             for (int i = 0; i < parallaxLayers.Length; i++)

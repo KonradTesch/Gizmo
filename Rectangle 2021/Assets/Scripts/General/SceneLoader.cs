@@ -11,16 +11,29 @@ namespace Rectangle.General
     public class SceneLoader : MonoBehaviour
     {
         /// <summary>
-        /// reloads the scene with the next level
+        /// The name of the tutorial scene.
+        /// </summary>
+        [Tooltip("The name of the tutorial scene.")]
+        [SerializeField] private string tutorialSceneName;
+
+        /// <summary>
+        /// The name of the level scene.
+        /// </summary>
+        [Tooltip("The name of the level scene.")]
+        [SerializeField] private string levelSceneName;
+
+
+        /// <summary>
+        /// Reloads the scene with the next level.
         /// </summary>
         public void LoadNextLevel()
         {
-            if(SaveGameManager.instance.levelSaveData != null)
+            if(SaveGameManager.Singleton.saveData != null)
             {
-                SaveGameManager.instance.SetNextLevel();
-                if(SceneManager.GetActiveScene().name == "TutorialScene")
+                SaveGameManager.Singleton.SetNextLevel();
+                if(SceneManager.GetActiveScene().name == tutorialSceneName)
                 {
-                    SceneManager.LoadScene("LevelScene");
+                    SceneManager.LoadScene(levelSceneName);
                 }
                 else
                 {

@@ -9,11 +9,24 @@ namespace Rectangle.LevelCreation
     [System.Serializable]
     public class LevelData : ScriptableObject
     {
+        /// <summary>
+        /// The data of the tile grid.
+        /// </summary>
         public LevelGrid gridData;
+
+        /// <summary>
+        /// The tiles that are avaivalble for this level.
+        /// </summary>
         public List<PlannedTile> plannedTiles;
 
+        /// <summary>
+        /// The amount of tiles, that needed for the shortest way.
+        /// </summary>
         public int shortestWay;
 
+        /// <summary>
+        /// Gets the tile at the given coordinates.
+        /// </summary>
         public PlannedTile GetTileByCoordinates(Vector2Int coordinates, AnchorTile anchor)
         {
             if(anchor == null)
@@ -45,6 +58,9 @@ namespace Rectangle.LevelCreation
             return null;
         }
 
+        /// <summary>
+        /// Gets the anchor tile at the given coordinates.
+        /// </summary>
         public AnchorTile GetAnchorByCoordinates(Vector2Int coordinates)
         {
             if(gridData.anchorTiles == null)
@@ -63,6 +79,9 @@ namespace Rectangle.LevelCreation
             return null;
         }
 
+        /// <summary>
+        /// Changes a planned tile for thé level.
+        /// </summary>
         public void ChangePlannedTile(PlannedTile tile)
         {
             for(int i = 0; i < plannedTiles.Count; i++)
@@ -76,6 +95,9 @@ namespace Rectangle.LevelCreation
             plannedTiles.Add(tile);
         }
 
+        /// <summary>
+        /// Gets the grid spot at the given coordinates.
+        /// </summary>
         public LevelSpot GetGridSpot(Vector2Int coordinates)
         {
             for(int i = 0; i < gridData.grid.Count; i++)
@@ -89,6 +111,9 @@ namespace Rectangle.LevelCreation
             return null;
         }
 
+        /// <summary>
+        /// Sets the given level spot at the given coordinates.
+        /// </summary>
         public void SetGridSpot(Vector2Int coordinates, LevelSpot levelSpot)
         {
             for (int i = 0; i < gridData.grid.Count; i++)
@@ -102,6 +127,9 @@ namespace Rectangle.LevelCreation
             }
         }
 
+        /// <summary>
+        /// Changes the tile, that is stored inside of an anchor.
+        /// </summary>
         public void ChangeCollectableTile(AnchorTile anchor, PlannedTile tile)
         {
             for(int i = 0; i < gridData.anchorTiles.Count; i++)
@@ -121,6 +149,9 @@ namespace Rectangle.LevelCreation
             }
         }
 
+        /// <summary>
+        /// Removes a planned tile from the level.
+        /// </summary>
         public void RemoveTile(PlannedTile tile, AnchorTile anchor)
         {
             if(anchor == null)
@@ -175,7 +206,7 @@ namespace Rectangle.LevelCreation
         [HideInInspector]public LevelTile placedTile;
         public bool anchor;
         public bool blocked;
-        public bool star;
+        public bool collectable;
 
         public LevelSpot(Vector2Int coordinates, Vector2 worldPosition, bool blocked, bool anchor)
         {
