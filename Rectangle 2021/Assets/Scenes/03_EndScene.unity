@@ -306,7 +306,6 @@ GameObject:
   - component: {fileID: 389377193}
   - component: {fileID: 389377192}
   - component: {fileID: 389377191}
-  - component: {fileID: 389377190}
   - component: {fileID: 389377189}
   - component: {fileID: 389377188}
   - component: {fileID: 389377194}
@@ -350,6 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2fd254c55aa8c488025ec6ba3dbc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialSceneName: 01_TutorialScene
+  levelSceneName: 02_LevelScene
 --- !u!114 &389377189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,32 +368,18 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 389377190}
-          m_TargetAssemblyTypeName: Rectangle.Audio.PlayHoverSound, Assembly-CSharp
-          m_MethodName: HoverPlay
-          m_Mode: 1
+        - m_Target: {fileID: 1337173292}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &389377190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389377186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da89605f5e1507340889d92777ffa7ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverSource: {fileID: 1337173292}
-  hoverClip: {fileID: 8300000, guid: 9706c3f0b6e74964490996de249f62b9, type: 3}
 --- !u!114 &389377191
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Rectangle.LevelCreation;
 using System.IO;
 using System.Xml.Linq;
+using UnityEngine.Rendering;
 
 namespace Rectangle.General
 {
@@ -74,6 +75,8 @@ namespace Rectangle.General
 
                 LoadData();
             }
+
+            DebugManager.instance.enableRuntimeUI = false;
         }
 
         private void OnApplicationQuit()
@@ -139,11 +142,22 @@ namespace Rectangle.General
                 for (int i = 0; i < levelOrder.Length; i++)
                 {
                     LevelSaveData newLevelSaveData = new LevelSaveData();
-                    newLevelSaveData.levelData = levelOrder[i];
+                    newLevelSaveData.levelData = Resources.Load<LevelData>(levelOrder[i].name);
+                    Debug.Log($"Savemanager: Lads {levelOrder[i].name} from Resources");
 
-                    if (i <= 1)
+                    if (i == 0)
+                    {
+                        newLevelSaveData.levelName = "Tutorial";
+                        newLevelSaveData.avaivable = true;
+                    }
+                    else if (i == 1)
                     {
                         newLevelSaveData.avaivable = true;
+                        newLevelSaveData.levelName = "Level " + i.ToString();
+                    }
+                    else
+                    {
+                        newLevelSaveData.levelName = "Level " + i.ToString();
                     }
 
                     saveData.levelSaveData.Add(newLevelSaveData);
@@ -250,6 +264,20 @@ namespace Rectangle.General
 
                     return;
                 }
+            }
+        }
+
+        public void DeleteSaveGame()
+        {
+            string fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
+
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+
+                saveData = null;
+
+                LoadData();
             }
         }
 
