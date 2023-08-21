@@ -491,6 +491,8 @@ MonoBehaviour:
   levelNameUI: {fileID: 3790875155686324287}
   bestTimeUI: {fileID: 3790875156087285268}
   uiStar: {fileID: 2612570393228948823}
+  tutorialSceneName: 01_TutorialScene
+  levelSceneName: 02_LevelScene
 --- !u!1 &3790875156777138649
 GameObject:
   m_ObjectHideFlags: 0

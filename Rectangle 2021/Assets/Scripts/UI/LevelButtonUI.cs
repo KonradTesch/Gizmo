@@ -34,6 +34,21 @@ namespace Rectangle.UI
         [Tooltip("The UI object for the collectbale item.")]
         [SerializeField] private GameObject uiStar;
 
+        [Header("Scene Names")]
+
+        /// <summary>
+        /// The name of the tutorial scene.
+        /// </summary>
+        [Tooltip("The name of the tutorial scene.")]
+        [SerializeField] private string tutorialSceneName;
+
+        /// <summary>
+        /// The name of the level scene.
+        /// </summary>
+        [Tooltip("The name of the level scene.")]
+        [SerializeField] private string levelSceneName;
+
+
         private string levelName;
         private Button levelButton;
 
@@ -76,11 +91,11 @@ namespace Rectangle.UI
             General.SaveGameManager.Singleton.SetActiveLevel(levelName);
             if(levelName == "Tutorial")
             {
-                SceneManager.LoadScene("TutorialScene");
+                SceneManager.LoadScene(tutorialSceneName);
             }
             else
             {
-                SceneManager.LoadScene("LevelScene");
+                SceneManager.LoadScene(levelSceneName);
             }
         }
     }

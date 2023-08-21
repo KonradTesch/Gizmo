@@ -41,6 +41,8 @@ namespace Rectangle.Player
         private float lastYPosition;
         private float normalGravity;
 
+        private bool triggerFloating;
+
         private void Start()
         {
             normalGravity = rigidBody.gravityScale;
@@ -52,6 +54,11 @@ namespace Rectangle.Player
         public override void Move(Vector2 horizontalMove)
         {
             falling = CheckFalling();
+
+            if(falling && triggerFloating)
+            {
+                floating = true;
+            }
 
             if(floating)
             {
@@ -66,9 +73,6 @@ namespace Rectangle.Player
                         audioSource.loop = true;
                         audioSource.Play();
                     }
-                }
-                else if (audioSource.clip == floatSound)
-                {
                 }
 
                 animator.SetBool("float", true);
@@ -85,7 +89,9 @@ namespace Rectangle.Player
                         audioSource.Stop();
                     }
 
+                    Debug.Log("on Ramp floating false");
                     floating = false;
+                    triggerFloating = false;
                 }
             }
 
@@ -126,11 +132,13 @@ namespace Rectangle.Player
         /// </summary>
         public override void Jump()
         {
-            base.Jump();
 
-            if (!grounded && !onRamp && !floating && !timeAfterJump)
+            if (!grounded && !onRamp && !floating)
             {
+                Debug.Log("jump floating true");
+
                 floating = true;
+                triggerFloating = true;
                 audioSource.PlayOneShot(openWingsSound);
             }
             else if (floating)
@@ -144,8 +152,13 @@ namespace Rectangle.Player
                     audioSource.Stop();
                 }
 
+                Debug.Log("jump floating false");
+
                 floating = false;
+                triggerFloating = false;
             }
+
+            base.Jump();
         }
     }
 }

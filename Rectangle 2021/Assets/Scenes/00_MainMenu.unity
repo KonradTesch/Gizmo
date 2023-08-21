@@ -2423,6 +2423,17 @@ MonoBehaviour:
   tutorialSceneName: 01_TutorialScene
   levelSceneName: 02_LevelScene
   endSceneName: 03_EndScene
+  levelOrder:
+  - {fileID: 11400000, guid: 28a7230c33a305444923e22972578bb2, type: 2}
+  - {fileID: 11400000, guid: 4fd9b73d0e9cdb34290778befd815e0f, type: 2}
+  - {fileID: 11400000, guid: 5fe06f7cec0f2f44eac3c8fb70abb988, type: 2}
+  - {fileID: 11400000, guid: 0db509abc7e05724395229d5115fbee4, type: 2}
+  - {fileID: 11400000, guid: d11a24566c48f30479e49902a4f1c1d0, type: 2}
+  - {fileID: 11400000, guid: 9d7a83f3cc6023947af0ec85020c15d3, type: 2}
+  - {fileID: 11400000, guid: 1a56ce96cf12b6947a123563b4c77cd8, type: 2}
+  - {fileID: 11400000, guid: 58b1a83fecebaa147b96b30cfc38033e, type: 2}
+  - {fileID: 11400000, guid: cb9c960e5db56d746bf0e190c6f3f534, type: 2}
+  - {fileID: 11400000, guid: 25786bba1e36fe2438c14a4e2ac60215, type: 2}
   saveData:
     levelSaveData:
     - levelName: Tutorial

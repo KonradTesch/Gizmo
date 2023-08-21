@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Rectangle.LevelCreation;
 using System.IO;
+using System.Xml.Linq;
 
 namespace Rectangle.General
 {
@@ -25,7 +26,7 @@ namespace Rectangle.General
         [Tooltip("TThe code word to encrypt the save file.")]
         [SerializeField] private readonly string encryptionCodeWord = "84216109";
 
-        [Header("Level Names")]
+        [Header("Scene Names")]
 
         /// <summary>
         /// The name of the tutorial scene.
@@ -46,6 +47,8 @@ namespace Rectangle.General
         [SerializeField] private string endSceneName;
 
         [Header("Level")]
+
+        [SerializeField] private LevelData[] levelOrder;
 
         /// <summary>
         /// The game save data.
@@ -69,10 +72,7 @@ namespace Rectangle.General
                 Singleton = this;
                 DontDestroyOnLoad(this);
 
-                if(PlayerPrefs.HasKey("LevelSaveData"))
-                {
-                    LoadData();
-                }
+                LoadData();
             }
         }
 
@@ -112,7 +112,6 @@ namespace Rectangle.General
         {
             string fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
 
-            SaveData loadedSaveData;
 
             if (File.Exists(fullPath))
             {
@@ -128,9 +127,29 @@ namespace Rectangle.General
 
                 loadData = EncryptDecrypt(loadData);
 
-                loadedSaveData = JsonUtility.FromJson<SaveData>(loadData);
+                saveData = JsonUtility.FromJson<SaveData>(loadData);
 
-                saveData = loadedSaveData;
+            }
+
+            if(saveData == null || saveData.levelSaveData.Count != levelOrder.Length)
+            {
+                saveData = new SaveData();
+                saveData.levelSaveData = new List<LevelSaveData>();
+
+                for (int i = 0; i < levelOrder.Length; i++)
+                {
+                    LevelSaveData newLevelSaveData = new LevelSaveData();
+                    newLevelSaveData.levelData = levelOrder[i];
+
+                    if (i <= 1)
+                    {
+                        newLevelSaveData.avaivable = true;
+                    }
+
+                    saveData.levelSaveData.Add(newLevelSaveData);
+                }
+
+                SaveData();
             }
         }
 
